@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plaques" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4dd61175-e2bc-4e0a-9459-325834b7213b">
+    <parameter name="bflogo" class="java.lang.String"/>
+    <parameter name="code" class="java.lang.String"/>
+    <parameter name="plaque" class="java.lang.String"/>
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="46" splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band height="35" splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="61" splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="225" splitType="Stretch">
+            <componentElement>
+                <reportElement x="705" y="5" width="96" height="80" uuid="301c3f9e-743d-4500-b1fe-8f29e8067e6e"/>
+                <jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+                    <jr:codeExpression><![CDATA[$P{code}]]></jr:codeExpression>
+                </jr:QRCode>
+            </componentElement>
+            <image>
+                <reportElement x="5" y="5" width="80" height="79" uuid="a6b975ed-d1f7-4131-8d19-7823009fed66"/>
+                <imageExpression><![CDATA[$P{bflogo}]]></imageExpression>
+            </image>
+            <textField>
+                <reportElement x="26" y="105" width="760" height="120" uuid="6982f2ba-8b23-4e9a-a067-8228126f6988"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="75"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{plaque}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="45" splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="54" splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band height="42" splitType="Stretch"/>
+    </summary>
+</jasperReport>

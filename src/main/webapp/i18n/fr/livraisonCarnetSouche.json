@@ -1,0 +1,30 @@
+{
+  "improApp": {
+    "livraisonCarnetSouche": {
+      "home": {
+        "title": "LivraisonCarnetSouches",
+        "createLabel": "Créer un nouveau Livraison Carnet Souche",
+        "createOrEditLabel": "Créer ou éditer un Livraison Carnet Souche",
+        "notFound": "Aucun Livraison Carnet Souche trouvé"
+      },
+      "created": "Un nouveau Livraison Carnet Souche a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Livraison Carnet Souche avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Livraison Carnet Souche avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Livraison Carnet Souche {{ id }} ?"
+      },
+      "detail": {
+        "title": "Livraison Carnet Souche"
+      },
+      "numeroLivraisonCS": "Numero Livraison CS",
+      "dateLivraison": "Date Livraison",
+      "carnetASouche": "Carnet A Souche",
+      "concessionnaire": "Concessionnaire",
+      "supernet": "Supernet",
+      "commandeCarnetSouche": "Commande Carnet Souche",
+      "help": {
+        "numeroLivraisonCS": "numeroLivraisonCS"
+      }
+    }
+  }
+}

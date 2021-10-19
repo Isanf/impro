@@ -1,0 +1,38 @@
+{
+  "name": "CategorieOrganisation",
+  "fields": [
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typeCategorieOrganisation",
+      "fieldType": "TypeCategorieOrganisation",
+      "fieldValues": "SUPERNET,CONCESSIONNAIRE,ETABLISSEMENT_SPECIALISE,DGTTM,FDS,CCVA,ASSURANCE"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "typeOrganisation",
+      "otherEntityRelationshipName": "categorieOrganisation",
+      "relationshipName": "type"
+    }
+  ],
+  "changelogDate": "20200205114806",
+  "entityTableName": "categorie_organisation",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

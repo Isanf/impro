@@ -1,0 +1,55 @@
+{
+  "name": "LivraisonVehicule",
+  "fields": [
+    {
+      "fieldName": "numeroLivraison",
+      "fieldType": "String",
+      "javadoc": "numeroLivraison"
+    },
+    {
+      "fieldName": "dateLivraison",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vehicule",
+      "otherEntityRelationshipName": "livraisonVehicule",
+      "relationshipName": "vehicule"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "livraisonVRevendeur",
+      "relationshipName": "revendeur",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "livraisonVConcessionnaire",
+      "relationshipName": "concessionnaire",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "commandeVehicule",
+      "otherEntityRelationshipName": "livraisonVehicule",
+      "relationshipName": "commandeVehicule",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200205114803",
+  "javadoc": "The LivraisonVehicule entity.\\n@author A true hipster",
+  "entityTableName": "livraison_vehicule",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

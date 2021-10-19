@@ -1,0 +1,50 @@
+{
+  "name": "CarteW",
+  "fields": [
+    {
+      "fieldName": "numeroCarteW",
+      "fieldType": "String",
+      "javadoc": "numeroCarteW"
+    },
+    {
+      "fieldName": "dateEtablissementCarteW",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateExpirationCarteW",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "lieuEtablissement",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codeQr",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "carteW",
+      "relationshipName": "organisation",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20200205114750",
+  "javadoc": "The CarteW entity.\\n@author A true hipster",
+  "entityTableName": "carte_w",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false,
+  "searchEngine": false,
+  "databaseType": "sql"
+}

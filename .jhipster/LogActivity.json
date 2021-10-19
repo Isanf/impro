@@ -1,0 +1,36 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [],
+  "fields": [
+    {
+      "fieldName": "principal",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "action",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ip",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateAction",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "changelogDate": "20200624121044",
+  "dto": "mapstruct",
+  "searchEngine": false,
+  "service": "serviceClass",
+  "entityTableName": "log_activity",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": false,
+  "pagination": "no"
+}

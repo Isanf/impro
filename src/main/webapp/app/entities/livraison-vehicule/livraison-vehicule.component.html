@@ -1,0 +1,166 @@
+<div>
+    <nb-card>
+        <nb-card-header>
+            <h2 id="page-heading">
+                <span jhiTranslate="improApp.livraisonVehicule.home.title">Livraison Vehicules</span>
+
+                <button *jhiHasAnyAuthority="'CONCESSIONNAIRE'" id="jh-create-entity" nbButton outline status="primary" shape="round" class="float-right jh-create-entity create-livraison-vehicule" [routerLink]="['/livraison-vehicule/new']">
+                    <fa-icon icon="plus"></fa-icon>
+                    <span>
+                    Ajouter
+                </span>
+                </button>
+            </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <jhi-alert-error></jhi-alert-error>
+
+            <jhi-alert></jhi-alert>
+
+            <nb-form-field>
+                <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                <input type="text" fieldSize="tiny" nbInput status="primary" fullWidth placeholder="Rechercher par Date"
+                       [(ngModel)]="searchText" />
+            </nb-form-field>
+
+            <div class="alert alert-warning" id="no-result" *ngIf="livraisonVehicules?.length === 0 && livraisonVehicules1?.length === 0">
+                <span jhiTranslate="improApp.livraisonVehicule.home.notFound">No livraisonVehicules found</span>
+            </div>
+            <div *jhiHasAnyAuthority="'CONCESSIONNAIRE'">
+                <div class="table-responsive table-striped table-hover table-bordered" id="entities" *ngIf="livraisonVehicules?.length > 0">
+                    <table class="table table-striped" aria-describedby="page-heading">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                            <th scope="col"><span jhiTranslate="improApp.livraisonVehicule.numeroLivraison">Numero Livraison</span> </th>
+                            <th scope="col"><span jhiTranslate="improApp.livraisonVehicule.dateLivraison">Date Livraison</span> </th>
+                            <th scope="col"><span jhiTranslate="improApp.livraisonVehicule.revendeur">Revendeur</span> </th>
+                            <th scope="col"><span jhiTranslate="improApp.livraisonVehicule.concessionnaire">Concessionnaire</span> </th>
+                            <th scope="col"><span jhiTranslate="improApp.livraisonVehicule.commandeVehicule">Commande Vehicule</span> </th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let livraisonVehicule of livraisonVehicules | livraisonVehiculeFilter:searchText">
+                            <td>{{ livraisonVehicule.numeroLivraison }}</td>
+                            <td>{{ livraisonVehicule.dateLivraison | date:'medium' }}</td>
+                            <td>
+                                <div *ngIf="livraisonVehicule.revendeurId">
+                                    <a [routerLink]="['/organisation', livraisonVehicule.revendeurId , 'view']" >
+                                        <div *ngFor="let organisation of organisationtout">
+                                            <div *ngIf="organisation.id == livraisonVehicule.revendeurId">
+                                                {{ organisation.nom }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div *ngIf="livraisonVehicule.concessionnaireId">
+                                    <a [routerLink]="['/organisation', livraisonVehicule.concessionnaireId , 'view']" >
+                                        <div *ngFor="let organisation of organisationtout">
+                                            <div *ngIf="organisation.id == livraisonVehicule.concessionnaireId">
+                                                {{ organisation.nom }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div *ngIf="livraisonVehicule.commandeVehiculeId">
+                                    <a [routerLink]="['/commande-vehicule', livraisonVehicule.commandeVehiculeId , 'view']" >{{ livraisonVehicule.commandeVehiculeId }}</a>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="submit" nbButton status="info" size="tiny" outline shape="round"
+                                            [routerLink]="['/livraison-vehicule', livraisonVehicule.id, 'view']">
+                                        <fa-icon icon="eye"></fa-icon>
+                                        <span class="d-none d-md-inline" ></span>
+                                    </button>
+                                    <div *ngIf="livraisonVehicule.revendeurId; else candoit">
+                                        <div STYLE="color: #151a30">
+                                            --FAITE
+                                        </div>
+                                    </div>
+                                    <ng-template #candoit>
+                                        <button type="submit" nbButton status="primary" size="tiny" shape="round" outline
+                                                [routerLink]="['/livraison-vehicule', livraisonVehicule.id, 'edit']">
+                                            <fa-icon icon="pencil-alt"></fa-icon>
+                                            <span class="d-none d-md-inline"></span>
+                                        </button>
+
+                                        <button type="submit" (click)="delete(livraisonVehicule)"
+                                                nbButton status="danger" size="tiny" shape="round" outline>
+                                            <fa-icon icon="times"></fa-icon>
+                                            <span class="d-none d-md-inline"></span>
+                                        </button>
+                                    </ng-template>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div *jhiHasAnyAuthority="'REVENDEUR'">
+                <div class="table-responsive table-striped table-hover table-bordered" id="entities1" *ngIf="livraisonVehicules1?.length > 0">
+                    <table class="table table-striped" aria-describedby="page-heading">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                            <th scope="col"><span jhiTranslate="improApp.livraisonVehicule.numeroLivraison">Numero Livraison</span> </th>
+                            <th scope="col"><span jhiTranslate="improApp.livraisonVehicule.dateLivraison">Date Livraison</span> </th>
+                            <th scope="col"><span jhiTranslate="improApp.livraisonVehicule.revendeur">Revendeur</span> </th>
+                            <th scope="col"><span jhiTranslate="improApp.livraisonVehicule.concessionnaire">Concessionnaire</span> </th>
+                            <th scope="col"><span jhiTranslate="improApp.livraisonVehicule.commandeVehicule">Commande Vehicule</span> </th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let livraisonVehicule of livraisonVehicules1 | livraisonVehiculeFilter:searchText">
+                            <td>{{ livraisonVehicule.numeroLivraison }}</td>
+                            <td>{{ livraisonVehicule.dateLivraison | date:'medium' }}</td>
+                            <td>
+                                <div *ngIf="livraisonVehicule.revendeurId">
+                                    <a [routerLink]="['/organisation', livraisonVehicule.revendeurId , 'view']" >{{ livraisonVehicule.revendeurId }}</a>
+                                </div>
+                            </td>
+                            <td>
+                                <div *ngIf="livraisonVehicule.concessionnaireId">
+                                    <a [routerLink]="['/organisation', livraisonVehicule.concessionnaireId , 'view']" >{{ livraisonVehicule.concessionnaireId }}</a>
+                                </div>
+                            </td>
+                            <td>
+                                <div *ngIf="livraisonVehicule.commandeVehiculeId">
+                                    <a [routerLink]="['/commande-vehicule', livraisonVehicule.commandeVehiculeId , 'view']" >{{ livraisonVehicule.commandeVehiculeId }}</a>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="submit" nbButton status="info" size="tiny" outline shape="round"
+                                            [routerLink]="['/livraison-vehicule', livraisonVehicule.id, 'view']">
+                                        <fa-icon icon="eye"></fa-icon>
+                                        <span class="d-none d-md-inline" ></span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <div *ngIf="livraisonVehicules?.length > 0">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                </div>
+            </div>
+        </nb-card-footer>
+    </nb-card>
+
+
+</div>

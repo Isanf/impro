@@ -1,0 +1,59 @@
+{
+  "name": "Vente",
+  "fields": [
+    {
+      "fieldName": "numeroVente",
+      "fieldType": "String",
+      "javadoc": "numeroVente"
+    },
+    {
+      "fieldName": "dateVente",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "quantiteVendue",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vehicule",
+      "otherEntityRelationshipName": "vente",
+      "relationshipName": "vehicules"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "vente",
+      "relationshipName": "revendeur",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "personnePhysique",
+      "otherEntityRelationshipName": "vente",
+      "relationshipName": "personnePhysique",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "personneMorale",
+      "otherEntityRelationshipName": "vente",
+      "relationshipName": "personneMorale",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200219155400",
+  "javadoc": "The Vente entity.\\n@author A true hipster",
+  "entityTableName": "vente",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

@@ -1,0 +1,234 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div *ngIf="commandeCarnetSouche">
+            <nb-card>
+                <nb-card-header>
+                    <h2><span>Détails de la commande de Carnet à Souche</span> {{ commandeCarnetSouche.id }}</h2>
+                    <hr>
+                </nb-card-header>
+                <nb-card-body>
+                    <jhi-alert-error></jhi-alert-error>
+                    <div class="row">
+                        <dl class="col-md-7 jh-entity-details" *jhiHasAnyAuthority="['CONCESSIONNAIRE','STHGUICHET']">
+                            <div class="row">
+                                <nb-card class="col-md-6" status="basic">
+                                    <nb-card-header>
+                                        <dt><span jhiTranslate="improApp.commandeCarnetSouche.numeroCommandeCS" [ngbTooltip]="'improApp.commandeCarnetSouche.help.numeroCommandeCS' | translate">Numéro Commande CS</span></dt>
+
+                                    </nb-card-header>
+                                    <nb-card-body>
+                                        <dd>
+                                            <span>{{ commandeCarnetSouche.numeroCommandeCS }}</span>
+                                        </dd>
+                                    </nb-card-body>
+                                </nb-card>
+                                <nb-card class="col-md-6" status="basic">
+                                    <nb-card-header>
+                                        <dt><span jhiTranslate="improApp.commandeCarnetSouche.dateCommandeCS">Date Commande Carnet à Souche</span></dt>
+
+                                    </nb-card-header>
+                                    <nb-card-body>
+                                        <dd>
+                                            <span>{{ commandeCarnetSouche.dateCommandeCS }}</span>
+                                        </dd>
+                                    </nb-card-body>
+                                </nb-card>
+                            </div>
+                            <div class="row">
+                                <nb-card class="col-md-6" status="basic">
+                                    <nb-card-header>
+                                        <dt><span>Type Paiement</span></dt>
+                                    </nb-card-header>
+                                    <nb-card-body>
+                                        <dd>
+                                            <span>{{ commandeCarnetSouche.typePaiement }}</span>
+                                        </dd>
+                                    </nb-card-body>
+                                </nb-card>
+                                <nb-card class="col-md-6" status="basic">
+                                    <nb-card-header>
+                                        <dt><span>Prix Commande</span></dt>
+                                    </nb-card-header>
+                                    <nb-card-body>
+                                        <dd>
+                                            <span>{{ commandeCarnetSouche.prixCommande   }}</span>
+                                        </dd>
+                                    </nb-card-body>
+                                </nb-card>
+                            </div>
+                            <div class="row">
+                                <nb-card class="col-md-12" status="basic">
+                                    <nb-card-header>
+                                        <dt><span>Délai de Livraison</span></dt>
+                                    </nb-card-header>
+                                    <nb-card-body>
+                                        <dd>
+                                            <span>{{ commandeCarnetSouche.typePaiement }}</span>
+                                        </dd>
+                                    </nb-card-body>
+                                </nb-card>
+                            </div>
+                        </dl>
+                        <dl class="col-md-7 jh-entity-details" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                            <div class="row">
+                                <nb-card class="col-md-6" status="basic">
+                                    <nb-card-header>
+                                        <dt><span jhiTranslate="improApp.commandeCarnetSouche.numeroCommandeCS" [ngbTooltip]="'improApp.commandeCarnetSouche.help.numeroCommandeCS' | translate">Numéro Commande Carnet à Souche</span></dt>
+
+                                    </nb-card-header>
+                                    <nb-card-body>
+                                        <dd>
+                                            <span>{{ commandeCarnetSouche.numeroCommandeCS }}</span>
+                                        </dd>
+                                    </nb-card-body>
+                                </nb-card>
+                                <nb-card class="col-md-6" status="basic">
+                                    <nb-card-header>
+                                        <dt><span jhiTranslate="improApp.commandeCarnetSouche.dateCommandeCS">Date Commande CS</span></dt>
+                                    </nb-card-header>
+                                    <nb-card-body>
+                                        <dd>
+                                            <span>{{ commandeCarnetSouche.dateCommandeCS }}</span>
+                                        </dd>
+                                    </nb-card-body>
+                                </nb-card>
+                            </div>
+                            <div class="row">
+                                <nb-card class="col-md-6" status="basic">
+                                    <nb-card-header>
+                                        <dt><span>Type Paiement</span></dt>
+                                    </nb-card-header>
+                                    <nb-card-body>
+                                        <dd>
+                                            <span>{{ commandeCarnetSouche.typePaiement }}</span>
+                                        </dd>
+                                    </nb-card-body>
+                                </nb-card>
+                                <nb-card class="col-md-6" status="basic">
+                                    <nb-card-header>
+                                        <dt><span jhiTranslate="improApp.commandeCarnetSouche.concessionnaire">Concessionnaire</span></dt>
+                                    </nb-card-header>
+                                    <nb-card-body>
+                                        <dd>
+                                            <div *ngIf="commandeCarnetSouche.concessionnaireId">
+                                                <a [routerLink]="['/organisation', commandeCarnetSouche.concessionnaireId, 'view']">{{ commandeCarnetSouche.organisationDTO.nom }}</a>
+                                            </div>
+                                        </dd>
+                                    </nb-card-body>
+                                </nb-card>
+                            </div>
+                            <div class="row">
+                                <nb-card class="col-md-12" status="basic">
+                                    <nb-card-header>
+                                        <dt><span>Délai de Livraison</span></dt>
+                                    </nb-card-header>
+                                    <nb-card-body>
+                                        <dd>
+                                            <span>{{ commandeCarnetSouche.typePaiement }}</span>
+                                        </dd>
+                                    </nb-card-body>
+                                </nb-card>
+                            </div>
+                        </dl>
+                        <div class="col-5">
+                            <nb-card size="tiny" status="primary">
+                                <label> <strong> Information sur la commande </strong> </label>
+                                <table class="table table-striped" aria-describedby="page-heading">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" ><span>Numéro</span> </th>
+                                        <th scope="col" ><span>Quantité</span> </th>
+                                        <th scope="col" ><span>Type de Carnet</span></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let infos of infosCcs">
+                                        <td>{{ infos.numeroCommande }}</td>
+                                        <td>{{ infos.quantiteCommande }}</td>
+                                        <td>{{ infos.libelle }}</td>
+                                        <td class="text-right">
+                                            <div class="btn-group">
+                                                <button *ngIf="infos.estDeliver" type="submit"
+                                                        nbButton shape="round" status="success" size="tiny">
+                                                    <fa-icon icon="check-circle"></fa-icon>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </nb-card>
+                        </div>
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <button type="submit"
+                                (click)="previousState()"
+                                nbButton outline status="info" shape="round" size="tiny">
+                            <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                        </button>
+                        <button type="button" *ngIf="commandeCarnetSouche.estValide"
+                                (click)="processus(commandeCarnetSouche.id)" [nbSpinner]="loadingP" nbSpinnerStatus="success"
+                                nbButton outline status="success" size="tiny" shape="round"><fa-icon icon="check-circle"></fa-icon>&nbsp;
+                            <span>lancer le processus</span>
+                        </button>
+                        <button type="button" *ngIf="commandeCarnetSouche.estTraitee"
+                                [routerLink]="['/livraison-carnet-souche', commandeCarnetSouche.id, 'livrer']"
+                                nbButton outline status="warning" shape="round" size="tiny">
+                            <fa-icon icon="check-circle"></fa-icon>&nbsp;
+                            <span>Livré la commande</span>
+                        </button>
+                        <button type="button" *ngIf="commandeCarnetSouche.estTraitee && isAllDelivery()"
+                                (click)="facture(commandeCarnetSouche.id)" [nbSpinner]="loadingF" nbSpinnerStatus="success"
+                                nbButton outline status="info" shape="round" size="tiny">
+                            <fa-icon icon="check-circle"></fa-icon>&nbsp;
+                            <span>Facture de la Commande</span>
+                        </button>
+                    </div>
+                    <div *jhiHasAnyAuthority="['CONCESSIONNAIRE']">
+                        <button type="submit"
+                                (click)="previousState()"
+                                nbButton outline status="info" size="tiny" shape="round">
+                            <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                        </button>
+
+                        <button type="button" *ngIf="!commandeCarnetSouche.estValide"
+                                [routerLink]="['/commande-carnet-souche', commandeCarnetSouche.id, 'edit']"
+                                nbButton outline status="primary" shape="round" size="tiny">
+                            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+
+                        <button type="button" *ngIf="!commandeCarnetSouche.estValide" [nbSpinner]="loading"
+                                nbSpinnerStatus="success" (click)="toggleLoadingAnimation(commandeCarnetSouche.id)"
+                                nbButton outline status="success" shape="round" size="tiny">
+                            <fa-icon icon="check-circle"></fa-icon>&nbsp;
+                            <span>Le Bon de Commande</span>
+                        </button>
+                    </div>
+                    <div *jhiHasAnyAuthority="['STHGUICHET']">
+                        <button type="submit"
+                                (click)="previousState()" size="tiny"
+                                nbButton outline status="info" shape="round">
+                            <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                        </button>
+
+                        <button type="button" *ngIf="!commandeCarnetSouche.estValide" size="tiny"
+                                [routerLink]="['/commande-carnet-souche', commandeCarnetSouche.id, 'edit']"
+                                nbButton outline status="primary" shape="round">
+                            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+
+                        <button type="button" *ngIf="!commandeCarnetSouche.estValide" [nbSpinner]="loading"
+                                nbSpinnerStatus="success" (click)="toggleLoadingAnimation(commandeCarnetSouche.id)"
+                                nbButton outline status="success" shape="round" size="tiny">
+                            <fa-icon icon="check-circle"></fa-icon>&nbsp;
+                            <span>Le Bon de Commande</span>
+                        </button>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </div>
+    </div>
+</div>

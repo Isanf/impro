@@ -1,0 +1,30 @@
+{
+  "improApp": {
+    "docIdentificationPP": {
+      "home": {
+        "title": "DocIdentificationPPS",
+        "createLabel": "Créer un nouveau Doc Identification PP",
+        "createOrEditLabel": "Créer ou éditer un Doc Identification PP",
+        "notFound": "Aucun Doc Identification PP trouvé"
+      },
+      "created": "Un nouveau Doc Identification PP a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Doc Identification PP avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Doc Identification PP avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Doc Identification PP {{ id }} ?"
+      },
+      "detail": {
+        "title": "Doc Identification PP"
+      },
+      "numeroDoc": "Numero Doc",
+      "nip": "Nip",
+      "dateEtablissement": "Date Etablissement",
+      "lieuEtablissement": "Lieu Etablissement",
+      "autoriteEmettrice": "Autorite Emettrice",
+      "typeDocIdentification": "Type Doc Identification",
+      "help": {
+        "numeroDoc": "numeroDoc"
+      }
+    }
+  }
+}

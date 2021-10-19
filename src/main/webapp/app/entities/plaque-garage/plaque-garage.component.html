@@ -1,0 +1,82 @@
+<div>
+    <nb-card>
+        <nb-card-header>
+            <h2 id="page-heading">
+                <span jhiTranslate="improApp.plaqueGarage.home.title">Plaque Garages</span>
+
+                <!--<button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-plaque-garage" [routerLink]="['/plaque-garage/new']">
+                    <fa-icon icon="plus"></fa-icon>
+                    <span  jhiTranslate="improApp.plaqueGarage.home.createLabel">
+            Create a new Plaque Garage
+            </span>
+                </button>-->
+            </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <jhi-alert-error></jhi-alert-error>
+
+            <jhi-alert></jhi-alert>
+
+            <div class="alert alert-warning" id="no-result" *ngIf="plaqueGarages?.length === 0">
+                <span jhiTranslate="improApp.plaqueGarage.home.notFound">No plaqueGarages found</span>
+            </div>
+
+            <div class="table-responsive table table-striped" id="entities" *ngIf="plaqueGarages && plaqueGarages.length > 0">
+                <table class="table table-striped" aria-describedby="page-heading">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                        <th scope="col" ><span >N° </span> </th>
+                        <th scope="col"><span >Numero Plaque</span> </th>
+                        <th scope="col"><span >Code Qr Plaque</span> </th>
+                        <th scope="col"><span >Créer le</span> </th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let plaqueGarage of plaqueGarages ;trackBy: trackId">
+                        <td>{{ plaqueGarage.numeroOrdre }}</td>
+                        <td>{{ plaqueGarage.numeroPlaque }}</td>
+                        <td>{{ plaqueGarage.codeQrPlaque }}</td>
+                        <td>{{ plaqueGarage.createdAt | date:'medium' }}</td>
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <button type="submit" nbButton shape="round" status="info" size="tiny" outline
+                                        [routerLink]="['/plaque-garage', plaqueGarage.id, 'view']"
+                                        class="btn btn-info btn-sm">
+                                    <fa-icon icon="eye"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+<!--                                <button type="submit"-->
+<!--                                        [routerLink]="['/plaque-garage', plaqueGarage.id, 'edit']"-->
+<!--                                        class="btn btn-primary btn-sm">-->
+<!--                                    <fa-icon icon="pencil-alt"></fa-icon>-->
+<!--                                    <span class="d-none d-md-inline"></span>-->
+<!--                                </button>-->
+
+<!--                                <button type="submit" (click)="delete(plaqueGarage)"-->
+<!--                                        class="btn btn-danger btn-sm">-->
+<!--                                    <fa-icon icon="times"></fa-icon>-->
+<!--                                    <span class="d-none d-md-inline"></span>-->
+<!--                                </button>-->
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <div *ngIf="plaqueGarages && plaqueGarages.length > 0">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                </div>
+            </div>
+        </nb-card-footer>
+    </nb-card>
+
+</div>

@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="vehiculeTraversant">
+            <h2><span jhiTranslate="improApp.vehiculeTraversant.detail.title">Vehicule Traversant</span> {{ vehiculeTraversant.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.vehiculeTraversant.chassis">Chassis</span></dt>
+                <dd>
+                    <span>{{ vehiculeTraversant.chassis }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.vehiculeTraversant.marque">Marque</span></dt>
+                <dd>
+                    <span>{{ vehiculeTraversant.marque }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.vehiculeTraversant.model">Model</span></dt>
+                <dd>
+                    <span>{{ vehiculeTraversant.model }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.vehiculeTraversant.createdAt">Created At</span></dt>
+                <dd>
+                    <span>{{ vehiculeTraversant.createdAt }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/vehicule-traversant', vehiculeTraversant.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

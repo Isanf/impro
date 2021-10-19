@@ -1,0 +1,337 @@
+<nb-card>
+    <nb-card-header>
+        <nb-card *jhiHasAnyAuthority="['ROLE_ADMIN','STHGUICHET']">
+            <nb-card-header>
+                <h2 id="page-heading">
+                    <span>Vehicules Revendeurs/Traversants</span>
+
+                    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-vehicule-occasion" [routerLink]="['/vehicule-occasion/new']">
+                        <fa-icon icon="plus"></fa-icon>
+                        <span>
+                            Nouveau enregistrement
+                        </span>
+                    </button>
+                </h2>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <nb-checkbox [value]="checked" (checkedChange)="toggle($event)"
+                                     status="primary" id="notInStock" size="10">
+                            Vehicules Revendeurs
+                        </nb-checkbox>
+                    </div>
+                    <div class="col-sm-2">
+                        <nb-checkbox [value]="checked2" (checkedChange)="toggle2($event)"
+                                     status="primary" id="inStock" size="10">
+                            Vehicule traversant le territoire
+                        </nb-checkbox>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </nb-card-header>
+    <nb-card-body>
+        <div *ngIf="checked">
+            <div>
+                <nb-card>
+                    <nb-card-header>
+                        <h2>
+                            <span>Vehicules Revendeurs</span>
+                        </h2>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <jhi-alert-error></jhi-alert-error>
+
+                        <jhi-alert></jhi-alert>
+
+                        <!--<nb-form-field>
+                            <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                            <input type="text" fieldSize="tiny" nbInput status="primary" fullWidth placeholder="Rechercher"
+                                   [(ngModel)]="searchText" />
+                        </nb-form-field>-->
+
+                        <div class="alert alert-warning" *ngIf="vehiculeOccas?.length === 0">
+                            <span jhiTranslate="improApp.vehiculeTraversant.home.notFound">No vehiculeTraversants found</span>
+                        </div>
+
+                        <div class="table-responsive table-striped table-hover table-bordered" *ngIf="vehiculeOccas?.length > 0">
+                            <table class="table table-striped" aria-describedby="page-heading">
+                                <thead>
+                                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                                    <th scope="col"  jhiSortBy="chassis"><span>Chassis</span> <fa-icon icon="sort"></fa-icon></th>
+                                    <th scope="col"  jhiSortBy="marque"><span>Marque</span> <fa-icon icon="sort"></fa-icon></th>
+                                    <th scope="col"  jhiSortBy="model"><span>Model</span> <fa-icon icon="sort"></fa-icon></th>
+                                    <th scope="col"  jhiSortBy="createdAt"><span>Created At</span> <fa-icon icon="sort"></fa-icon></th>
+                                    <th scope="col"><span>Téléphone</span> </th>
+                                    <th scope="col"><span>Propriétaire</span> </th>
+                                    <th scope="col"><span>CarteW</span> </th>
+                                    <!--<th scope="col"><span></span> </th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let vehiculeTraversant of vehiculeOccas">
+                                    <td>{{ vehiculeTraversant.chassis }}</td>
+                                    <td>{{ vehiculeTraversant.marque }}</td>
+                                    <td>{{ vehiculeTraversant.model }}</td>
+                                    <td>{{ vehiculeTraversant.createdAt | date:'medium' }}</td>
+                                    <td>
+                                        <div *ngFor="let personnePhysique of personnePhysiques">
+                                            <div *ngIf="personnePhysique.id == vehiculeTraversant.personnePhysiqueId">
+                                                <div>
+                                                    <a [routerLink]="['/personne-physique', personnePhysique.id , 'view']">{{ personnePhysique.telephone }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngFor="let personneMorale of personneMorales">
+                                            <div *ngIf="personneMorale.id == vehiculeTraversant.personneMoraleId">
+                                                <div>
+                                                    <a [routerLink]="['/personne-physique', personneMorale.id , 'view']">{{ personneMorale.telephone }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div *ngFor="let personnePhysique of personnePhysiques">
+                                            <div *ngIf="personnePhysique.id == vehiculeTraversant.personnePhysiqueId">
+                                                <div>
+                                                    <a [routerLink]="['/personne-physique', personnePhysique.id , 'view']" >{{ personnePhysique.nom + ' ' + personnePhysique.prenom }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngFor="let personneMorale of personneMorales">
+                                            <div *ngIf="personneMorale.id == vehiculeTraversant.personneMoraleId">
+                                                <div>
+                                                    <a [routerLink]="['/personne-morale', personneMorale.id , 'view']">{{ personneMorale.denomination }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div *ngFor="let carteW of listcartew">
+                                            <div *ngIf="carteW.id == vehiculeTraversant.carteWId">
+                                                <div>
+                                                    <a [routerLink]="['/carte-w', carteW.id , 'view']">{{vehiculeTraversant.carteWDTO.numeroCarteW}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <!--<td class="text-right">
+                                        <div class="btn-group">
+                                            <button type="submit"
+                                                    [routerLink]="['/vehicule-traversant', vehiculeTraversant.id, 'edit']"
+                                                    class="btn btn-primary btn-sm">
+                                                <fa-icon icon="pencil-alt"></fa-icon>
+                                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                            </button>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </nb-card-body>
+                    <nb-card-footer>
+                        <!--<div *ngIf="vehiculeTraversants && vehiculeTraversants.length > 0">
+                            <div class="row justify-content-center">
+                                <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                            </div>
+                        </div>-->
+                    </nb-card-footer>
+                </nb-card>
+            </div>
+            <!--<div>
+
+                <jhi-alert-error></jhi-alert-error>
+
+                <jhi-alert></jhi-alert>
+
+                <div class="alert alert-warning" id="no-result" *ngIf="vehiculeOccasions?.length === 0">
+                    <span jhiTranslate="improApp.vehiculeOccasion.home.notFound">No vehiculeOccasions found</span>
+                </div>
+
+                <div class="table-responsive" id="entities" *ngIf="vehiculeOccasions && vehiculeOccasions.length > 0">
+                    <table class="table table-striped" aria-describedby="page-heading">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="chassis"><span jhiTranslate="improApp.vehiculeOccasion.chassis">Chassis</span> <fa-icon icon="sort"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="marque"><span jhiTranslate="improApp.vehiculeOccasion.marque">Marque</span> <fa-icon icon="sort"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="model"><span jhiTranslate="improApp.vehiculeOccasion.model">Model</span> <fa-icon icon="sort"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="nomPrenom"><span jhiTranslate="improApp.vehiculeOccasion.nomPrenom">Nom Prenom</span> <fa-icon icon="sort"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="telephone"><span jhiTranslate="improApp.vehiculeOccasion.telephone">Telephone</span> <fa-icon icon="sort"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="carteW"><span jhiTranslate="improApp.vehiculeOccasion.carteW">Carte W</span> <fa-icon icon="sort"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="createdAt"><span jhiTranslate="improApp.vehiculeOccasion.createdAt">Created At</span> <fa-icon icon="sort"></fa-icon></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let vehiculeOccasion of vehiculeOccasions ;trackBy: trackId">
+                            <td><a [routerLink]="['/vehicule-occasion', vehiculeOccasion.id, 'view']">{{ vehiculeOccasion.id }}</a></td>
+                            <td>{{ vehiculeOccasion.chassis }}</td>
+                            <td>{{ vehiculeOccasion.marque }}</td>
+                            <td>{{ vehiculeOccasion.model }}</td>
+                            <td>{{ vehiculeOccasion.nomPrenom }}</td>
+                            <td>{{ vehiculeOccasion.telephone }}</td>
+                            <td>{{ vehiculeOccasion.carteW }}</td>
+                            <td>{{ vehiculeOccasion.createdAt | date:'medium' }}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="submit"
+                                            [routerLink]="['/vehicule-occasion', vehiculeOccasion.id, 'view']"
+                                            class="btn btn-info btn-sm">
+                                        <fa-icon icon="eye"></fa-icon>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                    </button>
+
+                                    <button type="submit"
+                                            [routerLink]="['/vehicule-occasion', vehiculeOccasion.id, 'edit']"
+                                            class="btn btn-primary btn-sm">
+                                        <fa-icon icon="pencil-alt"></fa-icon>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                    </button>
+
+                                    <button type="submit" (click)="delete(vehiculeOccasion)"
+                                            class="btn btn-danger btn-sm">
+                                        <fa-icon icon="times"></fa-icon>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div *ngIf="vehiculeOccasions && vehiculeOccasions.length > 0">
+                    <div class="row justify-content-center">
+                        <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+        <div *ngIf="checked2">
+            <div>
+                <nb-card>
+                    <nb-card-header>
+                        <h2>
+                            <span>Vehicules Traversants</span>
+                        </h2>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <jhi-alert-error></jhi-alert-error>
+
+                        <jhi-alert></jhi-alert>
+
+                        <!--<nb-form-field>
+                            <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                            <input type="text" fieldSize="tiny" nbInput status="primary" fullWidth placeholder="Rechercher"
+                                   [(ngModel)]="searchText" />
+                        </nb-form-field>-->
+
+                        <div class="alert alert-warning" *ngIf="vehiculeTraversants?.length === 0">
+                            <span jhiTranslate="improApp.vehiculeTraversant.home.notFound">No vehiculeTraversants found</span>
+                        </div>
+
+                        <div class="table-responsive table-striped table-hover table-bordered" *ngIf="vehiculeTraversants?.length > 0">
+                            <table class="table table-striped" aria-describedby="page-heading">
+                                <thead>
+                                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                                    <th scope="col"  jhiSortBy="chassis"><span>Chassis</span> <fa-icon icon="sort"></fa-icon></th>
+                                    <th scope="col"  jhiSortBy="marque"><span>Marque</span> <fa-icon icon="sort"></fa-icon></th>
+                                    <th scope="col"  jhiSortBy="model"><span>Model</span> <fa-icon icon="sort"></fa-icon></th>
+                                    <th scope="col"  jhiSortBy="dateEntre"><span>Date Entre</span> <fa-icon icon="sort"></fa-icon></th>
+                                    <th scope="col"  jhiSortBy="dateSortie"><span>Date Sortie</span> <fa-icon icon="sort"></fa-icon></th>
+                                    <th scope="col"  jhiSortBy="provenance"><span>Provenance</span> <fa-icon icon="sort"></fa-icon></th>
+                                    <th scope="col"  jhiSortBy="destination"><span>Destination</span> <fa-icon icon="sort"></fa-icon></th>
+                                    <th scope="col"  jhiSortBy="createdAt"><span>Created At</span> <fa-icon icon="sort"></fa-icon></th>
+                                    <th scope="col"><span>Téléphone</span> </th>
+                                    <th scope="col"><span>Propriétaire</span> </th>
+                                    <!--<th scope="col"><span></span> </th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let vehiculeTraversant of vehiculeTraversants">
+                                    <td>{{ vehiculeTraversant.chassis }}</td>
+                                    <td>{{ vehiculeTraversant.marque }}</td>
+                                    <td>{{ vehiculeTraversant.model }}</td>
+                                    <td>{{ vehiculeTraversant.dateEntre | date:'medium' }}</td>
+                                    <td>{{ vehiculeTraversant.dateSortie | date:'medium' }}</td>
+                                    <td>{{ vehiculeTraversant.provenance }}</td>
+                                    <td>{{ vehiculeTraversant.destination }}</td>
+                                    <td>{{ vehiculeTraversant.createdAt | date:'medium' }}</td>
+                                    <td>
+                                        <div *ngFor="let personnePhysique of personnePhysiques">
+                                            <div *ngIf="personnePhysique.id == vehiculeTraversant.personnePhysiqueId">
+                                                <div>
+                                                    <a [routerLink]="['/personne-physique', personnePhysique.id , 'view']">{{ personnePhysique.telephone }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngFor="let personneMorale of personneMorales">
+                                            <div *ngIf="personneMorale.id == vehiculeTraversant.personneMoraleId">
+                                                <div>
+                                                    <a [routerLink]="['/personne-physique', personneMorale.id , 'view']">{{ personneMorale.telephone }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div *ngFor="let personnePhysique of personnePhysiques">
+                                            <div *ngIf="personnePhysique.id == vehiculeTraversant.personnePhysiqueId">
+                                                <div>
+                                                    <a [routerLink]="['/personne-physique', personnePhysique.id , 'view']" >{{ personnePhysique.nom + ' ' + personnePhysique.prenom }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngFor="let personneMorale of personneMorales">
+                                            <div *ngIf="personneMorale.id == vehiculeTraversant.personneMoraleId">
+                                                <div>
+                                                    <a [routerLink]="['/personne-morale', personneMorale.id , 'view']">{{ personneMorale.denomination }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <!--<td class="text-right">
+                                        <div class="btn-group">
+                                            <button type="submit"
+                                                    [routerLink]="['/vehicule-traversant', vehiculeTraversant.id, 'edit']"
+                                                    class="btn btn-primary btn-sm">
+                                                <fa-icon icon="pencil-alt"></fa-icon>
+                                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                            </button>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </nb-card-body>
+                    <nb-card-footer>
+                        <!--<div *ngIf="vehiculeTraversants && vehiculeTraversants.length > 0">
+                            <div class="row justify-content-center">
+                                <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                            </div>
+                        </div>-->
+                    </nb-card-footer>
+                </nb-card>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+    </nb-card-footer>
+</nb-card>
+
+

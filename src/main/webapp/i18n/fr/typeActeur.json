@@ -1,0 +1,25 @@
+{
+  "improApp": {
+    "typeActeur": {
+      "home": {
+        "title": "TypeActeurs",
+        "createLabel": "Créer un nouveau Type Acteur",
+        "createOrEditLabel": "Créer ou éditer un Type Acteur",
+        "notFound": "Aucun Type Acteur trouvé"
+      },
+      "created": "Un nouveau Type Acteur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Type Acteur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Type Acteur avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Type Acteur {{ id }} ?"
+      },
+      "detail": {
+        "title": "Type Acteur"
+      },
+      "nom": "Nom",
+      "description": "Description",
+      "organisations": "Organisations",
+      "typeOrganisations": "Type Organisations"
+    }
+  }
+}

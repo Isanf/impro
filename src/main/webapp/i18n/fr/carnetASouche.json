@@ -1,0 +1,30 @@
+{
+  "improApp": {
+    "carnetASouche": {
+      "home": {
+        "title": "CarnetASouches",
+        "createLabel": "Créer un nouveau Carnet A Souche",
+        "createOrEditLabel": "Créer ou éditer un Carnet A Souche",
+        "notFound": "Aucun Carnet A Souche trouvé"
+      },
+      "created": "Un nouveau Carnet A Souche a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Carnet A Souche avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Carnet A Souche avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Carnet A Souche {{ id }} ?"
+      },
+      "detail": {
+        "title": "Carnet A Souche"
+      },
+      "numero": "Numero",
+      "dateImpression": "Date Impression",
+      "certificatImmatriculation": "Certificat Immatriculation",
+      "concessionnaire": "Concessionnaire",
+      "livraisonCarnetSouche": "Livraison Carnet Souche",
+      "typeCarnet": "Type Carnet",
+      "help": {
+        "numero": "numero"
+      }
+    }
+  }
+}

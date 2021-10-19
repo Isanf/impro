@@ -1,0 +1,36 @@
+{
+  "name": "OrganisationLocalite",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "organisationLocalite",
+      "relationshipName": "organisations"
+    }
+  ],
+  "changelogDate": "20200504123800",
+  "entityTableName": "organisation_localite",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

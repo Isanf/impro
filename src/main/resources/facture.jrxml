@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="facture" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a15451c3-6fac-4693-9098-4bdd15f929c0">
+    <parameter name="sth" class="java.lang.String"/>
+    <parameter name="date" class="java.lang.String"/>
+    <parameter name="numero" class="java.lang.String"/>
+    <parameter name="client" class="java.lang.String"/>
+    <parameter name="tel" class="java.lang.String"/>
+    <parameter name="email" class="java.lang.String"/>
+    <parameter name="ifu" class="java.lang.String"/>
+    <parameter name="rccm" class="java.lang.String"/>
+    <parameter name="pseudo" class="java.lang.String"/>
+    <parameter name="totalht" class="java.lang.String"/>
+    <parameter name="somme" class="java.lang.String"/>
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <field name="designation" class="java.lang.String"/>
+    <field name="quantite" class="java.lang.String"/>
+    <field name="prixuni" class="java.lang.String"/>
+    <field name="prixtotal" class="java.lang.String"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="431" splitType="Stretch">
+            <frame>
+                <reportElement x="1" y="5" width="160" height="55" uuid="1cd1f383-c69a-4d53-9405-48c2d89aebd6"/>
+                <box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+                    <pen lineWidth="2.0" lineStyle="Solid"/>
+                </box>
+                <image>
+                    <reportElement x="9" y="5" width="140" height="45" uuid="2e65960b-94f1-4b38-9532-24eaccdc9985"/>
+                    <imageExpression><![CDATA[$P{sth}]]></imageExpression>
+                </image>
+            </frame>
+            <staticText>
+                <reportElement x="0" y="65" width="161" height="20" uuid="e182e17d-2c18-4d72-b40d-9eaab1e39305"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <text><![CDATA[10 BP 13120]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="2" y="85" width="159" height="20" uuid="f333fdc1-e3f8-4a31-ad2c-411bc15ddd15"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <text><![CDATA[TEL : 25 37 83 11]]></text>
+            </staticText>
+            <line>
+                <reportElement x="0" y="139" width="554" height="1" uuid="bce861b1-7609-4ac0-9208-926ae8db2d11"/>
+            </line>
+            <textField>
+                <reportElement x="360" y="0" width="197" height="20" uuid="0f637038-b91c-4bc2-9a14-3fa21f026bea"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Ouagadougou,   " +$P{date}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="1" y="105" width="212" height="25" uuid="f3bba4ea-c1fe-4616-90a6-b0b072015332"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["E-mail : supnet@yahoo.com"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="60" y="287" width="360" height="23" uuid="30bca44b-608e-4368-aa04-75934f256d9a"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["TEL : " + $P{tel}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="60" y="333" width="360" height="23" uuid="dfd6cf71-3118-4005-a95e-e2d522e61bb4"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["N° IFU : " + $P{ifu}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="60" y="359" width="360" height="23" uuid="97537c4a-cbad-4c62-a37c-6a5de91378a6"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["N° RCCM : "+$P{rccm}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="60" y="264" width="360" height="23" uuid="6d3c9a22-13ba-433e-bc1a-5200e99a0818"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{pseudo}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="2" y="217" width="58" height="25" uuid="e89d74b4-5d0f-443d-a99d-e21192381473"/>
+                <box>
+                    <bottomPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Client : ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="70" y="219" width="360" height="23" uuid="8c311dbd-7885-41f4-80f6-802ae5dd4ae4"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{client}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="60" y="310" width="360" height="23" uuid="03c8e2d5-a6c2-4fdb-9646-6f5872ae0f5d"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["E-mail : " + $P{email}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="3" y="149" width="550" height="30" uuid="3dbcc49e-7dbd-46db-89b9-8d4d71a74138"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["FACTURE N°" +$P{numero} + "/Impro/SuperNet"]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="130" y="179" width="300" height="22" uuid="afd41bab-fa08-440f-97c2-30739c6fd9b5"/>
+                <textElement textAlignment="Center">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Objet : Commande de Bandes Adhésives]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="-2" y="401" width="238" height="29" uuid="8655ab47-b43c-41f6-96bb-1b37fd15a35a"/>
+                <box leftPadding="2">
+                    <pen lineWidth="1.0" lineStyle="Solid"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Désignation]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="236" y="401" width="80" height="29" uuid="a0d248ab-2e8f-4543-b902-313099948677"/>
+                <box leftPadding="2">
+                    <pen lineWidth="1.0" lineStyle="Solid"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Quantité]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="316" y="400" width="120" height="30" uuid="faf508fb-2c4c-4c50-897f-5d61d3a045c2"/>
+                <box leftPadding="2">
+                    <pen lineWidth="1.0" lineStyle="Solid"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Prix Unitaire]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="436" y="400" width="117" height="30" uuid="6302d44d-4671-4f8b-956b-cfba31321f83"/>
+                <box leftPadding="2">
+                    <pen lineWidth="1.0" lineStyle="Solid"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Prix Total]]></text>
+            </staticText>
+        </band>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="31" splitType="Stretch">
+            <textField>
+                <reportElement x="-2" y="0" width="238" height="30" uuid="11d6b891-b8b6-4ff4-b753-36fef928a1d7"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{designation}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement mode="Opaque" x="236" y="0" width="80" height="30" backcolor="#FFFFFF" uuid="3151a89f-414b-4e28-9335-61137f75fd47"/>
+                <box leftPadding="2">
+                    <pen lineWidth="1.0" lineStyle="Solid"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{quantite}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement mode="Opaque" x="316" y="0" width="120" height="30" backcolor="#FFFFFF" uuid="7c2df241-05e3-4b64-8e7f-cf8c36a1deca"/>
+                <box leftPadding="2">
+                    <pen lineWidth="1.0" lineStyle="Solid"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{prixuni}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement mode="Opaque" x="436" y="0" width="117" height="30" backcolor="#FFFFFF" uuid="4a2efb95-9934-43d4-86d0-7eaef5f2d79a"/>
+                <box leftPadding="2">
+                    <pen lineWidth="1.0" lineStyle="Solid"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{prixtotal}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band splitType="Stretch"/>
+    </pageFooter>
+    <lastPageFooter>
+        <band height="181">
+            <staticText>
+                <reportElement x="430" y="102" width="100" height="19" uuid="9646562d-78a0-46d7-9f40-53c433914834"/>
+                <textElement>
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Signature]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="-2" y="70" width="552" height="23" uuid="36e9d7ee-e672-4aaa-ab49-b6ba530d8fa5"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="12" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{somme}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="316" y="0" width="120" height="30" uuid="cf55ff23-2655-4771-ba66-69cc3e497454"/>
+                <box leftPadding="2">
+                    <pen lineWidth="1.0" lineStyle="Solid"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Total HT]]></text>
+            </staticText>
+            <textField>
+                <reportElement mode="Opaque" x="436" y="0" width="117" height="30" backcolor="#FFFFFF" uuid="6a53292d-12d4-4658-ad75-dee64bb08369"/>
+                <box leftPadding="2">
+                    <pen lineWidth="1.0" lineStyle="Solid"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{totalht}]]></textFieldExpression>
+            </textField>
+        </band>
+    </lastPageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
+</jasperReport>

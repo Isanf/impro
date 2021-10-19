@@ -1,0 +1,111 @@
+<div class="col-md-12" [ngSwitch]="isAuthenticated()">
+    <div class="row">
+        <div class="header-container">
+            <div class="logo-container">
+                <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+                    <nb-icon icon="menu-2-outline"></nb-icon>
+                </a>
+                <!--<a class="logo-img" href="#" (click)="navigateHome()"></a>-->
+                <!--<a class="logo-img-head" href="#" (click)="navigateHome()"></a>
+                <a class="logo-img-text" href="#" (click)="navigateHome()"></a>-->
+                <img class="logo-img-new" src="../../../content/images/sth-logo-full.png" (click)="navigateHome()">
+                <h4>IMPRO</h4>
+            </div>
+        </div>
+        <div class="header-container ml-auto">
+            <nb-actions size="tiny">
+                <nb-action>
+                    <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <nb-select size="small"  status="danger" placeholder="LA LISTE DES ENTITÉS">
+                            <nb-option routerLink="type-carnet" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">type-carnet-souche</nb-option>
+                            <nb-option routerLink="certificat-immatriculation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">certificat-immatriculation</nb-option>
+                            <nb-option routerLink="immatriculation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">immatriculation</nb-option>
+                            <nb-option routerLink="supernet" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">supernet</nb-option>
+                            <nb-option routerLink="carnet-a-souche" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">carnet-a-souche</nb-option>
+                            <nb-option routerLink="carte-w" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">carte-w</nb-option>
+                            <nb-option routerLink="personne-physique" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">Personne physique</nb-option>
+                            <nb-option routerLink="doc-identification-pp" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">doc-identification-pp</nb-option>
+                            <nb-option routerLink="personne-morale" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">Personne morale</nb-option>
+                            <nb-option routerLink="doc-identification-pm" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">doc-identification-pm</nb-option>
+                            <nb-option routerLink="vente" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">vente</nb-option>
+                            <nb-option routerLink="pose-plaque" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">pose-plaque</nb-option>
+                            <nb-option routerLink="vehicule" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">vehicule</nb-option>
+                            <nb-option routerLink="collaboration" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">collaboration</nb-option>
+                            <nb-option routerLink="commande-vehicule" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">commande-vehicule</nb-option>
+                            <nb-option routerLink="stock" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">stock</nb-option>
+                            <nb-option routerLink="livraison-vehicule" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">livraison-vehicule</nb-option>
+                            <nb-option routerLink="livraison-carnet-souche" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">livraison-carnet-souche</nb-option>
+                            <nb-option routerLink="commande-carnet-souche" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">commande-carnet-souche</nb-option>
+                            <nb-option routerLink="categorie-organisation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">categorie-organisation</nb-option>
+                            <nb-option routerLink="type-organisation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">type-organisation</nb-option>
+                            <nb-option routerLink="organisation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">organisation</nb-option>
+                            <nb-option routerLink="type-acteur" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">type-acteur</nb-option>
+                            <nb-option routerLink="profil" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">profil</nb-option>
+                            <nb-option routerLink="type-vehicule" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">type-vehicule</nb-option>
+                            <nb-option routerLink="marque-vehicule" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">marque-vehicule</nb-option>
+                            <nb-option routerLink="plaque-immatriculation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">plaque-immatriculation</nb-option>
+                        </nb-select>
+                    </div>
+                </nb-action>
+                <nb-action>
+                    <div *ngIf="userorganisation">
+                        <span>{{userorganisation[0].nom}}</span>
+                    </div>
+                    <span>:{{user.login}}</span>
+                </nb-action>
+                <nb-action>
+                    <ul class="navbar-nav ml-auto">
+                        <li ngbDropdown class="dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <a class="dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
+                  <span *ngIf="!getImageUrl()">
+                    <fa-icon icon="user"></fa-icon>
+                    <span jhiTranslate="global.menu.account.main">
+                      Account
+                    </span>
+                  </span>
+                                <span *ngIf="getImageUrl()">
+                      <img [src]="getImageUrl()" class="profile-image rounded-circle" alt="Avatar">
+                  </span>
+                            </a>
+                            <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
+                                <li *ngSwitchCase="true">
+                                    <a class="dropdown-item" routerLink="account/settings" routerLinkActive="active" (click)="collapseNavbar()">
+                                        <fa-icon icon="wrench" fixedWidth="true"></fa-icon>
+                                        <span jhiTranslate="global.menu.account.settings">Settings</span>
+                                    </a>
+                                </li>
+                                <li *ngSwitchCase="true">
+                                    <a class="dropdown-item" routerLink="account/password" routerLinkActive="active" (click)="collapseNavbar()">
+                                        <fa-icon icon="lock" fixedWidth="true"></fa-icon>
+                                        <span jhiTranslate="global.menu.account.password">Password</span>
+                                    </a>
+                                </li>
+                                <li *ngSwitchCase="true">
+                                    <a class="dropdown-item" (click)="logout()" id="logout">
+                                        <fa-icon icon="sign-out-alt" fixedWidth="true"></fa-icon>
+                                        <span jhiTranslate="global.menu.account.logout">Sign out</span>
+                                    </a>
+                                </li>
+                                <li *ngSwitchCase="false">
+                                    <a class="dropdown-item" (click)="login()" id="login">
+                                        <fa-icon icon="sign-in-alt" fixedWidth="true"></fa-icon>
+                                        <span jhiTranslate="global.menu.account.login">Sign in</span>
+                                    </a>
+                                </li>
+                                <li *ngSwitchCase="false">
+                                    <a class="dropdown-item" routerLink="account/register" routerLinkActive="active" (click)="collapseNavbar()">
+                                        <fa-icon icon="user-plus" fixedWidth="true"></fa-icon>
+                                        <span jhiTranslate="global.menu.account.register">Register</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nb-action>
+
+            </nb-actions>
+        </div>
+    </div>
+
+</div>
+

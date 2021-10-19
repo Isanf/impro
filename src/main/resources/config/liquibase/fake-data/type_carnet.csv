@@ -1,0 +1,9 @@
+id;code;libelle;quantite_certificat;type_vehicule_id
+1251;01;Carnet de 25 Véhicule automobile;25;1201
+1252;02;Carnet de 25 Cycle à Moteur;25;1209
+1253;03;Carnet de 25 Tracteur routier;25;1201
+1254;04;Carnet de 25 Remorque/Semi-remorque;25;1206
+1255;05;Carnet de 50 Véhicule automobile;50;1203
+1256;06;Carnet de 50 Tracteur routier;50;1201
+1257;07;Carnet de 50 Cycle à Moteur;50;1204
+1258;08;Carnet de 25 Remorque/Semi-remorque;50;1206

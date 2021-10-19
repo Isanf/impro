@@ -1,0 +1,40 @@
+{
+  "name": "DocIdentificationPP",
+  "fields": [
+    {
+      "fieldName": "numeroDoc",
+      "fieldType": "String",
+      "javadoc": "numeroDoc"
+    },
+    {
+      "fieldName": "dateEtablissement",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "lieuEtablissement",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "autoriteEmettrice",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typeDocIdentification",
+      "fieldType": "TypeDocIdentification",
+      "fieldValues": "CNIB,PASSEPORT,CARTE_MILITAIRE,CARTE_SCOLAIRE,CARTE_ID_ETRANGERE"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200205114754",
+  "javadoc": "The DocIdentification entity.\\n@author A true hipster",
+  "entityTableName": "doc_identification_pp",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

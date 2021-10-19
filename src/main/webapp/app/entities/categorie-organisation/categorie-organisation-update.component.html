@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+    <div class="col-10">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <nb-card>
+                <nb-card-header>
+                    <h2 id="jhi-categorie-organisation-heading">Création d'une Categorie d'Organisation</h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <div>
+                        <jhi-alert-error></jhi-alert-error>
+
+                        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                   id="id" name="id" formControlName="id" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.categorieOrganisation.libelle" for="field_libelle">Libellé</label>
+                            <input nbInput fullWidth type="text" shape="round" status="primary" fieldSize="small"
+                                   name="libelle" id="field_libelle" formControlName="libelle"/>
+                            <div *ngIf="editForm.get('libelle')!.invalid && (editForm.get('libelle')!.dirty || editForm.get('libelle')!.touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="editForm.get('libelle')?.errors?.required" jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.categorieOrganisation.description" for="field_description">Description</label>
+                            <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                   name="description" id="field_description" formControlName="description"/>
+                        </div>
+                        <!--<div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.categorieOrganisation.typeCategorieOrganisation" for="field_typeCategorieOrganisation">Type Categorie Organisation</label>
+                            <nb-select fullWidth shape="round" status="primary" name="typeCategorieOrganisation" formControlName="typeCategorieOrganisation" id="field_typeCategorieOrganisation">
+                                <nb-option [value]="SUPERNET">{{ 'improApp.TypeCategorieOrganisation.SUPERNET' | translate }}</nb-option>
+                                <nb-option [value]="CONCESSIONNAIRE">{{ 'improApp.TypeCategorieOrganisation.CONCESSIONNAIRE' | translate }}</nb-option>
+                                <nb-option [value]="ETABLISSEMENT_SPECIALISE">{{ 'improApp.TypeCategorieOrganisation.ETABLISSEMENT_SPECIALISE' | translate }}</nb-option>
+                                <nb-option [value]="DGTTM">{{ 'improApp.TypeCategorieOrganisation.DGTTM' | translate }}</nb-option>
+                                <nb-option [value]="FDS">{{ 'improApp.TypeCategorieOrganisation.FDS' | translate }}</nb-option>
+                                <nb-option [value]="CCVA">{{ 'improApp.TypeCategorieOrganisation.CCVA' | translate }}</nb-option>
+                                <nb-option [value]="ASSURANCE">{{ 'improApp.TypeCategorieOrganisation.ASSURANCE' | translate }}</nb-option>
+                            </nb-select>
+                        </div>-->
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div>
+                        <button type="button" id="cancel-save" nbButton (click)="previousState()">
+                            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+
+                        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                                nbButton outline status="primary">
+                            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>

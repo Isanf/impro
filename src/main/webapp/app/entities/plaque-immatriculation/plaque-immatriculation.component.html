@@ -1,0 +1,99 @@
+<div>
+    <nb-card>
+        <nb-card-header>
+            <h2 id="page-heading">
+                <span jhiTranslate="improApp.plaqueImmatriculation.home.title">Plaque Immatriculations</span>
+
+                <button id="jh-create-entity" nbButton outline status="primary" shape="round" class="float-right jh-create-entity create-plaque-immatriculation" [routerLink]="['/plaque-immatriculation/new']">
+                    <fa-icon icon="plus"></fa-icon>
+                    <span  jhiTranslate="improApp.plaqueImmatriculation.home.createLabel">
+            Create a new Plaque Immatriculation
+            </span>
+                </button>
+            </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <jhi-alert-error></jhi-alert-error>
+
+            <jhi-alert></jhi-alert>
+
+            <nb-form-field>
+                <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                <input type="text" fieldSize="tiny" nbInput status="primary" fullWidth placeholder="Rechercher"
+                       [(ngModel)]="searchText" />
+            </nb-form-field>
+
+            <div class="alert alert-warning" id="no-result" *ngIf="plaqueImmatriculations?.length === 0">
+                <span jhiTranslate="improApp.plaqueImmatriculation.home.notFound">No plaqueImmatriculations found</span>
+            </div>
+
+            <div class="table-responsive table-striped table-hover table-bordered" id="entities" *ngIf="plaqueImmatriculations?.length > 0">
+                <table class="table table-striped" aria-describedby="page-heading">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                        <th scope="col"><span jhiTranslate="global.field.id">ID</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.plaqueImmatriculation.numeroSerie">Numero Serie</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.plaqueImmatriculation.numeroImmatriculation">Numero Immatriculation</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.plaqueImmatriculation.certificatImmatriculation">Certificat Immatriculation</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.plaqueImmatriculation.vehicule">Vehicule</span> </th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let plaqueImmatriculation of plaqueImmatriculations | plaqueFilter:searchText">
+                        <td><a [routerLink]="['/plaque-immatriculation', plaqueImmatriculation.id, 'view']">{{ plaqueImmatriculation.id }}</a></td>
+                        <td>{{ plaqueImmatriculation.numeroSerie }}</td>
+                        <td>{{ plaqueImmatriculation.numeroImmatriculation }}</td>
+                        <td>
+                            <div *ngIf="plaqueImmatriculation.certificatImmatriculationId">
+                                <a [routerLink]="['/certificat-immatriculation', plaqueImmatriculation.certificatImmatriculationId , 'view']" >{{ plaqueImmatriculation.certificatImmatriculationId }}</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div *ngIf="plaqueImmatriculation.vehiculeId">
+                                <a [routerLink]="['/vehicule', plaqueImmatriculation.vehiculeId , 'view']" >{{ plaqueImmatriculation.vehiculeId }}</a>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <button type="submit" nbButton status="info" size="tiny" outline shape="round"
+                                        [routerLink]="['/plaque-immatriculation', plaqueImmatriculation.id, 'view']">
+                                    <fa-icon icon="eye"></fa-icon>
+                                    <span class="d-none d-md-inline" ></span>
+                                </button>
+
+<!--                                <button type="submit" nbButton status="primary" size="tiny"-->
+<!--                                        [routerLink]="['/plaque-immatriculation', plaqueImmatriculation.id, 'edit']">-->
+<!--                                    <fa-icon icon="pencil-alt"></fa-icon>-->
+<!--                                    <span class="d-none d-md-inline"></span>-->
+<!--                                </button>-->
+
+<!--                                <button type="submit" nbButton status="danger" size="tiny" (click)="delete(plaqueImmatriculation)">-->
+<!--                                    <fa-icon icon="times"></fa-icon>-->
+<!--                                    <span class="d-none d-md-inline"></span>-->
+<!--                                </button>-->
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+
+        </nb-card-footer>
+    </nb-card>
+
+
+
+
+    <div *ngIf="plaqueImmatriculations?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

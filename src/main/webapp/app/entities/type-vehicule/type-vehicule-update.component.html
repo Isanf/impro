@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+    <div class="col-10">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <nb-card>
+                <nb-card-header>
+<!--
+                    <h2 id="jhi-type-vehicule-heading" jhiTranslate="improApp.typeVehicule.home.createOrEditLabel">Create or edit a Type Vehicule</h2>
+-->
+                    <h2 >Importer uniquement le Fichier(.csv) déjà traité pour ce cas !</h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <div>
+                        <jhi-alert-error></jhi-alert-error>
+
+                        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                   id="id" name="id" formControlName="id" readonly />
+                        </div>
+
+                        <!--<div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.typeVehicule.code" for="field_code" [ngbTooltip]="'improApp.typeVehicule.help.code' | translate">Code</label>
+                            <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                   name="code" id="field_code" formControlName="code"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.typeVehicule.libelle" for="field_libelle">Libelle</label>
+                            <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                   name="libelle" id="field_libelle" formControlName="libelle"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.typeVehicule.nombrePlaque" for="field_nombrePlaque">Nombre Plaque</label>
+                            <input type="number" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                   name="nombrePlaque" id="field_nombrePlaque" formControlName="nombrePlaque"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.typeVehicule.estCycleMoteur" for="field_estCycleMoteur">Est Cycle Moteur</label>
+                            <nb-checkbox status="primary"
+                                   name="estCycleMoteur" id="field_estCycleMoteur" formControlName="estCycleMoteur"></nb-checkbox>
+                        </div>-->
+                        <div class="form-group">
+                            <div class="d-flex">
+                                <input id="field_dateStock" type="file" nbInput fieldSize="small" fullWidth
+                                       (change)="handleFileInput($event.target.files)"
+                                       shape="round" status="primary" formControlName="file" />
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div>
+                        <button type="button" id="cancel-save" nbButton (click)="previousState()">
+                            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+
+                        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                                nbButton outline status="primary">
+                            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>

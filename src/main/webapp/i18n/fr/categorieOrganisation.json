@@ -1,0 +1,25 @@
+{
+  "improApp": {
+    "categorieOrganisation": {
+      "home": {
+        "title": "CategorieOrganisations",
+        "createLabel": "Créer un nouveau Categorie Organisation",
+        "createOrEditLabel": "Créer ou éditer un Categorie Organisation",
+        "notFound": "Aucun Categorie Organisation trouvé"
+      },
+      "created": "Un nouveau Categorie Organisation a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Categorie Organisation avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Categorie Organisation avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Categorie Organisation {{ id }} ?"
+      },
+      "detail": {
+        "title": "Categorie Organisation"
+      },
+      "libelle": "Libelle",
+      "description": "Description",
+      "typeCategorieOrganisation": "Type Categorie Organisation",
+      "type": "Type"
+    }
+  }
+}

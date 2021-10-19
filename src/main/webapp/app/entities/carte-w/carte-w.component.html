@@ -1,0 +1,93 @@
+<nb-card>
+    <nb-card-header>
+        <h2 id="page-heading">
+            <span jhiTranslate="improApp.carteW.home.title">Cartes W</span>
+
+            <button id="jh-create-entity" nbButton outline status="primary" shape="round" class="float-right jh-create-entity create-carte-w" [routerLink]="['/carte-w/new']">
+                <fa-icon icon="plus"></fa-icon>
+                <span>
+            Créer une nouvelle Carte W
+            </span>
+            </button>
+        </h2>
+    </nb-card-header>
+    <nb-card-body>
+        <div>
+            <nb-form-field>
+                <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                <input type="text" fieldSize="tiny" nbInput status="primary" fullWidth placeholder="Rechercher">
+            </nb-form-field>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <jhi-alert></jhi-alert>
+
+            <div class="alert alert-warning" id="no-result" *ngIf="carteWS?.length === 0">
+                <span>Aucune carte W trouvée</span>
+            </div>
+
+            <div class="table-responsive table-striped table-hover table-bordered" id="entities" *ngIf="carteWS?.length > 0">
+                <table class="table table-striped" aria-describedby="page-heading">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                        <th scope="col"><span jhiTranslate="improApp.carteW.numeroCarteW">Numéro Carte W</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.carteW.dateEtablissementCarteW">Date Etablissement Carte W</span></th>
+                        <th scope="col"><span jhiTranslate="improApp.carteW.dateExpirationCarteW">Date Expiration Carte W</span></th>
+                        <th scope="col"><span jhiTranslate="improApp.carteW.lieuEtablissement">Lieu Etablissement</span></th>
+                        <th scope="col"><span jhiTranslate="improApp.carteW.organisation">Organisation</span></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let carteW of carteWS ;trackBy: trackId">
+                        <td>{{ carteW.numeroCarteW }}</td>
+                        <td>{{ carteW.dateEtablissementCarteW.locale("fr").format("LLL  ") }}</td>
+                        <td>{{ carteW.dateExpirationCarteW.locale("fr").format("LLL") }}</td>
+                        <td>{{ carteW.lieuEtablissement }}</td>
+                        <td>
+                            <div *ngIf="carteW.organisationId">
+                                <a [routerLink]="['/organisation', carteW.organisationId , 'view']" >{{ carteW.organisationDTO.nom }}</a>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <button type="submit" nbButton outline status="info" shape="round" size="tiny"
+                                        [routerLink]="['/carte-w', carteW.id, 'view']">
+                                    <fa-icon icon="eye"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+                                <button type="submit" nbButton outline status="primary" shape="round" size="tiny"
+                                        [routerLink]="['/carte-w', carteW.id, 'edit']">
+                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <!--<button type="submit" (click)="delete(carteW)"
+                                        nbButton outline status="danger" shape="round" size="tiny">
+                                    <fa-icon icon="times"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>-->
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <div *ngIf="carteWS?.length > 0">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+            </div>
+        </div>
+    </nb-card-footer>
+</nb-card>
+
+

@@ -1,0 +1,41 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="improApp.logActivity.home.title">Log Activities</span>
+
+<!--        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-log-activity" [routerLink]="['/log-activity/new']">-->
+<!--            <fa-icon icon="plus"></fa-icon>-->
+<!--            <span  jhiTranslate="improApp.logActivity.home.createLabel">-->
+<!--            Create a new Log Activity-->
+<!--            </span>-->
+<!--        </button>-->
+    </h2>
+
+
+    <div class="alert alert-warning" id="no-result" *ngIf="logActivities?.length === 0">
+        <span jhiTranslate="improApp.logActivity.home.notFound">No logActivities found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="logActivities && logActivities.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="improApp.logActivity.principal">Principal</span></th>
+                    <th scope="col" ><span jhiTranslate="improApp.logActivity.url">Url</span></th>
+                    <th scope="col" ><span jhiTranslate="improApp.logActivity.action">Action</span></th>
+                    <th scope="col" ><span jhiTranslate="improApp.logActivity.ip">Ip</span></th>
+                    <th scope="col" ><span >Date Action</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let logActivity of logActivities ;trackBy: trackId">
+                    <td>{{ logActivity.principal }}</td>
+                    <td>{{ logActivity.url }}</td>
+                    <td>{{ logActivity.action }}</td>
+                    <td>{{ logActivity.ip }}</td>
+                    <td>{{ logActivity.dateAction.locale('fr').locale('LLLL') }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

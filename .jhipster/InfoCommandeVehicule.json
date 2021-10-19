@@ -1,0 +1,46 @@
+{
+  "name": "InfoCommandeVehicule",
+  "fields": [
+    {
+      "fieldName": "numeroCommande",
+      "fieldType": "String",
+      "javadoc": "numeroCommande"
+    },
+    {
+      "fieldName": "dateCommande",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "quantiteCommande",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "commandeVehicule",
+      "otherEntityRelationshipName": "infoCommandeVehicule",
+      "relationshipName": "commandeVehicule",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "marqueVehicule",
+      "otherEntityRelationshipName": "infoCommandeVehicule",
+      "relationshipName": "marqueVehicule",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200220120000",
+  "javadoc": "The InfoCommandeVehicule entity.\\n@author A true hipster",
+  "entityTableName": "info_commande_vehicule",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

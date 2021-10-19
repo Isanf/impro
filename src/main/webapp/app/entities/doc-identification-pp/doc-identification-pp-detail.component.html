@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="docIdentificationPP">
+            <h2><span jhiTranslate="improApp.docIdentificationPP.detail.title">Documents d'identification Personne Physique</span> {{ docIdentificationPP.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.docIdentificationPP.numeroDoc" [ngbTooltip]="'improApp.docIdentificationPP.help.numeroDoc' | translate">Numero Doc</span></dt>
+                <dd>
+                    <span>{{ docIdentificationPP.numeroDoc }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.docIdentificationPP.nip">Nip</span></dt>
+                <dd>
+                    <span>{{ docIdentificationPP.nip }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.docIdentificationPP.dateEtablissement">Date Etablissement</span></dt>
+                <dd>
+                    <span>{{ docIdentificationPP.dateEtablissement }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.docIdentificationPP.lieuEtablissement">Lieu Etablissement</span></dt>
+                <dd>
+                    <span>{{ docIdentificationPP.lieuEtablissement }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.docIdentificationPP.autoriteEmettrice">Autorite Emettrice</span></dt>
+                <dd>
+                    <span>{{ docIdentificationPP.autoriteEmettrice }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.docIdentificationPP.typeDocIdentification">Type Doc Identification</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'improApp.TypeDocIdentification.' + docIdentificationPP.typeDocIdentification }}">{{ docIdentificationPP.typeDocIdentification }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/doc-identification-pp', docIdentificationPP.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

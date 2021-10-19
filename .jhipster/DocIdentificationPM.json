@@ -1,0 +1,66 @@
+{
+  "name": "DocIdentificationPM",
+  "fields": [
+    {
+      "fieldName": "numero",
+      "fieldType": "String",
+      "javadoc": "numero"
+    },
+    {
+      "fieldName": "numeroIFU",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numeroRCCM",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "siegeSocial",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codePostal",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "docIdentificationPM",
+      "relationshipName": "organisation",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "personneMorale",
+      "otherEntityRelationshipName": "docIdentificationPM",
+      "relationshipName": "personneMorale",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20200205114756",
+  "javadoc": "The DocIdentificationPM entity.\\n@author A true hipster",
+  "entityTableName": "doc_identification_pm",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false,
+  "searchEngine": false,
+  "databaseType": "sql"
+}

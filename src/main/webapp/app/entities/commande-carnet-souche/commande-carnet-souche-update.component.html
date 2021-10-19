@@ -1,0 +1,418 @@
+<div class="steppers-container row" *jhiHasAnyAuthority="'CONCESSIONNAIRE'">
+    <div class="col-md-12">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <nb-card>
+                <nb-card-header>
+                    <h2>Nouvelle Commande de Carnets à Souches</h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <nb-stepper orientation="horizontal">
+                        <nb-step>
+                            <div>
+                                <jhi-alert-error></jhi-alert-error>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" > <strong> Type Carnet </strong> </label>
+                                            <div class="col-md-8">
+                                                <nb-select status="primary" size="small" shape="round" outline fullWidth formControlName="typeCarnetId">
+                                                    <nb-option [value]="typeCarnetOption.id" *ngFor="let typeCarnetOption of typecarnets; trackBy: trackByIdInfos">{{ typeCarnetOption.libelle }}</nb-option>
+                                                </nb-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label"> <strong> Quantité de commande </strong> </label>
+                                    <div class="col-sm-8">
+                                        <input nbInput fullWidth fieldSize="small" shape="round" status="primary"
+                                               type="number" placeholder="Quantité de commande"
+                                               formControlName="quantiteCommande"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label"> <strong> Est en Transit </strong> </label>
+                                    <div class="col-sm-8">
+                                        <nb-checkbox class="right" status="primary" size="10"
+                                                     formControlName="isTransited">  </nb-checkbox>
+                                    </div>
+                                    <div class="right">
+                                        <button nbButton status="primary" outline shape="round" size="medium"
+                                                [disabled]="this.editForm.get(['typeCarnetId']).value == null" (click)="add()">
+                                            <nb-icon icon="plus-circle-outline" size="80"></nb-icon>
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                                <div class="table-responsive table-striped" *ngIf="listShow?.length > 0">
+                                    <nb-card size="tiny" status="primary">
+                                        <table class="table table-striped" aria-describedby="page-heading">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col" ><span>Quantité Commandée</span> </th>
+                                                <th scope="col" ><span>Type de Carnet</span></th>
+                                                <th scope="col" ><span>Prix de la Commande</span> </th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let infos of listShow">
+                                                <td> <strong>{{ infos.quantiteCommande }}</strong> </td>
+                                                <td> <strong>{{ infos.libelle }}</strong> </td>
+                                                <td> <strong>{{ infos.numeroCommande }}</strong> </td>
+
+                                                <td class="text-right">
+                                                    <div class="btn-group">
+                                                        <button type="submit" (click)="edit(infos)" nbButton outline size="tiny" shape="round" status="primary">
+                                                            <fa-icon icon="pencil-alt"></fa-icon>
+                                                            <span class="d-none d-md-inline"></span>
+                                                        </button>
+
+                                                        <button type="submit" (click)="delete(infos)"
+                                                                nbButton outline shape="round" status="danger" size="tiny">
+                                                            <fa-icon icon="times"></fa-icon>
+                                                            <span class="d-none d-md-inline"></span>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </nb-card>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-11 col-form-label" ></label>
+                                <button nbButton nbStepperNext (click)="getPrix()" outline shape="round" status="primary" >
+                                    <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                                </button>
+                            </div>
+                        </nb-step>
+                        <nb-step>
+                            <div>
+                                <jhi-alert-error></jhi-alert-error>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <nb-card class="row align-items-center">
+                                            <div class="col-md-8">
+                                                <nb-card>
+                                                    <nb-card-header>
+                                                        <div class="row align-items-center">
+                                                            <nb-checkbox [value]="checked" (checkedChange)="toggle($event)"
+                                                                         status="primary" size="40"> ORANGE MONEY </nb-checkbox>
+                                                        </div>
+                                                    </nb-card-header>
+                                                    <nb-card-body *ngIf="checked">
+                                                        <div class="form-group">
+                                                            <img src="/content/images/om.png" height="120" width="130" class="rounded mx-auto d-block">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                                       type="number" placeholder="Numéro de téléphone"
+                                                                       formControlName="telephone"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                                       type="number" placeholder="Code OTP"
+                                                                       formControlName="otp"/>
+                                                            </div>
+                                                        </div>
+                                                    </nb-card-body>
+                                                    <nb-card-footer *ngIf="checked">
+                                                        <h5>Net à payer :  {{ totalT }}</h5>
+                                                    </nb-card-footer>
+                                                </nb-card>
+                                            </div>
+                                        </nb-card>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <nb-card class="row align-items-center">
+                                            <div class="col-md-8">
+                                                <nb-card>
+                                                    <nb-card-header>
+                                                        <div class="row align-items-center">
+                                                            <nb-checkbox [value]="checked2" (checkedChange)="toggle2($event)"
+                                                                         status="primary" size="40"> MOBICASH </nb-checkbox>
+                                                        </div>
+                                                    </nb-card-header>
+                                                    <nb-card-body *ngIf="checked2">
+                                                        <div class="form-group">
+                                                            <img src="/content/images/mc.jpg" height="120" width="170" class="rounded mx-auto d-block">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                                       type="number" placeholder="Numéro de téléphone"
+                                                                       formControlName="telephone"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                                       type="number" placeholder="Code OTP"
+                                                                       formControlName="otp"/>
+                                                            </div>
+                                                        </div>
+                                                    </nb-card-body>
+                                                    <nb-card-footer *ngIf="checked2">
+                                                        <h5>Net à payer :  {{ totalT }}</h5>
+                                                    </nb-card-footer>
+                                                </nb-card>
+                                            </div>
+                                        </nb-card>
+                                    </div>
+                                </div>
+
+                                <!--<div class="form-group row">
+                                    <label class="col-sm-3 col-form-label"></label>
+                                    <div class="col-sm-6">
+                                        <nb-card status="primary">
+                                            <nb-card-header>
+                                                <label> <strong> Total prix de la commande </strong> </label>
+                                            </nb-card-header>
+                                            <nb-card-body>
+                                                <h6> {{ totalT }} </h6>
+                                            </nb-card-body>
+                                        </nb-card>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label"> <strong> Type de paiement </strong> </label>
+                                    <div class="col-sm-6">
+                                        <nb-select status="primary" shape="round" outline fullWidth formControlName="typePaiement">
+                                            <nb-option [value]="'ESPECE'">{{ 'ESPECE' }}</nb-option>
+                                            <nb-option [value]="'CHEQUE'">{{ 'CHEQUE CERTIFIER' }}</nb-option>
+                                            <nb-option [value]="'ORANGE_MONEY'">{{ 'ORANGE MONEY' }}</nb-option>
+                                            <nb-option [value]="'MOBICASH'">{{ 'MOBICASH' }}</nb-option>
+                                        </nb-select>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="this.editForm.get(['typePaiement'])!.value == 'ORANGE_MONEY'">
+                                    <nb-card status="basic">
+                                        <nb-card-header>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label"></label>
+                                                <div class="col-sm-6">
+                                                    <label> <strong> Paiement par ORANGE MONEY </strong> </label>
+                                                </div>
+                                            </div>
+                                        </nb-card-header>
+                                        <nb-card-body>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label"></label>
+                                                <div class="col-sm-6">
+                                                    <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                           type="number" placeholder="Numéro de téléphone"
+                                                           formControlName="telephone"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label"></label>
+                                                <div class="col-sm-6">
+                                                    <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                           type="number" placeholder="Code OTP"
+                                                           formControlName="otp"/>
+                                                </div>
+                                            </div>
+                                        </nb-card-body>
+                                    </nb-card>
+                                </div>
+                                <div *ngIf="this.editForm.get(['typePaiement'])!.value == 'MOBICASH'">
+                                    <nb-card status="basic">
+                                        <nb-card-header>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label"></label>
+                                                <div class="col-sm-6">
+                                                    <label> <strong> Paiement par MOBICASH </strong> </label>
+                                                </div>
+                                            </div>
+                                        </nb-card-header>
+                                        <nb-card-body>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label"></label>
+                                                <div class="col-sm-6">
+                                                    <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                           type="number" placeholder="Numéro de téléphone"
+                                                           formControlName="telephoneMobicash"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label"></label>
+                                                <div class="col-sm-6">
+                                                    <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                           type="number" placeholder="Code OTP"
+                                                           formControlName="otpMobicash"/>
+                                                </div>
+                                            </div>
+                                        </nb-card-body>
+                                    </nb-card>
+                                </div>
+                                <div *ngIf="this.editForm.get(['typePaiement'])!.value == 'CHEQUE'">
+                                    <nb-card status="basic">
+                                        <nb-card-header>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label"></label>
+                                                <div class="col-sm-6">
+                                                    <label> <strong> Paiement par CHEQUE Certifier </strong> </label>
+                                                </div>
+                                            </div>
+                                        </nb-card-header>
+                                        <nb-card-body>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label"></label>
+                                                <div class="col-sm-6">
+                                                    <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                           type="number" placeholder="Numéro du CHEQUE"
+                                                           formControlName="numeroCheque"/>
+                                                </div>
+                                            </div>
+                                        </nb-card-body>
+                                    </nb-card>
+                                </div>-->
+
+                            </div>
+
+                            <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                                <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                            </button>
+                        </nb-step>
+                    </nb-stepper>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div>
+                        <button type="button" nbButton outline shape="round" size="tiny" (click)="previousState()">
+                            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" [disabled]="infosList.length == 0"
+                                nbButton outline status="primary" size="tiny" shape="round">
+                            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>
+<div class="steppers-container row" *jhiHasAnyAuthority="'STHGUICHET'">
+    <div class="col-md-12">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <nb-card>
+                <nb-card-header>
+                    <h2> Nouvelle Commande de Carnet à Souche </h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <div>
+                        <jhi-alert-error></jhi-alert-error>
+
+                        <!--<div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Numéro de commande</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="Numéro de commande"
+                                       formControlName="numeroCommande"/>
+                            </div>
+                        </div>-->
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"> <strong> Quantité de commande </strong> </label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="number" placeholder="Quantité de commande"
+                                       formControlName="quantiteCommande"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"> <strong> Est en Transit </strong> </label>
+                            <div class="col-sm-3">
+                                <nb-checkbox class="right" status="primary" size="10"
+                                             formControlName="isTransited">  </nb-checkbox>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" > <strong> Type Carnet </strong> </label>
+                                    <div class="col-md-8">
+                                        <nb-select status="primary" shape="round" outline fullWidth formControlName="typeCarnetId">
+                                            <nb-option [value]="typeCarnetOption.id" *ngFor="let typeCarnetOption of typecarnets; trackBy: trackByIdInfos">{{ typeCarnetOption.libelle }}</nb-option>
+                                        </nb-select>
+                                    </div>
+                                    <div class="right">
+                                        <button nbButton status="primary" outline shape="round" size="medium"
+                                                [disabled]="this.editForm.get(['typeCarnetId']).value == null" (click)="add()">
+                                            <nb-icon icon="plus-circle-outline" size="80"></nb-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive table-striped" *ngIf="listShow?.length > 0">
+                            <nb-card size="tiny" status="primary">
+                                <table class="table table-striped" aria-describedby="page-heading">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" ><span>Quantité Commande</span> </th>
+                                        <th scope="col" ><span>Type de Carnet</span></th>
+                                        <th scope="col" ><span>Prix de la Commande</span> </th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let infos of listShow">
+                                        <td> <strong>{{ infos.quantiteCommande }}</strong> </td>
+                                        <td> <strong>{{ infos.libelle }}</strong> </td>
+                                        <td> <strong>{{ infos.numeroCommande }}</strong> </td>
+
+                                        <td class="text-right">
+                                            <div class="btn-group">
+                                                <button type="submit" (click)="edit(infos)" nbButton outline size="tiny" shape="round" status="primary">
+                                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                                    <span class="d-none d-md-inline"></span>
+                                                </button>
+
+                                                <button type="submit" (click)="delete(infos)"
+                                                        nbButton outline shape="round" status="danger" size="tiny">
+                                                    <fa-icon icon="times"></fa-icon>
+                                                    <span class="d-none d-md-inline"></span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </nb-card>
+                        </div>
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div>
+                        <button type="button" id="cancel-save" nbButton outline size="tiny" shape="round" (click)="previousState()">
+                            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" id="save-entity" [disabled]="infosList.length == 0"
+                                nbButton outline status="primary" shape="round" size="tiny">
+                            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>
+

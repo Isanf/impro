@@ -1,0 +1,606 @@
+<nb-card>
+    <nb-card-header>
+        <h2>
+            <span id="user-management-page-heading" jhiTranslate="userManagement.home.title">Users</span>
+            <button id="jh-create-entity" nbButton status="primary" outline shape="round" class="float-right jh-create-entity create-user" [routerLink]="['./new']">
+                <fa-icon [icon]="'plus'"></fa-icon>
+                <span>
+                CREER UN UTILISATEUR
+                </span>
+            </button>
+        </h2>
+    </nb-card-header>
+    <jhi-alert></jhi-alert>
+    <nb-tabset fullWidth *jhiHasAnyAuthority="'ROLE_ADMIN'">
+        <nb-tab tabTitle="PAR STH">
+            <div>
+                <nb-card-body class="table-responsive" *ngIf="users1" >
+                    <table class="table table-striped" aria-describedby="user-management-page-heading">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                            <th scope="col"  jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                            <th scope="col"><span jhiTranslate="userManagement.profiles">Profiles</span></th>
+                            <th scope="col" jhiSortBy="lastModifiedBy"><span jhiTranslate="userManagement.lastModifiedBy">Last Modified By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf ="users1">
+                        <tr *ngFor="let user of users1; trackBy: trackIdentity">
+                            <td>{{user.login}}</td>
+                            <td>{{user.email}}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" (click)="setActive(user, true)" *ngIf="!user.activated"
+                                        jhiTranslate="userManagement.deactivated">Deactivated</button>
+                                <button class="btn btn-success btn-sm" (click)="setActive(user, false)" *ngIf="user.activated"
+                                        [disabled]="currentAccount.login === user.login" jhiTranslate="userManagement.activated">Activated</button>
+                            </td>
+                            <td>
+                                <div *ngFor="let authority of user.authorities">
+                                    <span class="badge badge-info">{{ authority }}</span>
+                                </div>
+                            </td>
+                            <td>{{user.lastModifiedBy}}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="button" (click)="orgUser(user.login)"
+                                            class="btn btn-outline-dark btn-sm">
+                                        <nb-icon icon="home-outline"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="printUser(user.login)"
+                                            class="btn btn-outline-success btn-sm">
+                                        <nb-icon icon="printer-outline"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'view']"
+                                            class="btn btn-info btn-sm">
+                                        <nb-icon icon="eye"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'edit']"
+                                            queryParamsHandling="merge"
+                                            class="btn btn-primary btn-sm">
+                                        <nb-icon icon="edit"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="deleteUser(user)"
+                                            class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.login">
+                                        <nb-icon icon="trash-2"></nb-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div *ngIf="users1">
+                        <div class="row justify-content-center">
+                            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                        </div>
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>
+                </nb-card-footer>
+            </div>
+        </nb-tab>
+        <nb-tab tabTitle="TOUS">
+            <div>
+                <nb-card-body class="table-responsive" *ngIf="users" >
+                    <table class="table table-striped" aria-describedby="user-management-page-heading">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                            <th scope="col"  jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                            <th scope="col"><span jhiTranslate="userManagement.profiles">Profiles</span></th>
+                            <th scope="col" jhiSortBy="lastModifiedBy"><span jhiTranslate="userManagement.lastModifiedBy">Last Modified By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf ="users">
+                        <tr *ngFor="let user of users; trackBy: trackIdentity">
+                            <td>{{user.login}}</td>
+                            <td>{{user.email}}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" (click)="setActive(user, true)" *ngIf="!user.activated"
+                                        jhiTranslate="userManagement.deactivated">Deactivated</button>
+                                <button class="btn btn-success btn-sm" (click)="setActive(user, false)" *ngIf="user.activated"
+                                        [disabled]="currentAccount.login === user.login" jhiTranslate="userManagement.activated">Activated</button>
+                            </td>
+                            <td>
+                                <div *ngFor="let authority of user.authorities">
+                                    <span class="badge badge-info">{{ authority }}</span>
+                                </div>
+                            </td>
+                            <td>{{user.lastModifiedBy}}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="button" (click)="orgUser(user.login)"
+                                            class="btn btn-outline-dark btn-sm">
+                                        <nb-icon icon="home-outline"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="printUser(user.login)"
+                                            class="btn btn-outline-success btn-sm">
+                                        <nb-icon icon="printer-outline"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'view']"
+                                            class="btn btn-info btn-sm">
+                                        <nb-icon icon="eye"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'edit']"
+                                            queryParamsHandling="merge"
+                                            class="btn btn-primary btn-sm">
+                                        <nb-icon icon="edit"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="deleteUser(user)"
+                                            class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.login">
+                                        <nb-icon icon="trash-2"></nb-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </nb-card-body>
+                <!--<nb-card-footer>
+                    <div *ngIf="users">
+                        <div class="row justify-content-center">
+                            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                        </div>
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>
+                </nb-card-footer>-->
+            </div>
+        </nb-tab>
+    </nb-tabset>
+    <nb-tabset *jhiHasAnyAuthority="'CONCESSIONNAIRE'">
+        <nb-tab tabTitle="PAR VOUS">
+            <div>
+                <nb-card-body class="table-responsive" *ngIf="users1" >
+                    <table class="table table-striped" aria-describedby="user-management-page-heading">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                            <th scope="col"  jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                            <th scope="col"><span jhiTranslate="userManagement.profiles">Profiles</span></th>
+                            <th scope="col" jhiSortBy="lastModifiedBy"><span jhiTranslate="userManagement.lastModifiedBy">Last Modified By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf ="users1">
+                        <tr *ngFor="let user of users1; trackBy: trackIdentity">
+                            <td>{{user.login}}</td>
+                            <td>{{user.email}}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" (click)="setActive(user, true)" *ngIf="!user.activated"
+                                        jhiTranslate="userManagement.deactivated">Deactivated</button>
+                                <button class="btn btn-success btn-sm" (click)="setActive(user, false)" *ngIf="user.activated"
+                                        [disabled]="currentAccount.login === user.login" jhiTranslate="userManagement.activated">Activated</button>
+                            </td>
+                            <td>
+                                <div *ngFor="let authority of user.authorities">
+                                    <span class="badge badge-info">{{ authority }}</span>
+                                </div>
+                            </td>
+                            <td>{{user.lastModifiedBy}}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="button" (click)="orgUser(user.login)"
+                                            class="btn btn-outline-dark btn-sm">
+                                        <nb-icon icon="home-outline"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="printUser(user.login)"
+                                            class="btn btn-outline-success btn-sm">
+                                        <nb-icon icon="printer-outline"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'view']"
+                                            class="btn btn-info btn-sm">
+                                        <nb-icon icon="eye"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'edit']"
+                                            queryParamsHandling="merge"
+                                            class="btn btn-primary btn-sm">
+                                        <nb-icon icon="edit"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="deleteUser(user)"
+                                            class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.login">
+                                        <nb-icon icon="trash-2"></nb-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div *ngIf="users1">
+                        <div class="row justify-content-center">
+                            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                        </div>
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>
+                </nb-card-footer>
+            </div>
+        </nb-tab>
+        <nb-tab tabTitle="TOUS">
+            <div>
+                <nb-card-body class="table-responsive" *ngIf="usersByMyOrg" >
+                    <table class="table table-striped" aria-describedby="user-management-page-heading">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                            <th scope="col"  jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                            <th scope="col"><span jhiTranslate="userManagement.profiles">Profiles</span></th>
+                            <th scope="col" jhiSortBy="lastModifiedBy"><span jhiTranslate="userManagement.lastModifiedBy">Last Modified By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf ="usersByMyOrg">
+                        <tr *ngFor="let user of usersByMyOrg; trackBy: trackIdentity">
+                            <td>{{user.login}}</td>
+                            <td>{{user.email}}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" (click)="setActive(user, true)" *ngIf="!user.activated"
+                                        jhiTranslate="userManagement.deactivated">Deactivated</button>
+                                <button class="btn btn-success btn-sm" (click)="setActive(user, false)" *ngIf="user.activated"
+                                        [disabled]="currentAccount.login === user.login" jhiTranslate="userManagement.activated">Activated</button>
+                            </td>
+                            <td>
+                                <div *ngFor="let authority of user.authorities">
+                                    <span class="badge badge-info">{{ authority }}</span>
+                                </div>
+                            </td>
+                            <td>{{user.lastModifiedBy}}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="button" (click)="orgUser(user.login)"
+                                            class="btn btn-outline-dark btn-sm">
+                                        <nb-icon icon="home-outline"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="printUser(user.login)"
+                                            class="btn btn-outline-success btn-sm">
+                                        <nb-icon icon="printer-outline"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'view']"
+                                            class="btn btn-info btn-sm">
+                                        <nb-icon icon="eye"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'edit']"
+                                            queryParamsHandling="merge"
+                                            class="btn btn-primary btn-sm">
+                                        <nb-icon icon="edit"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="deleteUser(user)"
+                                            class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.login">
+                                        <nb-icon icon="trash-2"></nb-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </nb-card-body>
+                <nb-card-footer>
+                    <!--<div *ngIf="usersByMyOrg">
+                        <div class="row justify-content-center">
+                            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                        </div>
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>-->
+                </nb-card-footer>
+            </div>
+        </nb-tab>
+    </nb-tabset>
+    <nb-tabset *jhiHasAnyAuthority="'REVENDEUR'">
+        <nb-tab tabTitle="PAR VOUS">
+            <div>
+                <nb-card-body class="table-responsive" *ngIf="users1" >
+                    <table class="table table-striped" aria-describedby="user-management-page-heading">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                            <th scope="col"  jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                            <th scope="col"><span jhiTranslate="userManagement.profiles">Profiles</span></th>
+                            <th scope="col" jhiSortBy="lastModifiedBy"><span jhiTranslate="userManagement.lastModifiedBy">Last Modified By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf ="users1">
+                        <tr *ngFor="let user of users1; trackBy: trackIdentity">
+                            <td>{{user.login}}</td>
+                            <td>{{user.email}}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" (click)="setActive(user, true)" *ngIf="!user.activated"
+                                        jhiTranslate="userManagement.deactivated">Deactivated</button>
+                                <button class="btn btn-success btn-sm" (click)="setActive(user, false)" *ngIf="user.activated"
+                                        [disabled]="currentAccount.login === user.login" jhiTranslate="userManagement.activated">Activated</button>
+                            </td>
+                            <td>
+                                <div *ngFor="let authority of user.authorities">
+                                    <span class="badge badge-info">{{ authority }}</span>
+                                </div>
+                            </td>
+                            <td>{{user.lastModifiedBy}}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="button" (click)="orgUser(user.login)"
+                                            class="btn btn-outline-dark btn-sm">
+                                        <nb-icon icon="home-outline"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="printUser(user.login)"
+                                            class="btn btn-outline-success btn-sm">
+                                        <nb-icon icon="printer-outline"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'view']"
+                                            class="btn btn-info btn-sm">
+                                        <nb-icon icon="eye"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'edit']"
+                                            queryParamsHandling="merge"
+                                            class="btn btn-primary btn-sm">
+                                        <nb-icon icon="edit"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="deleteUser(user)"
+                                            class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.login">
+                                        <nb-icon icon="trash-2"></nb-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div *ngIf="users1">
+                        <div class="row justify-content-center">
+                            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                        </div>
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>
+                </nb-card-footer>
+            </div>
+        </nb-tab>
+        <nb-tab tabTitle="TOUS">
+            <div>
+                <nb-card-body class="table-responsive" *ngIf="usersByMyOrg" >
+                    <table class="table table-striped" aria-describedby="user-management-page-heading">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                            <th scope="col"  jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                            <th scope="col"><span jhiTranslate="userManagement.profiles">Profiles</span></th>
+                            <th scope="col" jhiSortBy="lastModifiedBy"><span jhiTranslate="userManagement.lastModifiedBy">Last Modified By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf ="usersByMyOrg">
+                        <tr *ngFor="let user of usersByMyOrg; trackBy: trackIdentity">
+                            <td>{{user.login}}</td>
+                            <td>{{user.email}}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" (click)="setActive(user, true)" *ngIf="!user.activated"
+                                        jhiTranslate="userManagement.deactivated">Deactivated</button>
+                                <button class="btn btn-success btn-sm" (click)="setActive(user, false)" *ngIf="user.activated"
+                                        [disabled]="currentAccount.login === user.login" jhiTranslate="userManagement.activated">Activated</button>
+                            </td>
+                            <td>
+                                <div *ngFor="let authority of user.authorities">
+                                    <span class="badge badge-info">{{ authority }}</span>
+                                </div>
+                            </td>
+                            <td>{{user.lastModifiedBy}}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="button" (click)="orgUser(user.login)"
+                                            class="btn btn-outline-dark btn-sm">
+                                        <nb-icon icon="home-outline"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="printUser(user.login)"
+                                            class="btn btn-outline-success btn-sm">
+                                        <nb-icon icon="printer-outline"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'view']"
+                                            class="btn btn-info btn-sm">
+                                        <nb-icon icon="eye"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'edit']"
+                                            queryParamsHandling="merge"
+                                            class="btn btn-primary btn-sm">
+                                        <nb-icon icon="edit"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="deleteUser(user)"
+                                            class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.login">
+                                        <nb-icon icon="trash-2"></nb-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div *ngIf="usersByMyOrg">
+                        <div class="row justify-content-center">
+                            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                        </div>
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>
+                </nb-card-footer>
+            </div>
+        </nb-tab>
+    </nb-tabset>
+    <nb-tabset *jhiHasAnyAuthority="'STHGUICHET'">
+        <nb-tab tabTitle="PAR VOUS">
+            <div>
+                <nb-card-body class="table-responsive" *ngIf="users1" >
+                    <table class="table table-striped" aria-describedby="user-management-page-heading">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                            <th scope="col"  jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                            <th scope="col"><span jhiTranslate="userManagement.profiles">Profiles</span></th>
+                            <th scope="col" jhiSortBy="lastModifiedBy"><span jhiTranslate="userManagement.lastModifiedBy">Last Modified By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf ="users1">
+                        <tr *ngFor="let user of users1; trackBy: trackIdentity">
+                            <td>{{user.login}}</td>
+                            <td>{{user.email}}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" (click)="setActive(user, true)" *ngIf="!user.activated"
+                                        jhiTranslate="userManagement.deactivated">Deactivated</button>
+                                <button class="btn btn-success btn-sm" (click)="setActive(user, false)" *ngIf="user.activated"
+                                        [disabled]="currentAccount.login === user.login" jhiTranslate="userManagement.activated">Activated</button>
+                            </td>
+                            <td>
+                                <div *ngFor="let authority of user.authorities">
+                                    <span class="badge badge-info">{{ authority }}</span>
+                                </div>
+                            </td>
+                            <td>{{user.lastModifiedBy}}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="button" (click)="orgUser(user.login)"
+                                            class="btn btn-outline-dark btn-sm">
+                                        <nb-icon icon="home-outline"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="printUser(user.login)"
+                                            class="btn btn-outline-success btn-sm">
+                                        <nb-icon icon="printer-outline"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'view']"
+                                            class="btn btn-info btn-sm">
+                                        <nb-icon icon="eye"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'edit']"
+                                            queryParamsHandling="merge"
+                                            class="btn btn-primary btn-sm">
+                                        <nb-icon icon="edit"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="deleteUser(user)"
+                                            class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.login">
+                                        <nb-icon icon="trash-2"></nb-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div *ngIf="users1">
+                        <div class="row justify-content-center">
+                            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                        </div>
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>
+                </nb-card-footer>
+            </div>
+        </nb-tab>
+        <nb-tab tabTitle="TOUS">
+            <div>
+                <nb-card-body class="table-responsive" *ngIf="usersByMyOrg" >
+                    <table class="table table-striped" aria-describedby="user-management-page-heading">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                            <th scope="col"  jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"  jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                            <th scope="col"><span jhiTranslate="userManagement.profiles">Profiles</span></th>
+                            <th scope="col" jhiSortBy="lastModifiedBy"><span jhiTranslate="userManagement.lastModifiedBy">Last Modified By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody *ngIf ="usersByMyOrg">
+                        <tr *ngFor="let user of usersByMyOrg; trackBy: trackIdentity">
+                            <td>{{user.login}}</td>
+                            <td>{{user.email}}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" (click)="setActive(user, true)" *ngIf="!user.activated"
+                                        jhiTranslate="userManagement.deactivated">Deactivated</button>
+                                <button class="btn btn-success btn-sm" (click)="setActive(user, false)" *ngIf="user.activated"
+                                        [disabled]="currentAccount.login === user.login" jhiTranslate="userManagement.activated">Activated</button>
+                            </td>
+                            <td>
+                                <div *ngFor="let authority of user.authorities">
+                                    <span class="badge badge-info">{{ authority }}</span>
+                                </div>
+                            </td>
+                            <td>{{user.lastModifiedBy}}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="button" (click)="orgUser(user.login)"
+                                            class="btn btn-outline-dark btn-sm">
+                                        <nb-icon icon="home-outline"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="printUser(user.login)"
+                                            class="btn btn-outline-success btn-sm">
+                                        <nb-icon icon="printer-outline"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'view']"
+                                            class="btn btn-info btn-sm">
+                                        <nb-icon icon="eye"></nb-icon>
+                                    </button>
+                                    <button type="submit"
+                                            [routerLink]="['./', user.login, 'edit']"
+                                            queryParamsHandling="merge"
+                                            class="btn btn-primary btn-sm">
+                                        <nb-icon icon="edit"></nb-icon>
+                                    </button>
+                                    <button type="button" (click)="deleteUser(user)"
+                                            class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.login">
+                                        <nb-icon icon="trash-2"></nb-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div *ngIf="usersByMyOrg">
+                        <div class="row justify-content-center">
+                            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                        </div>
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                        </div>
+                    </div>
+                </nb-card-footer>
+            </div>
+        </nb-tab>
+    </nb-tabset>
+</nb-card>

@@ -1,0 +1,92 @@
+{
+  "name": "PersonnePhysique",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "javadoc": "nom"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateNaissance",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "lieuNaissance",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "residence",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "docIdentificationPP",
+      "otherEntityRelationshipName": "personnePhysique",
+      "relationshipName": "docIdentification",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "personnePhysique",
+      "relationshipName": "user",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "immatriculation",
+      "otherEntityRelationshipName": "personnePhysique",
+      "relationshipName": "immatriculation"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "gerant",
+      "relationshipName": "organisation"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vente",
+      "otherEntityRelationshipName": "personnePhysique",
+      "relationshipName": "vente"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "personnePhysique",
+      "relationshipName": "organisation",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "profil",
+      "otherEntityRelationshipName": "personnePhysique",
+      "relationshipName": "profil",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200205114753",
+  "javadoc": "The PersonnePhysique entity.\\n@author A true hipster",
+  "entityTableName": "personne_physique",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

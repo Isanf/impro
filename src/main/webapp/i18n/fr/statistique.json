@@ -1,0 +1,22 @@
+{
+  "improApp": {
+    "statistique": {
+      "home": {
+        "title": "Statistiques",
+        "createLabel": "Créer un nouveau Statistique",
+        "createOrEditLabel": "Créer ou éditer un Statistique",
+        "notFound": "Aucun Statistique trouvé"
+      },
+      "created": "Un nouveau Statistique a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Statistique avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Statistique avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Statistique {{ id }} ?"
+      },
+      "detail": {
+        "title": "Statistique"
+      },
+      "nom": "Nom"
+    }
+  }
+}

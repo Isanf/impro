@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog dbchangelog-3.9.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <!--
+        Added the entity DocIdentificationPP.
+    -->
+    <changeSet id="20200205114754-1" author="jhipster">
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="doc_identification_pp"/>
+            </not>
+        </preConditions>
+        <createTable tableName="doc_identification_pp" remarks="The DocIdentification entity.\n@author A true hipster">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="autorite_emettrice" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_etablissement" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="lieu_etablissement" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="nip" type="varchar(255)" remarks="nip">
+                <constraints nullable="true" />
+            </column>
+            <column name="numero_doc" type="varchar(255)" remarks="numeroDoc">
+                <constraints nullable="true" />
+            </column>
+            <column name="type_doc_identification" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20200205114754-1-relations" author="jhipster">
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20200205114754-1-data" author="jhipster" context="faker">
+        <loadData
+            file="config/liquibase/fake-data/doc_identification_pp.csv"
+            separator=";"
+            tableName="doc_identification_pp">
+            <column name="id" type="numeric"/>
+            <column name="autorite_emettrice" type="string"/>
+            <column name="date_etablissement" type="date"/>
+            <column name="lieu_etablissement" type="string"/>
+            <column name="numero_doc" type="string"/>
+            <column name="nip" type="string"/>
+            <column name="type_doc_identification" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

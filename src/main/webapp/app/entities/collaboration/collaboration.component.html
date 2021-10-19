@@ -1,0 +1,134 @@
+<div>
+    <nb-card>
+        <nb-card-header>
+            <h2 id="page-heading">
+                <span jhiTranslate="improApp.collaboration.home.title">Collaborations</span>
+
+                <button id="jh-create-entity" nbButton outline shape="round" status="primary"
+                        class="float-right jh-create-entity create-collaboration"  [routerLink]="['/collaboration/new']">
+                    <fa-icon icon="plus"></fa-icon>
+                    <span>
+                    Créer une nouvelle Collaboration
+                    </span>
+                </button>
+            </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <jhi-alert-error></jhi-alert-error>
+
+            <jhi-alert></jhi-alert>
+
+            <nb-form-field>
+                <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                <input type="text" fieldSize="tiny" nbInput status="primary" fullWidth placeholder="Rechercher"
+                       [(ngModel)]="searchText" />
+            </nb-form-field>
+
+            <div class="alert alert-warning" id="no-result" *ngIf="collaborations?.length === 0">
+                <span>Aucune collaboration trouvée</span>
+            </div>
+
+            <div class="table-responsive table-striped" id="entities" *ngIf="collaborations?.length > 0">
+                <table class="table table-striped" aria-describedby="page-heading">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                        <th scope="col"><span jhiTranslate="improApp.collaboration.dateDebut">Date Début</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.collaboration.dateFin">Date Fin</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.collaboration.numeroCollaboration">Numéro Collaboration</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.collaboration.revendeur">Revendeur</span> </th>
+                        <th scope="col" *jhiHasAnyAuthority="'ROLE_ADMIN'"><span jhiTranslate="improApp.collaboration.concessionnaire">Concessionnaire</span> </th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    <tr *ngFor="let collaboration of collaborations | collaborationFilter:searchText">
+                        <td>{{ collaboration.dateDebut.locale("fr").format("LLLL") }}</td>
+                        <td>{{ collaboration.dateFin | date:'mediumDate' }}</td>
+                        <td>{{ collaboration.numeroCollaboration }}</td>
+                        <td>
+                            <div *ngIf="collaboration.revendeurId">
+                                <a [routerLink]="['/organisation', collaboration.revendeurId , 'view']" >{{ collaboration.revendeurs.nom }}</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div *ngIf="collaboration.concessionnaireId">
+                                <a [routerLink]="['/organisation', collaboration.concessionnaireId , 'view']" >{{ collaboration.concessionnaires.nom }}</a>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <button type="submit" nbButton shape="round" size="tiny" outline status="info"
+                                        [routerLink]="['/collaboration', collaboration.id, 'view']">
+                                    <fa-icon icon="eye"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <button type="submit" nbButton shape="round" size="tiny" outline status="primary"
+                                        [routerLink]="['/collaboration', collaboration.id, 'edit']">
+                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <button type="submit" (click)="delete(collaboration)"
+                                        nbButton shape="round" size="tiny" outline status="danger">
+                                    <fa-icon icon="times"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody *jhiHasAnyAuthority="'CONCESSIONNAIRE'">
+                    <tr *ngFor="let collaboration of collaborations | collaborationFilter:searchText">
+                        <td>{{ collaboration.dateDebut | date:'mediumDate' }}</td>
+                        <td>{{ collaboration.dateFin | date:'mediumDate' }}</td>
+                        <td>{{ collaboration.numeroCollaboration }}</td>
+                        <td>
+                            <div *ngIf="collaboration.revendeurId">
+                                <a [routerLink]="['/organisation', collaboration.revendeurId , 'view']" >{{ collaboration.revendeurs.nom }}</a>
+                            </div>
+                        </td>
+                        <!--<td>
+                            <div *ngIf="collaboration.concessionnaireId">
+                                <a [routerLink]="['/organisation', collaboration.concessionnaireId , 'view']" >{{ collaboration.concessionnaireId }}</a>
+                            </div>
+                        </td>-->
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <button type="submit" nbButton shape="round" size="tiny" outline status="info"
+                                        [routerLink]="['/collaboration', collaboration.id, 'view']">
+                                    <fa-icon icon="eye"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <button type="submit" nbButton shape="round" size="tiny" outline status="primary"
+                                        [routerLink]="['/collaboration', collaboration.id, 'edit']">
+                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <button type="submit" (click)="delete(collaboration)"
+                                        nbButton shape="round" size="tiny" outline status="danger">
+                                    <fa-icon icon="times"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <div *ngIf="collaborations?.length > 0">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                </div>
+            </div>
+        </nb-card-footer>
+    </nb-card>
+</div>

@@ -1,0 +1,183 @@
+{
+  "name": "Organisation",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "numeroOrdre",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "numeroPhone",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "carnetASouche",
+      "otherEntityRelationshipName": "concessionnaire",
+      "relationshipName": "carnetASouche"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "collaboration",
+      "otherEntityRelationshipName": "revendeur",
+      "relationshipName": "collaborationsRevendeur"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "collaboration",
+      "otherEntityRelationshipName": "concessionnaire",
+      "relationshipName": "collaborationsConcessionnaire"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "commandeCarnetSouche",
+      "otherEntityRelationshipName": "concessionnaire",
+      "relationshipName": "commandeCSConcessionnaire"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "commandeCarnetSouche",
+      "otherEntityRelationshipName": "supernet",
+      "relationshipName": "commandeCSRevendeur"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "commandeVehicule",
+      "otherEntityRelationshipName": "revendeur",
+      "relationshipName": "commandeVRevendeur"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "commandeVehicule",
+      "otherEntityRelationshipName": "concessionnaire",
+      "relationshipName": "commandeVConcessionnaire"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "immatriculation",
+      "otherEntityRelationshipName": "organisation",
+      "relationshipName": "immatriculation"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "livraisonCarnetSouche",
+      "otherEntityRelationshipName": "concessionnaire",
+      "relationshipName": "livraisonCSConcessionnaire"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "livraisonCarnetSouche",
+      "otherEntityRelationshipName": "supernet",
+      "relationshipName": "livraisonCSSupernet"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "livraisonVehicule",
+      "otherEntityRelationshipName": "revendeur",
+      "relationshipName": "livraisonVRevendeur"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "livraisonVehicule",
+      "otherEntityRelationshipName": "concessionnaire",
+      "relationshipName": "livraisonVConcessionnaire"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "pere",
+      "relationshipName": "fils"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "personnePhysique",
+      "otherEntityRelationshipName": "organisation",
+      "relationshipName": "personnePhysique"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "posePlaque",
+      "otherEntityRelationshipName": "revendeur",
+      "relationshipName": "posePlaque"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "profil",
+      "otherEntityRelationshipName": "organisation",
+      "relationshipName": "profils"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "stock",
+      "otherEntityRelationshipName": "concessionnaire",
+      "relationshipName": "stock"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vente",
+      "otherEntityRelationshipName": "revendeur",
+      "relationshipName": "vente"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisationLocalite",
+      "otherEntityRelationshipName": "organisations",
+      "relationshipName": "organisationLocalite",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "fils",
+      "relationshipName": "pere",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "typeOrganisation",
+      "otherEntityRelationshipName": "organisations",
+      "relationshipName": "typeOrganisation",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "personnePhysique",
+      "otherEntityRelationshipName": "organisation",
+      "relationshipName": "gerant",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "typeActeur",
+      "otherEntityRelationshipName": "organisations",
+      "relationshipName": "typeActeur",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200219154300",
+  "entityTableName": "organisation",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false,
+  "searchEngine": false,
+  "databaseType": "sql"
+}

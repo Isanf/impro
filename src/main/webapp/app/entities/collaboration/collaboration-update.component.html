@@ -1,0 +1,72 @@
+<div class="container-fluid form-horizontal">
+    <div class="container-fluid">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <nb-card size="tiny">
+                <nb-card-header>
+                    <div>
+                        <h5 id="jhi-collaboration-heading">Créer une nouvelle Collaboration</h5>
+                        <!--<button nbButton outline status="primary" shape="round" size="tiny" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+                            <span aria-hidden="true">x</span>
+                        </button>-->
+                    </div>
+                </nb-card-header>
+                <nb-card-body>
+                    <div class="form-group row justify-content-center">
+                        <jhi-alert-error></jhi-alert-error>
+                        <div class="col-md-6">
+                            <nb-form-field>
+                                <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                                <input [nbAutocomplete]="auto" type="text" fieldSize="tiny" formControlName="revendeurId" required
+                                       #autoInput (input)="onChange()" nbInput status="primary" fullWidth placeholder="Rechercher un revendeur"/>
+                            </nb-form-field>
+                            <nb-autocomplete #auto [handleDisplayFn]="viewHandle" (selectedChange)="onSelectionChange($event)">
+                                <nb-option  *ngFor="let option of filteredOptions$ | async" [value]="option.nom">
+                                    {{ option.nom }}
+                                </nb-option>
+                            </nb-autocomplete>
+                        </div>
+                        <!--<div class="form-group" [hidden]="!editForm.get('id')!.value">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input nbInput status="primary" shape="round" type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                        </div>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <label class="form-control-label" jhiTranslate="improApp.collaboration.revendeur" for="field_revendeur">Revendeur</label>-->
+<!--                            <nb-select fullWidth id="field_revendeur" formControlName="revendeurId">-->
+<!--                                <nb-option [value] ="organisationOption.id" *ngFor="let organisationOption of organisations">{{ organisationOption.id }}</nb-option>-->
+<!--                            </nb-select>-->
+<!--                        </div>-->
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div class="col-md-6">
+                        <button type="button" id="cancel-save" size="tiny" outline nbButton (click)="previousState()">
+                            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                                nbButton shape="round" size="tiny" outline status="primary" >
+                            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>
+<!--
+<nb-card>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <h5>Ou créer un nouveau Revendeur
+                <button nbButton outline shape="round" status="primary"
+                        class="float-right"  (click)="new()">
+                    <fa-icon icon="plus"></fa-icon>
+                    <span>
+                        Créer
+                    </span>
+                </button>
+            </h5>
+        </div>
+    </div>
+</nb-card>
+-->

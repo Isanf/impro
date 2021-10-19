@@ -1,0 +1,16 @@
+
+
+entity VehiculeTraversant{
+	chassis String
+    marque String
+    model String
+    dateEntre ZonedDateTime
+    dateSortie ZonedDateTime
+    provenance String
+    destination String
+    createdAt ZonedDateTime
+}
+
+dto * with mapstruct
+paginate * with pagination
+service * with serviceClass

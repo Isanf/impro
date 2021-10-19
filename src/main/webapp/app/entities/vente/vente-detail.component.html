@@ -1,0 +1,152 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <nb-card>
+            <nb-card-header>
+                <h2><span jhiTranslate="improApp.vente.detail.title">Vente</span> {{ vente.id }}</h2>
+            </nb-card-header>
+            <nb-card-body>
+                <div *ngIf="vente">
+                    <hr>
+
+                    <jhi-alert-error></jhi-alert-error>
+
+                    <dl class="row-md jh-entity-details">
+                        <div class="row">
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt>
+                                        <span jhiTranslate="improApp.vente.numeroVente" [ngbTooltip]="'improApp.vente.help.numeroVente' | translate">Numero Vente</span></dt>
+
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <span>{{ vente.numeroVente }}</span>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.vente.dateVente">Date Vente</span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <span>{{ vente.dateVente.locale('fr').format('LLLL') }}</span>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span> Prix de l'engin </span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <span>{{ vente.quantiteVendue + ' FCFA' }}</span>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="row">
+
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.vente.personnePhysique">Personne Physique</span></dt>
+
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <div *ngIf="vente.personnePhysiqueId">
+                                            <a [routerLink]="['/personne-physique', vente.personnePhysiqueId, 'view']">{{ vente.personnePhysiqueDTO.nom + ' ' + vente.personnePhysiqueDTO.prenom }}</a>
+                                        </div>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.vente.personneMorale">Personne Morale</span></dt>
+
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <div *ngIf="vente.personneMoraleId">
+                                            <a [routerLink]="['/personne-morale', vente.personneMoraleId, 'view']">{{ vente.personneMoraleDTO.denomination }}</a>
+                                        </div>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.vehicule.numeroChassis" [ngbTooltip]="'improApp.vehicule.help.numeroChassis' | translate">Numero Chassis</span></dt>
+
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <span>{{vente.vehiculeDTO.numeroChassis}}</span>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="row">
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.vehicule.marqueVehicule">Marque Vehicule</span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <span>{{vente.vehiculeDTO.marqueVehiculeId}}</span>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.vehicule.types">Types</span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <span>{{vente.vehiculeDTO.types}}</span>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.vehicule.model">Model</span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <span>{{vente.vehiculeDTO.model}}</span>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                    </dl>
+                </div>
+            </nb-card-body>
+            <nb-card-footer>
+                <button type="submit" nbButton outline status="basic" shape="round" size="tiny"
+                        (click)="previousState()">
+                    <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                </button>
+
+                <button type="button" nbButton outline status="primary" shape="round" size="tiny"
+                        [routerLink]="['/vente', vente.id, 'edit']">
+                    <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+                </button>
+                <button type="button" [nbSpinner]="loading"
+                        nbSpinnerStatus="primary" (click)="toggleLoadingAnimationVente(vente.id)"
+                        nbButton outline status="success" shape="round" size="tiny">
+                    <fa-icon icon="print"></fa-icon>&nbsp;<span> Le Certificat de Vente</span>
+                </button>
+                <button type="button" [nbSpinner]="loading2"
+                        nbSpinnerStatus="primary" (click)="toggleLoadingAnimationConformite(vente.id)"
+                        nbButton outline status="info" shape="round" size="tiny">
+                    <fa-icon icon="print"></fa-icon>&nbsp;<span> Le Certificat de Conformité</span>
+                </button>
+                <button type="button" [nbSpinner]="loading3"
+                        nbSpinnerStatus="primary" (click)="toggleLoadingFacture(vente.id)"
+                        nbButton outline status="info" shape="round" size="tiny">
+                    <fa-icon icon="print"></fa-icon>&nbsp;<span> Facture de la Vente </span>
+                </button>
+            </nb-card-footer>
+        </nb-card>
+
+    </div>
+</div>

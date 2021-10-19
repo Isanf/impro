@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="conformite" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a61de3d-11ae-4a10-9315-30ed9e1f4bc3">
+    <parameter name="vendeur" class="java.lang.String"/>
+    <parameter name="date" class="java.lang.String"/>
+    <parameter name="nomclient" class="java.lang.String"/>
+    <parameter name="genre" class="java.lang.String"/>
+    <parameter name="marque" class="java.lang.String"/>
+    <parameter name="modele" class="java.lang.String"/>
+    <parameter name="carross" class="java.lang.String"/>
+    <parameter name="energie" class="java.lang.String"/>
+    <parameter name="places" class="java.lang.String"/>
+    <parameter name="type" class="java.lang.String"/>
+    <parameter name="ptac" class="java.lang.String"/>
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="51" splitType="Stretch">
+            <staticText>
+                <reportElement x="132" y="10" width="290" height="30" uuid="4f17a87f-1430-415d-ad4d-573f7c233849"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[CERTIFICAT DE CONFORMITE]]></text>
+            </staticText>
+            <line>
+                <reportElement x="0" y="40" width="554" height="1" uuid="7d784817-b1ff-4ad2-9bd1-6093a03b6abf"/>
+            </line>
+        </band>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="661" splitType="Stretch">
+            <textField>
+                <reportElement x="-3" y="20" width="560" height="30" uuid="26b3d501-6c99-4745-82e5-d949aef65150"/>
+                <box>
+                    <pen lineWidth="0.0"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Je soussigné,   " + $P{vendeur}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="-3" y="100" width="560" height="20" uuid="28d61274-766d-4a3a-bae7-0c807b85d331"/>
+                <textElement>
+                    <font fontName="Times New Roman" size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[ A)	que le véhicule ci-après décrit :]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="270" y="130" width="287" height="30" uuid="ee69b44d-b819-4ccd-b9c4-287bb1579274"/>
+                <box>
+                    <pen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{genre}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="-3" y="130" width="273" height="30" uuid="9000d115-05cb-477f-aa89-09bd8e008b9a"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="16" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Genre  : ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="270" y="160" width="287" height="30" uuid="e88b1337-2e8e-43aa-a0bc-25fe3172283e"/>
+                <box>
+                    <pen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{marque}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="-3" y="160" width="273" height="30" uuid="a9635e00-021d-41e1-9c11-6f835b1356ea"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="16" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Marque  : ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="270" y="190" width="287" height="30" uuid="e3df7c53-a422-4a95-b8c6-32e698b78079"/>
+                <box>
+                    <pen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{modele}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="-3" y="190" width="273" height="30" uuid="b9be576a-e73a-4dc7-9781-8945d6f7c5a3"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="16" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Type / Modèle  : ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="270" y="220" width="287" height="30" uuid="1c238fdf-3e0e-40b4-9e7b-a2faf8ea8791"/>
+                <box>
+                    <pen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{carross}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="-3" y="220" width="273" height="30" uuid="be51563a-d6fb-444e-8821-adac1be3d661"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="16" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Carrosserie  : ]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="-3" y="250" width="273" height="30" uuid="63783d48-59c5-4121-b03b-ffb94b07eff8"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="16" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Source d’énergie  : ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="270" y="250" width="287" height="30" uuid="fc636680-3ca1-4b04-bd19-18e8ee4bf61f"/>
+                <box>
+                    <pen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{energie}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="-3" y="280" width="273" height="30" uuid="f2efd2ff-2e57-4520-be44-6a2e17995c63"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="16" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Nombre de place (s)  : ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="270" y="280" width="287" height="30" uuid="da89e3d8-ea13-487d-abdf-2fd0c5c4b2df"/>
+                <box>
+                    <pen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{places}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="-3" y="310" width="273" height="30" uuid="7fa6774b-5076-4027-895c-0665986d623c"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="16" isBold="false"/>
+                </textElement>
+                <text><![CDATA[N° dans la série du type  : ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="270" y="310" width="287" height="30" uuid="f654259b-2c90-443c-8c7c-3485848b34df"/>
+                <box>
+                    <pen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{type}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="-3" y="340" width="273" height="30" uuid="6947d2b8-ccf1-471c-b187-604bb88f4a1a"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="16" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Poids à vide / charge utile / PTAC  : ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="270" y="340" width="287" height="30" uuid="423874b7-ac1c-4e77-ab90-12b4264632a1"/>
+                <box>
+                    <pen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{ptac}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="-3" y="380" width="560" height="30" uuid="28b775a4-8f62-482b-8ef0-05505d5a0395"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Est entièrement conforme aux caractéristiques ci-dessus décrites :]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="-3" y="410" width="560" height="30" uuid="96479d56-33de-4642-8f42-ecc5d5029617"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[B)	que ledit véhicule sort de nos magasins pour être livrés à :]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="-3" y="450" width="210" height="50" uuid="79d70563-c4c7-4fb5-a54a-44d95bd4acc9"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Nom et prénom (s) ou Dénomination ou raison sociale "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="207" y="450" width="350" height="50" uuid="592ad4ee-9bb2-4e41-aa5d-34641d452a69"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{nomclient}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="-3" y="520" width="560" height="30" uuid="ce8e9e70-6ef4-4514-b555-2fea0587578b"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[En foi de quoi le présent certificat pour servir et valoir ce que de droit.]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="-3" y="60" width="560" height="30" uuid="a06ff495-fdd0-4d0d-8868-416143a0f180"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Certifions :]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="214" y="581" width="337" height="30" uuid="00117339-92f9-4c13-95d7-1a3274660f65"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Fait à Ouagadougou le, " + $P{date}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="317" y="611" width="234" height="25" uuid="865e6712-b8b5-4abe-9b95-e856866d13a6"/>
+                <textElement>
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <text><![CDATA[(Signature et cachet du vendeur)]]></text>
+            </staticText>
+        </band>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
+</jasperReport>

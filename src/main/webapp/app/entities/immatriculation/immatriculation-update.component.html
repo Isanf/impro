@@ -1,0 +1,77 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-immatriculation-heading">Créer une Immatriculation</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.immatriculation.numero" for="field_numero">Numéro</label>
+                    <input type="text" class="form-control" name="numero" id="field_numero"
+                           formControlName="numero"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.immatriculation.dateImmatriculation" for="field_dateImmatriculation">Date Immatriculation</label>
+                    <div class="d-flex">
+                        <input id="field_dateImmatriculation" type="datetime-local" class="form-control" name="dateImmatriculation" formControlName="dateImmatriculation" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.immatriculation.certificatImmatriculation" for="field_certificatImmatriculation">Certificat d'Immatriculation</label>
+                    <select class="form-control" id="field_certificatImmatriculation" name="certificatImmatriculation" formControlName="certificatImmatriculationId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="certificatImmatriculationOption.id" *ngFor="let certificatImmatriculationOption of certificatimmatriculations; trackBy: trackById">{{ certificatImmatriculationOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.immatriculation.organisation" for="field_organisation">Organisation</label>
+                    <select class="form-control" id="field_organisation" name="organisation" formControlName="organisationId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="organisationOption.id" *ngFor="let organisationOption of organisations; trackBy: trackById">{{ organisationOption.nom }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.immatriculation.personnePhysique" for="field_personnePhysique">Personne Physique</label>
+                    <select class="form-control" id="field_personnePhysique" name="personnePhysique" formControlName="personnePhysiqueId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="personnePhysiqueOption.id" *ngFor="let personnePhysiqueOption of personnephysiques; trackBy: trackById">{{ personnePhysiqueOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.immatriculation.personneMorale" for="field_personneMorale">Personne Morale</label>
+                    <select class="form-control" id="field_personneMorale" name="personneMorale" formControlName="personneMoraleId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="personneMoraleOption.id" *ngFor="let personneMoraleOption of personnemorales; trackBy: trackById">{{ personneMoraleOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.immatriculation.vehicule" for="field_vehicule">Véhicule</label>
+                    <select class="form-control" id="field_vehicule" name="vehicule" formControlName="vehiculeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="vehiculeOption.id" *ngFor="let vehiculeOption of vehicules; trackBy: trackById">{{ vehiculeOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="!editForm.get('vehiculeId')!.value && editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

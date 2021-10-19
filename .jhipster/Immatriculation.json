@@ -1,0 +1,62 @@
+{
+  "name": "Immatriculation",
+  "fields": [
+    {
+      "fieldName": "numero",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateImmatriculation",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "certificatImmatriculation",
+      "otherEntityRelationshipName": "immatriculation",
+      "relationshipName": "certificatImmatriculation",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "immatriculation",
+      "relationshipName": "organisation",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "personnePhysique",
+      "otherEntityRelationshipName": "immatriculation",
+      "relationshipName": "personnePhysique",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "personneMorale",
+      "otherEntityRelationshipName": "immatriculation",
+      "relationshipName": "personneMorale",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "vehicule",
+      "otherEntityRelationshipName": "immatriculation",
+      "relationshipName": "vehicule",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200204171047",
+  "entityTableName": "immatriculation",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

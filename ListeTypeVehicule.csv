@@ -1,0 +1,10 @@
+1;Vehicule particulier;2;0
+2;Vehicule utilitaire;2;0
+3;Vehicule de transport en commun;2;0
+4;Tracteur routier;2;0
+5;Vehicule spécifique;2;0
+6;Remorque;2;0
+7;Semi-remorque;1;0
+8;Caravane;2;0
+9;Moto;1;true
+10;Taxi-Moto;1;true

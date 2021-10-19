@@ -1,0 +1,55 @@
+{
+  "name": "TypeOrganisation",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "niveau",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "typeOrganisation",
+      "relationshipName": "organisations"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "categorieOrganisation",
+      "otherEntityRelationshipName": "type",
+      "relationshipName": "categorieOrganisation",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "typeActeur",
+      "otherEntityRelationshipName": "typeOrganisations",
+      "relationshipName": "typeActeurs",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200205114807",
+  "entityTableName": "type_organisation",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

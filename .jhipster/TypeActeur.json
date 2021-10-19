@@ -1,0 +1,43 @@
+{
+  "name": "TypeActeur",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "typeActeur",
+      "relationshipName": "organisations"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "typeOrganisation",
+      "otherEntityRelationshipName": "typeActeurs",
+      "relationshipName": "typeOrganisations",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20200205114809",
+  "entityTableName": "type_acteur",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

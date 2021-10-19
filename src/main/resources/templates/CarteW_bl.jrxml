@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CarteW" pageWidth="595" pageHeight="420" orientation="Landscape" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="69cdc1c7-7a63-4e17-aba9-f020b90c49ba">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+    <property name="com.jaspersoft.studio.unit." value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+    <property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+    <property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+    <style name="Style1" fontName="Arial"/>
+    <parameter name="titulaire" class="java.lang.String"/>
+    <parameter name="telephone" class="java.lang.String"/>
+    <parameter name="siege" class="java.lang.String"/>
+    <parameter name="ouagale" class="java.lang.String"/>
+    <parameter name="expire" class="java.lang.String"/>
+    <parameter name="logobf" class="java.lang.String"/>
+    <parameter name="carte_w" class="java.lang.String"/>
+    <parameter name="transparent" class="java.lang.String"/>
+    <parameter name="code" class="java.lang.String"/>
+    <parameter name="signe" class="java.lang.String"/>
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="420" splitType="Stretch">
+            <rectangle radius="0">
+                <reportElement x="0" y="0" width="595" height="420" backcolor="#FFFFFF" uuid="de903602-c964-45c1-b635-438e82df76b6"/>
+                <graphicElement>
+                    <pen lineWidth="0.0" lineColor="#000000"/>
+                </graphicElement>
+            </rectangle>
+            <image>
+                <reportElement x="160" y="69" width="280" height="280" uuid="eaf7b323-b684-40f5-9302-113452ed0136"/>
+                <imageExpression><![CDATA[$P{transparent}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement style="Style1" x="30" y="141" width="100" height="20" uuid="5ce1707d-d073-4c6b-aa94-f471d922d1e2"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Titulaire :]]></text>
+            </staticText>
+            <textField>
+                <reportElement style="Style1" x="130" y="141" width="429" height="19" uuid="ce1812a8-4ed3-428c-ba60-1e47afee4691"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Arial" size="16" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["__________"+$P{titulaire}+"__________"]]></textFieldExpression>
+            </textField>
+            <componentElement>
+                <reportElement x="510" y="10" width="50" height="50" uuid="ae9557de-a12a-40d9-8f10-189c2861cc8e"/>
+                <jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+                    <jr:codeExpression><![CDATA[$P{code}]]></jr:codeExpression>
+                </jr:QRCode>
+            </componentElement>
+            <staticText>
+                <reportElement style="Style1" x="280" y="178" width="130" height="20" uuid="c3c83c9e-ca30-49ff-8326-8d52078a776f"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[N° Téléphone :]]></text>
+            </staticText>
+            <textField>
+                <reportElement style="Style1" x="410" y="179" width="149" height="19" uuid="dce2ace4-ef45-4712-b1d2-8173d17e479b"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{telephone}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="Style1" x="30" y="179" width="110" height="20" uuid="9616ce48-ea7a-4c89-bde4-015d9119cfb8"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Siège social :]]></text>
+            </staticText>
+            <textField>
+                <reportElement style="Style1" x="140" y="180" width="140" height="19" uuid="7c88bed6-654e-4f15-be2c-6499c10b74cc"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["___"+$P{siege}+"___"]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="Style1" x="280" y="230" width="150" height="20" uuid="74985c2e-5ed2-41b1-bb86-406e95eb8523"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Ouagadougou le :]]></text>
+            </staticText>
+            <textField>
+                <reportElement style="Style1" x="430" y="231" width="128" height="19" uuid="6832ec76-0e34-445b-b406-9f4f5fa670e9"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{ouagale}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="Style1" x="30" y="280" width="180" height="20" uuid="72d81fae-d45f-4f2e-8d89-7c4742d44b16"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Cette carte expire le :]]></text>
+            </staticText>
+            <textField>
+                <reportElement style="Style1" x="210" y="280" width="240" height="19" uuid="6ac965f6-a615-46d1-b66f-bda2d08daeca"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{expire}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="Style1" x="340" y="320" width="219" height="20" uuid="eaa65ef0-90c0-4065-9922-55489b8034a3"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Arial" size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[SIGNATURE DE L’AUTORITE
+]]></text>
+            </staticText>
+            <image>
+                <reportElement x="40" y="10" width="50" height="49" uuid="e483119c-8284-4ea2-bd42-d6a3ef8cb6c8"/>
+                <imageExpression><![CDATA[$P{logobf}]]></imageExpression>
+            </image>
+            <textField>
+                <reportElement style="Style1" x="140" y="69" width="310" height="30" uuid="15ec1268-eda1-425e-b50d-6391551fdde0"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Arial" size="22" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{carte_w}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement style="Style1" x="210" y="10" width="160" height="30" uuid="e93b5f87-736c-42a4-8e7e-192ffdbc4535"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Arial" size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[BURKINA FASO
+******]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Style1" x="177" y="40" width="220" height="19" uuid="a2fceff9-49d9-4875-98e7-68e2389f5e70"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Arial" size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Unité - Progrès - Justice]]></text>
+            </staticText>
+            <image>
+                <reportElement x="430" y="350" width="128" height="50" uuid="018ca761-2371-433e-977f-57173f417e47"/>
+                <imageExpression><![CDATA[$P{signe}]]></imageExpression>
+            </image>
+        </band>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
+</jasperReport>

@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <nb-card>
+                <nb-card-header>
+                    <h2 id="jhi-carnet-a-souche-heading">Création de Carnets à Souches</h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <div>
+                        <jhi-alert-error></jhi-alert-error>
+
+                        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_numero">Nombre de Carnets</label>
+                            <input type="number" nbInput shape="round" status="primary" fullWidth name="numero" id="field_numero"
+                                   formControlName="numero"/>
+                        </div>
+
+                        <!--<div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.carnetASouche.dateImpression" for="field_dateImpression">Date Impression</label>
+                            <div class="d-flex">
+                                <input id="field_dateImpression" type="datetime-local" class="form-control" name="dateImpression" formControlName="dateImpression" placeholder="YYYY-MM-DD HH:mm"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.carnetASouche.concessionnaire" for="field_concessionnaire">Concessionnaire</label>
+                            <select class="form-control" id="field_concessionnaire" name="concessionnaire" formControlName="concessionnaireId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="organisationOption.id" *ngFor="let organisationOption of organisations; trackBy: trackById">{{ organisationOption.id }}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.carnetASouche.livraisonCarnetSouche" for="field_livraisonCarnetSouche">Livraison Carnet Souche</label>
+                            <select class="form-control" id="field_livraisonCarnetSouche" name="livraisonCarnetSouche" formControlName="livraisonCarnetSoucheId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="livraisonCarnetSoucheOption.id" *ngFor="let livraisonCarnetSoucheOption of livraisoncarnetsouches; trackBy: trackById">{{ livraisonCarnetSoucheOption.id }}</option>
+                            </select>
+                        </div>-->
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.carnetASouche.typeCarnet" for="field_typeCarnet">Type de Carnet</label>
+                            <nb-select fullWidth status="primary" shape="round" outline id="field_typeCarnet" formControlName="typeCarnetId">
+                                <nb-option [value]="typeCarnetOption.id" *ngFor="let typeCarnetOption of typecarnets; trackBy: trackById">{{ typeCarnetOption.libelle }}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div>
+                        <button type="button" id="cancel-save" nbButton shape="round" outline
+                                (click)="previousState()">
+                            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+
+                        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                                [nbSpinner]="loading" nbSpinnerStatus="success"
+                                nbButton outline shape="round" status="primary">
+                            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </nb-card-footer>
+
+            </nb-card>
+        </form>
+    </div>
+</div>

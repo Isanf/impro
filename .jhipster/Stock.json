@@ -1,0 +1,46 @@
+{
+  "name": "Stock",
+  "fields": [
+    {
+      "fieldName": "numeroStock",
+      "fieldType": "String",
+      "javadoc": "numeroStock"
+    },
+    {
+      "fieldName": "fichierStock",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "dateStock",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vehicule",
+      "otherEntityRelationshipName": "stock",
+      "relationshipName": "vehicules"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "stock",
+      "relationshipName": "concessionnaire",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200205114802",
+  "javadoc": "The Stock entity.\\n@author A true hipster",
+  "entityTableName": "stock",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

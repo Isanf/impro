@@ -1,0 +1,29 @@
+{
+  "improApp": {
+    "collaboration": {
+      "home": {
+        "title": "Collaborations",
+        "createLabel": "Créer un nouveau Collaboration",
+        "createOrEditLabel": "Créer ou éditer un Collaboration",
+        "notFound": "Aucun Collaboration trouvé"
+      },
+      "created": "Un nouveau Collaboration a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Collaboration avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Collaboration avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Collaboration {{ id }} ?"
+      },
+      "detail": {
+        "title": "Collaboration"
+      },
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "numeroCollaboration": "Numero Collaboration",
+      "revendeur": "Revendeur",
+      "concessionnaire": "Concessionnaire",
+      "help": {
+        "dateDebut": "dateDebut"
+      }
+    }
+  }
+}

@@ -1,0 +1,203 @@
+<nb-card *jhiHasAnyAuthority="['ROLE_ADMIN']" class="container-fluid">
+    <div>
+        <h3>Statistique général pour Immatriculation par période</h3>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" jhiTranslate="audits.filter.from">from</span>
+                    </div>
+                    <input type="date" class="form-control" name="start" [(ngModel)]="fromDate4AllOrg" required/>
+                    <div class="input-group-append">
+                        <span class="input-group-text" jhiTranslate="audits.filter.to">To</span>
+                    </div>
+                    <input type="date" class="form-control" name="end" [(ngModel)]="toDate4AllOrg" required/>
+                    <button type="submit" size="tiny" (click)="update4AllOrg($event)" nbButton status="success" shape="round">Consulter</button>
+                </div>
+            </div>
+        </div>
+        <p-chart type="line" [data]="data"></p-chart>
+    </div>
+</nb-card>
+<nb-card *jhiHasAnyAuthority="['ROLE_ADMIN']" class="container-fluid">
+    <div>
+        <h3>Statistiques par Organisation</h3>
+        <form name="editForm" role="form" novalidate [formGroup]="editForm4Org">
+            <div class="row">
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label" >Sélectionner l'Organisation</label>
+                    <div class="col-sm-6">
+                        <nb-select status="primary" size="tiny" shape="round" fullWidth outline formControlName="idOrg" >
+                            <nb-option *ngFor="let org of organisations"
+                                       [value]="org.id">{{org.nom}}</nb-option>
+                        </nb-select>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" jhiTranslate="audits.filter.from">from</span>
+                    </div>
+                    <input type="date" class="form-control" name="start" [(ngModel)]="fromDat" required/>
+
+                    <div class="input-group-append">
+                        <span class="input-group-text" jhiTranslate="audits.filter.to">To</span>
+                    </div>
+                    <input type="date" class="form-control" name="end" [(ngModel)]="toDat" required/>
+                    <button type="submit" size="tiny" (click)="update4Org($event)" nbButton status="success" shape="round">Consulter</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <nb-card status="basic">
+                    <nb-card-header>Livraisons</nb-card-header>
+                    <nb-card-body>
+                        <h2>{{ totLiv4Org }}</h2>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-md-2">
+                <nb-card status="basic">
+                    <nb-card-header>Carnets</nb-card-header>
+                    <nb-card-body>
+                        <h2>{{ CarnetTotal }}</h2>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-md-3">
+                <nb-flip-card>
+                    <nb-card-front>
+                        <nb-card status="basic">
+                            <nb-card-header>Certificats de la periode</nb-card-header>
+                            <nb-card-body>
+                                <h2>{{ certificatImmatriculationsTotal }}</h2>
+                            </nb-card-body>
+                        </nb-card>
+                    </nb-card-front>
+                    <nb-card-back>
+                        <nb-card status="basic">
+                            <nb-card-header> Certificats Non utilisés </nb-card-header>
+                            <nb-card-body>
+                                <h2>{{ certificatImmatriculationsDipo }}</h2>
+                            </nb-card-body>
+                        </nb-card>
+                    </nb-card-back>
+                </nb-flip-card>
+            </div>
+            <div class="col-md-2">
+                <nb-card status="basic">
+                    <nb-card-header>Immatriculations</nb-card-header>
+                    <nb-card-body>
+                        <h2>{{ totIm4Org }}</h2>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+    </div>
+</nb-card>
+<nb-card>
+    <div *jhiHasAnyAuthority="['DGTTM','CONCESSIONNAIRE','STHGUICHET','REVENDEUR','DOUANE']" class="container-fluid">
+        <h3>Statistique Immatriculation par période</h3>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" jhiTranslate="audits.filter.from">from</span>
+                    </div>
+                    <input type="date" class="form-control" name="start" [(ngModel)]="fromDate4Im" required/>
+
+                    <div class="input-group-append">
+                        <span class="input-group-text" jhiTranslate="audits.filter.to">To</span>
+                    </div>
+                    <input type="date" class="form-control" name="end" [(ngModel)]="toDate4Im" required/>
+                    <button type="submit" size="tiny" (click)="queryIm($event)" nbButton status="success" shape="round">Consulter</button>
+                </div>
+            </div>
+        </div>
+        <p-chart type="line" [data]="data4Im"></p-chart>
+    </div>
+</nb-card>
+<nb-card *jhiHasAnyAuthority="['CONCESSIONNAIRE']" class="container-fluid">
+    <div>
+        <h3>Statistiques par Revendeur</h3>
+        <form name="editForm" role="form" novalidate [formGroup]="editForm4Org">
+            <div class="row">
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label" >Sélectionner l'Organisation</label>
+                    <div class="col-sm-6">
+                        <nb-select status="primary" size="tiny" shape="round" fullWidth outline formControlName="idOrg" >
+                            <nb-option *ngFor="let org of organisationsRev"
+                                       [value]="org.id">{{org.nom}}</nb-option>
+                        </nb-select>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" jhiTranslate="audits.filter.from">from</span>
+                    </div>
+                    <input type="date" class="form-control" name="start" [(ngModel)]="fromDat" required/>
+
+                    <div class="input-group-append">
+                        <span class="input-group-text" jhiTranslate="audits.filter.to">To</span>
+                    </div>
+                    <input type="date" class="form-control" name="end" [(ngModel)]="toDat" required/>
+                    <button type="submit" size="tiny" (click)="update4Org($event)" nbButton status="success" shape="round">Consulter</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!--<div class="col-md-2">
+                <nb-card status="basic">
+                    <nb-card-header>Livraisons</nb-card-header>
+                    <nb-card-body>
+                        <h2>{{ totLiv4Org }}</h2>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-md-2">
+                <nb-card status="basic">
+                    <nb-card-header>Carnets</nb-card-header>
+                    <nb-card-body>
+                        <h2>{{ CarnetTotal }}</h2>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-md-3">
+                <nb-flip-card>
+                    <nb-card-front>
+                        <nb-card status="basic">
+                            <nb-card-header>Certificats de la periode</nb-card-header>
+                            <nb-card-body>
+                                <h2>{{ certificatImmatriculationsTotal }}</h2>
+                            </nb-card-body>
+                        </nb-card>
+                    </nb-card-front>
+                    <nb-card-back>
+                        <nb-card status="basic">
+                            <nb-card-header> Certificats Non utilisés </nb-card-header>
+                            <nb-card-body>
+                                <h2>{{ certificatImmatriculationsDipo }}</h2>
+                            </nb-card-body>
+                        </nb-card>
+                    </nb-card-back>
+                </nb-flip-card>
+            </div>-->
+            <div class="col-md-2">
+                <nb-card status="basic">
+                    <nb-card-header>Immatriculations</nb-card-header>
+                    <nb-card-body>
+                        <h2>{{ totIm4Org }}</h2>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
+    </div>
+</nb-card>

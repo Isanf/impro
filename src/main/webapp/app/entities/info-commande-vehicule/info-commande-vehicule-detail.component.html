@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="infoCommandeVehicule">
+            <h2><span jhiTranslate="improApp.infoCommandeVehicule.detail.title">Info-Commande de Vehicule</span> {{ infoCommandeVehicule.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.infoCommandeVehicule.numeroCommande" [ngbTooltip]="'improApp.infoCommandeVehicule.help.numeroCommande' | translate">Numéro Commande</span></dt>
+                <dd>
+                    <span>{{ infoCommandeVehicule.numeroCommande }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.infoCommandeVehicule.dateCommande">Date Commande</span></dt>
+                <dd>
+                    <span>{{ infoCommandeVehicule.dateCommande }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.infoCommandeVehicule.quantiteCommande">Quantite Commande</span></dt>
+                <dd>
+                    <span>{{ infoCommandeVehicule.quantiteCommande }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.infoCommandeVehicule.commandeVehicule">Commande Véhicule</span></dt>
+                <dd>
+                    <div *ngIf="infoCommandeVehicule.commandeVehiculeId">
+                        <a [routerLink]="['/commande-vehicule', infoCommandeVehicule.commandeVehiculeId, 'view']">{{ infoCommandeVehicule.commandeVehiculeId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="improApp.infoCommandeVehicule.marqueVehicule">Marque Véhicule</span></dt>
+                <dd>
+                    <div *ngIf="infoCommandeVehicule.marqueVehiculeId">
+                        <a [routerLink]="['/marque-vehicule', infoCommandeVehicule.marqueVehiculeId, 'view']">{{ infoCommandeVehicule.marqueVehiculeId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/info-commande-vehicule', infoCommandeVehicule.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

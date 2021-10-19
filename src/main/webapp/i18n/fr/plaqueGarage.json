@@ -1,0 +1,26 @@
+{
+  "improApp": {
+    "plaqueGarage": {
+      "home": {
+        "title": "PlaqueGarages",
+        "createLabel": "Créer un nouveau Plaque Garage",
+        "createOrEditLabel": "Créer ou éditer un Plaque Garage",
+        "notFound": "Aucun Plaque Garage trouvé"
+      },
+      "created": "Un nouveau Plaque Garage a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Plaque Garage avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Plaque Garage avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Plaque Garage {{ id }} ?"
+      },
+      "detail": {
+        "title": "Plaque Garage"
+      },
+      "numeroOrdre": "Numero Ordre",
+      "numeroPlaque": "Numero Plaque",
+      "codeQrPlaque": "Code Qr Plaque",
+      "createdAt": "Created At",
+      "carteW": "Carte W"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "MarqueVehicule",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "javadoc": "code"
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vehicule",
+      "otherEntityRelationshipName": "marqueVehicule",
+      "relationshipName": "vehicule"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "infoCommandeVehicule",
+      "otherEntityRelationshipName": "marqueVehicule",
+      "relationshipName": "infoCommandeVehicule"
+    }
+  ],
+  "changelogDate": "20200205114812",
+  "javadoc": "The MarqueVehicule entity.\\n@author A true hipster",
+  "entityTableName": "marque_vehicule",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

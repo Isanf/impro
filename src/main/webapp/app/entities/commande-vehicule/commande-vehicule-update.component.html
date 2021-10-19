@@ -1,0 +1,100 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <nb-card>
+                <nb-card-header>
+                    <h2 id="jhi-commande-vehicule-heading">
+                        Créer une nouvelle Commande de Vehicule
+                    </h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <jhi-alert-error></jhi-alert-error>
+
+                    <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                        <label for="id" jhiTranslate="global.field.id">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                    </div>
+                    <div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="id">Quantite de Commande</label>
+                            <div class="col-sm-9">
+                                <input type="number" nbInput fullWidth fieldSize="small" shape="round" status="primary"
+                                       name="quantiteCommande" id="field_quantiteCommande" required formControlName="quantiteCommande"/>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" jhiTranslate="improApp.stock.concessionnaire" for="field_concessionnaire">Concessionnaire</label>
+                            <div class="col-sm-9">
+                                <nb-select shape="round" fullWidth status="primary" id="field_concessionnaire" name="concessionnaire" formControlName="concessionnaireId">
+                                    <nb-option [value]="null"></nb-option>
+                                    <nb-option [value]="organisationOption.id" *ngFor="let organisationOption of organisations; trackBy: trackById">{{organisationOption.nom}}</nb-option>
+                                </nb-select>
+                            </div>
+
+                        </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label" jhiTranslate="improApp.infoCommandeVehicule.marqueVehicule" for="field_marqueVehicule">Marque Véhicule</label>
+                                    <div class="col-sm-9">
+                                        <nb-select status="primary" fullWidth shape="round" id="field_marqueVehicule" name="marqueVehicule" formControlName="marqueVehiculeId">
+                                            <nb-option [value]="null"></nb-option>
+                                            <nb-option [value]="marqueVehiculeOption.id" *ngFor="let marqueVehiculeOption of marquevehicules; trackBy: trackById">Marque : {{ marqueVehiculeOption.libelle }} --- Code Marque : {{marqueVehiculeOption.code}}</nb-option>
+                                        </nb-select>
+                                    </div>
+                                    <div class="right">
+                                        <label class="rounded btn btn-primary" (click)="add()">
+                                            <nb-icon icon="plus-circle-outline" size="80"></nb-icon>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        <!--<nb-alert *ngIf="a == true " status="danger">
+                            Vous ne pouvez pas selectionner la meme marque pour deux lignes; additionnez les quantités!
+                        </nb-alert>-->
+                        <div class="form-group" *ngIf="listShow?.length > 0">
+                            <nb-card size="small">
+                                <table class="table table-striped" aria-describedby="page-heading">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" ><span>Quantité Commande</span> </th>
+                                        <th scope="col" ><span>Marque de vehicule</span></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let infos of listShow">
+                                        <td>{{ infos.quantiteCommande }}</td>
+                                        <td>{{ infos.marqueVehiculeId }}</td>
+                                        <td class="text-right">
+                                            <div class="btn-group">
+                                                <button type="submit" (click)="edit(infos)" class="btn rounded btn-primary btn-sm">
+                                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                                    <span class="d-none d-md-inline"></span>
+                                                </button>
+                                                <button type="submit" (click)="delete(infos)"
+                                                        class="btn rounded btn-danger btn-sm">
+                                                    <fa-icon icon="times"></fa-icon>
+                                                    <span class="d-none d-md-inline"></span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </nb-card>
+                        </div>
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button type="submit" id="save-entity" [disabled]="infocomsList.length === 0" class="btn btn-primary">
+                        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    </button>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>

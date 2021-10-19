@@ -1,0 +1,140 @@
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <nb-card>
+                <nb-card-header>
+                    <h2 id="jhi-vehicule-heading" jhiTranslate="improApp.vehicule.home.createOrEditLabel">Create or edit a Vehicule</h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <jhi-alert-error></jhi-alert-error>
+                        <div class="col-md-6">
+                            <div class="form-group" [hidden]="!editForm.get('id').value">
+                                <label for="id" jhiTranslate="global.field.id">ID</label>
+                                <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       id="id" name="id" formControlName="id" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" >Numero Chassis</label>
+                                <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       formControlName="numeroChassis" required/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" >Model</label>
+                                <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       name="model" id="field_model" formControlName="model" required/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" >Energie</label>
+                                <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       name="energie" id="field_energie" formControlName="energie" required/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" >Puissance Reel</label>
+                                <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       name="puissanceReel" id="field_puissanceReel" formControlName="puissanceReel" required/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" >Puissance Admin</label>
+                                <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       name="puissanceAdmin" id="field_puissanceAdmin" formControlName="puissanceAdmin" required/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" >Couleur</label>
+                                <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       name="couleur" id="field_couleur" formControlName="couleur" required/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" >Poids Vide</label>
+                                <input type="number" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       name="poidsVide" id="field_poidsVide" formControlName="poidsVide" required/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" >Charge Utile</label>
+                                <input type="number" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       name="chargeUtile" id="field_chargeUtile" formControlName="chargeUtile" required/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" >Ptac</label>
+                                <input type="number" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       name="ptac" id="field_ptac" formControlName="ptac" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" >Ptra</label>
+                                <input type="number" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       name="ptra" id="field_ptra" formControlName="ptra" required/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" >Nbr Place</label>
+                                <input type="number" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       name="nbrPlace" id="field_nbrPlace" formControlName="nbrPlace" required/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" >Capacite</label>
+                                <input type="number" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       name="capacite" id="field_capacite" formControlName="capacite" required/>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                <span class="input-group-append">
+                                    <input id="field_dateMiseCirculation" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                           placeholder="Date Mise en circulation" type="text" name="dateMiseCirculation" ngbDatepicker  #dateMiseCirculationDp="ngbDatepicker" formControlName="dateMiseCirculation" required/>
+
+                                    <button type="button" class="btn btn-secondary" (click)="dateMiseCirculationDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                                </span>
+                                </div>
+                                <!--<span class="floating-label">Date Mise Circulation</span>-->
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" >Regime</label>
+                                <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       name="regime" id="field_regime" formControlName="regime" required/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" >No Dedouanement</label>
+                                <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                       name="noDedouanement" id="field_noDedouanement" formControlName="noDedouanement" required/>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                <span class="input-group-append">
+                                    <input id="field_dateDedouanement" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                           placeholder="Date Dedouanement" type="text" name="dateDedouanement" ngbDatepicker  #dateDedouanementDp="ngbDatepicker" formControlName="dateDedouanement" required/>
+
+                                    <button type="button" class="btn btn-secondary" (click)="dateDedouanementDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                                </span>
+                                </div>
+                                <!--<span class="floating-label">Date Dedouanement</span>-->
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Type Vehicule</label>
+                                <nb-select status="primary" fullWidth id="field_typeVehicule" formControlName="typeVehiculeId">
+                                    <nb-option [value]="typeVehiculeOption.id" *ngFor="let typeVehiculeOption of typevehicules; trackBy: trackTypeVehiculeById">{{typeVehiculeOption.libelle}}</nb-option>
+                                </nb-select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Marque Vehicule</label>
+                                <nb-select status="primary" fullWidth id="field_marqueVehicule" formControlName="marqueVehiculeId">
+                                    <nb-option [value]="marqueVehiculeOption.id" *ngFor="let marqueVehiculeOption of marquevehicules; trackBy: trackMarqueVehiculeById">{{marqueVehiculeOption.libelle}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div>
+                        <button type="button" id="cancel-save" nbButton outline (click)="previousState()">
+                            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                                nbButton outline shape="round" status="primary">
+                            <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>

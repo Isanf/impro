@@ -1,0 +1,77 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="improApp.vehiculeTraversant.home.title">Vehicule Traversants</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-vehicule-traversant" [routerLink]="['/vehicule-traversant/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="improApp.vehiculeTraversant.home.createLabel">
+            Create a new Vehicule Traversant
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="vehiculeTraversants?.length === 0">
+        <span jhiTranslate="improApp.vehiculeTraversant.home.notFound">No vehiculeTraversants found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="vehiculeTraversants && vehiculeTraversants.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="chassis"><span jhiTranslate="improApp.vehiculeTraversant.chassis">Chassis</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="marque"><span jhiTranslate="improApp.vehiculeTraversant.marque">Marque</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="model"><span jhiTranslate="improApp.vehiculeTraversant.model">Model</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdAt"><span jhiTranslate="improApp.vehiculeTraversant.createdAt">Created At</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let vehiculeTraversant of vehiculeTraversants ;trackBy: trackId">
+                    <td><a [routerLink]="['/vehicule-traversant', vehiculeTraversant.id, 'view']">{{ vehiculeTraversant.id }}</a></td>
+                    <td>{{ vehiculeTraversant.chassis }}</td>
+                    <td>{{ vehiculeTraversant.marque }}</td>
+                    <td>{{ vehiculeTraversant.model }}</td>
+                    <td>{{ vehiculeTraversant.createdAt | date:'medium' }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/vehicule-traversant', vehiculeTraversant.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/vehicule-traversant', vehiculeTraversant.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(vehiculeTraversant)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="vehiculeTraversants && vehiculeTraversants.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

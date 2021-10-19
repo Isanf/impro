@@ -1,0 +1,34 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="prixCertificat">
+            <h2><span jhiTranslate="improApp.prixCertificat.detail.title">Prix Certificat</span> {{ prixCertificat.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.prixCertificat.prix">Prix</span></dt>
+                <dd>
+                    <span>{{ prixCertificat.prix }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.prixCertificat.activated">Activated</span></dt>
+                <dd>
+                    <span>{{ prixCertificat.activated }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/prix-certificat', prixCertificat.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

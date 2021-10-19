@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="personnePhysique">
+            <h2><span jhiTranslate="improApp.personnePhysique.detail.title">Personne Physique</span> {{personnePhysique.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.personnePhysique.nom" [ngbTooltip]="'improApp.personnePhysique.help.nom' | translate">Nom</span></dt>
+                <dd>
+                    <span>{{personnePhysique.nom}}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.personnePhysique.prenom">Prenom</span></dt>
+                <dd>
+                    <span>{{personnePhysique.prenom}}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.personnePhysique.dateNaissance">Date Naissance</span></dt>
+                <dd>
+                    <span>{{personnePhysique.dateNaissance}}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.personnePhysique.lieuNaissance">Lieu Naissance</span></dt>
+                <dd>
+                    <span>{{personnePhysique.lieuNaissance}}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.personnePhysique.telephone">Telephone</span></dt>
+                <dd>
+                    <span>{{personnePhysique.telephone}}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.personnePhysique.residence">Residence</span></dt>
+                <dd>
+                    <span>{{personnePhysique.residence}}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.personnePhysique.docIdentification">Doc Identification</span></dt>
+                <dd>
+                    <div *ngIf="personnePhysique.docIdentificationId">
+                        <a [routerLink]="['/doc-identification-pp', personnePhysique.docIdentificationId, 'view']">{{personnePhysique.docIdentificationId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="improApp.personnePhysique.user">User</span></dt>
+                <dd>
+                    {{personnePhysique.userId}}
+                </dd>
+                <dt><span jhiTranslate="improApp.personnePhysique.organisation">Organisation</span></dt>
+                <dd>
+                    <div *ngIf="personnePhysique.organisationId">
+                        <a [routerLink]="['/organisation', personnePhysique.organisationId, 'view']">{{personnePhysique.organisationId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="improApp.personnePhysique.profil">Profil</span></dt>
+                <dd>
+                    <div *ngIf="personnePhysique.profilId">
+                        <a [routerLink]="['/profil', personnePhysique.profilId, 'view']">{{personnePhysique.profilId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/personne-physique', personnePhysique.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

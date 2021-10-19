@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Vente.
+    -->
+    <changeSet id="20200219155400-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="revendeur_id"
+                                 baseTableName="vente"
+                                 constraintName="fk_vente_revendeur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation"/>
+
+        <addForeignKeyConstraint baseColumnNames="personne_physique_id"
+                                 baseTableName="vente"
+                                 constraintName="fk_vente_personne_physique_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personne_physique"/>
+
+        <addForeignKeyConstraint baseColumnNames="personne_morale_id"
+                                 baseTableName="vente"
+                                 constraintName="fk_vente_personne_morale_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personne_morale"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,1159 @@
+<nb-card>
+    <nb-card-header>
+        <nb-card *jhiHasAnyAuthority="['ROLE_ADMIN','STHGUICHET']">
+            <nb-card-header>
+                <h2>
+                    <span>Nouveau enregistrement</span>
+                </h2>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <nb-checkbox [value]="checked" (checkedChange)="toggle($event)"
+                                     status="primary" id="notInStock" size="10">
+                            Vehicule Revendeur
+                        </nb-checkbox>
+                    </div>
+                    <div class="col-sm-2">
+                        <nb-checkbox [value]="checked2" (checkedChange)="toggle2($event)"
+                                     status="primary" id="inStock" size="10">
+                            Vehicule traversant le territoire
+                        </nb-checkbox>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </nb-card-header>
+    <nb-card-body>
+        <form>
+            <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                <label class="col-sm-3 col-form-label" for="id" jhiTranslate="global.field.id">ID</label>
+                <div class="col-sm-9">
+                    <input type="text" nbInput fullWidth status="primary" shape="semi-round" fieldSize="tiny"
+                           id="id" name="id" formControlName="id" readonly />
+                </div>
+            </div>
+        </form>
+        <div *ngIf="checked">
+            <nb-tabset fullWidth>
+                <nb-tab tabTitle="Pour Personne physique">
+                    <form name="editForm" role="form" novalidate (ngSubmit)="saveOcca()" [formGroup]="editFormOcca">
+                        <nb-card>
+                            <nb-card-body>
+                                <nb-stepper orientation="horizontal">
+                                    <nb-step>
+                                        <!--<div class="form-group" [hidden]="!editForm.get('id').value">
+                                            <label >ID</label>
+                                            <input type="text" class="form-control" name="id" formControlName="id"
+                                                   readonly />
+                                        </div>-->
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Numéro de Chassis </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="Numéro de Chassis"
+                                                       formControlName="chassis"/>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Marque </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="marque"
+                                                       formControlName="marque"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Modèle </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="Modèle"
+                                                       formControlName="model"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label  class="col-sm-4 col-form-label">Carte W</label>
+                                            <div class="col-sm-8">
+                                                <nb-select outline shape="semi-round" status="primary" fullWidth size="small" formControlName="carteW">
+                                                    <nb-option [value]="cartew" *ngFor="let cartew of listcartew">
+                                                        {{cartew.numeroCarteW}} --- Lieu établissement => {{cartew.lieuEtablissement}}
+                                                    </nb-option>
+                                                </nb-select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-11 col-form-label" ></label>
+                                            <button nbButton nbStepperNext outline shape="round" status="primary" (click)="verifRevend()">
+                                                <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                                            </button>
+                                        </div>
+                                    </nb-step>
+                                    <nb-step>
+                                        <table class="table table-striped" aria-describedby="page-heading">
+                                            <thead>
+                                                <td>Voici les Revendeurs du Concessionnaire de la Carte W:</td>
+                                            </thead>
+                                            <tr *ngFor="let revend of orgsRevendWith">
+                                                <td>{{revend.nom}}</td>
+                                            </tr>
+                                        </table>
+                                        <br><br><br>
+                                        <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                                            <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                                        </button>
+                                        <button nbButton nbStepperNext outline shape="round" status="primary" (click)="verifNipOcca()">
+                                            <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                                        </button>
+                                    </nb-step>
+                                    <nb-step>
+                                        <div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label"> NIP </label>
+                                                <div class="col-sm-9">
+                                                    <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                           type="text" placeholder="NIP" required
+                                                           formControlName="nip"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                                            <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                                        </button>
+                                        <button nbButton nbStepperNext outline shape="round" status="primary" (click)="verifNipOcca()">
+                                            <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                                        </button>
+                                    </nb-step>
+                                    <nb-step>
+                                        <div *ngIf="exist; else pasHstNipOcca">
+                                            <div>
+                                                <p style="background: #db8b00">Ce numero NIP existe! Voici les details en déssous, s'il s'agit du même document continuez;
+                                                    dans le cas contraire reculer pour rectifier le NIP.</p>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Numero NIP :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist.body.nip}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Numero Document :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist.body.numeroDoc}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Type Document :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist.body.typeDocIdentification}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Date établissement :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist.body.dateEtablissement}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Authorité émettrice :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist.body.autoriteEmettrice}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Lieu établissement :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist.body.lieuEtablissement}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ng-template #pasHstNipOcca>
+                                            <div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Nom </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Nom" required
+                                                               formControlName="nom"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Prenom </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Prenom" required
+                                                               formControlName="prenom"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Date Naissance </label>
+                                                    <div class="col-sm-9">
+                                                            <span class="input-group-append">
+                                                                <input nbInput fullWidth shape="round" fieldSize="small" placeholder="Date Naissance" type="text" class="inputText" name="dateNaissance"
+                                                                       ngbDatepicker  #dateNaissanceDp="ngbDatepicker" formControlName="dateNaissance"/>
+                                                                <button type="button" class="btn btn-secondary" (click)="dateNaissanceDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Lieu Naissance </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Lieu Naissance" required
+                                                               formControlName="lieuNaissance"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Telephone </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Telephone" required
+                                                               formControlName="telephone"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Residence </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Residence" required
+                                                               formControlName="residence"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label" >Type Doc Identification</label>
+                                                    <div class="col-sm-9">
+                                                        <nb-select status="primary" shape="round" fullWidth outline size="small" formControlName="typeDocIdentification">
+                                                            <nb-option value="CNIB">{{'improApp.TypeDocIdentification.CNIB' | translate}}</nb-option>
+                                                            <nb-option value="PASSEPORT">{{'improApp.TypeDocIdentification.PASSEPORT' | translate}}</nb-option>
+                                                            <nb-option value="CARTE_MILITAIRE">{{'improApp.TypeDocIdentification.CARTE_MILITAIRE' | translate}}</nb-option>
+                                                            <nb-option value="CARTE_SCOLAIRE">{{'improApp.TypeDocIdentification.CARTE_SCOLAIRE' | translate}}</nb-option>
+                                                            <nb-option value="CARTE_ID_ETRANGERE">{{'improApp.TypeDocIdentification.CARTE_ID_ETRANGERE' | translate}}</nb-option>
+                                                        </nb-select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label  class="col-sm-3 col-form-label">Pays</label>
+                                                    <div class="col-sm-9">
+                                                        <nb-select outline shape="semi-round" status="primary" fullWidth size="small" formControlName="nation">
+                                                            <nb-option [value]="nation" *ngFor="let nation of listnation">
+                                                                {{nation.name}} --- Code => {{nation.phonecode}}
+                                                            </nb-option>
+                                                        </nb-select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Numero Document </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Numero Document" required
+                                                               formControlName="numeroDoc"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Date Etablissement </label>
+                                                    <div class="col-sm-9">
+                                                            <span class="input-group-append">
+                                                                <input nbInput fullWidth shape="round" status="primary"
+                                                                       placeholder="Date Etablissement" type="text" class="inputText" name="dateEtablissement"
+                                                                       ngbDatepicker  #dateEtablissementDp="ngbDatepicker" formControlName="dateEtablissement"/>
+                                                                <button type="button" class="btn btn-secondary" (click)="dateEtablissementDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Lieu Etablissement </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Lieu Etablissement" required
+                                                               formControlName="lieuEtablissement"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Autorite Emettrice </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Autorite Emettrice" required
+                                                               formControlName="autoriteEmettrice"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                        <button nbButton nbStepperPrevious (click)="videNipOcca()" outline shape="round" status="basic">
+                                            <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                                        </button>
+                                    </nb-step>
+                                </nb-stepper>
+                            </nb-card-body>
+                            <nb-card-footer>
+                                <button type="button" (click)="previousState()"
+                                        nbButton status="basic" outline shape="round" >
+                                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span >Annuler</span>
+                                </button>
+                                <button type="submit"  [disabled]="isSaving"
+                                        nbButton status="primary" outline shape="round" >
+                                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Enregistrer</span>
+                                </button>
+                            </nb-card-footer>
+                        </nb-card>
+                    </form>
+                </nb-tab>
+                <nb-tab tabTitle="Pour Personne morale">
+                    <form name="editForm1" role="form" novalidate (ngSubmit)="saveOcca1()" [formGroup]="editFormOcca1">
+                        <nb-card>
+                            <nb-card-body>
+                                <nb-stepper orientation="horizontal">
+                                    <nb-step>
+                                        <!--<div class="form-group" [hidden]="!editForm.get('id').value">
+                                            <label >ID</label>
+                                            <input type="text" class="form-control" name="id" formControlName="id"
+                                                   readonly />
+                                        </div>-->
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Numéro de Chassis </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="Numéro de Chassis"
+                                                       formControlName="chassis"/>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Marque </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="marque"
+                                                       formControlName="marque"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Modèle </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="Modèle"
+                                                       formControlName="model"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label  class="col-sm-4 col-form-label">Carte W</label>
+                                            <div class="col-sm-8">
+                                                <nb-select outline shape="semi-round" status="primary" fullWidth size="small" formControlName="carteW">
+                                                    <nb-option [value]="cartew" *ngFor="let cartew of listcartew">
+                                                        {{cartew.numeroCarteW}} --- Lieu établissement => {{cartew.lieuEtablissement}}
+                                                    </nb-option>
+                                                </nb-select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-11 col-form-label" ></label>
+                                            <button nbButton nbStepperNext outline shape="round" status="primary">
+                                                <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                                            </button>
+                                        </div>
+                                    </nb-step>
+                                    <nb-step>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Numéro IFU </label>
+                                            <div class="col-sm-8">
+                                                <input name="numeroIFU" nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="Numéro IFU"
+                                                       formControlName="numeroIFU"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                                                <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                                            </button>
+                                            <label class="col-sm-10 col-form-label" ></label>
+                                            <button nbButton nbStepperNext outline shape="round" (click)="verifIFUOcca()" status="primary">
+                                                <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                                            </button>
+                                        </div>
+                                    </nb-step>
+                                    <nb-step>
+                                        <div *ngIf="exist1; else pasHstIfuOcca">
+                                            <div>
+                                                <p style="background: #db8b00">Ce numero NIP existe! Voici les details en déssous, s'il s'agit du même document continuez;
+                                                    dans le cas contraire reculer pour rectifier le NIP.</p>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Numero IFU :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist1.body.numeroIFU}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Numero RCCM :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist1.body.numeroRCCM}}
+                                                        </div>
+                                                    </div>
+                                                    <!--<div class="row">
+                                                        <div class="col-sm">
+                                                            Dénomination :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist1.body}}
+                                                        </div>
+                                                    </div>-->
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Siege Social :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist1.body.siegeSocial}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Phone :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist1.body.telephone}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Email:
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist1.body.email}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Code Postal :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist1.body.codePostal}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ng-template #pasHstIfuOcca>
+                                            <div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Denomination</label>
+                                                    <div class="col-sm-8">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                               type="text" placeholder="Denomination"
+                                                               formControlName="denomination"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label  class="col-sm-4 col-form-label">Pays</label>
+                                                    <div class="col-sm-8">
+                                                        <nb-select outline shape="semi-round" status="primary" fullWidth size="small" formControlName="nation">
+                                                            <nb-option [value]="nation" *ngFor="let nation of listnation">
+                                                                {{nation.name}} --- Code => {{nation.phonecode}}
+                                                            </nb-option>
+                                                        </nb-select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Date Création</label>
+                                                    <div class="col-sm-8">
+                                                                    <span class="input-group-append">
+                                                                        <input nbInput fullWidth shape="round" fieldSize="small" placeholder="Date Creation" type="text" class="inputText"
+                                                                               ngbDatepicker  #dateNaissanceDp="ngbDatepicker" formControlName="dateCreate"/>
+                                                                        <button type="button" class="btn btn-secondary" (click)="dateNaissanceDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                                                                    </span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Numéro Document</label>
+                                                    <div class="col-sm-8">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                               type="text" placeholder="Numéro Document"
+                                                               formControlName="numeroDoc1"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Numéro RCCM</label>
+                                                    <div class="col-sm-8">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                               type="text" placeholder="Numero RCCM"
+                                                               formControlName="numeroRCCM" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label"> Téléphone </label>
+                                                    <div class="col-sm-8">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                               type="text" placeholder="Téléphone"
+                                                               formControlName="telephone"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                        <button nbButton nbStepperPrevious (click)="videIFUOcca()" outline shape="round" status="basic">
+                                            <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                                        </button>
+                                    </nb-step>
+                                </nb-stepper>
+                            </nb-card-body>
+                            <nb-card-footer>
+                                <button type="button" (click)="previousState()"
+                                        nbButton status="basic" outline shape="round" >
+                                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span >Annuler</span>
+                                </button>
+                                <button type="submit" [disabled]="isSaving"
+                                        nbButton status="primary" outline shape="round" >
+                                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Enregistrer</span>
+                                </button>
+                            </nb-card-footer>
+                        </nb-card>
+                    </form>
+                </nb-tab>
+            </nb-tabset>
+            <!--<div class="row justify-content-center">
+                <div class="col-12">
+                    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                        <nb-card>
+                            <nb-card-header>
+                                <h2 id="jhi-vehicule-occasion-heading">Enregistrement de Vehicule Occasion</h2>
+                            </nb-card-header>
+                            <nb-card-body>
+                                <div>
+                                    <jhi-alert-error></jhi-alert-error>
+
+                                    <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                                        <label class="col-sm-3 col-form-label" for="id" jhiTranslate="global.field.id">ID</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" nbInput fullWidth status="primary" shape="semi-round" fieldSize="tiny"
+                                                   id="id" name="id" formControlName="id" readonly />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" for="field_chassis">N° Chassis</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" nbInput fullWidth status="primary" shape="semi-round" fieldSize="tiny" name="chassis" id="field_chassis"
+                                                   formControlName="chassis" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Marque</label>
+                                        <div class="col-sm-9">
+                                            <nb-select status="primary" shape="semi-round" outline size="tiny" fullWidth id="field_marque" formControlName="marque">
+                                                <nb-option [value]="marqueVehiculeOption.libelle" *ngFor="let marqueVehiculeOption of marquevehicules">{{marqueVehiculeOption.libelle}}</nb-option>
+                                            </nb-select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" for="field_model">Model</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" nbInput fullWidth status="primary" shape="semi-round" fieldSize="tiny" name="model" id="field_model"
+                                                   formControlName="model" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" for="field_nomPrenom">Nom Prenom</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" nbInput fullWidth status="primary" shape="semi-round" fieldSize="tiny" name="nomPrenom" id="field_nomPrenom"
+                                                   formControlName="nomPrenom" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" for="field_nomPrenom">N° CNIB</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" nbInput fullWidth status="primary" shape="semi-round" fieldSize="tiny" name="nomPrenom"
+                                                   formControlName="numeroCNIB" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" for="field_telephone">Telephone</label>
+                                        <div class="col-sm-9">
+                                            <input type="text"nbInput fullWidth status="primary" shape="semi-round" fieldSize="tiny" name="telephone" id="field_telephone"
+                                                   formControlName="telephone" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" for="field_carteW">Carte W</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" nbInput fullWidth status="primary" shape="semi-round" fieldSize="tiny" name="carteW" id="field_carteW"
+                                                   formControlName="carteW" required />
+                                        </div>
+                                    </div>
+
+                                    &lt;!&ndash;<div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" for="field_createdAt">Created At</label>
+                                        <div class="d-flex">
+                                            <input id="field_createdAt" type="datetime-local" class="form-control" name="createdAt" formControlName="createdAt" placeholder="YYYY-MM-DD HH:mm"/>
+                                        </div>
+                                    </div>&ndash;&gt;
+                                </div>
+
+                            </nb-card-body>
+                            <nb-card-footer>
+                                <div>
+                                    <button type="button" id="cancel-save" nbButton size="tiny" shape="round" outline (click)="previousState()">
+                                        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                    </button>
+
+                                    <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                                            nbButton size="tiny" shape="round" outline status="primary">
+                                        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                    </button>
+                                </div>
+                            </nb-card-footer>
+                        </nb-card>
+                    </form>
+
+                </div>
+            </div>-->
+        </div>
+        <div *ngIf="checked2">
+            <nb-tabset fullWidth>
+                <nb-tab tabTitle="Pour Personne physique">
+                    <form name="editForm" role="form" novalidate (ngSubmit)="saveTrav()" [formGroup]="editFormTrav">
+                        <nb-card>
+                            <nb-card-body>
+                                <nb-stepper orientation="horizontal">
+                                    <nb-step>
+                                        <!--<div class="form-group" [hidden]="!editForm.get('id').value">
+                                            <label >ID</label>
+                                            <input type="text" class="form-control" name="id" formControlName="id"
+                                                   readonly />
+                                        </div>-->
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Numéro de Chassis </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="Numéro de Chassis"
+                                                       formControlName="chassis"/>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Marque </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="marque"
+                                                       formControlName="marque"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Modèle </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="Modèle"
+                                                       formControlName="model"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Provenance </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="provenance"
+                                                       formControlName="provenance"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Destination </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="destination"
+                                                       formControlName="destination"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Date Entrée </label>
+                                            <div class="col-sm-8">
+                                                            <span class="input-group-append">
+                                                                <input nbInput fullWidth shape="round" fieldSize="small" placeholder="Date Entrée" type="text" class="inputText" name="dateEntre"
+                                                                       ngbDatepicker  #dateEntre="ngbDatepicker" formControlName="dateEntre"/>
+                                                                <button type="button" class="btn btn-secondary" (click)="dateEntre.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Date Sortie </label>
+                                            <div class="col-sm-8">
+                                                            <span class="input-group-append">
+                                                                <input nbInput fullWidth shape="round" fieldSize="small" placeholder="Date Sortie" type="text" class="inputText" name="dateNaissance"
+                                                                       ngbDatepicker  #dateSortie="ngbDatepicker" formControlName="dateSortie"/>
+                                                                <button type="button" class="btn btn-secondary" (click)="dateSortie.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-11 col-form-label" ></label>
+                                            <button nbButton nbStepperNext outline shape="round" status="primary">
+                                                <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                                            </button>
+                                        </div>
+                                    </nb-step>
+                                    <nb-step>
+                                        <div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label"> NIP </label>
+                                                <div class="col-sm-9">
+                                                    <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                           type="text" placeholder="NIP" required
+                                                           formControlName="nip"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                                            <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                                        </button>
+                                        <button nbButton nbStepperNext outline shape="round" status="primary" (click)="verifNip()">
+                                            <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                                        </button>
+                                    </nb-step>
+                                    <nb-step>
+                                        <div *ngIf="exist; else pasHstNip">
+                                            <div>
+                                                <p style="background: #db8b00">Ce numero NIP existe! Voici les details en déssous, s'il s'agit du même document continuez;
+                                                    dans le cas contraire reculer pour rectifier le NIP.</p>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Numero NIP :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist.body.nip}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Numero Document :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist.body.numeroDoc}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Type Document :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist.body.typeDocIdentification}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Date établissement :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist.body.dateEtablissement}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Authorité émettrice :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist.body.autoriteEmettrice}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Lieu établissement :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist.body.lieuEtablissement}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ng-template #pasHstNip>
+                                            <div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Nom </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Nom" required
+                                                               formControlName="nom"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Prenom </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Prenom" required
+                                                               formControlName="prenom"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Date Naissance </label>
+                                                    <div class="col-sm-9">
+                                                            <span class="input-group-append">
+                                                                <input nbInput fullWidth shape="round" fieldSize="small" placeholder="Date Naissance" type="text" class="inputText" name="dateNaissance"
+                                                                       ngbDatepicker  #dateNaissanceDp="ngbDatepicker" formControlName="dateNaissance"/>
+                                                                <button type="button" class="btn btn-secondary" (click)="dateNaissanceDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Lieu Naissance </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Lieu Naissance" required
+                                                               formControlName="lieuNaissance"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Telephone </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Telephone" required
+                                                               formControlName="telephone"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Residence </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Residence" required
+                                                               formControlName="residence"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label" >Type Doc Identification</label>
+                                                    <div class="col-sm-9">
+                                                        <nb-select status="primary" shape="round" fullWidth outline size="small" formControlName="typeDocIdentification">
+                                                            <nb-option value="CNIB">{{'improApp.TypeDocIdentification.CNIB' | translate}}</nb-option>
+                                                            <nb-option value="PASSEPORT">{{'improApp.TypeDocIdentification.PASSEPORT' | translate}}</nb-option>
+                                                            <nb-option value="CARTE_MILITAIRE">{{'improApp.TypeDocIdentification.CARTE_MILITAIRE' | translate}}</nb-option>
+                                                            <nb-option value="CARTE_SCOLAIRE">{{'improApp.TypeDocIdentification.CARTE_SCOLAIRE' | translate}}</nb-option>
+                                                            <nb-option value="CARTE_ID_ETRANGERE">{{'improApp.TypeDocIdentification.CARTE_ID_ETRANGERE' | translate}}</nb-option>
+                                                        </nb-select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label  class="col-sm-3 col-form-label">Pays</label>
+                                                    <div class="col-sm-9">
+                                                        <nb-select outline shape="semi-round" status="primary" fullWidth size="small" formControlName="nation">
+                                                            <nb-option [value]="nation" *ngFor="let nation of listnation">
+                                                                {{nation.name}} --- Code => {{nation.phonecode}}
+                                                            </nb-option>
+                                                        </nb-select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Numero Document </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Numero Document" required
+                                                               formControlName="numeroDoc"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Date Etablissement </label>
+                                                    <div class="col-sm-9">
+                                                            <span class="input-group-append">
+                                                                <input nbInput fullWidth shape="round" status="primary"
+                                                                       placeholder="Date Etablissement" type="text" class="inputText" name="dateEtablissement"
+                                                                       ngbDatepicker  #dateEtablissementDp="ngbDatepicker" formControlName="dateEtablissement"/>
+                                                                <button type="button" class="btn btn-secondary" (click)="dateEtablissementDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Lieu Etablissement </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Lieu Etablissement" required
+                                                               formControlName="lieuEtablissement"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"> Autorite Emettrice </label>
+                                                    <div class="col-sm-9">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                                               type="text" placeholder="Autorite Emettrice" required
+                                                               formControlName="autoriteEmettrice"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                        <button nbButton nbStepperPrevious (click)="videNip()" outline shape="round" status="basic">
+                                            <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                                        </button>
+                                    </nb-step>
+                                </nb-stepper>
+                            </nb-card-body>
+                            <nb-card-footer>
+                                <button type="button" (click)="previousState()"
+                                        nbButton status="basic" outline shape="round" >
+                                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span >Annuler</span>
+                                </button>
+                                <button type="submit"  [disabled]="isSaving"
+                                        nbButton status="primary" outline shape="round" >
+                                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Enregistrer</span>
+                                </button>
+                            </nb-card-footer>
+                        </nb-card>
+                    </form>
+                </nb-tab>
+                <nb-tab tabTitle="Pour Personne morale">
+                    <form name="editForm1" role="form" novalidate (ngSubmit)="saveTrav1()" [formGroup]="editFormTrav1">
+                        <nb-card>
+                            <nb-card-body>
+                                <nb-stepper orientation="horizontal">
+                                    <nb-step>
+                                        <!--<div class="form-group" [hidden]="!editForm.get('id').value">
+                                            <label >ID</label>
+                                            <input type="text" class="form-control" name="id" formControlName="id"
+                                                   readonly />
+                                        </div>-->
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Numéro de Chassis </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="Numéro de Chassis"
+                                                       formControlName="chassis"/>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Marque </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="marque"
+                                                       formControlName="marque"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Modèle </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="Modèle"
+                                                       formControlName="model"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Provenance </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="provenance"
+                                                       formControlName="provenance"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Destination </label>
+                                            <div class="col-sm-8">
+                                                <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="destination"
+                                                       formControlName="destination"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Date Entrée </label>
+                                            <div class="col-sm-8">
+                                                            <span class="input-group-append">
+                                                                <input nbInput fullWidth shape="round" fieldSize="small" placeholder="Date Entrée" type="text" class="inputText" name="dateEntre"
+                                                                       ngbDatepicker  #dateEntre1="ngbDatepicker" formControlName="dateEntre"/>
+                                                                <button type="button" class="btn btn-secondary" (click)="dateEntre1.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Date Sortie </label>
+                                            <div class="col-sm-8">
+                                                            <span class="input-group-append">
+                                                                <input nbInput fullWidth shape="round" fieldSize="small" placeholder="Date Sortie" type="text" class="inputText" name="dateNaissance"
+                                                                       ngbDatepicker  #dateSortie1="ngbDatepicker" formControlName="dateSortie"/>
+                                                                <button type="button" class="btn btn-secondary" (click)="dateSortie1.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                                                            </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-11 col-form-label" ></label>
+                                            <button nbButton nbStepperNext outline shape="round" status="primary">
+                                                <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                                            </button>
+                                        </div>
+                                    </nb-step>
+                                    <nb-step>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label"> Numéro IFU </label>
+                                            <div class="col-sm-8">
+                                                <input name="numeroIFU" nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                       type="text" placeholder="Numéro IFU"
+                                                       formControlName="numeroIFU"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                                                <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                                            </button>
+                                            <label class="col-sm-10 col-form-label" ></label>
+                                            <button nbButton nbStepperNext outline shape="round" (click)="verifIFU()" status="primary">
+                                                <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                                            </button>
+                                        </div>
+                                    </nb-step>
+                                    <nb-step>
+                                        <div *ngIf="exist1; else pasHstIfu">
+                                            <div>
+                                                <p style="background: #db8b00">Ce numero NIP existe! Voici les details en déssous, s'il s'agit du même document continuez;
+                                                    dans le cas contraire reculer pour rectifier le NIP.</p>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Numero IFU :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist1.body.numeroIFU}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Numero RCCM :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist1.body.numeroRCCM}}
+                                                        </div>
+                                                    </div>
+                                                    <!--<div class="row">
+                                                        <div class="col-sm">
+                                                            Dénomination :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist1.body}}
+                                                        </div>
+                                                    </div>-->
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Siege Social :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist1.body.siegeSocial}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Phone :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist1.body.telephone}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Email:
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist1.body.email}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm">
+                                                            Code Postal :
+                                                        </div>
+                                                        <div class="col-sm">
+                                                            {{docexist1.body.codePostal}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ng-template #pasHstIfu>
+                                            <div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Denomination</label>
+                                                    <div class="col-sm-8">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                               type="text" placeholder="Denomination"
+                                                               formControlName="denomination"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label  class="col-sm-4 col-form-label">Pays</label>
+                                                    <div class="col-sm-8">
+                                                        <nb-select outline shape="semi-round" status="primary" fullWidth size="small" formControlName="nation">
+                                                            <nb-option [value]="nation" *ngFor="let nation of listnation">
+                                                                {{nation.name}} --- Code => {{nation.phonecode}}
+                                                            </nb-option>
+                                                        </nb-select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Date Création</label>
+                                                    <div class="col-sm-8">
+                                                                    <span class="input-group-append">
+                                                                        <input nbInput fullWidth shape="round" fieldSize="small" placeholder="Date Creation" type="text" class="inputText"
+                                                                               ngbDatepicker  #dateNaissanceDp="ngbDatepicker" formControlName="dateCreate"/>
+                                                                        <button type="button" class="btn btn-secondary" (click)="dateNaissanceDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                                                                    </span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Numéro Document</label>
+                                                    <div class="col-sm-8">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                               type="text" placeholder="Numéro Document"
+                                                               formControlName="numeroDoc1"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label">Numéro RCCM</label>
+                                                    <div class="col-sm-8">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                               type="text" placeholder="Numero RCCM"
+                                                               formControlName="numeroRCCM" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 col-form-label"> Téléphone </label>
+                                                    <div class="col-sm-8">
+                                                        <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                               type="text" placeholder="Téléphone"
+                                                               formControlName="telephone"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                        <button nbButton nbStepperPrevious (click)="videIFU()" outline shape="round" status="basic">
+                                            <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                                        </button>
+                                    </nb-step>
+                                </nb-stepper>
+                            </nb-card-body>
+                            <nb-card-footer>
+                                <button type="button" (click)="previousState()"
+                                        nbButton status="basic" outline shape="round" >
+                                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span >Annuler</span>
+                                </button>
+                                <button type="submit" [disabled]="isSaving"
+                                        nbButton status="primary" outline shape="round" >
+                                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Enregistrer</span>
+                                </button>
+                            </nb-card-footer>
+                        </nb-card>
+                    </form>
+                </nb-tab>
+            </nb-tabset>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+    </nb-card-footer>
+</nb-card>
+

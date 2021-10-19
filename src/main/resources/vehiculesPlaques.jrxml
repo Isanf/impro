@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="motoPlaque" pageWidth="842" pageHeight="595" orientation="Landscape"
+              columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20"
+              bottomMargin="20" uuid="aa1fd45a-8e59-44b9-a726-f593b90b4b25">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+    <parameter name="immatriculation" class="java.lang.String"/>
+    <parameter name="qrcode" class="java.lang.String"/>
+    <parameter name="logo" class="java.lang.String"/>
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="419" splitType="Stretch">
+            <textField textAdjust="StretchHeight">
+                <reportElement x="60" y="0" width="670" height="110" uuid="bcbae245-33f2-41ee-b744-0382eb4a6be4"/>
+                <textElement textAlignment="Center" verticalAlignment="Top">
+                    <font fontName="Arial Black" size="85" isBold="true"/>
+                    <paragraph lineSpacing="Proportional"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{immatriculation}]]></textFieldExpression>
+            </textField>
+            <image>
+                <reportElement x="0" y="0" width="60" height="30" uuid="0e702e55-a981-4057-9abf-0b490554ee52">
+                </reportElement>
+                <imageExpression><![CDATA[$P{logo}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="0" y="30" width="50" height="40" uuid="69a1e92c-6b83-416e-be2e-7bbbb6fe52bd"/>
+                <textElement textAlignment="Center" verticalAlignment="Top">
+                    <font fontName="Arial" size="30" isBold="true"/>
+                </textElement>
+                <text><![CDATA[BF]]></text>
+            </staticText>
+            <componentElement>
+                <reportElement x="730" y="0" width="74" height="69" uuid="16f1ad7a-7001-4461-a2f8-93260f9fa57c">
+                </reportElement>
+                <jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+                    <jr:codeExpression><![CDATA[$P{qrcode}]]></jr:codeExpression>
+                </jr:QRCode>
+            </componentElement>
+        </band>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
+</jasperReport>

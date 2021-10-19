@@ -1,0 +1,130 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <nb-card>
+            <nb-card-header>
+                <h2><span jhiTranslate="improApp.organisation.detail.title">Organisation</span> {{ organisation.id }}</h2>
+            </nb-card-header>
+            <nb-card-body>
+                <div *ngIf="organisation">
+
+                    <hr>
+
+                    <jhi-alert-error></jhi-alert-error>
+
+                    <dl class="row-md jh-entity-details">
+                        <div class="row">
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.organisation.nom">Nom</span></dt>
+
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <span>{{ organisation.nom }}</span>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.organisation.description">Description</span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <span>{{ organisation.description }}</span>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span>Contact</span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <span>{{ organisation.numeroPhone }}</span>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="row">
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.organisation.organisationLocalite">Organisation Localite</span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <div *ngIf="organisation.organisationLocaliteId">
+                                            <a [routerLink]="['/organisation-localite', organisation.organisationLocaliteId, 'view']">{{ organisation.organisationLocaliteId }}</a>
+                                        </div>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.organisation.pere">Pere</span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <div *ngIf="organisation.pereId">
+                                            <a [routerLink]="['/organisation', organisation.pereId, 'view']">{{ organisation.pereId }}</a>
+                                        </div>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.organisation.typeOrganisation">Type Organisation</span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <div *ngIf="organisation.typeOrganisationId">
+                                            <a [routerLink]="['/type-organisation', organisation.typeOrganisationId, 'view']">{{ organisation.typeOrganisationId }}</a>
+                                        </div>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="row">
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.organisation.gerant">Gerant</span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <div *ngIf="organisation.gerantId">
+                                            <a [routerLink]="['/personne-physique', organisation.gerantId, 'view']">{{ organisation.gerantId }}</a>
+                                        </div>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.organisation.typeActeur">Type Acteur</span></dt>
+
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <div *ngIf="organisation.typeActeurId">
+                                            <a [routerLink]="['/type-acteur', organisation.typeActeurId, 'view']">{{ organisation.typeActeurId }}</a>
+                                        </div>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                    </dl>
+                </div>
+            </nb-card-body>
+            <nb-card-footer>
+                <button type="submit" nbButton outline status="basic" shape="round" size="tiny"
+                        (click)="previousState()">
+                    <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                </button>
+
+                <button type="button" nbButton outline status="primary" shape="round" size="tiny"
+                        [routerLink]="['/organisation', organisation.id, 'edit']">
+                    <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+                </button>
+            </nb-card-footer>
+        </nb-card>
+
+    </div>
+</div>

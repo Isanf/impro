@@ -1,0 +1,37 @@
+{
+  "improApp": {
+    "personnePhysique": {
+      "home": {
+        "title": "PersonnePhysiques",
+        "createLabel": "Créer un nouveau Personne Physique",
+        "createOrEditLabel": "Créer ou éditer un Personne Physique",
+        "notFound": "Aucun Personne Physique trouvé"
+      },
+      "created": "Un nouveau Personne Physique a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Personne Physique avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Personne Physique avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Personne Physique {{ id }} ?"
+      },
+      "detail": {
+        "title": "Personne Physique"
+      },
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "dateNaissance": "Date Naissance",
+      "lieuNaissance": "Lieu Naissance",
+      "telephone": "Telephone",
+      "residence": "Residence",
+      "docIdentification": "Doc Identification",
+      "user": "User",
+      "immatriculation": "Immatriculation",
+      "organisation": "Organisation",
+      "vente": "Vente",
+      "organisation": "Organisation",
+      "profil": "Profil",
+      "help": {
+        "nom": "nom"
+      }
+    }
+  }
+}

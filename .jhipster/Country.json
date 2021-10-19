@@ -1,0 +1,41 @@
+{
+  "name": "Country",
+  "fields": [
+    {
+      "fieldName": "iso",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nicename",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "iso3",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numcode",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "phonecode",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20201118143835",
+  "entityTableName": "country",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

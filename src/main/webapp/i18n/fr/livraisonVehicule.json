@@ -1,0 +1,30 @@
+{
+  "improApp": {
+    "livraisonVehicule": {
+      "home": {
+        "title": "LivraisonVehicules",
+        "createLabel": "Créer un nouveau Livraison Vehicule",
+        "createOrEditLabel": "Créer ou éditer un Livraison Vehicule",
+        "notFound": "Aucun Livraison Vehicule trouvé"
+      },
+      "created": "Un nouveau Livraison Vehicule a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Livraison Vehicule avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Livraison Vehicule avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Livraison Vehicule {{ id }} ?"
+      },
+      "detail": {
+        "title": "Livraison Vehicule"
+      },
+      "numeroLivraison": "Numero Livraison",
+      "dateLivraison": "Date Livraison",
+      "vehicule": "Vehicule",
+      "revendeur": "Revendeur",
+      "concessionnaire": "Concessionnaire",
+      "commandeVehicule": "Commande Vehicule",
+      "help": {
+        "numeroLivraison": "numeroLivraison"
+      }
+    }
+  }
+}

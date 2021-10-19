@@ -1,0 +1,14 @@
+
+
+entity Nation{
+	iso String
+    name String
+    nicename String
+    iso3 String
+    numcode Integer
+    phonecode Integer
+}
+
+dto * with mapstruct
+paginate * with pagination
+service * with serviceClass

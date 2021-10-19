@@ -1,0 +1,55 @@
+{
+  "name": "LivraisonCarnetSouche",
+  "fields": [
+    {
+      "fieldName": "numeroLivraisonCS",
+      "fieldType": "String",
+      "javadoc": "numeroLivraisonCS"
+    },
+    {
+      "fieldName": "dateLivraison",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "carnetASouche",
+      "otherEntityRelationshipName": "livraisonCarnetSouche",
+      "relationshipName": "carnetASouche"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "livraisonCSConcessionnaire",
+      "relationshipName": "concessionnaire",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "livraisonCSSupernet",
+      "relationshipName": "supernet",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "commandeCarnetSouche",
+      "otherEntityRelationshipName": "livraisonCarnetSouche",
+      "relationshipName": "commandeCarnetSouche",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200205114804",
+  "javadoc": "The LivraisonCarnetSouche entity.\\n@author A true hipster",
+  "entityTableName": "livraison_carnet_souche",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

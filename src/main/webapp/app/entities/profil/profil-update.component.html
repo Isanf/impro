@@ -1,0 +1,619 @@
+<nb-card>
+    <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+        <div class="col-md-12">
+            <nb-card>
+                <form [formGroup]="editForm">
+                    <h4>Choisir l'Acteur du profil à créer</h4>
+                    <input type="radio" value="sth" formControlName="enregi">Profil pour STH<br>
+                    <input type="radio" value="sthguichet" formControlName="enregi">Profil pour un Guichet STH<br>
+                    <input type="radio" value="conce" formControlName="enregi">Profil pour un Concessionnaire<br>
+                    <input type="radio" value="dgttm" formControlName="enregi">Profil pour la DGTTM<br>
+                    <input type="radio" value="douane" formControlName="enregi">Profil pour la Douane<br>
+                    <input type="radio" value="dg_dgttm" formControlName="enregi">Profil pour le DG de la DGTTM<br>
+                    <input type="radio" value="dg_douane" formControlName="enregi">Profil pour le DG de la Douane<br>
+                    <button nbButton status="success" shape="round" (click)="changeHandler()">Valider le choix>>></button>
+                </form>
+                <div *ngIf="enregist == 'sth'">
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+                            <form name="editForm" role="form" novalidate (ngSubmit)="saveSTH()" [formGroup]="editForm">
+                                <h2>POUR STH</h2>
+                                <div>
+                                    <!--<jhi-alert-error></jhi-alert-error>-->
+                                    <div class="form-group" [hidden]="!editForm.get('id').value">
+                                        <label for="id" jhiTranslate="global.field.id">ID</label>
+                                        <input type="text" class="form-control"  name="id" formControlName="id"
+                                               readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.nom" for="field_nom">Nom</label>
+                                        <input type="text" class="form-control" name="nom"
+                                               formControlName="nom"/>
+                                        <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.description" for="field_description">Description</label>
+                                        <input type="text" class="form-control" name="description"
+                                               formControlName="description"/>
+                                        <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                                This field cannot be longer than 1000 characters.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <!--<div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.organisation" for="field_organisation">Organisation</label>
+                                        <select nbInput class="form-control" name="categorieOrganisation" formControlName="organisationId">
+                                            <option [ngValue]="null"></option>
+                                            <option [ngValue]="organisation.id" *ngFor="let organisation of organisationtout; trackBy: trackOrganisationById">{{organisation.nom}}</option>
+                                        </select>
+                                    </div>-->
+                                    <!--<div class="form-group">
+                                        <label jhiTranslate="userManagement.profiles">Profiles</label>
+                                        <select class="form-control" multiple name="authority" formControlName="roles">
+                                            <option *ngFor="let authority of roles" [value]="authority">{{authority}}</option>
+                                        </select>
+                                    </div>-->
+                                </div>
+                                <div>
+                                    <button type="button"  class="btn btn-secondary"  (click)="previousState()">
+                                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                    </button>
+                                    <button type="submit"  [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="enregist == 'sthguichet'" class="col-md-12">
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+                            <form name="editForm" role="form" novalidate (ngSubmit)="save4STHGuichet()" [formGroup]="editForm">
+                                <h2>POUR GUICHET-STH</h2>
+                                <div>
+                                    <!--<jhi-alert-error></jhi-alert-error>-->
+                                    <div class="form-group" [hidden]="!editForm.get('id').value">
+                                        <label for="id" jhiTranslate="global.field.id">ID</label>
+                                        <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                                               readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.nom" for="field_nom">Nom</label>
+                                        <input type="text" class="form-control" name="nom"
+                                               formControlName="nom"/>
+                                        <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.description" for="field_description">Description</label>
+                                        <input type="text" class="form-control" name="description"
+                                               formControlName="description"/>
+                                        <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                                This field cannot be longer than 1000 characters.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.organisation" for="field_organisation">Organisation</label>
+                                        <select nbInput class="form-control" name="categorieOrganisation" formControlName="organisationId">
+                                            <option [ngValue]="null"></option>
+                                            <option [ngValue]="organisation.id" *ngFor="let organisation of allorganisationfils; trackBy: trackOrganisationById">{{organisation.nom}}</option>
+                                        </select>
+                                    </div>
+                                    <!--<div class="form-group">
+                                        <label jhiTranslate="userManagement.profiles">Profiles</label>
+                                        <select class="form-control" multiple name="authority" formControlName="roles">
+                                            <option *ngFor="let authority of roles" [value]="authority">{{authority}}</option>
+                                        </select>
+                                    </div>-->
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-secondary"  (click)="previousState()">
+                                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                    </button>
+                                    <button type="submit" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="enregist == 'conce'">
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+                            <form name="editForm" role="form" novalidate (ngSubmit)="save4Concessionnaire()" [formGroup]="editForm">
+                                <h2>POUR CONCESSIONNAIRE</h2>
+                                <div>
+                                    <!--<jhi-alert-error></jhi-alert-error>-->
+                                    <div class="form-group" [hidden]="!editForm.get('id').value">
+                                        <label for="id" jhiTranslate="global.field.id">ID</label>
+                                        <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                                               readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.nom" for="field_nom">Nom</label>
+                                        <input type="text" class="form-control" name="nom" id="field_nom"
+                                               formControlName="nom"/>
+                                        <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.description" for="field_description">Description</label>
+                                        <input type="text" class="form-control" name="description" id="field_description"
+                                               formControlName="description"/>
+                                        <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                                This field cannot be longer than 1000 characters.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.organisation" for="field_organisation">Organisation</label>
+                                        <select nbInput class="form-control" id="field_organisation" name="categorieOrganisation" formControlName="organisationId">
+                                            <option [ngValue]="null"></option>
+                                            <option [ngValue]="organisation.id" *ngFor="let organisation of orgConcessionnairetotal; trackBy: trackOrganisationById">{{organisation.nom}}</option>
+                                        </select>
+                                    </div>
+                                    <!--<div class="form-group">
+                                        <label jhiTranslate="userManagement.profiles">Profiles</label>
+                                        <select class="form-control" multiple name="authority" formControlName="roles">
+                                            <option *ngFor="let authority of roles" [value]="authority">{{authority}}</option>
+                                        </select>
+                                    </div>-->
+                                </div>
+                                <div>
+                                    <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                    </button>
+                                    <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="enregist == 'dgttm'">
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+                            <form name="editForm" role="form" novalidate (ngSubmit)="save4DGTTM()" [formGroup]="editForm">
+                                <h2>POUR DGTTM</h2>
+                                <div>
+                                    <!--<jhi-alert-error></jhi-alert-error>-->
+                                    <div class="form-group" [hidden]="!editForm.get('id').value">
+                                        <label for="id" jhiTranslate="global.field.id">ID</label>
+                                        <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                                               readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.nom" for="field_nom">Nom</label>
+                                        <input type="text" class="form-control" name="nom"
+                                               formControlName="nom"/>
+                                        <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.description" for="field_description">Description</label>
+                                        <input type="text" class="form-control" name="description"
+                                               formControlName="description"/>
+                                        <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                                This field cannot be longer than 1000 characters.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.organisation" for="field_organisation">Organisation</label>
+                                        <select nbInput class="form-control" name="categorieOrganisation" formControlName="organisationId">
+                                            <option [ngValue]="null"></option>
+                                            <option [ngValue]="organisation.id" *ngFor="let organisation of organisationtout; trackBy: trackOrganisationById">{{organisation.nom}}</option>
+                                        </select>
+                                    </div>
+                                    <!--<div class="form-group">
+                                        <label jhiTranslate="userManagement.profiles">Profiles</label>
+                                        <select class="form-control" multiple name="authority" formControlName="roles">
+                                            <option *ngFor="let authority of roles" [value]="authority">{{authority}}</option>
+                                        </select>
+                                    </div>-->
+                                </div>
+                                <div>
+                                    <button type="button"  class="btn btn-secondary"  (click)="previousState()">
+                                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                    </button>
+                                    <button type="submit"[disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="enregist == 'douane'" class="col-md-12">
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+                            <form name="editForm" role="form" novalidate (ngSubmit)="save4DOUANE()" [formGroup]="editForm">
+                                <h2>POUR DGTTM</h2>
+                                <div>
+                                    <!--<jhi-alert-error></jhi-alert-error>-->
+                                    <div class="form-group" [hidden]="!editForm.get('id').value">
+                                        <label for="id" jhiTranslate="global.field.id">ID</label>
+                                        <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                                               readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.nom" for="field_nom">Nom</label>
+                                        <input type="text" class="form-control" name="nom"
+                                               formControlName="nom"/>
+                                        <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.description" for="field_description">Description</label>
+                                        <input type="text" class="form-control" name="description"
+                                               formControlName="description"/>
+                                        <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                                This field cannot be longer than 1000 characters.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.organisation" for="field_organisation">Organisation</label>
+                                        <select nbInput class="form-control" name="categorieOrganisation" formControlName="organisationId">
+                                            <option [ngValue]="null"></option>
+                                            <option [ngValue]="organisation.id" *ngFor="let organisation of organisationtout; trackBy: trackOrganisationById">{{organisation.nom}}</option>
+                                        </select>
+                                    </div>
+                                    <!--<div class="form-group">
+                                        <label jhiTranslate="userManagement.profiles">Profiles</label>
+                                        <select class="form-control" multiple name="authority" formControlName="roles">
+                                            <option *ngFor="let authority of roles" [value]="authority">{{authority}}</option>
+                                        </select>
+                                    </div>-->
+                                </div>
+                                <div>
+                                    <button type="button"  class="btn btn-secondary"  (click)="previousState()">
+                                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                    </button>
+                                    <button type="submit"[disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="enregist == 'dg_dgttm'">
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+                            <form name="editForm" role="form" novalidate (ngSubmit)="save4DGDGTTM()" [formGroup]="editForm">
+                                <h2>POUR DG DGTTM</h2>
+                                <div>
+                                    <!--<jhi-alert-error></jhi-alert-error>-->
+                                    <div class="form-group" [hidden]="!editForm.get('id').value">
+                                        <label for="id" jhiTranslate="global.field.id">ID</label>
+                                        <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                                               readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.nom" for="field_nom">Nom</label>
+                                        <input type="text" class="form-control" name="nom"
+                                               formControlName="nom"/>
+                                        <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.description" for="field_description">Description</label>
+                                        <input type="text" class="form-control" name="description"
+                                               formControlName="description"/>
+                                        <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                                This field cannot be longer than 1000 characters.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.organisation" for="field_organisation">Organisation</label>
+                                        <select nbInput class="form-control" name="categorieOrganisation" formControlName="organisationId">
+                                            <option [ngValue]="null"></option>
+                                            <option [ngValue]="organisation.id" *ngFor="let organisation of organisationtout; trackBy: trackOrganisationById">{{organisation.nom}}</option>
+                                        </select>
+                                    </div>
+                                    <!--<div class="form-group">
+                                        <label jhiTranslate="userManagement.profiles">Profiles</label>
+                                        <select class="form-control" multiple name="authority" formControlName="roles">
+                                            <option *ngFor="let authority of roles" [value]="authority">{{authority}}</option>
+                                        </select>
+                                    </div>-->
+                                </div>
+                                <div>
+                                    <button type="button"  class="btn btn-secondary"  (click)="previousState()">
+                                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                    </button>
+                                    <button type="submit"[disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="enregist == 'dg_douane'" class="col-md-12">
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+                            <form name="editForm" role="form" novalidate (ngSubmit)="save4DGDOUANE()" [formGroup]="editForm">
+                                <h2>POUR DG DOUANE</h2>
+                                <div>
+                                    <!--<jhi-alert-error></jhi-alert-error>-->
+                                    <div class="form-group" [hidden]="!editForm.get('id').value">
+                                        <label for="id" jhiTranslate="global.field.id">ID</label>
+                                        <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                                               readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.nom" for="field_nom">Nom</label>
+                                        <input type="text" class="form-control" name="nom"
+                                               formControlName="nom"/>
+                                        <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.description" for="field_description">Description</label>
+                                        <input type="text" class="form-control" name="description"
+                                               formControlName="description"/>
+                                        <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                                This field cannot be longer than 1000 characters.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="improApp.profil.organisation" for="field_organisation">Organisation</label>
+                                        <select nbInput class="form-control" name="categorieOrganisation" formControlName="organisationId">
+                                            <option [ngValue]="null"></option>
+                                            <option [ngValue]="organisation.id" *ngFor="let organisation of organisationtout; trackBy: trackOrganisationById">{{organisation.nom}}</option>
+                                        </select>
+                                    </div>
+                                    <!--<div class="form-group">
+                                        <label jhiTranslate="userManagement.profiles">Profiles</label>
+                                        <select class="form-control" multiple name="authority" formControlName="roles">
+                                            <option *ngFor="let authority of roles" [value]="authority">{{authority}}</option>
+                                        </select>
+                                    </div>-->
+                                </div>
+                                <div>
+                                    <button type="button"  class="btn btn-secondary"  (click)="previousState()">
+                                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                    </button>
+                                    <button type="submit"[disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </nb-card>
+        </div>
+    </div>
+    <div *jhiHasAnyAuthority="'CONCESSIONNAIRE'">
+        <nb-tabset fullWidth>
+            <nb-tab tabTitle="Profil pour votre Société">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <form name="editForm" role="form" novalidate (ngSubmit)="saveConcessionnaire()" [formGroup]="editForm">
+                            <h2>POUR VOUS</h2>
+                            <div>
+                                <!--<jhi-alert-error></jhi-alert-error>-->
+                                <div class="form-group" [hidden]="!editForm.get('id').value">
+                                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                                    <input type="text" class="form-control" name="id" formControlName="id"
+                                           readonly />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="improApp.profil.nom" for="field_nom">Nom</label>
+                                    <input type="text" class="form-control" name="nom"
+                                           formControlName="nom"/>
+                                    <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="improApp.profil.description" for="field_description">Description</label>
+                                    <input type="text" class="form-control" name="description"
+                                           formControlName="description"/>
+                                    <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                            This field cannot be longer than 1000 characters.
+                                        </small>
+                                    </div>
+                                </div>
+                                <!--<div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="improApp.profil.organisation" for="field_organisation">Organisation</label>
+                                    <select nbInput class="form-control" name="categorieOrganisation" formControlName="organisationId">
+                                        <option [ngValue]="null"></option>
+                                        <option [ngValue]="organisation.id" *ngFor="let organisation of organisation; trackBy: trackOrganisationById">{{organisation.nom}}</option>
+                                    </select>
+                                </div>-->
+                                <!--div class="form-group">
+                                    <label jhiTranslate="userManagement.profiles">Profiles</label>
+                                    <select class="form-control" multiple name="authority" formControlName="roles">
+                                        <option *ngFor="let authority of roles3" [value]="authority">{{authority}}</option>
+                                    </select>
+                                </div-->
+                            </div>
+                            <div>
+                                <button type="button"  class="btn btn-secondary"  (click)="previousState()">
+                                    <fa-icon [icon]="'ban'"></fa-icon><span jhiTranslate="entity.action.cancel">Cancel</span>
+                                </button>
+                                <button type="submit"  [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                                    <fa-icon [icon]="'save'"></fa-icon><span jhiTranslate="entity.action.save">Save</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nb-tab>
+            <nb-tab tabTitle="Profil pour un Revendeur">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <form name="editForm" role="form" novalidate (ngSubmit)="save4Revendeur()" [formGroup]="editForm">
+                            <h2>POUR VOTRE REVENDEUR</h2>
+                            <div>
+                                <!--<jhi-alert-error></jhi-alert-error>-->
+                                <div class="form-group" [hidden]="!editForm.get('id').value">
+                                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                                    <input type="text" class="form-control" name="id" formControlName="id"
+                                           readonly />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="improApp.profil.nom" for="field_nom">Nom</label>
+                                    <input type="text" class="form-control" name="nom"
+                                           formControlName="nom"/>
+                                    <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="improApp.profil.description" for="field_description">Description</label>
+                                    <input type="text" class="form-control" name="description"
+                                           formControlName="description"/>
+                                    <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                            This field cannot be longer than 1000 characters.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="improApp.profil.organisation" for="field_organisation">Organisation</label>
+                                    <select nbInput class="form-control" name="categorieOrganisation" formControlName="organisationId">
+                                        <option [ngValue]="null"></option>
+                                        <option [ngValue]="organisation.id" *ngFor="let organisation of organisations; trackBy: trackOrganisationById">{{organisation.nom}}</option>
+                                    </select>
+                                </div>
+                                <!--<div class="form-group">
+                                    <label jhiTranslate="userManagement.profiles">Profiles</label>
+                                    <select class="form-control" multiple name="authority" formControlName="roles">
+                                        <option *ngFor="let authority of roles3" [value]="authority">{{authority}}</option>
+                                    </select>
+                                </div>-->
+                            </div>
+                            <div>
+                                <button type="button"  class="btn btn-secondary"  (click)="previousState()">
+                                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                </button>
+                                <button type="submit"  [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nb-tab>
+        </nb-tabset>
+    </div>
+    <div *jhiHasAnyAuthority="'REVENDEUR'">
+        <div  class="row justify-content-center">
+            <div class="col-8">
+                <form name="editForm" role="form" novalidate (ngSubmit)="saveRevendeur()" [formGroup]="editForm">
+                    <nb-card>
+                        <nb-card-header>
+                            <h2 ><h2>Creation de profil</h2></h2>
+                        </nb-card-header>
+                        <nb-card-body>
+                            <div>
+                                <!--<jhi-alert-error></jhi-alert-error>-->
+                                <div class="form-group" [hidden]="!editForm.get('id').value">
+                                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                                    <input type="text" class="form-control" name="id" formControlName="id"
+                                           readonly />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="improApp.profil.nom" for="field_nom">Nom</label>
+                                    <input type="text" class="form-control" name="nom"
+                                           formControlName="nom"/>
+                                    <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="improApp.profil.description" for="field_description">Description</label>
+                                    <input type="text" class="form-control" name="description"
+                                           formControlName="description"/>
+                                    <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                            This field cannot be longer than 1000 characters.
+                                        </small>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </nb-card-body>
+                        <nb-card-footer>
+                            <div>
+                                <button type="button" class="btn btn-secondary"  (click)="previousState()">
+                                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                </button>
+                                <button type="submit" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                </button>
+                            </div>
+                        </nb-card-footer>
+                    </nb-card>
+                </form>
+            </div>
+        </div>
+    </div>
+</nb-card>

@@ -1,0 +1,51 @@
+{
+  "name": "TypeCarnet",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "javadoc": "code"
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "quantiteCertificat",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "carnetASouche",
+      "otherEntityRelationshipName": "typeCarnet",
+      "relationshipName": "carnetSouche"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "infoCommandeCarnetASouche",
+      "otherEntityRelationshipName": "typeCarnet",
+      "relationshipName": "infoCommandeCarnetASouche"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "typeVehicule",
+      "otherEntityRelationshipName": "typeCarnet",
+      "relationshipName": "typeVehicule",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200220105600",
+  "javadoc": "The TypeCarnet entity.\\n@author A true hipster",
+  "entityTableName": "type_carnet",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

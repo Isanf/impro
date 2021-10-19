@@ -1,0 +1,26 @@
+{
+  "improApp": {
+    "logActivity": {
+      "home": {
+        "title": "LogActivities",
+        "createLabel": "Créer un nouveau Log Activity",
+        "createOrEditLabel": "Créer ou éditer un Log Activity",
+        "notFound": "Aucun Log Activity trouvé"
+      },
+      "created": "Un nouveau Log Activity a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Log Activity avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Log Activity avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Log Activity {{ id }} ?"
+      },
+      "detail": {
+        "title": "Log Activity"
+      },
+      "principal": "Principal",
+      "url": "Url",
+      "action": "Action",
+      "ip": "Ip",
+      "dateAction": "Date Action"
+    }
+  }
+}

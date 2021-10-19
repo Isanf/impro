@@ -1,0 +1,48 @@
+{
+  "name": "TypeVehicule",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "javadoc": "code"
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nombrePlaque",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "estCycleMoteur",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "typeCarnet",
+      "otherEntityRelationshipName": "typeVehicule",
+      "relationshipName": "typeCarnet"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vehicule",
+      "otherEntityRelationshipName": "typeVehicule",
+      "relationshipName": "vehicule"
+    }
+  ],
+  "changelogDate": "20200205114811",
+  "javadoc": "The TypeVehicule entity.\\n@author A true hipster",
+  "entityTableName": "type_vehicule",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

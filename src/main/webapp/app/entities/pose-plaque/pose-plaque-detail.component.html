@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="posePlaque">
+            <h2><span jhiTranslate="improApp.posePlaque.detail.title">Pose Plaque</span> {{posePlaque.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.posePlaque.numeroPose" [ngbTooltip]="'improApp.posePlaque.help.numeroPose' | translate">Numero Pose</span></dt>
+                <dd>
+                    <span>{{posePlaque.numeroPose}}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.posePlaque.datePosePlaque">Date Pose Plaque</span></dt>
+                <dd>
+                    <span>{{posePlaque.datePosePlaque}}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.posePlaque.revendeur">Revendeur</span></dt>
+                <dd>
+                    <div *ngIf="posePlaque.revendeurId">
+                        <a [routerLink]="['/organisation', posePlaque.revendeurId, 'view']">{{posePlaque.revendeurId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pose-plaque', posePlaque.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

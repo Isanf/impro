@@ -1,0 +1,48 @@
+{
+  "improApp": {
+    "vehicule": {
+      "home": {
+        "title": "Vehicules",
+        "createLabel": "Créer un nouveau Vehicule",
+        "createOrEditLabel": "Créer ou éditer un Vehicule",
+        "notFound": "Aucun Vehicule trouvé"
+      },
+      "created": "Un nouveau Vehicule a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Vehicule avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Vehicule avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Vehicule {{ id }} ?"
+      },
+      "detail": {
+        "title": "Vehicule"
+      },
+      "numeroChassis": "Numero Chassis",
+      "types": "Types",
+      "model": "Model",
+      "energie": "Energie",
+      "puissanceReel": "Puissance Reel",
+      "puissanceAdmin": "Puissance Admin",
+      "couleur": "Couleur",
+      "poidsVide": "Poids Vide",
+      "chargeUtile": "Charge Utile",
+      "ptac": "Ptac",
+      "ptra": "Ptra",
+      "nbrPlace": "Nbr Place",
+      "capacite": "Capacite",
+      "dateMiseCirculation": "Date Mise Circulation",
+      "regime": "Regime",
+      "noDedouanement": "No Dedouanement",
+      "dateDedouanement": "Date Dedouanement",
+      "immatriculation": "Immatriculation",
+      "plaqueImmatriculation": "Plaque Immatriculation",
+      "livraisonVehicule": "Livraison Vehicule",
+      "typeVehicule": "Type Vehicule",
+      "marqueVehicule": "Marque Vehicule",
+      "vente": "Vente",
+      "stock": "Stock",
+      "help": {
+        "numeroChassis": "numeroChassis"
+      }
+    }
+  }
+}

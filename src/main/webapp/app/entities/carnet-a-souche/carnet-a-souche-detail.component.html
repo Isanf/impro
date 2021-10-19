@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="carnetASouche">
+            <h2><span jhiTranslate="improApp.carnetASouche.detail.title">Carnet à Souche</span> {{ carnetASouche.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.carnetASouche.numero" [ngbTooltip]="'improApp.carnetASouche.help.numero' | translate">Numéro</span></dt>
+                <dd>
+                    <span>{{ carnetASouche.numero }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.carnetASouche.dateImpression">Date Impression</span></dt>
+                <dd>
+                    <span>{{ carnetASouche.dateImpression }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.carnetASouche.concessionnaire">Concessionnaire</span></dt>
+                <dd>
+                    <div *ngIf="carnetASouche.concessionnaireId">
+                        <a [routerLink]="['/organisation', carnetASouche.concessionnaireId, 'view']">{{ carnetASouche.concessionnaireId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="improApp.carnetASouche.livraisonCarnetSouche">Livraison Carnet à Souche</span></dt>
+                <dd>
+                    <div *ngIf="carnetASouche.livraisonCarnetSoucheId">
+                        <a [routerLink]="['/livraison-carnet-souche', carnetASouche.livraisonCarnetSoucheId, 'view']">{{ carnetASouche.livraisonCarnetSoucheId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="improApp.carnetASouche.typeCarnet">Type de Carnet</span></dt>
+                <dd>
+                    <div *ngIf="carnetASouche.typeCarnetId">
+                        <a [routerLink]="['/type-carnet', carnetASouche.typeCarnetId, 'view']">{{ carnetASouche.typeCarnetId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button"
+                    [routerLink]="['/carnet-a-souche', carnetASouche.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

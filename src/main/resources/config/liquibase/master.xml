@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql, mariadb"/>
+    <property name="clobType" value="longvarchar" dbms="h2"/>
+    <property name="clobType" value="clob" dbms="mysql, oracle, mssql, mariadb, postgresql"/>
+    <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200204171045_added_entity_CertificatImmatriculation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200204171047_added_entity_Immatriculation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200504123800_added_entity_OrganisationLocalite.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200204171051_added_entity_CarnetASouche.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114809_added_entity_TypeActeur.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114750_added_entity_CarteW.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114754_added_entity_DocIdentificationPP.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114755_added_entity_PersonneMorale.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114756_added_entity_DocIdentificationPM.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114800_added_entity_Collaboration.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114801_added_entity_CommandeVehicule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114802_added_entity_Stock.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114803_added_entity_LivraisonVehicule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114804_added_entity_LivraisonCarnetSouche.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114806_added_entity_CategorieOrganisation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114805_added_entity_CommandeCarnetSouche.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114807_added_entity_TypeOrganisation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200219154300_added_entity_Organisation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200219154800_added_entity_Profil.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114811_added_entity_TypeVehicule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114753_added_entity_PersonnePhysique.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114812_added_entity_MarqueVehicule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114813_added_entity_PlaqueImmatriculation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200220105600_added_entity_TypeCarnet.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200220120000_added_entity_InfoCommandeVehicule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200220120100_added_entity_InfoCommandeCarnetASouche.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200219155400_added_entity_Vente.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200422142929_added_entity_Firstlogin.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200219154700_added_entity_PosePlaque.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200624121044_added_entity_LogActivity.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200817163710_added_entity_VehiculeOccasion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114759_added_entity_Vehicule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200901122802_added_entity_Statistique.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201015084810_added_entity_PrixCertificat.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201023111202_added_entity_UserOtp.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201023112125_added_entity_UserDeviceId.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201123092757_added_entity_Nation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201126162354_added_entity_VehiculeTraversant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201203165815_added_entity_VehiculeOccasional.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20200204171045_added_entity_constraints_CertificatImmatriculation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200204171047_added_entity_constraints_Immatriculation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200204171051_added_entity_constraints_CarnetASouche.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114753_added_entity_constraints_PersonnePhysique.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114759_added_entity_constraints_Vehicule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114800_added_entity_constraints_Collaboration.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114801_added_entity_constraints_CommandeVehicule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114802_added_entity_constraints_Stock.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114803_added_entity_constraints_LivraisonVehicule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114804_added_entity_constraints_LivraisonCarnetSouche.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114805_added_entity_constraints_CommandeCarnetSouche.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114807_added_entity_constraints_TypeOrganisation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114810_added_entity_constraints_Profil.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114813_added_entity_constraints_PlaqueImmatriculation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114750_added_entity_constraints_CarteW.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200219154300_added_entity_constraints_Organisation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200220105600_added_entity_constraints_TypeCarnet.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200220120000_added_entity_constraints_InfoCommandeVehicule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200220120100_added_entity_constraints_InfoCommandeCarnetASouche.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200219155400_added_entity_constraints_Vente.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114756_added_entity_constraints_DocIdentificationPM.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200422142929_added_entity_constraints_Firstlogin.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200219154700_added_entity_constraints_PosePlaque.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114809_added_entity_constraints_TypeActeur.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200817163710_added_entity_constraints_VehiculeOccasion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200205114759_added_entity_constraints_Vehicule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200827145736_added_entity_constraints_PlaqueGarage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201023111202_added_entity_constraints_UserOtp.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201023112125_added_entity_constraints_UserDeviceId.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+</databaseChangeLog>

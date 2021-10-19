@@ -1,0 +1,79 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="improApp.certificatImmatriculation.home.title">Certificat Immatriculations</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-certificat-immatriculation" [routerLink]="['/certificat-immatriculation/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Créer une nouveau Certificat d'Immatriculation
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="certificatImmatriculations?.length === 0">
+        <span jhiTranslate="improApp.certificatImmatriculation.home.notFound">No certificatImmatriculations found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="certificatImmatriculations?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="numero"><span jhiTranslate="improApp.certificatImmatriculation.numero">Numero</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="codeQr"><span jhiTranslate="improApp.certificatImmatriculation.codeQr">Code Qr</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="carnetASoucheId"><span jhiTranslate="improApp.certificatImmatriculation.carnetASouche">Carnet A Souche</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let certificatImmatriculation of certificatImmatriculations ;trackBy: trackId">
+                    <td><a [routerLink]="['/certificat-immatriculation', certificatImmatriculation.id, 'view']">{{ certificatImmatriculation.id }}</a></td>
+                    <td>{{ certificatImmatriculation.numero }}</td>
+                    <td>{{ certificatImmatriculation.codeQr }}</td>
+                    <td>
+                        <div *ngIf="certificatImmatriculation.carnetASoucheId">
+                            <a [routerLink]="['/carnet-a-souche', certificatImmatriculation.carnetASoucheId , 'view']" >{{ certificatImmatriculation.carnetASoucheId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/certificat-immatriculation', certificatImmatriculation.id, 'view']"
+                                    class="btn rounded btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" ></span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/certificat-immatriculation', certificatImmatriculation.id, 'edit']"
+                                    class="btn rounded btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline"></span>
+                            </button>
+
+                            <button type="submit" (click)="delete(certificatImmatriculation)"
+                                    class="btn rounded btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="certificatImmatriculations?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

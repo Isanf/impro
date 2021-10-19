@@ -1,0 +1,86 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <nb-card>
+                <nb-card-header>
+                    <h2 id="jhi-livraison-vehicule-heading" jhiTranslate="improApp.livraisonVehicule.home.createOrEditLabel">Create or edit a Livraison Vehicule</h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <nb-stepper orientation="horizontal">
+                        <nb-step label="Etape 1">
+                            <div>
+                                <jhi-alert-error></jhi-alert-error>
+                                <div class="form-group" [hidden]="!editForm.get('id').value">
+                                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                                           readonly />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" >Commande a satisfaire</label>
+                                    <nb-select status="primary" required fullWidth outline shape="round" size="small" id="field_commandeVehicule" formControlName="commandeVehiculeId">
+                                        <nb-option [value]="commandeVehiculesOption.id" *ngFor="let commandeVehiculesOption of commandevehicules; trackBy: trackById">
+                                            No Commande:{{commandeVehiculesOption.numeroCommandeVehicule}}. ID:{{commandeVehiculesOption.id}}. ----- Date:{{commandeVehiculesOption.dateCommande}}.
+                                        </nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <div>
+                                <button nbButton nbStepperNext (click)="getc()">next</button>
+                            </div>
+                        </nb-step>
+                        <nb-step label="Etape 2">
+                            <div>
+                                <div class="form-group">
+                                    <label class="form-control-label" >Marque commandée</label>
+                                    <select class="form-control" required id="field_infoCommandeVehicule" name="infoCommandeVehicule" formControlName="infoCommandeVehicule">
+                                        <option [ngValue]="infoCommandeVehiculesOption.marqueVehiculeId" *ngFor="let infoCommandeVehiculesOption of infocommandev; trackBy: trackById">
+                                            No Commande:{{infoCommandeVehiculesOption.numeroCommandeVehicule}}. ----- Date:{{infoCommandeVehiculesOption.dateCommande}}. ----- Marque:{{infoCommandeVehiculesOption.marqueVehiculeId}}.
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <button nbButton nbStepperNext (click)="getv()">Suivant</button>
+                            </div>
+                        </nb-step>
+                        <nb-step label="Etape Fin">
+                            <div>
+                                <div class="form-group">
+                                    <label class="form-control-label" >Revendeur</label>
+                                    <input nbInput shape="round" status="primary" fullWidth fieldSize="small" type="text" formControlName="revendeurId"
+                                           #revId  disabled/>
+<!--                                    <select class="form-control" id="field_revendeur" name="revendeur" formControlName="revendeurId">-->
+<!--                                        <option [ngValue]="organisationOption.id" *ngFor="let organisationOption of organisations; trackBy: trackById">{{organisationOption.nom}}</option>-->
+<!--                                    </select>-->
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label" >Selectionner le(s) vehicule(s)</label>
+                                    <select class="form-control" required id="field_vehicule" multiple name="vehicule" formControlName="vehiculeslist">
+                                        <option [ngValue]="vehiculeOption" *ngFor="let vehiculeOption of vehicule; trackBy: trackById">
+                                            No Chassis:{{vehiculeOption.numeroChassis}}. Type:{{ vehiculeOption.types}}. Model:{{vehiculeOption.model}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--<button nbButton nbStepperPrevious class="btn btn-primary">prev</button>-->
+
+                        </nb-step>
+                    </nb-stepper>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div>
+                        <button type="button" id="cancel-save" nbButton outline  (click)="previousState()">
+                            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                                nbButton shape="round" status="primary" outline>
+                            <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+
+
+        </form>
+    </div>
+</div>

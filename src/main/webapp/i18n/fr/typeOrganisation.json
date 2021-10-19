@@ -1,0 +1,27 @@
+{
+  "improApp": {
+    "typeOrganisation": {
+      "home": {
+        "title": "TypeOrganisations",
+        "createLabel": "Créer un nouveau Type Organisation",
+        "createOrEditLabel": "Créer ou éditer un Type Organisation",
+        "notFound": "Aucun Type Organisation trouvé"
+      },
+      "created": "Un nouveau Type Organisation a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Type Organisation avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Type Organisation avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Type Organisation {{ id }} ?"
+      },
+      "detail": {
+        "title": "Type Organisation"
+      },
+      "nom": "Nom",
+      "description": "Description",
+      "niveau": "Niveau",
+      "organisations": "Organisations",
+      "categorieOrganisation": "Categorie Organisation",
+      "typeActeurs": "Type Acteurs"
+    }
+  }
+}

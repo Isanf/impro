@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-doc-identification-pp-heading" jhiTranslate="improApp.docIdentificationPP.home.createOrEditLabel">Créer ou editer Documents d'identification Personne Physique</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.docIdentificationPP.numeroDoc" for="field_numeroDoc" [ngbTooltip]="'improApp.docIdentificationPP.help.numeroDoc' | translate">Numéro Document</label>
+                    <input type="text" class="form-control" name="numeroDoc" id="field_numeroDoc"
+                           formControlName="numeroDoc"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.docIdentificationPP.nip" for="field_nip">Nip</label>
+                    <input type="text" class="form-control" name="nip" id="field_nip"
+                           formControlName="nip"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.docIdentificationPP.dateEtablissement" for="field_dateEtablissement">Date Etablissement</label>
+                    <div class="input-group">
+                        <input id="field_dateEtablissement" type="text" class="form-control" name="dateEtablissement" ngbDatepicker #dateEtablissementDp="ngbDatepicker" formControlName="dateEtablissement"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateEtablissementDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.docIdentificationPP.lieuEtablissement" for="field_lieuEtablissement">Lieu Etablissement</label>
+                    <input type="text" class="form-control" name="lieuEtablissement" id="field_lieuEtablissement"
+                           formControlName="lieuEtablissement"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.docIdentificationPP.autoriteEmettrice" for="field_autoriteEmettrice">Autorite Emettrice</label>
+                    <input type="text" class="form-control" name="autoriteEmettrice" id="field_autoriteEmettrice"
+                           formControlName="autoriteEmettrice"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.docIdentificationPP.typeDocIdentification" for="field_typeDocIdentification">Type de Document Identification</label>
+                    <select class="form-control" name="typeDocIdentification" formControlName="typeDocIdentification" id="field_typeDocIdentification">
+                        <option value="CNIB">{{ 'improApp.TypeDocIdentification.CNIB' | translate }}</option>
+                        <option value="PASSEPORT">{{ 'improApp.TypeDocIdentification.PASSEPORT' | translate }}</option>
+                        <option value="CARTE_MILITAIRE">{{ 'improApp.TypeDocIdentification.CARTE_MILITAIRE' | translate }}</option>
+                        <option value="CARTE_SCOLAIRE">{{ 'improApp.TypeDocIdentification.CARTE_SCOLAIRE' | translate }}</option>
+                        <option value="CARTE_ID_ETRANGERE">{{ 'improApp.TypeDocIdentification.CARTE_ID_ETRANGERE' | translate }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

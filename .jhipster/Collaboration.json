@@ -1,0 +1,46 @@
+{
+  "name": "Collaboration",
+  "fields": [
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "LocalDate",
+      "javadoc": "dateDebut"
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "numeroCollaboration",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "collaborationsRevendeur",
+      "relationshipName": "revendeur",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "collaborationsConcessionnaire",
+      "relationshipName": "concessionnaire",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200205114800",
+  "javadoc": "The Collaboration entity.\\n@author A true hipster",
+  "entityTableName": "collaboration",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

@@ -1,0 +1,58 @@
+{
+  "name": "CommandeVehicule",
+  "fields": [
+    {
+      "fieldName": "numeroCommandeVehicule",
+      "fieldType": "String",
+      "javadoc": "numeroCommandeVehicule"
+    },
+    {
+      "fieldName": "dateCommande",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "estLivree",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "infoCommandeVehicule",
+      "otherEntityRelationshipName": "commandeVehicule",
+      "relationshipName": "infoCommandeVehicule"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "livraisonVehicule",
+      "otherEntityRelationshipName": "commandeVehicule",
+      "relationshipName": "livraisonVehicule"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "commandeVRevendeur",
+      "relationshipName": "revendeur",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "commandeVConcessionnaire",
+      "relationshipName": "concessionnaire",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200205114801",
+  "javadoc": "The CommandeVehicule entity.\\n@author A true hipster",
+  "entityTableName": "commande_vehicule",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

@@ -1,0 +1,24 @@
+{
+  "improApp": {
+    "userOtp": {
+      "home": {
+        "title": "UserOtps",
+        "createLabel": "Créer un nouveau User Otp",
+        "createOrEditLabel": "Créer ou éditer un User Otp",
+        "notFound": "Aucun User Otp trouvé"
+      },
+      "created": "Un nouveau User Otp a été créé avec l'identifiant {{ param }}",
+      "updated": "Le User Otp avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le User Otp avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le User Otp {{ id }} ?"
+      },
+      "detail": {
+        "title": "User Otp"
+      },
+      "otpNumber": "Otp Number",
+      "otpUsed": "Otp Used",
+      "user": "User"
+    }
+  }
+}

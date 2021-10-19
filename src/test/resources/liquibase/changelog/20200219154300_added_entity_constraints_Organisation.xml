@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Organisation.
+    -->
+    <changeSet id="20200219154300-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="organisation_localite_id"
+                                 baseTableName="organisation"
+                                 constraintName="fk_organisation_organisation_localite_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation_localite"/>
+
+        <addForeignKeyConstraint baseColumnNames="pere_id"
+                                 baseTableName="organisation"
+                                 constraintName="fk_organisation_pere_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation"/>
+
+        <addForeignKeyConstraint baseColumnNames="type_organisation_id"
+                                 baseTableName="organisation"
+                                 constraintName="fk_organisation_type_organisation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type_organisation"/>
+
+        <addForeignKeyConstraint baseColumnNames="gerant_id"
+                                 baseTableName="organisation"
+                                 constraintName="fk_organisation_gerant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personne_physique"/>
+
+        <addForeignKeyConstraint baseColumnNames="type_acteur_id"
+                                 baseTableName="organisation"
+                                 constraintName="fk_organisation_type_acteur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type_acteur"/>
+
+    </changeSet>
+</databaseChangeLog>

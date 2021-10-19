@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="docIdentificationPM">
+            <h2><span jhiTranslate="improApp.docIdentificationPM.detail.title">Document d'identification Personne Morale</span> {{ docIdentificationPM.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.docIdentificationPM.numero" [ngbTooltip]="'improApp.docIdentificationPM.help.numero' | translate">Numero</span></dt>
+                <dd>
+                    <span>{{ docIdentificationPM.numero }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.docIdentificationPM.numeroIFU">Numéro IFU</span></dt>
+                <dd>
+                    <span>{{ docIdentificationPM.numeroIFU }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.docIdentificationPM.numeroRCCM">Numéro RCCM</span></dt>
+                <dd>
+                    <span>{{ docIdentificationPM.numeroRCCM }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/doc-identification-pm', docIdentificationPM.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

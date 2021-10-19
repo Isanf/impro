@@ -1,0 +1,91 @@
+<nb-card>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <h4>Mot de passe modifié avec succès!</h4>
+        </div>
+        <div class="row justify-content-md-center">
+            <button nbButton status="success" (click)="logout()">Reconnectez vous avec le nouveau mot de passe>>></button>
+        </div>
+    </div>
+</nb-card>
+<!--
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="improApp.firstlogin.home.title">Firstlogins</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-firstlogin" [routerLink]="['/firstlogin/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="improApp.firstlogin.home.createLabel">
+            Create a new Firstlogin
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="firstlogins?.length === 0">
+        <span jhiTranslate="improApp.firstlogin.home.notFound">No firstlogins found</span>
+        <div *ngFor="let b of first">{{b}}</div>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="firstlogins?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="passe"><span jhiTranslate="improApp.firstlogin.passe">Passe</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userLogin"><span jhiTranslate="improApp.firstlogin.user">User</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let firstlogin of firstlogins ;trackBy: trackId">
+                    <td><a [routerLink]="['/firstlogin', firstlogin.id, 'view']">{{ firstlogin.id }}</a></td>
+                    <td>{{ firstlogin.passe }}</td>
+                    <td>
+                        {{ firstlogin.userLogin }}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/firstlogin', firstlogin.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/firstlogin', firstlogin.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(firstlogin)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="firstlogins?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>
+-->
+
+
+

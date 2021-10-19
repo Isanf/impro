@@ -1,0 +1,14 @@
+{
+  "improApp": {
+    "TypeCategorieOrganisation": {
+      "null": "",
+      "SUPERNET": "SUPERNET",
+      "CONCESSIONNAIRE": "CONCESSIONNAIRE",
+      "ETABLISSEMENT_SPECIALISE": "ETABLISSEMENT_SPECIALISE",
+      "DGTTM": "DGTTM",
+      "FDS": "FDS",
+      "CCVA": "CCVA",
+      "ASSURANCE": "ASSURANCE"
+    }
+  }
+}

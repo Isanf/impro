@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="commandeVehicule">
+            <h2><span>Commande de Vehicule</span> {{ commandeVehicule.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.commandeVehicule.numeroCommandeVehicule" [ngbTooltip]="'improApp.commandeVehicule.help.numeroCommandeVehicule' | translate">Numéro Commande de Vehicule</span></dt>
+                <dd>
+                    <span>{{ commandeVehicule.numeroCommandeVehicule }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.commandeVehicule.dateCommande">Date Commande</span></dt>
+                <dd>
+                    <span>{{ commandeVehicule.dateCommande }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.commandeVehicule.revendeur">Revendeur</span></dt>
+                <dd>
+                    <div *ngIf="commandeVehicule.revendeurId">
+                        <a [routerLink]="['/organisation', commandeVehicule.revendeurId, 'view']">{{ commandeVehicule.revendeurId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="improApp.commandeVehicule.concessionnaire">Concessionnaire</span></dt>
+                <dd>
+                    <div *ngIf="commandeVehicule.concessionnaireId">
+                        <a [routerLink]="['/organisation', commandeVehicule.concessionnaireId, 'view']">{{ commandeVehicule.concessionnaireId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/commande-vehicule', commandeVehicule.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

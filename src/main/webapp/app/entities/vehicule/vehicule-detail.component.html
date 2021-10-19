@@ -1,0 +1,133 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div *ngIf="vehicule">
+            <nb-card>
+                <nb-card-header>
+                    <h2><span jhiTranslate="improApp.vehicule.detail.title">Vehicule</span> {{vehicule.id}}</h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <hr>
+                    <jhi-alert-error></jhi-alert-error>
+
+                    <dl class="row-md jh-entity-details">
+                        <div class="row">
+                            <div class="col-6">
+                                <dt><span jhiTranslate="improApp.vehicule.numeroChassis" [ngbTooltip]="'improApp.vehicule.help.numeroChassis' | translate">Numero Chassis</span></dt>
+                                <dd>
+                                    <span>{{vehicule.numeroChassis}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.types">Types</span></dt>
+                                <dd>
+                                    <span>{{vehicule.types}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.model">Model</span></dt>
+                                <dd>
+                                    <span>{{vehicule.model}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.energie">Energie</span></dt>
+                                <dd>
+                                    <span>{{vehicule.energie}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.puissanceReel">Puissance Reel</span></dt>
+                                <dd>
+                                    <span>{{vehicule.puissanceReel}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.puissanceAdmin">Puissance Admin</span></dt>
+                                <dd>
+                                    <span>{{vehicule.puissanceAdmin}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.couleur">Couleur</span></dt>
+                                <dd>
+                                    <span>{{vehicule.couleur}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.poidsVide">Poids Vide</span></dt>
+                                <dd>
+                                    <span>{{vehicule.poidsVide}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.chargeUtile">Charge Utile</span></dt>
+                                <dd>
+                                    <span>{{vehicule.chargeUtile}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.ptac">Ptac</span></dt>
+                                <dd>
+                                    <span>{{vehicule.ptac}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.ptra">Ptra</span></dt>
+                                <dd>
+                                    <span>{{vehicule.ptra}}</span>
+                                </dd>
+                            </div>
+
+                            <div class="col-6">
+                                <dt><span jhiTranslate="improApp.vehicule.nbrPlace">Nbr Place</span></dt>
+                                <dd>
+                                    <span>{{vehicule.nbrPlace}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.capacite">Capacite</span></dt>
+                                <dd>
+                                    <span>{{vehicule.capacite}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.dateMiseCirculation">Date Mise Circulation</span></dt>
+                                <dd>
+                                    <span>{{vehicule.dateMiseCirculation}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.regime">Regime</span></dt>
+                                <dd>
+                                    <span>{{vehicule.regime}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.noDedouanement">No Dedouanement</span></dt>
+                                <dd>
+                                    <span>{{vehicule.noDedouanement}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.dateDedouanement">Date Dedouanement</span></dt>
+                                <dd>
+                                    <span>{{vehicule.dateDedouanement}}</span>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.livraisonVehicule">Livraison Vehicule</span></dt>
+                                <dd>
+                                    <div *ngIf="vehicule.livraisonVehiculeId">
+                                        <a [routerLink]="['/livraison-vehicule', vehicule.livraisonVehiculeId, 'view']">{{vehicule.livraisonVehiculeId}}</a>
+                                    </div>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.typeVehicule">Type Vehicule</span></dt>
+                                <dd>
+                                    <div *ngIf="vehicule.typeVehiculeId">
+                                        <a [routerLink]="['/type-vehicule', vehicule.typeVehiculeId, 'view']">{{vehicule.typeVehiculeId}}</a>
+                                    </div>
+                                </dd>
+                                <dt><span jhiTranslate="improApp.vehicule.marqueVehicule">Marque Vehicule</span></dt>
+                                <dd>
+                                    <div *ngIf="vehicule.marqueVehiculeId">
+                                        <a [routerLink]="['/marque-vehicule', vehicule.marqueVehiculeId, 'view']">{{vehicule.marqueVehiculeId}}</a>
+                                    </div>
+                                </dd>
+                                <dt><span>Status Vente</span></dt>
+                                <dd>
+                                    <div *ngIf="vehicule.venteId">
+                                        <a [routerLink]="['/marque-vehicule', vehicule.venteId, 'view']">{{vehicule.venteId}}</a>
+                                    </div>
+                                </dd>
+                            </div>
+                        </div>
+                    </dl>
+                </nb-card-body>
+                <nb-card-footer>
+                    <button type="submit" nbButton outline shape="round" status="info"
+                            (click)="previousState()">
+                        <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                    </button>
+
+                    <button *ngIf="!vehicule.livraisonVehiculeId" type="button" nbButton outline shape="round" status="primary"
+                            [routerLink]="['/vehicule', vehicule.id, 'edit']">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                    </button>
+                    <div *ngIf="vehicule.livraisonVehiculeId">
+                        <div STYLE="color: #151a30">
+                            --LIVRE
+                        </div>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </div>
+    </div>
+</div>

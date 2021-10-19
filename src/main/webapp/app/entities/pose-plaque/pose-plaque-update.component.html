@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-pose-plaque-heading" jhiTranslate="improApp.posePlaque.home.createOrEditLabel">Create or edit a Pose Plaque</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.posePlaque.numeroPose" for="field_numeroPose" [ngbTooltip]="'improApp.posePlaque.help.numeroPose' | translate">Numero Pose</label>
+                    <input type="text" class="form-control" name="numeroPose" id="field_numeroPose"
+                           formControlName="numeroPose"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.posePlaque.datePosePlaque" for="field_datePosePlaque">Date Pose Plaque</label>
+                    <div class="d-flex">
+                        <input id="field_datePosePlaque" type="datetime-local" class="form-control" name="datePosePlaque" formControlName="datePosePlaque" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.posePlaque.revendeur" for="field_revendeur">Revendeur</label>
+                    <select class="form-control" id="field_revendeur" name="revendeur" formControlName="revendeurId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="organisationOption.id" *ngFor="let organisationOption of organisations; trackBy: trackOrganisationById">{{organisationOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

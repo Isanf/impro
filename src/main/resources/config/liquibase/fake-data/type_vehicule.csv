@@ -1,0 +1,11 @@
+id;code;libelle;nombre_plaque;est_cycle_moteur
+1201;01;Vehicule particulier;2;false
+1202;02;Vehicule utilitaire;2;false
+1203;03;Vehicule de transport en commun;2;false
+1204;04;Tracteur routier;2;false
+1205;05;Vehicule spécifique;2;false
+1206;06;Remorque;1;false
+1207;07;Semi-remorque;1;false
+1208;08;Caravane;2;false
+1209;09;Moto;1;true
+1210;10;Taxi-Moto;1;true

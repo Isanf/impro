@@ -1,0 +1,23 @@
+{
+  "improApp": {
+    "firstlogin": {
+      "home": {
+        "title": "Firstlogins",
+        "createLabel": "Créer un nouveau Firstlogin",
+        "createOrEditLabel": "Créer ou éditer un Firstlogin",
+        "notFound": "Aucun Firstlogin trouvé"
+      },
+      "created": "Un nouveau Firstlogin a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Firstlogin avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Firstlogin avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Firstlogin {{ id }} ?"
+      },
+      "detail": {
+        "title": "Firstlogin"
+      },
+      "passe": "Passe",
+      "user": "User"
+    }
+  }
+}

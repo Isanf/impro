@@ -1,0 +1,29 @@
+{
+  "improApp": {
+    "supernet": {
+      "home": {
+        "title": "Supernets",
+        "createLabel": "Créer un nouveau Supernet",
+        "createOrEditLabel": "Créer ou éditer un Supernet",
+        "notFound": "Aucun Supernet trouvé"
+      },
+      "created": "Un nouveau Supernet a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Supernet avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Supernet avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Supernet {{ id }} ?"
+      },
+      "detail": {
+        "title": "Supernet"
+      },
+      "numeroIFU": "Numero IFU",
+      "denomination": "Denomination",
+      "adresse": "Adresse",
+      "immatriculation": "Immatriculation",
+      "livraisonCarnetSouche": "Livraison Carnet Souche",
+      "help": {
+        "numeroIFU": "numeroIFU"
+      }
+    }
+  }
+}

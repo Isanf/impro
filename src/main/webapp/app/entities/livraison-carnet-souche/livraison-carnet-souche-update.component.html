@@ -1,0 +1,96 @@
+<nb-card>
+    <nb-card-body>
+        <div class="w-100">
+            <div class="modal-header">
+                <h3 class="modal-title" id="jhi-livraison-carnet-souche-heading">Livraison de Carnet Souche</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row justi fy-content-center">
+                    <div class="col-10">
+                        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                            <nb-stepper orientation="horizontal">
+                                <nb-step label="First step">
+                                    <div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3" for="field_numeroCommandeCS">Numero Commande CS</label>
+                                            <div class="col-sm-9">
+                                                <input nbInput fullWidth fieldSize="small" shape="round" status="primary"
+                                                       disabled [value]="commandecarnetsouche.numeroCommandeCS"
+                                                       type="text" name="numeroCommandeCS" id="field_numeroCommandeCS"
+                                                       formControlName="numeroCommandeCS"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 form-control-label" >Information Commande</label>
+
+                                            <div class="col-sm-9">
+                                                <nb-select status="primary" multiple fullWidth formControlName="infoCommandeCarnetASouche">
+                                                    <nb-option [value]="infos.id" *ngFor="let infos of infoCommandeCarnetASouches">
+                                                        {{ infos.quantiteCommande}} Unité de :  {{infos.libelle}}
+                                                    </nb-option>
+                                                </nb-select>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button nbButton (click)="next()" nbStepperNext>next</button>
+                                    </div>
+                                </nb-step>
+                                <nb-step label="Second step">
+                                    <div>
+                                        <jhi-alert-error></jhi-alert-error>
+
+                                        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                                            <input type="text" nbInput fullWidth fieldSize="small" shape="round" status="primary"
+                                                   formControlName="id" readonly />
+                                        </div>
+
+                                        <!--<div class="form-group">
+                                            <input type="text" nbInput fullWidth fieldSize="small" shape="round" status="primary" name="numeroLivraisonCS" id="field_numeroLivraisonCS"
+                                                   formControlName="numeroLivraisonCS" placeholder="Numero Livraison CS"/>
+                                        </div>-->
+                                        <div class="form-group">
+                                            <label class="form-control-label">Selectionner le(s) Carnet(s)</label>
+                                            <select class="form-control" multiple formControlName="carnetASouches" required>
+                                                <option [ngValue]="carnet" *ngFor="let carnet of carnetASouches; trackBy: trackById">
+                                                    N° de Carnet : {{ carnet.numero }}
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-control-label">Le Concessionnaire</label>
+                                            <input type="text" nbInput fullWidth fieldSize="small" shape="round" status="primary"
+                                                   formControlName="concessionnaireId"
+                                                   [value]="commandecarnetsouche.concessionnaireId" disabled/>
+                                        </div>
+
+                                        <!--<div class="form-group">
+                                            <label class="form-control-label" >La Commande</label>
+                                            <input type="text" nbInput fullWidth fieldSize="small" shape="round" status="primary"
+                                                   id="field_commandeCarnetSouche" formControlName="commandeCarnetSoucheId"
+                                                   [value]="commandecarnetsouche.numeroCommandeCS " disabled/>
+                                        </div>-->
+                                    </div>
+                                    <button nbButton nbStepperPrevious>prev</button>
+                                </nb-step>
+                            </nb-stepper>
+
+                            <div>
+                                <button type="button" id="cancel-save" nbButton shape="round" (click)="previousState()">
+                                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                </button>
+                                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                                        nbButton outline shape="round" status="primary">
+                                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </nb-card-body>
+</nb-card>

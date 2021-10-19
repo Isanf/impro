@@ -1,0 +1,86 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="improApp.infoCommandeCarnetASouche.home.title">Infos-Commandes Carnet à Souches</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-info-commande-carnet-a-souche" [routerLink]="['/info-commande-carnet-a-souche/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="improApp.infoCommandeCarnetASouche.home.createLabel">
+            Créer une Info-Commande Carnet à Souche
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="infoCommandeCarnetASouches?.length === 0">
+        <span>Aucune info-Commande Carnet à Souches trouvée</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="infoCommandeCarnetASouches?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="numeroCommande"><span jhiTranslate="improApp.infoCommandeCarnetASouche.numeroCommande">Numéro Commande</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dateCommande"><span jhiTranslate="improApp.infoCommandeCarnetASouche.dateCommande">Date Commande</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="quantiteCommande"><span jhiTranslate="improApp.infoCommandeCarnetASouche.quantiteCommande">Quantite Commande</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="commandeCarnetSoucheId"><span jhiTranslate="improApp.infoCommandeCarnetASouche.commandeCarnetSouche">Commande Carnet Souche</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="typeCarnetId"><span jhiTranslate="improApp.infoCommandeCarnetASouche.typeCarnet">Type de Carnet</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let infoCommandeCarnetASouche of infoCommandeCarnetASouches ;trackBy: trackId">
+                    <td><a [routerLink]="['/info-commande-carnet-a-souche', infoCommandeCarnetASouche.id, 'view']">{{ infoCommandeCarnetASouche.id }}</a></td>
+                    <td>{{ infoCommandeCarnetASouche.numeroCommande }}</td>
+                    <td>{{ infoCommandeCarnetASouche.dateCommande | date:'medium' }}</td>
+                    <td>{{ infoCommandeCarnetASouche.quantiteCommande }}</td>
+                    <td>
+                        <div *ngIf="infoCommandeCarnetASouche.commandeCarnetSoucheId">
+                            <a [routerLink]="['/commande-carnet-souche', infoCommandeCarnetASouche.commandeCarnetSoucheId , 'view']" >{{ infoCommandeCarnetASouche.commandeCarnetSoucheId }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="infoCommandeCarnetASouche.typeCarnetId">
+                            <a [routerLink]="['/type-carnet', infoCommandeCarnetASouche.typeCarnetId , 'view']" >{{ infoCommandeCarnetASouche.typeCarnetId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/info-commande-carnet-a-souche', infoCommandeCarnetASouche.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/info-commande-carnet-a-souche', infoCommandeCarnetASouche.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(infoCommandeCarnetASouche)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="infoCommandeCarnetASouches?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

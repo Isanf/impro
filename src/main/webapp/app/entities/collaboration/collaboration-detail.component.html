@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="collaboration">
+            <h2><span jhiTranslate="improApp.collaboration.detail.title">Collaboration</span> {{ collaboration.id }}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.collaboration.dateDebut" [ngbTooltip]="'improApp.collaboration.help.dateDebut' | translate">Date Début</span></dt>
+                <dd>
+                    <span>{{ collaboration.dateDebut }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.collaboration.dateFin">Date Fin</span></dt>
+                <dd>
+                    <span>{{ collaboration.dateFin }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.collaboration.numeroCollaboration">Numéro Collaboration</span></dt>
+                <dd>
+                    <span>{{ collaboration.numeroCollaboration }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.collaboration.revendeur">Revendeur</span></dt>
+                <dd>
+                    <div *ngIf="collaboration.revendeurId">
+                        <a [routerLink]="['/organisation', collaboration.revendeurId, 'view']">{{ collaboration.revendeurId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="improApp.collaboration.concessionnaire">Concessionnaire</span></dt>
+                <dd>
+                    <div *ngIf="collaboration.concessionnaireId">
+                        <a [routerLink]="['/organisation', collaboration.concessionnaireId, 'view']">{{ collaboration.concessionnaireId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/collaboration', collaboration.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

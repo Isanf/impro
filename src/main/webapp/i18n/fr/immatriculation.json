@@ -1,0 +1,28 @@
+{
+  "improApp": {
+    "immatriculation": {
+      "home": {
+        "title": "Immatriculations",
+        "createLabel": "Créer un nouveau Immatriculation",
+        "createOrEditLabel": "Créer ou éditer un Immatriculation",
+        "notFound": "Aucun Immatriculation trouvé"
+      },
+      "created": "Un nouveau Immatriculation a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Immatriculation avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Immatriculation avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Immatriculation {{ id }} ?"
+      },
+      "detail": {
+        "title": "Immatriculation"
+      },
+      "numero": "Numero",
+      "dateImmatriculation": "Date Immatriculation",
+      "certificatImmatriculation": "Certificat Immatriculation",
+      "organisation": "Organisation",
+      "personnePhysique": "Personne Physique",
+      "personneMorale": "Personne Morale",
+      "vehicule": "Vehicule"
+    }
+  }
+}

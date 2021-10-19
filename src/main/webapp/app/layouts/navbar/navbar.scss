@@ -1,0 +1,128 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '../styles/themes';
+
+/* ==========================================================================
+Navbar
+========================================================================== */
+
+.navbar-version {
+  font-size: 0.65em;
+  color: $navbar-dark-color;
+}
+
+.navbar {
+  height: 60px;
+  width: 100%;
+}
+
+/* ==========================================================================
+Logo styles
+========================================================================== */
+.logo-img {
+  height: 100px;
+  width: 200px;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url('../../../content/images/sth-logo-full.png') no-repeat center center;
+  background-size: contain;
+}
+.logo-img-new {
+  height: 50px;
+  width: 150px;
+  margin-left: 10px;
+  margin-right: 10px;
+  /*filter: drop-shadow(5px 5px 10px black);
+  -webkit-filter: drop-shadow(5px 5px 10px black);*/
+  filter: drop-shadow(5px 5px 10px black);
+  -webkit-filter: drop-shadow(5px 5px 10px black);
+  /*filter: drop-shadow(5px 5px 10px black);
+  -webkit-filter: drop-shadow(5px 5px 10px black);*/
+}
+.logo-img-head {
+  height: 45px;
+  width: 60px;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url('../../../content/images/sth-logo-head.png') no-repeat center center;
+  background-size: contain;
+}
+.logo-img-text {
+  height: 45px;
+  width: 60px;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url('../../../content/images/sth-logo-text.png') no-repeat center center;
+  background-size: contain;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  width: calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
+}
+
+nb-action {
+  height: auto;
+  display: flex;
+  align-content: center;
+}
+.header-container {
+  display: flex;
+  align-items: center;
+  width: auto;
+
+  .sidebar-toggle {
+    @include nb-ltr(padding-right, 1.25rem);
+    @include nb-rtl(padding-left, 1.25rem);
+    text-decoration: none;
+    color: black;
+    nb-icon {
+      font-size: 1.75rem;
+    }
+  }
+
+  .logo {
+    padding: 0 1.25rem;
+    font-size: 1.75rem;
+    @include nb-ltr(border-left, 1px solid nb-theme(divider-color));
+    @include nb-rtl(border-right, 1px solid nb-theme(divider-color));
+    white-space: nowrap;
+    text-decoration: none;
+  }
+}
+
+nb-user {
+  cursor: pointer;
+}
+
+::ng-deep nb-search button {
+  padding: 0 !important;
+}
+
+@include nb-install-component() {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  @include media-breakpoint-down(sm) {
+    .control-item {
+      display: none;
+    }
+    .user-action {
+      border: none;
+      padding: 0;
+    }
+  }
+
+  @include media-breakpoint-down(is) {
+    nb-select {
+      display: none;
+    }
+  }
+}

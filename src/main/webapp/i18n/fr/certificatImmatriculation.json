@@ -1,0 +1,28 @@
+{
+  "improApp": {
+    "certificatImmatriculation": {
+      "home": {
+        "title": "CertificatImmatriculations",
+        "createLabel": "Créer un nouveau Certificat Immatriculation",
+        "createOrEditLabel": "Créer ou éditer un Certificat Immatriculation",
+        "notFound": "Aucun Certificat Immatriculation trouvé"
+      },
+      "created": "Un nouveau Certificat Immatriculation a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Certificat Immatriculation avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Certificat Immatriculation avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Certificat Immatriculation {{ id }} ?"
+      },
+      "detail": {
+        "title": "Certificat Immatriculation"
+      },
+      "numero": "Numero",
+      "codeQr": "Code Qr",
+      "plaqueImmatriculation": "Plaque Immatriculation",
+      "carnetASouche": "Carnet A Souche",
+      "help": {
+        "numero": "numero"
+      }
+    }
+  }
+}

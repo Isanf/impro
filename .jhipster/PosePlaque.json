@@ -1,0 +1,35 @@
+{
+  "name": "PosePlaque",
+  "fields": [
+    {
+      "fieldName": "numeroPose",
+      "fieldType": "String",
+      "javadoc": "numeroPose"
+    },
+    {
+      "fieldName": "datePosePlaque",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "posePlaque",
+      "relationshipName": "revendeur",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200219154700",
+  "javadoc": "The PosePlaque entity.\\n@author A true hipster",
+  "entityTableName": "pose_plaque",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

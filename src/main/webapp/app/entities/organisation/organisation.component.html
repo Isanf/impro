@@ -1,0 +1,370 @@
+<div>
+    <nb-card>
+        <nb-card-header>
+            <div class="form-group row" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                <div class="col-sm-2" *ngFor="let typeActeur of typeacteurs">
+                    <nb-checkbox [value]="checked" (checkedChange)="toggle($event, typeActeur.id)"
+                                 status="primary" size="10"> {{ typeActeur.nom }} </nb-checkbox>
+                </div>
+            </div>
+
+            <h2 id="page-heading">
+                <span *jhiHasAnyAuthority="'CONCESSIONNAIRE'" >Revendeurs</span>
+
+                <button *jhiHasAnyAuthority="'CONCESSIONNAIRE'" nbButton status="primary" outline shape="round" class="float-right jh-create-entity create-organisation" [routerLink]="['/organisation/new']">
+                    <fa-icon icon="plus"></fa-icon>
+                    <span>
+                    Ajouter
+                    </span>
+                </button>
+                <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    <button nbButton status="primary" outline shape="round" class="float-right jh-create-entity create-organisation" [routerLink]="['/organisation/new']">
+                        <fa-icon icon="plus"></fa-icon>
+                        <span>
+                    Créer autre Organisation
+                    </span>
+                    </button>
+                    <button nbButton status="primary" outline shape="round" class="float-right jh-create-entity create-organisation" [routerLink]="['/carte-w/new']">
+                        <fa-icon icon="plus"></fa-icon>
+                        <span>
+                    Créer un Concessionnaire
+                    </span>
+                    </button>
+                </div>
+            </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <jhi-alert-error></jhi-alert-error>
+            <jhi-alert></jhi-alert>
+            <!--<div class="container row">
+                <div class="col-md-12">
+                    <h1>Upload Image</h1>
+                </div>
+            </div>
+
+            <div class="container row">
+                <div class="col-md-6">
+                    <input type="file" (change)="onFileChanged($event)">
+
+                </div>
+                <div class="col-md-6">
+                    <input type="button" (click)="onUpload()" value="upload">
+                </div>
+            </div>
+            <hr />
+            <div class="container row">
+                <div class="col-md-12">
+                    <div *ngIf=message>{{message}}</div>
+                </div>
+            </div>
+
+            <div class="container row">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imageName"
+                           name="name" />
+                </div>
+                <div class="col-md-6">
+                    <input type="button" (click)="getImage()" value="Get Image">
+
+                </div>
+            </div>
+
+            <div class="container row">
+                <div class="col-md-12">
+                    <div *ngIf=retrievedImage>
+                        <img [src]="retrievedImage">
+                    </div>
+                </div>
+            </div>-->
+            <div class="container row">
+                <div class="col-md-12">
+                    <div *ngIf=retrievedImage>
+                        <img [src]="retrievedImage">
+                    </div>
+                </div>
+            </div>
+            <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                <nb-form-field>
+                    <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                    <input type="text" fieldSize="tiny" nbInput status="primary" fullWidth placeholder="Rechercher"
+                           [(ngModel)]="searchText" />
+                </nb-form-field>
+                <div class="alert alert-warning" id="no-result" *ngIf="selectedorg?.length === 0">
+                    <span jhiTranslate="improApp.organisation.home.notFound">No organisations found</span>
+                </div>
+                <div class="table-responsive table-striped table-hover table-bordered"  *ngIf="selectedorg?.length > 0">
+                    <table class="table table-striped" aria-describedby="page-heading">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+
+                            <th scope="col"><span jhiTranslate="improApp.organisation.nom">Nom</span> </th>
+                            <th scope="col"><span >N° Ordre</span> </th>
+                            <th scope="col"><span >Type</span> </th>
+                            <th scope="col"><span >Localite</span> </th>
+                            <th scope="col"><span >Telephone</span> </th>
+                            <!--<th scope="col"><span jhiTranslate="improApp.organisation.pere">Mere</span> </th>-->
+                            <th scope="col"><span jhiTranslate="improApp.organisation.gerant">Gerant</span> </th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let organisation of selectedorg | organisationFilter:searchText">
+                            <td>{{ organisation.nom }}</td>
+                            <td>{{ organisation.numeroOrdre }}</td>
+                            <td>
+                                <div *ngIf="organisation.typeOrganisationId">
+                                    <a [routerLink]="['/organisation-localite', organisation.typeOrganisationId , 'view']" >
+                                        <div *ngFor="let typeorganisation of typeOrganisations">
+                                            <div *ngIf="typeorganisation.id == organisation.typeOrganisationId">
+                                                {{ typeorganisation.nom }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div *ngIf="organisation.organisationLocaliteId">
+                                    <a [routerLink]="['/organisation-localite', organisation.organisationLocaliteId , 'view']" >
+                                        <div *ngFor="let localite of localites">
+                                            <div *ngIf="localite.id == organisation.organisationLocaliteId">
+                                                {{ localite.nom }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>{{ organisation.numeroPhone }}</td>
+                            <!--<td>
+                                <div *ngIf="organisation.pereId">
+                                    <a [routerLink]="['/organisation', organisation.pereId , 'view']" >
+                                        <div *ngFor="let organisation of organisationtout">
+                                            <div *ngIf="organisation.id == organisation.pereId">
+                                                {{ organisation.nom }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>-->
+                            <td>
+                                <div *ngIf="organisation.gerantId">
+                                    <a [routerLink]="['/personne-physique', organisation.gerantId , 'view']" >
+                                        <div *ngFor="let gerant of personphysiques">
+                                            <div *ngIf="gerant.id == organisation.gerantId">
+                                                {{ gerant.nom }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="submit" nbButton shape="round" size="tiny" outline status="info"
+                                            [routerLink]="['/organisation', organisation.id, 'view']">
+                                        <fa-icon icon="eye"></fa-icon>
+                                        <span class="d-none d-md-inline"></span>
+                                    </button>
+
+                                    <button type="submit" nbButton shape="round" size="tiny" outline status="primary"
+                                            [routerLink]="['/organisation', organisation.id, 'edit']">
+                                        <fa-icon icon="pencil-alt"></fa-icon>
+                                        <span class="d-none d-md-inline"></span>
+                                    </button>
+                                    <!--<div class="container row">
+                                        <div class="col-md-5">
+                                            <input nbInput status="primary" shape="round" fieldSize="tiny" type="file" (change)="onFileChanged($event)">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" nbInput status="primary" shape="round" fieldSize="tiny" (click)="onUpload(organisation.id)" value="Signer">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="button" nbInput status="primary" shape="round" fieldSize="tiny" (click)="getImage(organisation.id)" value="Afficher">
+                                        </div>
+                                    </div>-->
+                                    <!--<button type="submit" (click)="delete(organisation)"
+                                            nbButton shape="round" size="tiny" outline status="danger">
+                                        <fa-icon icon="times"></fa-icon>
+                                        <span class="d-none d-md-inline"></span>
+                                    </button>-->
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div *jhiHasAnyAuthority="'CONCESSIONNAIRE'">
+                <nb-form-field>
+                    <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                    <input type="text" fieldSize="tiny" nbInput status="primary" fullWidth placeholder="Rechercher"
+                           [(ngModel)]="searchText" />
+                </nb-form-field>
+                <div class="table-responsive table-striped table-hover table-bordered" id="entitiesr" *ngIf="organisationsRevendeur?.length > 0">
+                    <table class="table table-striped" aria-describedby="page-heading">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                            <th scope="col"><span jhiTranslate="improApp.organisation.nom">Nom</span> </th>
+                            <th scope="col"><span >N° Ordre</span> </th>
+                            <th scope="col"><span >Type</span> </th>
+                            <th scope="col"><span >Localite</span> </th>
+                            <th scope="col"><span >Telephone</span> </th>
+                            <!--<th scope="col"><span jhiTranslate="improApp.organisation.pere">Mere</span> </th>-->
+                            <!--<th scope="col"><span >Type</span> </th>-->
+                            <th scope="col"><span jhiTranslate="improApp.organisation.gerant">Gerant</span> </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let organisation of organisationsRevendeur | organisationFilter:searchText">
+                            <td>{{ organisation.nom }}</td>
+                            <td>{{ organisation.numeroOrdre }}</td>
+                            <td>
+                                <div *ngIf="organisation.typeOrganisationId">
+                                    <a [routerLink]="['/organisation-localite', organisation.typeOrganisationId , 'view']" >
+                                        <div *ngFor="let typeorganisation of typeOrganisations">
+                                            <div *ngIf="typeorganisation.id == organisation.typeOrganisationId">
+                                                {{ typeorganisation.nom }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div *ngIf="organisation.organisationLocaliteId">
+                                    <a [routerLink]="['/organisation-localite', organisation.organisationLocaliteId , 'view']" >
+                                        <div *ngFor="let localite of localites">
+                                            <div *ngIf="localite.id == organisation.organisationLocaliteId">
+                                                {{ localite.nom }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>{{ organisation.numeroPhone }}</td>
+                            <!--<td>
+                                <div *ngIf="organisation.pereId">
+                                    <a [routerLink]="['/organisation', organisation.pereId , 'view']" >
+                                        <div *ngFor="let organisation of organisationtout">
+                                            <div *ngIf="organisation.id == organisation.pereId">
+                                                {{ organisation.nom }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>-->
+                            <td>
+                                <div *ngIf="organisation.gerantId">
+                                    <a [routerLink]="['/personne-physique', organisation.gerantId , 'view']" >
+                                        <div *ngFor="let gerant of personphysiques">
+                                            <div *ngIf="gerant.id == organisation.gerantId">
+                                                {{ gerant.nom }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="submit" nbButton shape="round" size="tiny" outline status="info"
+                                            [routerLink]="['/organisation', organisation.id, 'view']">
+                                        <fa-icon icon="eye"></fa-icon>
+                                        <span class="d-none d-md-inline"></span>
+                                    </button>
+
+                                    <button type="submit" nbButton shape="round" size="tiny" outline status="primary"
+                                            [routerLink]="['/organisation', organisation.id, 'edit']">
+                                        <fa-icon icon="pencil-alt"></fa-icon>
+                                        <span class="d-none d-md-inline"></span>
+                                    </button>
+                                   <!-- <div class="container row">
+                                        <div class="col-md-5">
+                                            <input type="file" (change)="onFileChanged($event)">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" (click)="onUpload(organisation.id)" value="Signer">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="button" (click)="getImage(organisation.id)" value="Afficher">
+                                        </div>
+                                    </div>-->
+                                    <!--<button type="submit" (click)="delete(organisation)"
+                                            nbButton shape="round" size="tiny" outline status="danger">
+                                        <fa-icon icon="times"></fa-icon>
+                                        <span class="d-none d-md-inline"></span>
+                                    </button>-->
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div *jhiHasAnyAuthority="'DG_DGTTM'">
+                <div class="table-responsive table-striped table-hover table-bordered"  *ngIf="Myorganisation?.length > 0">
+                    <table class="table table-striped" aria-describedby="page-heading">
+                        <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+
+                            <th scope="col"><span jhiTranslate="improApp.organisation.nom">Nom</span> </th>
+                            <!--<th scope="col"><span jhiTranslate="improApp.organisation.pere">Mere</span> </th>-->
+                            <th scope="col"><span jhiTranslate="improApp.organisation.gerant">Gerant</span> </th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let organisation of Myorganisation | organisationFilter:searchText">
+                            <td>{{ organisation.nom }}</td>
+                            <!--<td>
+                                <div *ngIf="organisation.pereId">
+                                    <a [routerLink]="['/organisation', organisation.pereId , 'view']" >
+                                        <div *ngFor="let organisation of organisationtout">
+                                            <div *ngIf="organisation.id == organisation.pereId">
+                                                {{ organisation.nom }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>-->
+                            <td>
+                                <div *ngIf="organisation.gerantId">
+                                    <a [routerLink]="['/personne-physique', organisation.gerantId , 'view']" >
+                                        <div *ngFor="let gerant of personphysiques">
+                                            <div *ngIf="gerant.id == organisation.gerantId">
+                                                {{ gerant.nom }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="submit" nbButton shape="round" size="tiny" outline status="info"
+                                            [routerLink]="['/organisation', organisation.id, 'view']">
+                                        <fa-icon icon="eye"></fa-icon>
+                                        <span class="d-none d-md-inline"></span>
+                                    </button>
+                                    <div class="container row">
+                                        <div class="col-md-5">
+                                            <input nbInput status="primary" shape="round" fieldSize="tiny" type="file" (change)="onFileChanged($event)">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="button" nbInput status="primary" shape="round" fieldSize="tiny" (click)="onUpload(organisation.id)" value="Signer">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="button" nbInput status="primary" shape="round" fieldSize="tiny" (click)="getImage(organisation.id)" value="Afficher">
+                                        </div>
+                                    </div>
+                                    <!--<button type="submit" (click)="delete(organisation)"
+                                            nbButton shape="round" size="tiny" outline status="danger">
+                                        <fa-icon icon="times"></fa-icon>
+                                        <span class="d-none d-md-inline"></span>
+                                    </button>-->
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+        </nb-card-footer>
+    </nb-card>
+</div>

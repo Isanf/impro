@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="infoCommandeCarnetASouche">
+            <h2><span jhiTranslate="improApp.infoCommandeCarnetASouche.detail.title">Info-Commande Carnet à Souche</span> {{ infoCommandeCarnetASouche.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.infoCommandeCarnetASouche.numeroCommande" [ngbTooltip]="'improApp.infoCommandeCarnetASouche.help.numeroCommande' | translate">Numéro Commande</span></dt>
+                <dd>
+                    <span>{{ infoCommandeCarnetASouche.numeroCommande }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.infoCommandeCarnetASouche.dateCommande">Date Commande</span></dt>
+                <dd>
+                    <span>{{ infoCommandeCarnetASouche.dateCommande }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.infoCommandeCarnetASouche.quantiteCommande">Quantite Commande</span></dt>
+                <dd>
+                    <span>{{ infoCommandeCarnetASouche.quantiteCommande }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.infoCommandeCarnetASouche.commandeCarnetSouche">Commande Carnet à Souche</span></dt>
+                <dd>
+                    <div *ngIf="infoCommandeCarnetASouche.commandeCarnetSoucheId">
+                        <a [routerLink]="['/commande-carnet-souche', infoCommandeCarnetASouche.commandeCarnetSoucheId, 'view']">{{ infoCommandeCarnetASouche.commandeCarnetSoucheId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="improApp.infoCommandeCarnetASouche.typeCarnet">Type de Carnet</span></dt>
+                <dd>
+                    <div *ngIf="infoCommandeCarnetASouche.typeCarnetId">
+                        <a [routerLink]="['/type-carnet', infoCommandeCarnetASouche.typeCarnetId, 'view']">{{ infoCommandeCarnetASouche.typeCarnetId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/info-commande-carnet-a-souche', infoCommandeCarnetASouche.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

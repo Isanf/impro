@@ -1,0 +1,210 @@
+<nb-card class="inline-form-card">
+    <nb-card-header>
+        <h2>Création d'un nouveau Concessionnaire</h2>
+    </nb-card-header>
+    <nb-card-body>
+        <form (ngSubmit)="save()" [formGroup]="editForm" name="editForm" novalidate role="form">
+            <nb-stepper>
+                <nb-step>
+                    <div>
+                        <jhi-alert-error></jhi-alert-error>
+                        <div class="form-group" [hidden]="!editForm.get('idOrg').value">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input shape="round" nbInput status="primary" fullWidth fieldSize="tiny" type="text" class="form-control" id="id" name="id" formControlName="idOrg"
+                                   readonly />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nom Entreprise</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="Nom Entreprise" required="required"
+                                       formControlName="nom"/>
+                                <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                    <small class="form-text text-danger"
+                                           *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Description</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="Description" required="required"
+                                       formControlName="description"/>
+                                <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                    <small class="form-text text-danger"
+                                           *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                        This field cannot be longer than 1000 characters.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Numéro Téléphone</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="Numéro Téléphone" required
+                                       formControlName="numeroPhone"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">E-mail professionnel</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="E-mail professionnel" required
+                                       formControlName="email"/>
+                            </div>
+                        </div>
+                        <!--<div class="form-group row">
+                            <label class="col-sm-3 col-form-label" for="field_pere">Mere</label>
+                            <div class="col-sm-9">
+                                <nb-select id="field_pere" status="primary" outline shape="round" fullWidth size="small" formControlName="pereId" >
+                                    <nb-option [value]="organisationOption.id" *ngFor="let organisationOption of organisations; trackBy: trackOrganisationById">{{organisationOption.nom}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>-->
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Type d'Organisation</label>
+                            <div class="col-sm-9">
+                                <nb-select  status="primary" required="required" outline shape="round" fullWidth size="small" formControlName="typeOrganisationId" >
+                                    <nb-option [value]="typeOrganisationOption.id" *ngFor="let typeOrganisationOption of typeorganisations; trackBy: trackTypeOrganisationById">{{typeOrganisationOption.nom}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Est Acteur</label>
+                            <div class="col-sm-9">
+                                <nb-select status="primary" required="required" outline shape="round" fullWidth size="small" formControlName="typeActeurId" >
+                                    <nb-option [value]="typeActeurOption.id" *ngFor="let typeActeurOption of typeacteurs; trackBy: trackById">{{typeActeurOption.nom}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Localité de l'Organisation</label>
+                            <div class="col-sm-9">
+                                <nb-select  status="primary" required="required" outline shape="round" fullWidth size="small" formControlName="organisationLocaliteId" >
+                                    <nb-option [value]="organisationLocaliteOption.id" *ngFor="let organisationLocaliteOption of organisationlocalites; trackBy: trackById">{{organisationLocaliteOption.nom}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-11 col-form-label" ></label>
+                        <button nbButton nbStepperNext outline shape="round" status="primary" >
+                            <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                        </button>
+                    </div>
+                </nb-step>
+                <nb-step>
+                    <div class="form-group" [hidden]="!editForm.get('idpm')!.value">
+                        <label jhiTranslate="global.field.id">ID</label>
+                        <input shape="round" nbInput fullWidth fieldSize="tiny" status="primary"
+                               type="text" class="form-control" formControlName="idpm" readonly />
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Numéro Document</label>
+                        <div class="col-sm-9">
+                            <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                   type="text" placeholder="Numero Document" required
+                                   formControlName="numero"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Numéro IFU</label>
+                        <div class="col-sm-9">
+                            <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                   type="text" placeholder="Numero IFU" required
+                                   formControlName="numeroIFU"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Numéro RCCM</label>
+                        <div class="col-sm-9">
+                            <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                   type="text" placeholder="Numero RCCM" required
+                                   formControlName="numeroRCCM"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Adresse Postale</label>
+                        <div class="col-sm-9">
+                            <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                   type="text" placeholder="22 BP 52367 OUAGADOUGOU 22" required
+                                   formControlName="codePostal"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Lieu d'établissement</label>
+                        <div class="col-sm-9">
+                            <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                   type="text" placeholder="Lieu d'établissement de la carte W" required
+                                   formControlName="lieuEtablissement"/>
+                        </div>
+                    </div>
+                    <!--<div>
+                        <jhi-alert-error></jhi-alert-error>
+                        &lt;!&ndash;<div class="user-input-wrp">
+                        <br/>
+                        <input fieldSize="tiny" class="inputText" formControlName="numeroCarteW" fullWidth name="numeroCarteW"
+                               type="text" required>
+                        <span class="floating-label">Numero Carte W</span>
+                    </div>&ndash;&gt;
+                        &lt;!&ndash;<div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Date Etablissement Carte W</label>
+                        <div class="col-md-9">
+                                <span class="input-group-append">
+                                    <input nbInput shape="round" status="primary" fieldSize="tiny" placeholder="Date Etablissement Carte W"
+                                           fullWidth #dateEtablissementCarteWDp="ngbDatepicker" class="inputText"
+                                           formControlName="dateEtablissementCarteW"
+                                           ngbDatepicker type="text"/>
+                                    <button type="button" class="btn btn-secondary" (click)="dateEtablissementCarteWDp.toggle()">
+                                        <fa-icon icon="calendar-alt"></fa-icon>
+                                    </button>
+                                </span>
+                        </div>
+                    </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Date Expiration Carte W</label>
+                            <div class="col-md-9">
+                                <span class="input-group-append">
+                                    <input nbInput status="primary" shape="round" fieldSize="tiny" fullWidth #dateExpirationCarteWDp="ngbDatepicker" class="inputText"
+                                           formControlName="dateExpirationCarteW" placeholder="Date Expiration Carte W"
+                                           ngbDatepicker type="text"/>
+                                    <button type="button" class="btn btn-secondary" (click)="dateExpirationCarteWDp.toggle()">
+                                        <fa-icon icon="calendar-alt"></fa-icon>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>&ndash;&gt;
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Lieu Etablissement</label>
+                        <div class="col-sm-9">
+                            <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                   type="text" placeholder="Lieu Etablissement de la carte W" required="required"
+                                   formControlName="lieuEtablissement"/>
+                        </div>
+                    </div>-->
+                    <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                        <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                    </button>
+                </nb-step>
+            </nb-stepper>
+        </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <div>
+            <button size="small" nbButton status="basic" shape="round" outline
+                    (click)="previousState()">
+                <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+            </button>
+            <button type="button" nbButton outline status="primary" shape="round"
+                    (click)="save()" [disabled]="editForm.invalid || isSaving">
+                <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+        </div>
+    </nb-card-footer>
+</nb-card>

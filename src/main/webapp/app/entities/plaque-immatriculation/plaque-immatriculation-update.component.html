@@ -1,0 +1,275 @@
+<div class="row justify-content-center" *jhiHasAnyAuthority="['CONCESSIONNAIRE', 'REVENDEUR']">
+    <div class="container-fluid">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <nb-card>
+                <nb-card-header>
+                    <h2 id="jhi-plaque-immatriculation-heading">Nouvelle Immatriculation</h2>
+                </nb-card-header>
+                <nb-card-body>
+                <!--<jhi-alert-error></jhi-alert-error>-->
+                    <nb-stepper>
+                        <nb-step label="Scanner la Bande">
+                            <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                                <label for="id" jhiTranslate="global.field.id">ID</label>
+                                <input type="text" #id nbInput disabled fullWidth shape="round" status="primary" id="id" name="id"
+                                       formControlName="id" readonly />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"  for="field_numeroSerie">Code QR de la Bande</label>
+                                <div class="col-sm-9">
+                                    <input type="text" (change)="onChange()" nbInput placeholder="Scanner le code QR de la Bande ici"
+                                           fullWidth shape="semi-round" status="primary" name="numeroSerie" id="field_numeroSerie"
+                                           #numero formControlName="numeroSerie"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Numéro d'immatriculation</label>
+                                <div class="col-sm-9">
+                                    <input type="text" nbInput disabled fullWidth shape="semi-round" status="primary"
+                                           name="numeroImmatriculation" id="field_numeroImmatriculation"
+                                           #imma formControlName="numeroImmatriculation"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-11 col-form-label" ></label>
+                                <button nbButton nbStepperNext outline shape="round" status="primary" >
+                                    <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                                </button>
+                            </div>
+                        </nb-step>
+                        <nb-step label="Scanner le Certificat">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Certificat Immatriculation</label>
+                                <div class="col-sm-9">
+                                    <input type="text" nbInput required fullWidth shape="semi-round" placeholder="Scanner le code QR du certificat ici"
+                                           status="primary" (change)="onScanned()"
+                                           #certiId id="field_certificatImmatriculation" formControlName="certificatImmatriculationId"/>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="form-group row">
+                                <label class="col-sm-11 col-form-label" >
+                                    <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                                        <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                                    </button>
+                                </label>
+                                <button nbButton nbStepperNext outline shape="round" status="primary" >
+                                    <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                                </button>
+                            </div>
+                        </nb-step>
+                        <nb-step label="Engin Pose">
+                            <div>
+                                <div class="form-group row" *jhiHasAnyAuthority="'CONCESSIONNAIRE'">
+                                    <label class="col-sm-3 col-form-label" >Véhicule</label>
+                                    <div class="col-md-9">
+                                        <nb-select required fullWidth shape="semi-round" status="primary" formControlName="vehiculeId">
+                                            <nb-option [value]="vehiculeOption.id" *ngFor="let vehiculeOption of vehiculesC; trackBy: trackById">{{ 'N° de Chassis :'+ vehiculeOption.numeroChassis }}</nb-option>
+                                        </nb-select>
+                                    </div>
+                                </div>
+                                <div class="form-group row" *jhiHasAnyAuthority="'REVENDEUR'">
+                                    <label class="col-sm-3 col-form-label" >Véhicule</label>
+                                    <div class="col-md-9">
+                                        <nb-select fullWidth shape="semi-round" status="primary" required formControlName="vehiculeId">
+                                            <nb-option [value]="vehiculeOption.id" *ngFor="let vehiculeOption of vehiculesC; trackBy: trackById">{{ 'N° de Chassis :'+ vehiculeOption.numeroChassis }}</nb-option>
+                                        </nb-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                                <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                            </button>
+                            <!--<button nbStepperNext type="submit" size="tiny" (click)="typeVehi()" nbButton status="success"
+                                    shape="round">
+                                Voir Type
+                            </button>-->
+                        </nb-step>
+                        <!--<nb-step>
+                            <div>{{typeVehicule[0].libelle}}</div>
+                        </nb-step>-->
+                    </nb-stepper>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div>
+                        <button type="button" id="cancel-save" size="tiny" nbButton outline shape="round" (click)="previousState()">
+                            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+
+                        <button type="submit" id="save-entity" size="tiny" nbButton outline status="primary" shape="round"
+                                [disabled]="editForm.invalid || isSaving">
+                            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>
+<div class="row justify-content-center" *jhiHasAnyAuthority="'STHGUICHET'">
+    <div class="container-fluid">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <nb-card>
+                <nb-card-header>
+                    <h2 >Nouvelle Immatriculation</h2>
+                </nb-card-header>
+                <nb-card-body>
+<!--                    <jhi-alert-error></jhi-alert-error>-->
+                    <nb-stepper>
+                        <nb-step label="Scanner la Bande">
+                            <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                                <label jhiTranslate="global.field.id">ID</label>
+                                <input type="text" #idG nbInput disabled fullWidth shape="round" status="primary" name="id" formControlName="id" readonly />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"  for="field_numeroSerie">Code QR de la Bande</label>
+                                <div class="col-sm-9">
+                                    <input type="text" (change)="onChange()" nbInput placeholder="Scanner le code QR de la Bande ici"
+                                           fullWidth shape="semi-round" status="primary" name="numeroSerie"
+                                           #numeroG formControlName="numeroSerie"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Numéro d'immatriculation</label>
+                                <div class="col-sm-9">
+                                    <input type="text" nbInput disabled fullWidth shape="semi-round" status="primary"
+                                           name="numeroImmatriculation" #immaG formControlName="numeroImmatriculation"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-11 col-form-label" ></label>
+                                <button nbButton nbStepperNext  outline shape="round" status="primary" >
+                                    <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                                </button>
+                            </div>
+                        </nb-step>
+                        <nb-step label="Scanner le Certificat">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Certificat Immatriculation</label>
+                                <div class="col-sm-9">
+                                    <input type="text" nbInput required fullWidth shape="semi-round" placeholder="Scanner le code QR du certificat ici"
+                                           status="primary" (change)="onScanned()" #certiIdG formControlName="certificatImmatriculationId"/>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group row" *jhiHasAnyAuthority="'STHGUICHET'">
+                                    <label class="col-sm-3 col-form-label" >Véhicule</label>
+                                    <div class="col-md-9">
+                                        <nb-select fullWidth shape="semi-round" status="primary" required formControlName="vehiculeId">
+                                            <nb-option [value]="vehiculeOption.id" *ngFor="let vehiculeOption of vehiculesC; trackBy: trackById">{{ 'N° de Chassis :'+ vehiculeOption.numeroChassis }}</nb-option>
+                                        </nb-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-11 col-form-label" >
+                                    <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                                        <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                                    </button>
+                                </label>
+                                <button nbButton nbStepperNext outline [disabled]="!editForm.get('vehiculeId')!.value" shape="round" status="primary" >
+                                    <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                                </button>
+                            </div>
+                        </nb-step>
+                        <nb-step label="Paiement">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <nb-card class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <nb-card>
+                                                <nb-card-header>
+                                                    <div class="row align-items-center">
+                                                        <nb-checkbox [value]="checked" (checkedChange)="toggle($event)"
+                                                                     status="primary" size="40"> ORANGE MONEY </nb-checkbox>
+                                                    </div>
+                                                </nb-card-header>
+                                                <nb-card-body *ngIf="checked">
+                                                    <div class="form-group">
+                                                        <img src="/content/images/om.png" height="120" width="130" class="rounded mx-auto d-block">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                                   type="number" placeholder="Numéro de téléphone"
+                                                                   formControlName="telephone"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                                   type="number" placeholder="Code OTP"
+                                                                   formControlName="otp"/>
+                                                        </div>
+                                                    </div>
+                                                </nb-card-body>
+                                                <!--<nb-card-footer *ngIf="checked">
+                                                    <h6>Montant  :  25 000 FCFA</h6>
+                                                </nb-card-footer>-->
+                                            </nb-card>
+                                        </div>
+                                    </nb-card>
+                                </div>
+                                <div class="col-md-6">
+                                    <nb-card class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <nb-card>
+                                                <nb-card-header>
+                                                    <div class="row align-items-center">
+                                                        <nb-checkbox [value]="checked2" (checkedChange)="toggle2($event)"
+                                                                     status="primary" size="40"> MOBICASH </nb-checkbox>
+                                                    </div>
+                                                </nb-card-header>
+                                                <nb-card-body *ngIf="checked2">
+                                                    <div class="form-group">
+                                                        <img src="/content/images/mc.jpg" height="120" width="170" class="rounded mx-auto d-block">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                                   type="number" placeholder="Numéro de téléphone"
+                                                                   formControlName="telephone"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <input nbInput fullWidth fieldSize="tiny" shape="semi-round" status="primary"
+                                                                   type="number" placeholder="Code OTP"
+                                                                   formControlName="otp"/>
+                                                        </div>
+                                                    </div>
+                                                </nb-card-body>
+                                                <!--<nb-card-footer *ngIf="checked2">
+                                                    <h6>Montant  :  25 000 FCFA</h6>
+                                                </nb-card-footer>-->
+                                            </nb-card>
+                                        </div>
+                                    </nb-card>
+                                </div>
+                            </div>
+                            <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                                <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                            </button>
+                        </nb-step>
+                    </nb-stepper>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div>
+                        <button type="button" size="tiny" nbButton outline shape="round" (click)="previousState()">
+                            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" size="tiny" nbButton outline status="primary" shape="round"
+                                [disabled]="editForm.invalid || isSaving">
+                            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>

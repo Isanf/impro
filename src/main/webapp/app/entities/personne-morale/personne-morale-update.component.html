@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-personne-morale-heading" jhiTranslate="improApp.personneMorale.home.createOrEditLabel">Create or edit a Personne Morale</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.personneMorale.numeroIFU" for="field_numeroIFU" [ngbTooltip]="'improApp.personneMorale.help.numeroIFU' | translate">Numero IFU</label>
+                    <input type="text" class="form-control" name="numeroIFU" id="field_numeroIFU"
+                           formControlName="numeroIFU"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.personneMorale.denomination" for="field_denomination">Denomination</label>
+                    <input type="text" class="form-control" name="denomination" id="field_denomination"
+                           formControlName="denomination"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.personneMorale.dateCreate" for="field_dateCreate">Date Create</label>
+                    <div class="input-group">
+                        <input id="field_dateCreate" type="text" class="form-control" name="dateCreate" ngbDatepicker  #dateCreateDp="ngbDatepicker" formControlName="dateCreate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateCreateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+<div>
+    <nb-card>
+        <nb-card-header>
+            <h2 id="page-heading">
+                <span jhiTranslate="improApp.marqueVehicule.home.title">Marque Vehicules</span>
+
+                <button id="jh-create-entity" nbButton outline status="primary" shape="round" class="float-right jh-create-entity create-marque-vehicule" [routerLink]="['/marque-vehicule/new']">
+                    <fa-icon icon="plus"></fa-icon>
+                    <span  jhiTranslate="improApp.marqueVehicule.home.createLabel">
+                    Create a new Marque Vehicule
+                    </span>
+                </button>
+            </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <jhi-alert-error></jhi-alert-error>
+
+            <jhi-alert></jhi-alert>
+
+            <nb-form-field>
+                <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                <input type="text" fieldSize="tiny" nbInput status="primary" fullWidth placeholder="Rechercher"
+                       [(ngModel)]="searchText" />
+            </nb-form-field>
+
+            <div class="alert alert-warning" id="no-result" *ngIf="marqueVehicules?.length === 0">
+                <span jhiTranslate="improApp.marqueVehicule.home.notFound">No marqueVehicules found</span>
+            </div>
+
+            <div class="table-responsive table-striped table-hover table-bordered" id="entities" *ngIf="marqueVehicules?.length > 0">
+                <table class="table table-striped" aria-describedby="page-heading">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                        <th scope="col"><span jhiTranslate="global.field.id">ID</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.marqueVehicule.code">Code</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.marqueVehicule.libelle">Libelle</span> </th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let marqueVehicule of marqueVehicules | marqueFilter:searchText">
+                        <td><a [routerLink]="['/marque-vehicule', marqueVehicule.id, 'view']">{{ marqueVehicule.id }}</a></td>
+                        <td>{{ marqueVehicule.code }}</td>
+                        <td>{{ marqueVehicule.libelle }}</td>
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <button type="submit" nbButton status="info" size="tiny" outline shape="round"
+                                        [routerLink]="['/marque-vehicule', marqueVehicule.id, 'view']">
+                                    <fa-icon icon="eye"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <button type="submit" nbButton status="primary" size="tiny" shape="round" outline
+                                        [routerLink]="['/marque-vehicule', marqueVehicule.id, 'edit']">
+                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <button type="submit" (click)="delete(marqueVehicule)"
+                                        nbButton status="danger" size="tiny" shape="round" outline>
+                                    <fa-icon icon="times"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <div *ngIf="marqueVehicules?.length > 0">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                </div>
+            </div>
+        </nb-card-footer>
+    </nb-card>
+
+
+</div>
+
+
+<nb-card>
+    <nb-card-header>
+
+    </nb-card-header>
+    <nb-card-body>
+
+    </nb-card-body>
+    <nb-card-footer>
+
+    </nb-card-footer>
+</nb-card>

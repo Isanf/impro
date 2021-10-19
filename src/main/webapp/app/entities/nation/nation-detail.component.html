@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="nation">
+            <h2><span jhiTranslate="improApp.nation.detail.title">Nation</span> {{ nation.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.nation.iso">Iso</span></dt>
+                <dd>
+                    <span>{{ nation.iso }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.nation.name">Name</span></dt>
+                <dd>
+                    <span>{{ nation.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.nation.nicename">Nicename</span></dt>
+                <dd>
+                    <span>{{ nation.nicename }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.nation.iso3">Iso 3</span></dt>
+                <dd>
+                    <span>{{ nation.iso3 }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.nation.numcode">Numcode</span></dt>
+                <dd>
+                    <span>{{ nation.numcode }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.nation.phonecode">Phonecode</span></dt>
+                <dd>
+                    <span>{{ nation.phonecode }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/nation', nation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

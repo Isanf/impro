@@ -1,0 +1,232 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <nb-card>
+            <nb-card-header>
+                <h2><span >Carte W de </span> {{ carteW.organisationDTO.nom }}</h2>
+            </nb-card-header>
+            <nb-card-body>
+                <div *ngIf="carteW">
+                    <jhi-alert-error></jhi-alert-error>
+
+                    <dl class="row-md jh-entity-details" *ngIf="!typeActeur.nom.includes('GARAGE')">
+                        <div class="row">
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt>
+                                        <span jhiTranslate="improApp.carteW.numeroCarteW" [ngbTooltip]="'improApp.carteW.help.numeroCarteW' | translate">
+                                            Numéro Carte W</span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <span>{{ carteW.numeroCarteW }}</span>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.carteW.dateEtablissementCarteW">Date Etablissement Carte W</span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <span>{{ carteW.dateEtablissementCarteW }}</span>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.carteW.dateExpirationCarteW">Date Expiration Carte W</span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <span>{{ carteW.dateExpirationCarteW }}</span>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="row">
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.carteW.lieuEtablissement">Lieu Etablissement</span></dt>
+
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <span>{{ carteW.lieuEtablissement }}</span>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                            <nb-card class="col-md-4" status="basic">
+                                <nb-card-header>
+                                    <dt><span jhiTranslate="improApp.carteW.organisation">Organisation</span></dt>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <dd>
+                                        <div *ngIf="carteW.organisationId">
+                                            <a [routerLink]="['/organisation', carteW.organisationId, 'view']">{{ carteW.organisationDTO.nom }}</a>
+                                        </div>
+                                    </dd>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                    </dl>
+
+                    <div class="row" *ngIf="typeActeur.nom.includes('GARAGE')">
+                        <div class="col-md-6">
+                            <dl class="row-md jh-entity-details">
+                                <div class="row">
+                                    <nb-card class="col-md-6" status="basic">
+                                        <nb-card-header>
+                                            <dt>
+                                        <span jhiTranslate="improApp.carteW.numeroCarteW" [ngbTooltip]="'improApp.carteW.help.numeroCarteW' | translate">
+                                            Numéro Carte W</span></dt>
+                                        </nb-card-header>
+                                        <nb-card-body>
+                                            <dd>
+                                                <span>{{ carteW.numeroCarteW }}</span>
+                                            </dd>
+                                        </nb-card-body>
+                                    </nb-card>
+                                    <nb-card class="col-md-6" status="basic">
+                                        <nb-card-header>
+                                            <dt><span jhiTranslate="improApp.carteW.dateEtablissementCarteW">Date Etablissement Carte W</span></dt>
+                                        </nb-card-header>
+                                        <nb-card-body>
+                                            <dd>
+                                                <span>{{ carteW.dateEtablissementCarteW }}</span>
+                                            </dd>
+                                        </nb-card-body>
+                                    </nb-card>
+                                </div>
+                                <div class="row">
+                                    <nb-card class="col-md-6" status="basic">
+                                        <nb-card-header>
+                                            <dt><span jhiTranslate="improApp.carteW.dateExpirationCarteW">Date Expiration Carte W</span></dt>
+                                        </nb-card-header>
+                                        <nb-card-body>
+                                            <dd>
+                                                <span>{{ carteW.dateExpirationCarteW }}</span>
+                                            </dd>
+                                        </nb-card-body>
+                                    </nb-card>
+                                    <nb-card class="col-md-6" status="basic">
+                                        <nb-card-header>
+                                            <dt><span jhiTranslate="improApp.carteW.lieuEtablissement">Lieu Etablissement</span></dt>
+
+                                        </nb-card-header>
+                                        <nb-card-body>
+                                            <dd>
+                                                <span>{{ carteW.lieuEtablissement }}</span>
+                                            </dd>
+                                        </nb-card-body>
+                                    </nb-card>
+
+                                </div>
+                                <div class="row">
+                                    <nb-card class="col-md-4" status="basic">
+                                        <nb-card-header>
+                                            <dt><span jhiTranslate="improApp.carteW.organisation">Organisation</span></dt>
+                                        </nb-card-header>
+                                        <nb-card-body>
+                                            <dd>
+                                                <div *ngIf="carteW.organisationId">
+                                                    <a [routerLink]="['/organisation', carteW.organisationId, 'view']">{{ carteW.organisationDTO.nom }}</a>
+                                                </div>
+                                            </dd>
+                                        </nb-card-body>
+                                    </nb-card>
+
+                                </div>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <nb-card>
+                                <nb-card-header>
+                                    <h4 id="page-heading">
+                                        <span >Plaques</span>
+                                    </h4>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    <jhi-alert-error></jhi-alert-error>
+
+                                    <jhi-alert></jhi-alert>
+
+                                    <div class="alert alert-warning" id="no-result" *ngIf="plaqueGarages?.length === 0">
+                                        <span>Aucune plaque-Garage trouvée</span>
+                                    </div>
+                                    <div class="table-responsive table-hover table-bordered" id="entities" *ngIf="plaqueGarages && plaqueGarages.length > 0">
+                                        <table class="table table-striped" aria-describedby="page-heading">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col" ><span >N° </span> </th>
+                                                <th scope="col"><span >Numéro Plaque</span> </th>
+                                                <th scope="col"><span >Code QR Plaque</span> </th>
+                                                <th scope="col"><span >Créer le</span> </th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let plaqueGarage of plaqueGarages ;trackBy: trackId">
+                                                <td>{{ plaqueGarage.numeroOrdre }}</td>
+                                                <td>{{ plaqueGarage.numeroPlaque }}</td>
+                                                <td>{{ plaqueGarage.codeQrPlaque }}</td>
+                                                <td>{{ plaqueGarage.createdAt | date:'medium' }}</td>
+                                                <td class="text-right">
+                                                    <div class="btn-group">
+                                                        <button type="submit" nbButton shape="round" status="info" size="tiny" outline
+                                                                [routerLink]="['/plaque-garage', plaqueGarage.id, 'view']"
+                                                                class="btn btn-info btn-sm">
+                                                            <fa-icon icon="eye"></fa-icon>
+                                                            <span class="d-none d-md-inline"></span>
+                                                        </button>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </nb-card-body>
+                                <nb-card-footer>
+                                    <div *ngIf="plaqueGarages && plaqueGarages.length > 0">
+                                        <div class="row justify-content-center">
+                                            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                                        </div>
+
+                                        <div class="row justify-content-center">
+                                            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                                        </div>
+                                    </div>
+                                </nb-card-footer>
+                            </nb-card>
+                        </div>
+                    </div>
+
+                </div>
+            </nb-card-body>
+            <nb-card-footer>
+                <button type="submit" nbButton outline status="basic" shape="round" size="tiny"
+                        (click)="previousState()">
+                    <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                </button>
+
+                <div *jhiHasAnyAuthority="['ROLE_ADMIN']">
+                    <button type="button" nbButton outline status="primary" shape="round" size="tiny"
+                            [routerLink]="['/carte-w', carteW.id, 'edit']">
+                        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+                    </button>
+
+                    <button type="button" [nbSpinner]="loading"
+                            nbSpinnerStatus="primary" (click)="toggleLoadingAnimation(carteW.id)"
+                            nbButton outline status="success" shape="round" size="tiny">
+                        <fa-icon icon="print"></fa-icon>&nbsp;<span>Imprimer la carte W</span>
+                    </button>
+                    <button
+                        [routerLink]="['/plaque-garage', carteW.id, 'edit']" *ngIf="typeActeur.nom.includes('GARAGE')"
+                        nbButton outline status="info" shape="round" size="tiny">
+                        <fa-icon icon="copy"></fa-icon>&nbsp;<span>Attribution de Plaques</span>
+                    </button>
+                </div>
+            </nb-card-footer>
+        </nb-card>
+    </div>
+</div>

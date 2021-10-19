@@ -1,0 +1,71 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="improApp.posePlaque.home.title">Pose Plaques</span>
+        <button id="jh-create-entity" nbButton outline status="primary" shape="round" class="float-right jh-create-entity create-pose-plaque" [routerLink]="['/pose-plaque/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="improApp.posePlaque.home.createLabel">
+            Create a new Pose Plaque
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="posePlaques?.length === 0">
+        <span jhiTranslate="improApp.posePlaque.home.notFound">No posePlaques found</span>
+    </div>
+    <div class="table-responsive" *ngIf="posePlaques?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="numeroPose"><span jhiTranslate="improApp.posePlaque.numeroPose">Numero Pose</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="datePosePlaque"><span jhiTranslate="improApp.posePlaque.datePosePlaque">Date Pose Plaque</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="revendeurId"><span jhiTranslate="improApp.posePlaque.revendeur">Revendeur</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let posePlaque of posePlaques ;trackBy: trackId">
+                <td><a [routerLink]="['/pose-plaque', posePlaque.id, 'view' ]">{{posePlaque.id}}</a></td>
+                <td>{{posePlaque.numeroPose}}</td>
+                <td>{{posePlaque.datePosePlaque | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="posePlaque.revendeurId">
+                        <a [routerLink]="['/organisation', posePlaque.revendeurId , 'view' ]" >{{posePlaque.revendeurId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/pose-plaque', posePlaque.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/pose-plaque', posePlaque.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(posePlaque)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="posePlaques?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

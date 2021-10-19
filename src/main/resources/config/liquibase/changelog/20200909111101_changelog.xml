@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+<changeSet author="STH (generated)" id="1599649869888-11">
+<dropForeignKeyConstraint baseTableName="jhi_persistent_token" constraintName="fk_user_persistent_token"/>
+</changeSet>
+<changeSet author="STH (generated)" id="1599649869888-12">
+<dropTable tableName="jhi_persistent_token"/>
+</changeSet>
+<changeSet author="STH (generated)" id="1599649869888-1">
+<dropUniqueConstraint constraintName="UC_CARTE_WORGANISATION_ID_COL" tableName="carte_w"/>
+<addUniqueConstraint columnNames="organisation_id" constraintName="UC_CARTE_WORGANISATION_ID_COL" tableName="carte_w"/>
+</changeSet>
+<changeSet author="STH (generated)" id="1599649869888-2">
+<dropUniqueConstraint constraintName="UC_DOC_IDENTIFICATION_PMORGANISATION_ID_COL" tableName="doc_identification_pm"/>
+<addUniqueConstraint columnNames="organisation_id" constraintName="UC_DOC_IDENTIFICATION_PMORGANISATION_ID_COL" tableName="doc_identification_pm"/>
+</changeSet>
+<changeSet author="STH (generated)" id="1599649869888-3">
+<dropUniqueConstraint constraintName="UC_DOC_IDENTIFICATION_PMPERSONNE_MORALE_ID_COL" tableName="doc_identification_pm"/>
+<addUniqueConstraint columnNames="personne_morale_id" constraintName="UC_DOC_IDENTIFICATION_PMPERSONNE_MORALE_ID_COL" tableName="doc_identification_pm"/>
+</changeSet>
+<changeSet author="STH (generated)" id="1599649869888-4">
+<dropUniqueConstraint constraintName="UC_FIRSTLOGINUSER_ID_COL" tableName="firstlogin"/>
+<addUniqueConstraint columnNames="user_id" constraintName="UC_FIRSTLOGINUSER_ID_COL" tableName="firstlogin"/>
+</changeSet>
+<changeSet author="STH (generated)" id="1599649869888-5">
+<dropUniqueConstraint constraintName="UC_IMAGE_TABLEORGID_COL" tableName="image_table"/>
+<addUniqueConstraint columnNames="orgid" constraintName="UC_IMAGE_TABLEORGID_COL" tableName="image_table"/>
+</changeSet>
+<changeSet author="STH (generated)" id="1599649869888-6">
+<dropUniqueConstraint constraintName="UC_IMMATRICULATIONCERTIFICAT_IMMATRICULATION_ID_COL" tableName="immatriculation"/>
+<addUniqueConstraint columnNames="certificat_immatriculation_id" constraintName="UC_IMMATRICULATIONCERTIFICAT_IMMATRICULATION_ID_COL" tableName="immatriculation"/>
+</changeSet>
+<changeSet author="STH (generated)" id="1599649869888-7">
+<dropUniqueConstraint constraintName="UC_JHI_USEREMAIL_COL" tableName="jhi_user"/>
+<addUniqueConstraint columnNames="email" constraintName="UC_JHI_USEREMAIL_COL" tableName="jhi_user"/>
+</changeSet>
+<changeSet author="STH (generated)" id="1599649869888-8">
+<dropUniqueConstraint constraintName="UC_JHI_USERLOGIN_COL" tableName="jhi_user"/>
+<addUniqueConstraint columnNames="login" constraintName="UC_JHI_USERLOGIN_COL" tableName="jhi_user"/>
+</changeSet>
+<changeSet author="STH (generated)" id="1599649869888-9">
+<dropUniqueConstraint constraintName="UC_PERSONNE_PHYSIQUEDOC_IDENTIFICATION_ID_COL" tableName="personne_physique"/>
+<addUniqueConstraint columnNames="doc_identification_id" constraintName="UC_PERSONNE_PHYSIQUEDOC_IDENTIFICATION_ID_COL" tableName="personne_physique"/>
+</changeSet>
+<changeSet author="STH (generated)" id="1599649869888-10">
+<dropUniqueConstraint constraintName="UC_PERSONNE_PHYSIQUEUSER_ID_COL" tableName="personne_physique"/>
+<addUniqueConstraint columnNames="user_id" constraintName="UC_PERSONNE_PHYSIQUEUSER_ID_COL" tableName="personne_physique"/>
+</changeSet>
+</databaseChangeLog>

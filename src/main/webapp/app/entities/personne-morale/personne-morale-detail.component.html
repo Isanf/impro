@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="personneMorale">
+            <h2><span jhiTranslate="improApp.personneMorale.detail.title">Personne Morale</span> {{personneMorale.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.personneMorale.numeroIFU" [ngbTooltip]="'improApp.personneMorale.help.numeroIFU' | translate">Numero IFU</span></dt>
+                <dd>
+                    <span>{{personneMorale.numeroIFU}}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.personneMorale.denomination">Denomination</span></dt>
+                <dd>
+                    <span>{{personneMorale.denomination}}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.personneMorale.dateCreate">Date Create</span></dt>
+                <dd>
+                    <span>{{personneMorale.dateCreate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/personne-morale', personneMorale.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

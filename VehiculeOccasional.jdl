@@ -1,0 +1,12 @@
+
+
+entity VehiculeOccasional{
+	chassis String
+    marque String
+    model String
+    createdAt ZonedDateTime
+}
+
+dto * with mapstruct
+paginate * with pagination
+service * with serviceClass

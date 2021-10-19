@@ -1,0 +1,81 @@
+<div>
+    <nb-card>
+        <nb-card-header>
+            <h2 id="page-heading">
+                <span >Catégories d'Organisations</span>
+
+                <button id="jh-create-entity" nbButton status="primary" outline shape="round" class="float-right jh-create-entity create-categorie-organisation" [routerLink]="['/categorie-organisation/new']">
+                    <fa-icon icon="plus"></fa-icon>
+                    <span>
+                    Créer une nouvelle Categorie d'Organisation
+                    </span>
+                </button>
+            </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <jhi-alert-error></jhi-alert-error>
+
+            <jhi-alert></jhi-alert>
+
+            <nb-form-field>
+                <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                <input type="text" fieldSize="tiny" nbInput status="primary" fullWidth placeholder="Rechercher"
+                       [(ngModel)]="searchText" />
+            </nb-form-field>
+
+            <div class="alert alert-warning" id="no-result" *ngIf="categorieOrganisations?.length === 0">
+                <span>Aucune catégorie d'Organisation trouvée</span>
+            </div>
+
+            <div class="table-responsive table-striped" id="entities" *ngIf="categorieOrganisations?.length > 0">
+                <table class="table table-striped" aria-describedby="page-heading">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                        <th scope="col"><span jhiTranslate="improApp.categorieOrganisation.libelle">Libellé</span></th>
+                        <th scope="col"><span jhiTranslate="improApp.categorieOrganisation.description">Description</span></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let categorieOrganisation of categorieOrganisations | categorieFilter:searchText">
+                        <td>{{ categorieOrganisation.libelle }}</td>
+                        <td>{{ categorieOrganisation.description }}</td>
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <button type="submit" nbButton status="info" size="tiny" outline shape="round"
+                                        [routerLink]="['/categorie-organisation', categorieOrganisation.id, 'view']">
+                                    <fa-icon icon="eye"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <button type="submit" nbButton status="primary" outline shape="round" size="tiny"
+                                        [routerLink]="['/categorie-organisation', categorieOrganisation.id, 'edit']">
+                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <button type="submit" nbButton status="danger" size="tiny" outline shape="round"
+                                        (click)="delete(categorieOrganisation)">
+                                    <fa-icon icon="times"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <div *ngIf="categorieOrganisations?.length > 0">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                </div>
+            </div>
+        </nb-card-footer>
+    </nb-card>
+</div>

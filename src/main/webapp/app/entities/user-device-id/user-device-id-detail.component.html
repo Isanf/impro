@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="userDeviceId">
+            <h2><span jhiTranslate="improApp.userDeviceId.detail.title">User Device Id</span> {{ userDeviceId.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.userDeviceId.adressMac">Adress Mac</span></dt>
+                <dd>
+                    <span>{{ userDeviceId.adressMac }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.userDeviceId.deviceId">Device Id</span></dt>
+                <dd>
+                    <span>{{ userDeviceId.deviceId }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.userDeviceId.user">User</span></dt>
+                <dd>
+                    {{ userDeviceId.userLogin }}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/user-device-id', userDeviceId.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

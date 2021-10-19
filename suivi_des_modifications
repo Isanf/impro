@@ -1,0 +1,127 @@
+
+
+Gerer les numeros d'immatriculation en fonction du type de vehicule
+
+Definir une charte graphique
+  OK  - Utiliser les couleurs de SUPERNET TECHNOLOGIE (Rouge et bleu clair)
+  OK  - Ajouter le logo de SUPERNET
+    - Afficher les statistiques sur la page d'acceuil
+  OK - Reduire l'epaisseur de la page nav-bar
+    - Ajouter une barre de recherche pour chaque tableau
+    - Utiliser un tree view table pour les organisations
+  OK  - Reduire la taille des champs des formulaires et les regrouper sur une page autant que possible
+    - Utiliser les modals pour les formulaires avec un faible nombre de champs ( 5 au maximum)
+  OK  - Utiliser des placeholder pour les champs
+    - Reduire la taille des boutons
+  OK  - Utiliser la mise en forme de commande carnets a souche comme mise en forme de tous les tableaux
+
+<<<<<<< HEAD
+OK Definir le contenu de la barre de menu
+=======
+<<<<<<< HEAD
+OK Definir le contenu de la barre de menu
+=======
+<<<<<<< HEAD
+OK Definir le contenu de la barre de menu
+=======
+<<<<<<< HEAD
+OK Definir le contenu de la barre de menu
+=======
+<<<<<<< HEAD
+OK Definir le contenu de la barre de menu
+=======
+ Definir le contenu de la barre de menu
+>>>>>>> a437010628a74d5b546cb1725e17fce30b9d5c08
+>>>>>>> 70ecc6b5759d4cde32dee7c7676fc9a205c4e710
+>>>>>>> 693122af04d264e69e00eeb37dc73170beb137fd
+>>>>>>> 5b5b97308c580cb92b0bf3baa03969a986d20101
+>>>>>>> 5d483031915649f70a2c9bbeb0256f253f674878
+    - SUPERNET
+        * PARAMETRES:
+            OK. Definition des categories d'organisations
+            OK. Definition des types d'organisations
+            OK. Definition des types de carnets a souche
+            OK. Definition des types de vehicules
+            OK. Definition des marques de vehicules
+        * Organisations :
+            OK. Definition de SUPERNET et de ses guichets
+            OK. Definition des concessionnaires
+            OK. Definition des revendeurs
+            OK. Definition des FDS
+            OK. Definition de la DGTTM
+        * Gestion des utilisateurs
+            OK. Profil
+            OK. utilisateurs
+        * Statistiques :
+            . Statistiques des vehicules entres par periode
+            . Statistiques des vehicules en circulation par periode
+            . Statistiques des vehicules immatricules par periode
+            . Statistiques des vehicules dont l'immatriculation a expire par periode
+            . Statistiques des vehicules en transit par periode
+            . Statistiques des vehicules en stock chez les concessionnaires par periode
+            . Le nombre de concessionnaires par periode
+            . Le nombre de revendeurs par periode
+            . Le nombre d'utilisateurs par periode
+
+Gestion des utilisateurs
+    - Obliger l'utilisateur a reinitialiser son mot de passe a la premiere connexion
+
+Organisations
+    OK- Ajouter le gerant pour chaque organisation, Telephone, et siege social
+    OK- Ajouter le numero de Telephone pour personne physique au moment de l'enregistrement d'un
+    utilisateur
+    OK- Utiliser des Steps pour l'enregistrement des utilisateurs
+
+Gestion des concessionnaires et des revendeurs
+    OK- Ajouter l'ecran d'ajout des revendeurs et des autres organisations
+    OK- Ajouter l'ecran d'ajout de SUPERNET et de ses guichets
+    OK- Ajouter le gerant de l'organisation
+
+
+------------------------------------------------------------------------------------------------------------
+Realisation - Realisation - Realisation - Realisation - Realisation - Realisation - Realisation - Realisation -
+------------------------------------------------------------------------------------------------------------
+
+Gestion des carnets a souche
+    - Fait = Ajouter deux attributs dans CommandeCarnetSouche (EstTraiter et estLivree)
+    - Remplace les cles etrangeres par les nom ou les libelles dans toutes les tables
+    - Fait = Integrer la generation des codes QR de la signature au moment du traitement de la commande des carnets a souche
+    - En cours = Integrer le decodage et la verification de la signature du code QR
+    - Fait = Ajouter un attribut codeQR a PlaqueImmatriculation
+    - Fait = Revenir sur la page de CommandeCarnetSouche apres avoir termine le traitement
+    - Imprimer les certificats et les plaques d'immatriculation au moment du traitement de la CommandeCarnetSouche
+
+Gestion des commandeVehicule
+    - Generer automatiquement les numeros infoCommande
+    - Revoire = Relier le revendeur a la commandeVehicule
+    - Fait = Relier les entites livraison et commandeVehicule
+    - Fait = Relier le concessionnaire a livraisonVehicule
+    - Fait = Selectionner la commandeVehicule et Afficher les marques de vehicules commandes
+
+Gestion des importations de stocks de vehicules
+    - Fait =
+    - Fait =
+    - Fait =
+    - Fait =
+    - Fait =
+
+------------------------------------------------------------------------------------------------------------
+Nouveau - Nouveau - Nouveau - Nouveau - Nouveau - Nouveau - Nouveau - Nouveau - Nouveau - Nouveau - Nouveau -
+------------------------------------------------------------------------------------------------------------
+Definir une charte graphique
+    - Fait = Utiliser les couleurs de SUPERNET TECHNOLOGIE (Rouge et bleu clair)
+    - Fait = Ajouter le logo de SUPERNET
+    - Fait = Reduire l'epaisseur de la page nav-bar
+    - Fait = Reduire la taille des champs des formulaires et les regrouper sur une page autant que possible
+    - Fait = Utiliser des placeholder pour les champs
+    - Fait = Definir le contenu de la barre de menu
+
+Organisations
+    - Fait = Utiliser des Steps pour l'enregistrement des utilisateurs
+    - Fait = Ajout de gerant lors de la creation d'un conncessionnaire
+    - Fait = Fenetre d'ajout de revendeur en meme temps son gerant et le profil de son gerant
+    - Fait = Ajouter le numero de Telephone pour personne physique au moment de l'enregistrement d'un
+             utilisateur
+    - Fait = Ajouter le gerant de l'organisation
+    - Fait = Utiliser des Steps pour l'enregistrement des utilisateurs
+

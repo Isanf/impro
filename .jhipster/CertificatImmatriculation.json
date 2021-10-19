@@ -1,0 +1,41 @@
+{
+  "name": "CertificatImmatriculation",
+  "fields": [
+    {
+      "fieldName": "numero",
+      "fieldType": "String",
+      "javadoc": "numero"
+    },
+    {
+      "fieldName": "codeQr",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "plaqueImmatriculation",
+      "otherEntityRelationshipName": "certificatImmatriculation",
+      "relationshipName": "plaqueImmatriculation"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "carnetASouche",
+      "otherEntityRelationshipName": "certificatImmatriculation",
+      "relationshipName": "carnetASouche",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200204171045",
+  "javadoc": "The CertificatImmatriculation entity.\\n@author A true hipster",
+  "entityTableName": "certificat_immatriculation",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

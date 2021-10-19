@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-info-commande-carnet-a-souche-heading" jhiTranslate="improApp.infoCommandeCarnetASouche.home.createOrEditLabel">Créer ou éditer une Info-Commande Carnet à Souche</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.infoCommandeCarnetASouche.numeroCommande" for="field_numeroCommande" [ngbTooltip]="'improApp.infoCommandeCarnetASouche.help.numeroCommande' | translate">Numero Commande</label>
+                    <input type="text" class="form-control" name="numeroCommande" id="field_numeroCommande"
+                           formControlName="numeroCommande"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.infoCommandeCarnetASouche.dateCommande" for="field_dateCommande">Date Commande</label>
+                    <div class="d-flex">
+                        <input id="field_dateCommande" type="datetime-local" class="form-control" name="dateCommande" formControlName="dateCommande" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.infoCommandeCarnetASouche.quantiteCommande" for="field_quantiteCommande">Quantite Commande</label>
+                    <input type="number" class="form-control" name="quantiteCommande" id="field_quantiteCommande"
+                           formControlName="quantiteCommande"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.infoCommandeCarnetASouche.isDeliver" for="field_isDeliver">Is Deliver</label>
+                    <input type="checkbox" class="form-control" name="isDeliver" id="field_isDeliver"
+                           formControlName="isDeliver"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.infoCommandeCarnetASouche.isTransited" for="field_isTransited">Is Transited</label>
+                    <input type="checkbox" class="form-control" name="isTransited" id="field_isTransited"
+                           formControlName="isTransited"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.infoCommandeCarnetASouche.commandeCarnetSouche" for="field_commandeCarnetSouche">Commande Carnet à Souche</label>
+                    <select class="form-control" id="field_commandeCarnetSouche" name="commandeCarnetSouche" formControlName="commandeCarnetSoucheId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="commandeCarnetSoucheOption.id" *ngFor="let commandeCarnetSoucheOption of commandecarnetsouches; trackBy: trackById">{{ commandeCarnetSoucheOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="improApp.infoCommandeCarnetASouche.typeCarnet" for="field_typeCarnet">Type de Carnet</label>
+                    <select class="form-control" id="field_typeCarnet" name="typeCarnet" formControlName="typeCarnetId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="typeCarnetOption.id" *ngFor="let typeCarnetOption of typecarnets; trackBy: trackById">{{ typeCarnetOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

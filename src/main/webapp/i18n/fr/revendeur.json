@@ -1,0 +1,32 @@
+{
+  "improApp": {
+    "revendeur": {
+      "home": {
+        "title": "Revendeurs",
+        "createLabel": "Créer un nouveau Revendeur",
+        "createOrEditLabel": "Créer ou éditer un Revendeur",
+        "notFound": "Aucun Revendeur trouvé"
+      },
+      "created": "Un nouveau Revendeur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Revendeur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Revendeur avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Revendeur {{ id }} ?"
+      },
+      "detail": {
+        "title": "Revendeur"
+      },
+      "numeroIFU": "Numero IFU",
+      "denomination": "Denomination",
+      "dateCreation": "Date Creation",
+      "commandeVehicule": "Commande Vehicule",
+      "immatriculation": "Immatriculation",
+      "livraisonVehicule": "Livraison Vehicule",
+      "posePlaque": "Pose Plaque",
+      "vente": "Vente",
+      "help": {
+        "numeroIFU": "numero"
+      }
+    }
+  }
+}

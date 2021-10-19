@@ -1,0 +1,30 @@
+{
+  "improApp": {
+    "typeVehicule": {
+      "home": {
+        "title": "TypeVehicules",
+        "createLabel": "Créer un nouveau Type Vehicule",
+        "createOrEditLabel": "Créer ou éditer un Type Vehicule",
+        "notFound": "Aucun Type Vehicule trouvé"
+      },
+      "created": "Un nouveau Type Vehicule a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Type Vehicule avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Type Vehicule avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Type Vehicule {{ id }} ?"
+      },
+      "detail": {
+        "title": "Type Vehicule"
+      },
+      "code": "Code",
+      "libelle": "Libelle",
+      "nombrePlaque": "Nombre Plaque",
+      "estCycleMoteur": "Est Cycle Moteur",
+      "typeCarnet": "Type Carnet",
+      "vehicule": "Vehicule",
+      "help": {
+        "code": "code"
+      }
+    }
+  }
+}

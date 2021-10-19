@@ -1,0 +1,44 @@
+{
+  "name": "PersonneMorale",
+  "fields": [
+    {
+      "fieldName": "numeroIFU",
+      "fieldType": "String",
+      "javadoc": "numeroIFU"
+    },
+    {
+      "fieldName": "denomination",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateCreate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "immatriculation",
+      "otherEntityRelationshipName": "personneMorale",
+      "relationshipName": "immatriculation"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vente",
+      "otherEntityRelationshipName": "personneMorale",
+      "relationshipName": "vente"
+    }
+  ],
+  "changelogDate": "20200205114755",
+  "javadoc": "The PersonneMorale entity.\\n@author A true hipster",
+  "entityTableName": "personne_morale",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

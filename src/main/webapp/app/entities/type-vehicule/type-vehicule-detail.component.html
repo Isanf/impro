@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="typeVehicule">
+            <h2><span jhiTranslate="improApp.typeVehicule.detail.title">Type Vehicule</span> {{ typeVehicule.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.typeVehicule.code" [ngbTooltip]="'improApp.typeVehicule.help.code' | translate">Code</span></dt>
+                <dd>
+                    <span>{{ typeVehicule.code }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.typeVehicule.libelle">Libelle</span></dt>
+                <dd>
+                    <span>{{ typeVehicule.libelle }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.typeVehicule.nombrePlaque">Nombre Plaque</span></dt>
+                <dd>
+                    <span>{{ typeVehicule.nombrePlaque }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.typeVehicule.estCycleMoteur">Est Cycle Moteur</span></dt>
+                <dd>
+                    <span>{{ typeVehicule.estCycleMoteur }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/type-vehicule', typeVehicule.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

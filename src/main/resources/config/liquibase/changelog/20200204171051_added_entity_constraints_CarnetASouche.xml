@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity CarnetASouche.
+    -->
+    <changeSet id="20200204171051-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="concessionnaire_id"
+                                 baseTableName="carnet_a_souche"
+                                 constraintName="fk_carnet_a_souche_concessionnaire_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation"/>
+
+        <addForeignKeyConstraint baseColumnNames="livraison_carnet_souche_id"
+                                 baseTableName="carnet_a_souche"
+                                 constraintName="fk_carnet_a_souche_livraison_carnet_souche_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="livraison_carnet_souche"/>
+
+        <addForeignKeyConstraint baseColumnNames="type_carnet_id"
+                                 baseTableName="carnet_a_souche"
+                                 constraintName="fk_carnet_a_souche_type_carnet_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type_carnet"/>
+
+    </changeSet>
+</databaseChangeLog>

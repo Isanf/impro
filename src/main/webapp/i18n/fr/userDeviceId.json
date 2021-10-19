@@ -1,0 +1,24 @@
+{
+  "improApp": {
+    "userDeviceId": {
+      "home": {
+        "title": "UserDeviceIds",
+        "createLabel": "Créer un nouveau User Device Id",
+        "createOrEditLabel": "Créer ou éditer un User Device Id",
+        "notFound": "Aucun User Device Id trouvé"
+      },
+      "created": "Un nouveau User Device Id a été créé avec l'identifiant {{ param }}",
+      "updated": "Le User Device Id avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le User Device Id avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le User Device Id {{ id }} ?"
+      },
+      "detail": {
+        "title": "User Device Id"
+      },
+      "adressMac": "Adress Mac",
+      "deviceId": "Device Id",
+      "user": "User"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "improApp": {
+    "vehiculeOccasion": {
+      "home": {
+        "title": "VehiculeOccasions",
+        "createLabel": "Créer un nouveau Vehicule Occasion",
+        "createOrEditLabel": "Créer ou éditer un Vehicule Occasion",
+        "notFound": "Aucun Vehicule Occasion trouvé"
+      },
+      "created": "Un nouveau Vehicule Occasion a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Vehicule Occasion avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Vehicule Occasion avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Vehicule Occasion {{ id }} ?"
+      },
+      "detail": {
+        "title": "Vehicule Occasion"
+      },
+      "chassis": "Chassis",
+      "marque": "Marque",
+      "model": "Model",
+      "nomPrenom": "Nom Prenom",
+      "telephone": "Telephone",
+      "carteW": "Carte W",
+      "createdAt": "Created At",
+      "numeroCNIB": "Numero CNIB",
+      "organisation": "Organisation"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "improApp": {
+    "posePlaque": {
+      "home": {
+        "title": "PosePlaques",
+        "createLabel": "Créer un nouveau Pose Plaque",
+        "createOrEditLabel": "Créer ou éditer un Pose Plaque",
+        "notFound": "Aucun Pose Plaque trouvé"
+      },
+      "created": "Un nouveau Pose Plaque a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Pose Plaque avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Pose Plaque avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Pose Plaque {{ id }} ?"
+      },
+      "detail": {
+        "title": "Pose Plaque"
+      },
+      "numeroPose": "Numero Pose",
+      "datePosePlaque": "Date Pose Plaque",
+      "revendeur": "Revendeur",
+      "help": {
+        "numeroPose": "numeroPose"
+      }
+    }
+  }
+}

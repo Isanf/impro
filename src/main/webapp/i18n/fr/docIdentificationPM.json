@@ -1,0 +1,33 @@
+{
+  "improApp": {
+    "docIdentificationPM": {
+      "home": {
+        "title": "DocIdentificationPMS",
+        "createLabel": "Créer un nouveau Doc Identification PM",
+        "createOrEditLabel": "Créer ou éditer un Doc Identification PM",
+        "notFound": "Aucun Doc Identification PM trouvé"
+      },
+      "created": "Un nouveau Doc Identification PM a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Doc Identification PM avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Doc Identification PM avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Doc Identification PM {{ id }} ?"
+      },
+      "detail": {
+        "title": "Doc Identification PM"
+      },
+      "numero": "Numero",
+      "numeroIFU": "Numero IFU",
+      "numeroRCCM": "Numero RCCM",
+      "telephone": "Telephone",
+      "siegeSocial": "Siege Social",
+      "codePostal": "Code Postal",
+      "email": "Email",
+      "organisation": "Organisation",
+      "personneMorale": "Personne Morale",
+      "help": {
+        "numero": "numero"
+      }
+    }
+  }
+}

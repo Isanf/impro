@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity PersonnePhysique.
+    -->
+    <changeSet id="20200205114753-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="doc_identification_id"
+                                 baseTableName="personne_physique"
+                                 constraintName="fk_personne_physique_doc_identification_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="doc_identification_pp"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="personne_physique"
+                                 constraintName="fk_personne_physique_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="organisation_id"
+                                 baseTableName="personne_physique"
+                                 constraintName="fk_personne_physique_organisation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation"/>
+
+        <addForeignKeyConstraint baseColumnNames="profil_id"
+                                 baseTableName="personne_physique"
+                                 constraintName="fk_personne_physique_profil_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profil"/>
+
+    </changeSet>
+</databaseChangeLog>

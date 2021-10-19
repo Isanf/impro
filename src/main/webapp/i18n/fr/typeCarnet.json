@@ -1,0 +1,30 @@
+{
+  "improApp": {
+    "typeCarnet": {
+      "home": {
+        "title": "TypeCarnets",
+        "createLabel": "Créer un nouveau Type Carnet",
+        "createOrEditLabel": "Créer ou éditer un Type Carnet",
+        "notFound": "Aucun Type Carnet trouvé"
+      },
+      "created": "Un nouveau Type Carnet a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Type Carnet avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Type Carnet avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Type Carnet {{ id }} ?"
+      },
+      "detail": {
+        "title": "Type Carnet"
+      },
+      "code": "Code",
+      "libelle": "Libelle",
+      "quantiteCertificat": "Quantite Certificat",
+      "carnetSouche": "Carnet Souche",
+      "infoCommandeCarnetASouche": "Info Commande Carnet A Souche",
+      "typeVehicule": "Type Vehicule",
+      "help": {
+        "code": "code"
+      }
+    }
+  }
+}

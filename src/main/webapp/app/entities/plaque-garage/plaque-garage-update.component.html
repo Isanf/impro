@@ -1,0 +1,111 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <nb-card>
+                <nb-card-header>
+                    <h2 id="jhi-plaque-garage-heading" >Attribution de plaques à : {{ organisation.nom }}</h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <div>
+                        <jhi-alert-error></jhi-alert-error>
+
+                        <!--<div class="form-group" [hidden]="!editForm.get('id')!.value">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                        </div>-->
+
+                        <div class="form-group row justify-content-center">
+                            <div class="col-md-8">
+                                <nb-form-field>
+                                    <nb-icon nbPrefix icon="code" pack="eva"></nb-icon>
+                                    <input placeholder="Scanner le Code Qr de plaque ici" nbInput fullWidth
+                                           status="primary" shape="semi-round" formControlName="codeQrPlaque">
+                                    <nb-icon nbSuffix [icon]="'star'">
+                                    </nb-icon>
+                                </nb-form-field>
+                            </div>
+
+
+                            <!--<label class="form-control-label" jhiTranslate="improApp.plaqueGarage.numeroOrdre" for="field_numeroOrdre">Numero Ordre</label>
+                            <input type="text" name="numeroOrdre" id="field_numeroOrdre"
+                                   formControlName="numeroOrdre"/>-->
+                            <div class="right">
+                                <button type="button" nbButton status="primary" outline shape="round" size="medium"
+                                        [disabled]="this.editForm.get(['codeQrPlaque']).value == null" (click)="add()">
+                                    <nb-icon icon="plus-circle-outline" size="80"></nb-icon>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive table-striped" *ngIf="plaqueGarages.length > 0">
+                            <nb-card size="tiny" status="primary">
+                                <table class="table table-striped" aria-describedby="page-heading">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" ><span>Numéro Plaque</span> </th>
+                                        <th scope="col" ><span>Code Qr Plaque</span></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let plaque of plaqueGarages">
+                                        <td> <strong></strong> {{ plaque.numeroPlaque }} </td>
+                                        <td> <strong></strong> {{ plaque.codeQrPlaque }} </td>
+                                        <td class="text-right">
+                                            <div class="btn-group">
+                                                <button nbButton outline size="tiny" shape="round" status="primary">
+                                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                                    <span class="d-none d-md-inline"></span>
+                                                </button>
+
+                                                <button nbButton outline shape="round" status="danger" size="tiny">
+                                                    <fa-icon icon="times"></fa-icon>
+                                                    <span class="d-none d-md-inline"></span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </nb-card>
+                        </div>
+
+                        <!--<div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.plaqueGarage.numeroPlaque" for="field_numeroPlaque">Numero Plaque</label>
+                            <input type="text" class="form-control" name="numeroPlaque" id="field_numeroPlaque"
+                                   formControlName="numeroPlaque"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.plaqueGarage.codeQrPlaque" for="field_codeQrPlaque">Code Qr Plaque</label>
+                            <input type="text" class="form-control" name="codeQrPlaque" id="field_codeQrPlaque"
+                                   formControlName="codeQrPlaque"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.plaqueGarage.carteW" for="field_carteW">Carte W</label>
+                            <select class="form-control" id="field_carteW" name="carteW" formControlName="carteWId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="carteWOption.id" *ngFor="let carteWOption of cartews; trackBy: trackById">{{ carteWOption.id }}</option>
+                            </select>
+                        </div>-->
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div>
+                        <button type="button" nbButton shape="semi-round" size="tiny" outline
+                                (click)="previousState()">
+                            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+
+                        <button type="submit" nbButton outline size="tiny" shape="semi-round" status="primary"
+                                [disabled]="plaqueGarages.length === 0">
+                            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>

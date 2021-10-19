@@ -1,0 +1,35 @@
+{
+  "improApp": {
+    "concessionnaire": {
+      "home": {
+        "title": "Concessionnaires",
+        "createLabel": "Créer un nouveau Concessionnaire",
+        "createOrEditLabel": "Créer ou éditer un Concessionnaire",
+        "notFound": "Aucun Concessionnaire trouvé"
+      },
+      "created": "Un nouveau Concessionnaire a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Concessionnaire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Concessionnaire avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Concessionnaire {{ id }} ?"
+      },
+      "detail": {
+        "title": "Concessionnaire"
+      },
+      "numeroIFU": "Numero IFU",
+      "denomination": "Denomination",
+      "dateCreation": "Date Creation",
+      "commandeVehicule": "Commande Vehicule",
+      "immatriculation": "Immatriculation",
+      "livraisonCarnetSouche": "Livraison Carnet Souche",
+      "livraisonVehicule": "Livraison Vehicule",
+      "posePlaque": "Pose Plaque",
+      "stock": "Stock",
+      "vente": "Vente",
+      "organisation": "Organisation",
+      "help": {
+        "numeroIFU": "code"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "improApp": {
+    "organisationLocalite": {
+      "home": {
+        "title": "OrganisationLocalites",
+        "createLabel": "Créer un nouveau Organisation Localite",
+        "createOrEditLabel": "Créer ou éditer un Organisation Localite",
+        "notFound": "Aucun Organisation Localite trouvé"
+      },
+      "created": "Un nouveau Organisation Localite a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Organisation Localite avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Organisation Localite avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Organisation Localite {{ id }} ?"
+      },
+      "detail": {
+        "title": "Organisation Localite"
+      },
+      "code": "Code",
+      "nom": "Nom",
+      "description": "Description",
+      "organisations": "Organisations"
+    }
+  }
+}

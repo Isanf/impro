@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="carteVerso" pageWidth="595" pageHeight="420" orientation="Landscape" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="28c4edeb-c872-4e2e-92fd-054306c195ee">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+    <property name="com.jaspersoft.studio.unit." value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+    <style name="Style1" fontName="Times New Roman"/>
+    <parameter name="transparent" class="java.lang.String"/>
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="1" splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="419" splitType="Stretch">
+            <rectangle radius="0">
+                <reportElement x="0" y="0" width="595" height="419" backcolor="#FFFFFF" uuid="2f0d02ef-0fde-48eb-b32e-0af9d38d19e6"/>
+                <graphicElement>
+                    <pen lineWidth="0.0" lineColor="#000000"/>
+                </graphicElement>
+            </rectangle>
+            <image>
+                <reportElement style="Style1" x="160" y="70" width="280" height="280" uuid="766b1e3f-de26-4b37-bfa7-62a1e204dcc0"/>
+                <imageExpression><![CDATA[$P{transparent}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement style="Style1" x="20" y="10" width="410" height="30" uuid="eabb83bd-fbf1-4ab7-81e6-8723780fc535"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="18" isBold="true" isUnderline="true"/>
+                </textElement>
+                <text><![CDATA[Mention : Règles de gestion de la Carte W :]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Style1" x="20" y="250" width="60" height="20" uuid="4c9681a7-2045-4cd0-81f8-2490de520b06"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+                </textElement>
+                <text><![CDATA[Article 15 :]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Style1" x="80" y="250" width="497" height="60" uuid="695c3648-d762-47b6-8a5f-3e7c00b22236"/>
+                <textElement textAlignment="Justified" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="11" isBold="true"/>
+                    <paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+                </textElement>
+                <text><![CDATA[La carte " W " est accordée à titre individuel. Elle ne peut être ni cedée, ni prêtée, ni transférée, ni louée. En cas de cessation de l'activité professionnelle, les cartes " W " doivent être restituées à l'Administration des transports.]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Style1" x="20" y="310" width="60" height="20" uuid="7af59a2f-71b2-4df9-8239-14fbf7c7f6d5"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+                </textElement>
+                <text><![CDATA[Article 16 :]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Style1" x="80" y="310" width="498" height="40" uuid="52b3b5b0-e22b-4008-8957-5f1886ddf6ad"/>
+                <textElement textAlignment="Justified" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="11" isBold="true"/>
+                    <paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+                </textElement>
+                <text><![CDATA[Constitue une infraction et sanctionnée par les textes en vigueur, le fait de prêter, de louer, de céder une carte " W " ou de faire usage d"une carte " W " expirée ou appartenant à autrui.]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Style1" x="80" y="360" width="498" height="20" forecolor="#FF0400" uuid="38b30b55-a8f1-43de-a6d0-16ba5018f5e8"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+                    <font fontName="Times New Roman" size="12" isBold="false"/>
+                    <paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+                </textElement>
+                <text><![CDATA[*  Le délai de validité de la carte est d'un an]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Style1" x="80" y="380" width="499" height="20" forecolor="#FF0400" uuid="30185114-bc55-4f85-9756-2acd2de206b3"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+                    <font fontName="Times New Roman" size="12" isBold="false"/>
+                    <paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+                </textElement>
+                <text><![CDATA[*  Le titulaire est tenu à son remplacement en cas d'expiration de la carte ou de détérioration]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Style1" x="130" y="160" width="401" height="20" uuid="ab8b34d9-ffc6-47d1-9a05-00dd1e1e3efe"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="11" isBold="true"/>
+                    <paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+                </textElement>
+                <text><![CDATA[_	la quitance de paiement du prix de la prestation ;]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Style1" x="130" y="120" width="401" height="40" uuid="e00abe3f-3366-4877-96ed-073429ac4cd7"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="11" isBold="true"/>
+                    <paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+                </textElement>
+                <text><![CDATA[_	le formulaire de demande de carte " W ", dûment rempli, signé, daté,
+	cacheté et timbré à 200 FCFA, timbre fiscal ;]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Style1" x="130" y="220" width="401" height="20" uuid="d514855e-3cf6-43b6-a270-d43a7c1d89b0"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="11" isBold="true"/>
+                    <paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+                </textElement>
+                <text><![CDATA[_	les documents établissant le nouvel emplacement, le cas échéant.]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Style1" x="20" y="50" width="60" height="20" uuid="7c3cf1d1-245d-4b7d-84db-fded58f57d7a"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement verticalAlignment="Middle" markup="none">
+                    <font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+                </textElement>
+                <text><![CDATA[Article 11 :]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Style1" x="130" y="200" width="401" height="20" uuid="60e7d175-2377-4d1d-8e03-d93f58ead6de"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="11" isBold="true"/>
+                    <paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+                </textElement>
+                <text><![CDATA[_	la carte détériorée ou, le cas échéant, la déclaration de perte ;]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Style1" x="130" y="180" width="401" height="20" uuid="6450b7f7-e730-4a9a-a049-a299ae4d8d4d"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="11" isBold="true"/>
+                    <paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+                </textElement>
+                <text><![CDATA[_	une attestation de situation fiscale à jour afférente à l'activité ;]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="Style1" x="80" y="50" width="498" height="60" uuid="93d16b72-3a00-4109-a973-d43534d7bd29"/>
+                <textElement textAlignment="Justified" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="11" isBold="true"/>
+                    <paragraph lineSpacing="1_1_2" lineSpacingSize="1.0"/>
+                </textElement>
+                <text><![CDATA[Le titulaire d'une carte " W " est tenu de procéder à son remplacement en cas de détérioration ou de perte de la carte, de changement de lieu d'établissement, de modification du registre de commerce et des créances mobilières. La demande de remplacement ou de duplicata est composée comme suit :]]></text>
+            </staticText>
+        </band>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
+</jasperReport>

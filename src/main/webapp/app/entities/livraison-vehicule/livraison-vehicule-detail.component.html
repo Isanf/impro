@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="livraisonVehicule">
+            <h2><span jhiTranslate="improApp.livraisonVehicule.detail.title">Livraison Vehicule</span> {{ livraisonVehicule.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.livraisonVehicule.numeroLivraison" [ngbTooltip]="'improApp.livraisonVehicule.help.numeroLivraison' | translate">Numero Livraison</span></dt>
+                <dd>
+                    <span>{{ livraisonVehicule.numeroLivraison }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.livraisonVehicule.dateLivraison">Date Livraison</span></dt>
+                <dd>
+                    <span>{{ livraisonVehicule.dateLivraison }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.livraisonVehicule.revendeur">Revendeur</span></dt>
+                <dd>
+                    <div *ngIf="livraisonVehicule.revendeurId">
+                        <a [routerLink]="['/organisation', livraisonVehicule.revendeurId, 'view']">{{ livraisonVehicule.revendeurId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="improApp.livraisonVehicule.concessionnaire">Concessionnaire</span></dt>
+                <dd>
+                    <div *ngIf="livraisonVehicule.concessionnaireId">
+                        <a [routerLink]="['/organisation', livraisonVehicule.concessionnaireId, 'view']">{{ livraisonVehicule.concessionnaireId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="improApp.livraisonVehicule.commandeVehicule">Commande Vehicule</span></dt>
+                <dd>
+                    <div *ngIf="livraisonVehicule.commandeVehiculeId">
+                        <a [routerLink]="['/commande-vehicule', livraisonVehicule.commandeVehiculeId, 'view']">{{ livraisonVehicule.commandeVehiculeId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button *jhiHasAnyAuthority="'REVENDEUR'" type="button"
+                    [routerLink]="['/livraison-vehicule', livraisonVehicule.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

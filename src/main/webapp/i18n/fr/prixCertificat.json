@@ -1,0 +1,23 @@
+{
+  "improApp": {
+    "prixCertificat": {
+      "home": {
+        "title": "PrixCertificats",
+        "createLabel": "Créer un nouveau Prix Certificat",
+        "createOrEditLabel": "Créer ou éditer un Prix Certificat",
+        "notFound": "Aucun Prix Certificat trouvé"
+      },
+      "created": "Un nouveau Prix Certificat a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Prix Certificat avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Prix Certificat avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Prix Certificat {{ id }} ?"
+      },
+      "detail": {
+        "title": "Prix Certificat"
+      },
+      "prix": "Prix",
+      "activated": "Activated"
+    }
+  }
+}

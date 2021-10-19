@@ -1,0 +1,30 @@
+{
+  "improApp": {
+    "carteW": {
+      "home": {
+        "title": "CarteWS",
+        "createLabel": "Créer un nouveau Carte W",
+        "createOrEditLabel": "Créer ou éditer un Carte W",
+        "notFound": "Aucun Carte W trouvé"
+      },
+      "created": "Un nouveau Carte W a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Carte W avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Carte W avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Carte W {{ id }} ?"
+      },
+      "detail": {
+        "title": "Carte W"
+      },
+      "numeroCarteW": "Numero Carte W",
+      "dateEtablissementCarteW": "Date Etablissement Carte W",
+      "dateExpirationCarteW": "Date Expiration Carte W",
+      "lieuEtablissement": "Lieu Etablissement",
+      "codeQr": "Code Qr",
+      "organisation": "Organisation",
+      "help": {
+        "numeroCarteW": "numeroCarteW"
+      }
+    }
+  }
+}

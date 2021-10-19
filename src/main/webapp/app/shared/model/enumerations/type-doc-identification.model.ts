@@ -1,0 +1,11 @@
+export const enum TypeDocIdentification {
+  CNIB = 'CNIB',
+
+  PASSEPORT = 'PASSEPORT',
+
+  CARTE_MILITAIRE = 'CARTE_MILITAIRE',
+
+  CARTE_SCOLAIRE = 'CARTE_SCOLAIRE',
+
+  CARTE_ID_ETRANGERE = 'CARTE_ID_ETRANGERE'
+}

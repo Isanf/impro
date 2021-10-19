@@ -1,0 +1,135 @@
+{
+  "name": "Vehicule",
+  "fields": [
+    {
+      "fieldName": "numeroChassis",
+      "fieldType": "String",
+      "javadoc": "numeroChassis"
+    },
+    {
+      "fieldName": "types",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "model",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "energie",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "puissanceReel",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "puissanceAdmin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "couleur",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "poidsVide",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "chargeUtile",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "ptac",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "ptra",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "nbrPlace",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "capacite",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateMiseCirculation",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "regime",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "noDedouanement",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateDedouanement",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "immatriculation",
+      "otherEntityRelationshipName": "vehicule",
+      "relationshipName": "immatriculation"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "plaqueImmatriculation",
+      "otherEntityRelationshipName": "vehicule",
+      "relationshipName": "plaqueImmatriculation"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "livraisonVehicule",
+      "otherEntityRelationshipName": "vehicule",
+      "relationshipName": "livraisonVehicule",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "typeVehicule",
+      "otherEntityRelationshipName": "vehicule",
+      "relationshipName": "typeVehicule",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "marqueVehicule",
+      "otherEntityRelationshipName": "vehicule",
+      "relationshipName": "marqueVehicule",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "vente",
+      "otherEntityRelationshipName": "vehicules",
+      "relationshipName": "vente",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "stock",
+      "otherEntityRelationshipName": "vehicules",
+      "relationshipName": "stock",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200205114759",
+  "javadoc": "The Vehicule entity.\\n@author A true hipster",
+  "entityTableName": "vehicule",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

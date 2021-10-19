@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div *ngIf="immatriculation">
+            <nb-card>
+                <nb-card-header>
+                    <h2><span jhiTranslate="improApp.immatriculation.detail.title">Immatriculation</span> {{ immatriculation.id }}</h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <hr>
+
+                    <jhi-alert-error></jhi-alert-error>
+
+                    <dl class="row-md jh-entity-details">
+                        <dt><span jhiTranslate="improApp.immatriculation.numero">Numéro</span></dt>
+                        <dd>
+                            <span>{{ immatriculation.numero }}</span>
+                        </dd>
+                        <dt><span jhiTranslate="improApp.immatriculation.dateImmatriculation">Date Immatriculation</span></dt>
+                        <dd>
+                            <span>{{ immatriculation.dateImmatriculation }}</span>
+                        </dd>
+                        <dt><span jhiTranslate="improApp.immatriculation.certificatImmatriculation">Certificat d'Immatriculation</span></dt>
+                        <dd>
+                            <div *ngIf="immatriculation.certificatImmatriculationId">
+                                <a [routerLink]="['/certificat-immatriculation', immatriculation.certificatImmatriculationId, 'view']">{{ immatriculation.certificatImmatriculationId }}</a>
+                            </div>
+                        </dd>
+                        <dt><span jhiTranslate="improApp.immatriculation.organisation">Organisation</span></dt>
+                        <dd>
+                            <div *ngIf="immatriculation.organisationId">
+                                <a [routerLink]="['/organisation', immatriculation.organisationId, 'view']">{{ immatriculation.organisationId }}</a>
+                            </div>
+                        </dd>
+                        <dt><span jhiTranslate="improApp.immatriculation.personnePhysique">Personne Physique</span></dt>
+                        <dd>
+                            <div *ngIf="immatriculation.personnePhysiqueId">
+                                <a [routerLink]="['/personne-physique', immatriculation.personnePhysiqueId, 'view']">{{ immatriculation.personnePhysiqueId }}</a>
+                            </div>
+                        </dd>
+                        <dt><span jhiTranslate="improApp.immatriculation.personneMorale">Personne Morale</span></dt>
+                        <dd>
+                            <div *ngIf="immatriculation.personneMoraleId">
+                                <a [routerLink]="['/personne-morale', immatriculation.personneMoraleId, 'view']">{{ immatriculation.personneMoraleId }}</a>
+                            </div>
+                        </dd>
+                        <dt><span jhiTranslate="improApp.immatriculation.vehicule">Véhicule</span></dt>
+                        <dd>
+                            <div *ngIf="immatriculation.vehiculeId">
+                                <a [routerLink]="['/vehicule', immatriculation.vehiculeId, 'view']">{{ immatriculation.vehiculeId }}</a>
+                            </div>
+                        </dd>
+                    </dl>
+                </nb-card-body>
+                <nb-card-footer>
+                    <button type="submit" nbButton status="primary" shape="round" outline
+                            (click)="previousState()">
+                        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                    </button>
+                </nb-card-footer>
+            </nb-card>
+            <!--<button type="button"
+                    [routerLink]="['/immatriculation', immatriculation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>-->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <!--
+        Added the entity Vehicule.
+    -->
+    <changeSet id="20200205114759-1" author="jhipster">
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="vehicule"/>
+            </not>
+        </preConditions>
+        <createTable tableName="vehicule" remarks="The Vehicule entity.\n@author A true hipster">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="numero_chassis" type="varchar(255)" remarks="numeroChassis">
+                <constraints nullable="true" />
+            </column>
+            <column name="types" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="model" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="energie" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="puissance_reel" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="puissance_admin" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="couleur" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="poids_vide" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="charge_utile" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="ptac" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="ptra" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="nbr_place" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="capacite" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_mise_circulation" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="regime" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="no_dedouanement" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_dedouanement" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="livraison_vehicule_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="type_vehicule_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="marque_vehicule_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="vente_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="stock_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20200205114759-1-relations" author="jhipster">
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+<!--    <changeSet id="20200205114759-1-data" author="jhipster" context="faker">-->
+<!--        <loadData-->
+<!--                  file="config/liquibase/fake-data/vehicule.csv"-->
+<!--                  separator=";"-->
+<!--                  tableName="vehicule">-->
+<!--            <column name="id" type="numeric"/>-->
+<!--            <column name="numero_chassis" type="string"/>-->
+<!--            <column name="types" type="string"/>-->
+<!--            <column name="model" type="string"/>-->
+<!--            <column name="energie" type="string"/>-->
+<!--            <column name="puissance_reel" type="string"/>-->
+<!--            <column name="puissance_admin" type="string"/>-->
+<!--            <column name="couleur" type="string"/>-->
+<!--            <column name="poids_vide" type="numeric"/>-->
+<!--            <column name="charge_utile" type="numeric"/>-->
+<!--            <column name="ptac" type="numeric"/>-->
+<!--            <column name="ptra" type="numeric"/>-->
+<!--            <column name="nbr_place" type="numeric"/>-->
+<!--            <column name="capacite" type="numeric"/>-->
+<!--            <column name="date_mise_circulation" type="date"/>-->
+<!--            <column name="regime" type="string"/>-->
+<!--            <column name="no_dedouanement" type="string"/>-->
+<!--            <column name="date_dedouanement" type="date"/>-->
+<!--            &lt;!&ndash; jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove&ndash;&gt;-->
+<!--        </loadData>-->
+<!--    </changeSet>-->
+
+</databaseChangeLog>

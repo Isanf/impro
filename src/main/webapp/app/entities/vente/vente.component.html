@@ -1,0 +1,279 @@
+<div *jhiHasAnyAuthority="'CONCESSIONNAIRE'">
+    <nb-card>
+        <nb-card-header>
+            <h2 id="page-heading">
+                <span jhiTranslate="improApp.vente.home.title">Ventes</span>
+
+                <button id="jh-create-entity" nbButton outline shape="round" status="primary" class="float-right jh-create-entity create-vente" [routerLink]="['/vente/new']">
+                    <fa-icon icon="plus"></fa-icon>
+                    <span>
+            Créer une nouvelle Vente
+            </span>
+                </button>
+            </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <jhi-alert-error></jhi-alert-error>
+
+            <jhi-alert></jhi-alert>
+
+            <nb-form-field>
+                <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                <input type="text" fieldSize="tiny" nbInput status="primary" fullWidth placeholder="Rechercher"
+                       [(ngModel)]="searchText" />
+            </nb-form-field>
+
+            <div class="alert alert-warning" id="no-result" *ngIf="ventes?.length === 0">
+                <span jhiTranslate="improApp.vente.home.notFound">No ventes found</span>
+            </div>
+
+            <div class="table-responsive table-striped table-hover table-bordered" *ngIf="ventes?.length > 0">
+                <table class="table table-striped" aria-describedby="page-heading">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                        <th scope="col"><span jhiTranslate="improApp.vente.numeroVente">Numero Vente</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.vente.dateVente">Date Vente</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.vente.personnePhysique">Personne Physique</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.vente.personneMorale">Personne Morale</span> </th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let vente of ventes | venteFilter:searchText">
+                        <td>{{ vente.numeroVente }}</td>
+                        <td>{{ vente.dateVente.locale('fr').format('LLLL') }}</td>
+                        <td>
+                            <div *ngIf="vente.personnePhysiqueId">
+                                <a [routerLink]="['/personne-physique', vente.personnePhysiqueId , 'view']" >{{ vente.personnePhysiqueDTO.nom + ' ' + vente.personnePhysiqueDTO.prenom }}</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div *ngIf="vente.personneMoraleId">
+                                <a [routerLink]="['/personne-morale', vente.personneMoraleId , 'view']" >{{ vente.personneMoraleDTO.denomination }}</a>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <button type="submit" nbButton shape="round" outline status="info" size="tiny"
+                                        [routerLink]="['/vente', vente.id, 'view']">
+                                    <fa-icon icon="eye"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <button type="submit" nbButton shape="round" outline status="primary" size="tiny"
+                                        [routerLink]="['/vente', vente.id, 'edit']">
+                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <button type="submit" (click)="delete(vente)"
+                                        nbButton shape="round" outline status="danger" size="tiny">
+                                    <fa-icon icon="times"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <div *ngIf="ventes?.length > 0">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                </div>
+            </div>
+        </nb-card-footer>
+    </nb-card>
+</div>
+<div *jhiHasAnyAuthority="'REVENDEUR'">
+    <nb-card>
+        <nb-card-header>
+            <h2>
+                <span jhiTranslate="improApp.vente.home.title">Ventes</span>
+
+                <button nbButton outline shape="round" status="primary" class="float-right jh-create-entity create-vente" [routerLink]="['/vente/new']">
+                    <fa-icon icon="plus"></fa-icon>
+                    <span  jhiTranslate="improApp.vente.home.createLabel">
+            Create a new Vente
+            </span>
+                </button>
+            </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <jhi-alert-error></jhi-alert-error>
+
+            <jhi-alert></jhi-alert>
+
+            <nb-form-field>
+                <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                <input type="text" fieldSize="tiny" nbInput status="primary" fullWidth placeholder="Rechercher"
+                       [(ngModel)]="searchText" />
+            </nb-form-field>
+
+            <div class="alert alert-warning" *ngIf="ventes?.length === 0">
+                <span jhiTranslate="improApp.vente.home.notFound">No ventes found</span>
+            </div>
+
+            <div class="table-responsive table-striped table-hover table-bordered" *ngIf="ventes?.length > 0">
+                <table class="table table-striped" aria-describedby="page-heading">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                        <th scope="col"><span jhiTranslate="improApp.vente.numeroVente">Numero Vente</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.vente.dateVente">Date Vente</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.vente.personnePhysique">Personne Physique</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.vente.personneMorale">Personne Morale</span> </th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let vente of ventes | venteFilter:searchText">
+                        <td>{{ vente.numeroVente }}</td>
+                        <td>{{ vente.dateVente | date:'medium' }}</td>
+                        <td>
+                            <div *ngIf="vente.personnePhysiqueId">
+                                <a [routerLink]="['/personne-physique', vente.personnePhysiqueId , 'view']" >{{ vente.personnePhysiqueId }}</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div *ngIf="vente.personneMoraleId">
+                                <a [routerLink]="['/personne-morale', vente.personneMoraleId , 'view']" >{{ vente.personneMoraleId }}</a>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <button type="submit" nbButton shape="round" outline status="info" size="tiny"
+                                        [routerLink]="['/vente', vente.id, 'view']">
+                                    <fa-icon icon="eye"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <button type="submit" nbButton shape="round" outline status="primary" size="tiny"
+                                        [routerLink]="['/vente', vente.id, 'edit']">
+                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <button type="submit" (click)="delete(vente)"
+                                        nbButton shape="round" outline status="danger" size="tiny">
+                                    <fa-icon icon="times"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <div *ngIf="ventes?.length > 0">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                </div>
+            </div>
+        </nb-card-footer>
+    </nb-card>
+</div>
+<div *jhiHasAnyAuthority="'STHGUICHET'">
+    <nb-card>
+        <nb-card-header>
+            <h2>
+                <span>Vehicules d'importateurs occasionnels</span>
+
+                <button nbButton outline shape="round" status="primary" class="float-right jh-create-entity create-vente" [routerLink]="['/vente/new']">
+                    <fa-icon icon="plus"></fa-icon>
+                    <span>
+            Faire un enregistrement
+            </span>
+                </button>
+            </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <jhi-alert-error></jhi-alert-error>
+
+            <jhi-alert></jhi-alert>
+
+            <nb-form-field>
+                <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                <input type="text" fieldSize="tiny" nbInput status="primary" fullWidth placeholder="Rechercher"
+                       [(ngModel)]="searchText" />
+            </nb-form-field>
+
+            <div class="alert alert-warning" *ngIf="ventes?.length === 0">
+                <span jhiTranslate="improApp.vente.home.notFound">No ventes found</span>
+            </div>
+
+            <div class="table-responsive table-striped table-hover table-bordered" id="entities" *ngIf="ventes?.length > 0">
+                <table class="table table-striped" aria-describedby="page-heading">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                        <th scope="col"><span >Numero Enregistrement</span> </th>
+                        <th scope="col"><span >Date</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.vente.personnePhysique">Personne Physique</span> </th>
+                        <th scope="col"><span jhiTranslate="improApp.vente.personneMorale">Personne Morale</span> </th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let vente of ventes | venteFilter:searchText">
+                        <td>{{ vente.numeroVente }}</td>
+                        <td>{{ vente.dateVente | date:'medium' }}</td>
+                        <td>
+                            <div *ngIf="vente.personnePhysiqueId">
+                                <a [routerLink]="['/personne-physique', vente.personnePhysiqueId , 'view']" >{{ vente.personnePhysiqueDTO.nom + ' '+vente.personnePhysiqueDTO.prenom }}</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div *ngIf="vente.personneMoraleId">
+                                <a [routerLink]="['/personne-morale', vente.personneMoraleId , 'view']" >{{ vente.personneMoraleDTO.denomination }}</a>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <button type="submit" nbButton shape="round" outline status="info" size="tiny"
+                                        [routerLink]="['/vente', vente.id, 'view']">
+                                    <fa-icon icon="eye"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <button type="submit" nbButton shape="round" outline status="primary" size="tiny"
+                                        [routerLink]="['/vente', vente.id, 'edit']">
+                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+
+                                <button type="submit" (click)="delete(vente)"
+                                        nbButton shape="round" outline status="danger" size="tiny">
+                                    <fa-icon icon="times"></fa-icon>
+                                    <span class="d-none d-md-inline"></span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <div *ngIf="ventes?.length > 0">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                </div>
+            </div>
+        </nb-card-footer>
+    </nb-card>
+</div>

@@ -1,0 +1,28 @@
+{
+  "improApp": {
+    "marqueVehicule": {
+      "home": {
+        "title": "MarqueVehicules",
+        "createLabel": "Créer un nouveau Marque Vehicule",
+        "createOrEditLabel": "Créer ou éditer un Marque Vehicule",
+        "notFound": "Aucun Marque Vehicule trouvé"
+      },
+      "created": "Un nouveau Marque Vehicule a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Marque Vehicule avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Marque Vehicule avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Marque Vehicule {{ id }} ?"
+      },
+      "detail": {
+        "title": "Marque Vehicule"
+      },
+      "code": "Code",
+      "libelle": "Libelle",
+      "vehicule": "Vehicule",
+      "infoCommandeVehicule": "Info Commande Vehicule",
+      "help": {
+        "code": "code"
+      }
+    }
+  }
+}

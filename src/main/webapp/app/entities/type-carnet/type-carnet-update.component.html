@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-10">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <nb-card>
+                <nb-card-header>
+                    <h2 id="jhi-type-carnet-heading">Nouveau Type de Carnet</h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <div>
+                        <jhi-alert-error></jhi-alert-error>
+
+                        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                   id="id" name="id" formControlName="id" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.typeCarnet.code" for="field_code" [ngbTooltip]="'improApp.typeCarnet.help.code' | translate">Code</label>
+                            <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                   name="code" id="field_code" formControlName="code"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.typeCarnet.libelle" for="field_libelle">Libelle</label>
+                            <input type="text" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                   name="libelle" id="field_libelle" formControlName="libelle"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.typeCarnet.quantiteCertificat" for="field_quantiteCertificat">Quantite Certificat</label>
+                            <input type="number" nbInput fullWidth shape="round" status="primary" fieldSize="small"
+                                   name="quantiteCertificat" id="field_quantiteCertificat" formControlName="quantiteCertificat"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.typeCarnet.typeVehicule" for="field_typeVehicule">Type Vehicule</label>
+                            <nb-select fullWidth shape="round" status="primary" id="field_typeVehicule" name="typeVehicule" formControlName="typeVehiculeId">
+                                <nb-option [value]="typeVehiculeOption.id" *ngFor="let typeVehiculeOption of typevehicules; trackBy: trackById">{{ typeVehiculeOption.libelle }}</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </nb-card-body>
+                <nb-card-footer>
+                    <div>
+                        <button type="button" id="cancel-save" nbButton (click)="previousState()">
+                            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+
+                        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                                nbButton outline status="primary">
+                            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </nb-card-footer>
+            </nb-card>
+        </form>
+    </div>
+</div>

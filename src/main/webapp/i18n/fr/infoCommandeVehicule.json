@@ -1,0 +1,29 @@
+{
+  "improApp": {
+    "infoCommandeVehicule": {
+      "home": {
+        "title": "InfoCommandeVehicules",
+        "createLabel": "Créer un nouveau Info Commande Vehicule",
+        "createOrEditLabel": "Créer ou éditer un Info Commande Vehicule",
+        "notFound": "Aucun Info Commande Vehicule trouvé"
+      },
+      "created": "Un nouveau Info Commande Vehicule a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Info Commande Vehicule avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Info Commande Vehicule avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Info Commande Vehicule {{ id }} ?"
+      },
+      "detail": {
+        "title": "Info Commande Vehicule"
+      },
+      "numeroCommande": "Numero Commande",
+      "dateCommande": "Date Commande",
+      "quantiteCommande": "Quantite Commande",
+      "commandeVehicule": "Commande Vehicule",
+      "marqueVehicule": "Marque Vehicule",
+      "help": {
+        "numeroCommande": "numeroCommande"
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity InfoCommandeVehicule.
+    -->
+    <changeSet id="20200220120000-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="commande_vehicule_id"
+                                 baseTableName="info_commande_vehicule"
+                                 constraintName="fk_info_commande_vehicule_commande_vehicule_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="commande_vehicule"/>
+
+        <addForeignKeyConstraint baseColumnNames="marque_vehicule_id"
+                                 baseTableName="info_commande_vehicule"
+                                 constraintName="fk_info_commande_vehicule_marque_vehicule_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="marque_vehicule"/>
+
+    </changeSet>
+</databaseChangeLog>

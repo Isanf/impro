@@ -1,0 +1,48 @@
+{
+  "improApp": {
+    "organisation": {
+      "home": {
+        "title": "Organisations",
+        "createLabel": "Créer un nouveau Organisation",
+        "createOrEditLabel": "Créer ou éditer un Organisation",
+        "notFound": "Aucun Organisation trouvé"
+      },
+      "created": "Un nouveau Organisation a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Organisation avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Organisation avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Organisation {{ id }} ?"
+      },
+      "detail": {
+        "title": "Organisation"
+      },
+      "nom": "Nom",
+      "description": "Description",
+      "numeroOrdre": "Numero Ordre",
+      "numeroPhone": "Numero Phone",
+      "carnetASouche": "Carnet A Souche",
+      "collaborationsRevendeur": "Collaborations Revendeur",
+      "collaborationsConcessionnaire": "Collaborations Concessionnaire",
+      "commandeCSConcessionnaire": "Commande CS Concessionnaire",
+      "commandeCSRevendeur": "Commande CS Revendeur",
+      "commandeVRevendeur": "Commande V Revendeur",
+      "commandeVConcessionnaire": "Commande V Concessionnaire",
+      "immatriculation": "Immatriculation",
+      "livraisonCSConcessionnaire": "Livraison CS Concessionnaire",
+      "livraisonCSSupernet": "Livraison CS Supernet",
+      "livraisonVRevendeur": "Livraison V Revendeur",
+      "livraisonVConcessionnaire": "Livraison V Concessionnaire",
+      "fils": "Fils",
+      "personnePhysique": "Personne Physique",
+      "posePlaque": "Pose Plaque",
+      "profils": "Profils",
+      "stock": "Stock",
+      "vente": "Vente",
+      "organisationLocalite": "Organisation Localite",
+      "pere": "Pere",
+      "typeOrganisation": "Type Organisation",
+      "gerant": "Gerant",
+      "typeActeur": "Type Acteur"
+    }
+  }
+}

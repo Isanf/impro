@@ -1,0 +1,54 @@
+{
+  "name": "InfoCommandeCarnetASouche",
+  "fields": [
+    {
+      "fieldName": "numeroCommande",
+      "fieldType": "String",
+      "javadoc": "numeroCommande"
+    },
+    {
+      "fieldName": "dateCommande",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "quantiteCommande",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "estDeliver",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "estTransiter",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "commandeCarnetSouche",
+      "otherEntityRelationshipName": "infoCommandeCarnetASouche",
+      "relationshipName": "commandeCarnetSouche",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "typeCarnet",
+      "otherEntityRelationshipName": "infoCommandeCarnetASouche",
+      "relationshipName": "typeCarnet",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200220120100",
+  "javadoc": "The InfoCommandeCarnetASouche entity.\\n@author A true hipster",
+  "entityTableName": "info_commande_carnet_a_souche",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

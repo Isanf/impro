@@ -1,0 +1,79 @@
+<nb-card>
+    <nb-card-header>
+        <label class="form-control-label" for="field_dateStock">
+            Selectionner un fichier excel de format(.csv),
+            ce fichier doit avoir les memes types de colonnes telles que l'exemple données par SuperNet:
+        </label>
+        <nb-list>
+            <nb-list-item>
+                * Les dates doivent etre sous la forme : AAAA-MM-JJ (Exemple: 2020-02-05)
+            </nb-list-item>
+            <nb-list-item>
+                * Les Colonnes suivants doivent avoir des valeurs enitières : <br>
+                - poids_vide<br>
+                - charge_utile<br>
+                - ptac<br>
+                - ptra<br>
+                - nbr_plac<br>
+                - capacite<br>
+            </nb-list-item>
+        </nb-list>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" enctype="multipart/form-data">
+                    <h2 id="jhi-stock-heading" jhiTranslate="improApp.stock.home.createOrEditLabel">Create or edit a Stock</h2>
+                    <div>
+                        <jhi-alert-error></jhi-alert-error>
+                        <div class="form-group" [hidden]="!editForm.get('id').value">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input nbInput fieldSize="small" fullWidth shape="round" status="primary"
+                                   type="text" id="id" name="id" formControlName="id"
+                                   readonly />
+                        </div>
+                        <!--<div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.stock.numeroStock" for="field_numeroStock" [ngbTooltip]="'improApp.stock.help.numeroStock' | translate">Numero Stock</label>
+                            <input nbInput fieldSize="small" fullWidth shape="round" status="primary"
+                                   type="text" id="field_numeroStock" formControlName="numeroStock"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="improApp.stock.dateStock" for="file">Date Stock</label>
+                            <div class="d-flex">
+                                <input nbInput fieldSize="small" fullWidth shape="round" status="primary"
+                                       ngbDatepicker #dateExpirationCarteWDp="ngbDatepicker"
+                                              id="file" type="text"  name="dateStock"
+                                       formControlName="dateStock" placeholder="YYYY-MM-DD HH:mm"/>
+                                <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary" (click)="dateExpirationCarteWDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                                </span>
+                            </div>
+                        </div>-->
+
+
+
+                        <div class="form-group">
+                            <div class="d-flex">
+                                <input id="field_dateStock" type="file" nbInput fieldSize="small" fullWidth
+                                       (change)="handleFileInput($event.target.files)"
+                                       shape="round" status="primary" formControlName="file" />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                            <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+
+    </nb-card-footer>
+</nb-card>

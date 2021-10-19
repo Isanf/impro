@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="livraisonCarnetSouche">
+            <h2><span jhiTranslate="improApp.livraisonCarnetSouche.detail.title">Livraison Carnet Souche</span> {{ livraisonCarnetSouche.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.livraisonCarnetSouche.numeroLivraisonCS" [ngbTooltip]="'improApp.livraisonCarnetSouche.help.numeroLivraisonCS' | translate">Numero Livraison CS</span></dt>
+                <dd>
+                    <span>{{ livraisonCarnetSouche.numeroLivraisonCS }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.livraisonCarnetSouche.dateLivraison">Date Livraison</span></dt>
+                <dd>
+                    <span>{{ livraisonCarnetSouche.dateLivraison }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.livraisonCarnetSouche.concessionnaire">Concessionnaire</span></dt>
+                <dd>
+                    <div *ngIf="livraisonCarnetSouche.concessionnaireId">
+                        <a [routerLink]="['/organisation', livraisonCarnetSouche.concessionnaireId, 'view']">{{ livraisonCarnetSouche.concessionnaireId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="improApp.livraisonCarnetSouche.supernet">Supernet</span></dt>
+                <dd>
+                    <div *ngIf="livraisonCarnetSouche.supernetId">
+                        <a [routerLink]="['/organisation', livraisonCarnetSouche.supernetId, 'view']">{{ livraisonCarnetSouche.supernetId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="improApp.livraisonCarnetSouche.commandeCarnetSouche">Commande Carnet Souche</span></dt>
+                <dd>
+                    <div *ngIf="livraisonCarnetSouche.commandeCarnetSoucheId">
+                        <a [routerLink]="['/commande-carnet-souche', livraisonCarnetSouche.commandeCarnetSoucheId, 'view']">{{ livraisonCarnetSouche.commandeCarnetSoucheId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/livraison-carnet-souche', livraisonCarnetSouche.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

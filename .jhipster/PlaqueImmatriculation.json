@@ -1,0 +1,46 @@
+{
+  "name": "PlaqueImmatriculation",
+  "fields": [
+    {
+      "fieldName": "numeroSerie",
+      "fieldType": "String",
+      "javadoc": "numeroSerie"
+    },
+    {
+      "fieldName": "numeroImmatriculation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codeQR",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "certificatImmatriculation",
+      "otherEntityRelationshipName": "plaqueImmatriculation",
+      "relationshipName": "certificatImmatriculation",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "vehicule",
+      "otherEntityRelationshipName": "plaqueImmatriculation",
+      "relationshipName": "vehicule",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200205114813",
+  "javadoc": "The PlaqueImmatriculation entity.\\n@author A true hipster",
+  "entityTableName": "plaque_immatriculation",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

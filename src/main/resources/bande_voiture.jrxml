@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bande_voiture" pageWidth="909" pageHeight="286" orientation="Landscape" columnWidth="909" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="07f54d29-0eb9-46f5-a5b3-f9d88a1cd9c6">
+	<style name="Style1" fill="Solid" scaleImage="FillFrame" fontName="Arial Black C"/>
+	<parameter name="code" class="java.lang.String"/>
+	<parameter name="groupe" class="java.lang.String"/>
+	<parameter name="numero" class="java.lang.String"/>
+	<parameter name="qr" class="java.lang.String"/>
+	<parameter name="bf" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="286" splitType="Stretch">
+			<rectangle radius="50">
+				<reportElement x="0" y="0" width="909" height="286" uuid="0b7264cf-f48c-4ba4-92d9-0eaceaf9296f"/>
+				<graphicElement>
+					<pen lineWidth="7.0"/>
+				</graphicElement>
+			</rectangle>
+			<image scaleImage="FillFrame">
+				<reportElement x="10" y="50" width="60" height="70" uuid="2ba321b4-575e-4231-93fa-653bef5069ef"/>
+				<graphicElement fill="Solid"/>
+				<imageExpression><![CDATA[$P{bf}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement style="Style1" x="10" y="130" width="60" height="70" uuid="20de806f-39c5-423f-86ae-245ca732e249"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="35" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["BF"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Style1" x="70" y="50" width="130" height="160" uuid="8e7f2351-55c0-4bdc-ad08-6a2bbe99cdf6">
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Arial Black" size="62" isBold="false"/>
+					<paragraph firstLineIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{code}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" evaluationTime="Report">
+				<reportElement style="Style1" x="330" y="70" width="20" height="100" uuid="3081af0e-ab8b-499b-a273-581e3dc22eff">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None">
+					<font fontName="Arial Black" size="38" isBold="false"/>
+					<paragraph leftIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{groupe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Style1" x="200" y="52" width="130" height="160" uuid="e958c01b-ad21-49be-834d-958cc31a91ff"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+					<font fontName="Arial Black" size="62" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["WW"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Style1" x="350" y="50" width="440" height="160" uuid="a77ee708-8bed-41ab-813d-c46288dc7d67"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="Arial Black" size="62" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{numero}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="790" y="40" width="100" height="130" uuid="9fc89dd1-20d2-459c-9009-8cc6f42c3574"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[$P{qr}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

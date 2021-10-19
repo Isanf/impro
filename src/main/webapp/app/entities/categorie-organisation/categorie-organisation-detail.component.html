@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="categorieOrganisation">
+            <h2><span jhiTranslate="improApp.categorieOrganisation.detail.title">Catégorie d'Organisation</span> {{ categorieOrganisation.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.categorieOrganisation.libelle">Libellé</span></dt>
+                <dd>
+                    <span>{{ categorieOrganisation.libelle }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.categorieOrganisation.description">Description</span></dt>
+                <dd>
+                    <span>{{ categorieOrganisation.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.categorieOrganisation.typeCategorieOrganisation">Type de Catégorie d'Organisation</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'improApp.TypeCategorieOrganisation.' + categorieOrganisation.typeCategorieOrganisation }}">{{ categorieOrganisation.typeCategorieOrganisation }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+            <button type="button"
+                    [routerLink]="['/categorie-organisation', categorieOrganisation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

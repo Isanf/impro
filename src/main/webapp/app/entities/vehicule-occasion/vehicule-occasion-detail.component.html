@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="vehiculeOccasion">
+            <h2><span jhiTranslate="improApp.vehiculeOccasion.detail.title">Vehicule Occasion</span> {{ vehiculeOccasion.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.vehiculeOccasion.chassis">Chassis</span></dt>
+                <dd>
+                    <span>{{ vehiculeOccasion.chassis }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.vehiculeOccasion.marque">Marque</span></dt>
+                <dd>
+                    <span>{{ vehiculeOccasion.marque }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.vehiculeOccasion.model">Model</span></dt>
+                <dd>
+                    <span>{{ vehiculeOccasion.model }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.vehiculeOccasion.nomPrenom">Nom Prenom</span></dt>
+                <dd>
+                    <span>{{ vehiculeOccasion.nomPrenom }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.vehiculeOccasion.telephone">Telephone</span></dt>
+                <dd>
+                    <span>{{ vehiculeOccasion.telephone }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.vehiculeOccasion.carteW">Carte W</span></dt>
+                <dd>
+                    <span>{{ vehiculeOccasion.carteW }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.vehiculeOccasion.createdAt">Created At</span></dt>
+                <dd>
+                    <span>{{ vehiculeOccasion.createdAt }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.vehiculeOccasion.numeroCNIB">Numero CNIB</span></dt>
+                <dd>
+                    <span>{{ vehiculeOccasion.numeroCNIB }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.vehiculeOccasion.organisation">Organisation</span></dt>
+                <dd>
+                    <div *ngIf="vehiculeOccasion.organisation">
+                        <a [routerLink]="['/organisation', vehiculeOccasion.organisation?.id, 'view']">{{ vehiculeOccasion.organisation?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/vehicule-occasion', vehiculeOccasion.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

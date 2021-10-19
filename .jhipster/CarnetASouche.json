@@ -1,0 +1,55 @@
+{
+  "name": "CarnetASouche",
+  "fields": [
+    {
+      "fieldName": "numero",
+      "fieldType": "String",
+      "javadoc": "numero"
+    },
+    {
+      "fieldName": "dateImpression",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "certificatImmatriculation",
+      "otherEntityRelationshipName": "carnetASouche",
+      "relationshipName": "certificatImmatriculation"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "carnetASouche",
+      "relationshipName": "concessionnaire",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "livraisonCarnetSouche",
+      "otherEntityRelationshipName": "carnetASouche",
+      "relationshipName": "livraisonCarnetSouche",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "typeCarnet",
+      "otherEntityRelationshipName": "carnetSouche",
+      "relationshipName": "typeCarnet",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200204171051",
+  "javadoc": "The CarnetASouche entity.\\n@author A true hipster",
+  "entityTableName": "carnet_a_souche",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false
+}

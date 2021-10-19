@@ -1,0 +1,374 @@
+<div>
+    <nb-card>
+        <nb-card-header>
+            <h2 id="page-heading">
+                <button *jhiHasAnyAuthority="'CONCESSIONNAIRE'" id="jh-create-entity" nbButton outline status="primary" shape="round" class="float-right jh-create-entity create-vehicule" [routerLink]="['/vehicule/new']">
+                    <fa-icon [icon]="'plus'"></fa-icon>
+                    <span  jhiTranslate="improApp.vehicule.home.createLabel">
+                    Create a new Vehicule
+                    </span>
+                </button>
+            </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <nb-card *jhiHasAnyAuthority="['CONCESSIONNAIRE','REVENDEUR']">
+                <nb-card-header  >
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <nb-checkbox [value]="checked" (checkedChange)="toggle($event)"
+                                         status="primary" id="notInStock" size="10"> Pas dans le Stock </nb-checkbox>
+                        </div>
+                        <div class="col-sm-2">
+                            <nb-checkbox [value]="checked2" (checkedChange)="toggle2($event)"
+                                         status="primary" id="inStock" size="10"> Dans le Stock </nb-checkbox>
+                        </div>
+                    </div>
+                </nb-card-header>
+            </nb-card>
+            <jhi-alert-error></jhi-alert-error>
+            <jhi-alert></jhi-alert>
+            <nb-card>
+                <div *ngIf="checked2">
+                    <span jhiTranslate="improApp.vehicule.home.title">Vehicules dans le stock</span>
+                    <nb-form-field>
+                        <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                        <label>
+                            <input type="text" fieldSize="tiny" nbInput status="primary" fullWidth placeholder="Rechercher"
+                                   [(ngModel)]="searchText" />
+                        </label>
+                    </nb-form-field>
+                    <div *jhiHasAnyAuthority="'REVENDEUR'">
+                        <div class="alert alert-warning" *ngIf="vehicules1?.length === 0 ">
+                            <span jhiTranslate="improApp.vehicule.home.notFound">No vehicules found</span>
+                        </div>
+                        <div class="table-responsive table-striped table-hover table-bordered" *ngIf="vehicules1?.length > 0">
+                            <table class="table table-striped" aria-describedby="page-heading">
+                                <thead>
+                                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                                    <th scope="col"><span jhiTranslate="improApp.vehicule.numeroChassis">Numero Chassis</span> </th>
+                                    <!--<th scope="col"><span jhiTranslate="improApp.vehicule.types">Types</span> </th>-->
+                                    <th scope="col"><span jhiTranslate="improApp.vehicule.model">Model</span> </th>
+                                    <th scope="col"><span jhiTranslate="improApp.vehicule.typeVehicule">Type Vehicule</span> </th>
+                                    <th scope="col"><span jhiTranslate="improApp.vehicule.marqueVehicule">Marque Vehicule</span> </th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let vehicule of vehicules1 | vehiculeFilter:searchText">
+                                    <td>{{vehicule.numeroChassis}}</td>
+                                    <!--<td>{{vehicule.types}}</td>-->
+                                    <td>{{vehicule.model}}</td>
+                                    <td>
+                                        <div *ngIf="vehicule.typeVehiculeId">
+                                            <a [routerLink]="['/type-vehicule', vehicule.typeVehiculeId , 'view' ]" >
+                                                <div *ngFor="let type of types">
+                                                    <div *ngIf="type.id == vehicule.typeVehiculeId">
+                                                        {{type.libelle}}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div *ngIf="vehicule.marqueVehiculeId">
+                                            <a [routerLink]="['/marque-vehicule', vehicule.marqueVehiculeId , 'view' ]" >
+                                                <div *ngFor="let marque of marques">
+                                                    <div *ngIf="marque.id == vehicule.marqueVehiculeId">
+                                                        {{marque.libelle}}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">
+                                        <div class="btn-group">
+                                            <button type="submit" nbButton shape="round" outline status="info" size="tiny"
+                                                    [routerLink]="['/vehicule', vehicule.id, 'view' ]">
+                                                <fa-icon [icon]="'eye'"></fa-icon>
+                                                <span class="d-none d-md-inline"></span>
+                                            </button>
+                                            <div *ngIf="!vehicule.venteId && !vehicule.livraisonVehiculeId">
+                                                <button type="submit" nbButton shape="round" outline status="primary" size="tiny"
+                                                        [routerLink]="['/vehicule', vehicule.id, 'edit']">
+                                                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                                    <span class="d-none d-md-inline"></span>
+                                                </button>
+                                                <button type="submit" nbButton shape="round" outline status="danger" size="tiny" (click)="delete(vehicule)">
+                                                    <fa-icon [icon]="'times'"></fa-icon>
+                                                    <span class="d-none d-md-inline"></span>
+                                                </button>
+                                            </div>
+                                            <div *ngIf="vehicule.venteId">
+                                                <div STYLE="color: #105cb6">
+                                                    --VENDU
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div *jhiHasAnyAuthority="'CONCESSIONNAIRE'">
+                        <div class="alert alert-warning" *ngIf="vehicules?.length === 0 ">
+                            <span jhiTranslate="improApp.vehicule.home.notFound">No vehicules found</span>
+                        </div>
+                        <div class="table-responsive table-striped table-hover table-bordered" *ngIf="vehicules?.length > 0">
+                            <table class="table table-striped" aria-describedby="page-heading">
+                                <thead>
+                                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                                    <th scope="col"><span jhiTranslate="improApp.vehicule.numeroChassis">Numéro Châssis</span> </th>
+                                    <!--<th scope="col"><span jhiTranslate="improApp.vehicule.types">Types</span> </th>-->
+                                    <th scope="col"><span jhiTranslate="improApp.vehicule.model">Modèl</span> </th>
+                                    <th scope="col"><span jhiTranslate="improApp.vehicule.typeVehicule">Type Véhicule</span> </th>
+                                    <th scope="col"><span jhiTranslate="improApp.vehicule.marqueVehicule">Marque Véhicule</span> </th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let vehicule of vehicules | vehiculeFilter:searchText">
+                                    <td>{{vehicule.numeroChassis}}</td>
+                                    <!--<td>{{vehicule.types}}</td>-->
+                                    <td>{{vehicule.model}}</td>
+                                    <td>
+                                        <div *ngIf="vehicule.typeVehiculeId">
+                                            <a [routerLink]="['/type-vehicule', vehicule.typeVehiculeId , 'view' ]" >
+                                                <div *ngFor="let type of types">
+                                                    <div *ngIf="type.id == vehicule.typeVehiculeId">
+                                                        {{type.libelle}}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div *ngIf="vehicule.marqueVehiculeId">
+                                            <a [routerLink]="['/marque-vehicule', vehicule.marqueVehiculeId , 'view' ]" >
+                                                <div *ngFor="let marque of marques">
+                                                    <div *ngIf="marque.id == vehicule.marqueVehiculeId">
+                                                        {{marque.libelle}}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">
+                                        <div class="btn-group">
+                                            <button type="submit" nbButton shape="round" outline status="info" size="tiny"
+                                                    [routerLink]="['/vehicule', vehicule.id, 'view' ]">
+                                                <fa-icon [icon]="'eye'"></fa-icon>
+                                                <span class="d-none d-md-inline"></span>
+                                            </button>
+                                            <div *ngIf="!vehicule.venteId && !vehicule.livraisonVehiculeId">
+                                                <button type="submit" nbButton shape="round" outline status="primary" size="tiny"
+                                                        [routerLink]="['/vehicule', vehicule.id, 'edit']">
+                                                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                                    <span class="d-none d-md-inline"></span>
+                                                </button>
+                                                <button type="submit" nbButton shape="round" outline status="danger" size="tiny" (click)="delete(vehicule)">
+                                                    <fa-icon [icon]="'times'"></fa-icon>
+                                                    <span class="d-none d-md-inline"></span>
+                                                </button>
+                                            </div>
+                                            <div *ngIf="vehicule.venteId && !vehicule.livraisonVehiculeId">
+                                                <div STYLE="color: #105cb6">
+                                                    --VENDU
+                                                </div>
+                                            </div>
+                                            <div *ngIf="vehicule.livraisonVehiculeId">
+                                                <div STYLE="color: #151a30">
+                                                    --LIVRE
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="checked" class="col-md-12">
+                    <h3 *jhiHasAnyAuthority="['CONCESSIONNAIRE','REVENDEUR']">
+                        <span>Véhicules hors Stock</span>
+                    </h3>
+                    <div>
+                        <div class="alert alert-warning" *ngIf="vehiculesh?.length === 0 ">
+                            <span jhiTranslate="improApp.vehicule.home.notFound">No vehicules found</span>
+                        </div>
+                        <div class="table-responsive table-striped table-hover table-bordered" *ngIf="vehiculesh?.length > 0">
+                            <table class="table table-striped" aria-describedby="page-heading">
+                                <thead>
+                                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                                    <th scope="col"><span jhiTranslate="improApp.vehicule.numeroChassis">Numero Chassis</span> </th>
+                                    <!--<th scope="col"><span jhiTranslate="improApp.vehicule.types">Types</span> </th>-->
+                                    <th scope="col"><span jhiTranslate="improApp.vehicule.model">Model</span> </th>
+                                    <th scope="col"><span jhiTranslate="improApp.vehicule.typeVehicule">Type Vehicule</span> </th>
+                                    <th scope="col"><span jhiTranslate="improApp.vehicule.marqueVehicule">Marque Vehicule</span> </th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let vehicule of vehiculesh | vehiculeFilter:searchText">
+                                    <td>{{vehicule.numeroChassis}}</td>
+                                    <!--<td>{{vehicule.types}}</td>-->
+                                    <td>{{vehicule.model}}</td>
+                                    <td>
+                                        <div *ngIf="vehicule.typeVehiculeId">
+                                            <a [routerLink]="['/type-vehicule', vehicule.typeVehiculeId , 'view' ]" >
+                                                <div *ngFor="let type of types">
+                                                    <div *ngIf="type.id == vehicule.typeVehiculeId">
+                                                        {{type.libelle}}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div *ngIf="vehicule.marqueVehiculeId">
+                                            <a [routerLink]="['/marque-vehicule', vehicule.marqueVehiculeId , 'view' ]" >
+                                                <div *ngFor="let marque of marques">
+                                                    <div *ngIf="marque.id == vehicule.marqueVehiculeId">
+                                                        {{marque.libelle}}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">
+                                        <div class="btn-group">
+                                            <button type="submit" nbButton shape="round" outline status="info" size="tiny"
+                                                    [routerLink]="['/vehicule', vehicule.id, 'view' ]">
+                                                <fa-icon [icon]="'eye'"></fa-icon>
+                                                <span class="d-none d-md-inline"></span>
+                                            </button>
+                                            <div *ngIf="!vehicule.venteId && !vehicule.livraisonVehiculeId">
+                                                <button type="submit" nbButton shape="round" outline status="primary" size="tiny"
+                                                        [routerLink]="['/vehicule', vehicule.id, 'edit']">
+                                                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                                    <span class="d-none d-md-inline"></span>
+                                                </button>
+                                                <button type="submit" nbButton shape="round" outline status="danger" size="tiny" (click)="delete(vehicule)">
+                                                    <fa-icon [icon]="'times'"></fa-icon>
+                                                    <span class="d-none d-md-inline"></span>
+                                                </button>
+                                            </div>
+                                            <div *jhiHasAnyAuthority="['CONCESSIONNAIRE','REVENDEUR']" >
+                                                <div *ngIf="vehicule.venteId">
+                                                    <div STYLE="color: #105cb6">
+                                                        --VENDU
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *jhiHasAnyAuthority="['STHGUICHET']" >
+                                                <div *ngIf="vehicule.venteId">
+                                                    <div STYLE="color: #105cb6">
+                                                        --ENREGISTRE
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div *jhiHasAnyAuthority="'STHGUICHET'">
+                    <div class="alert alert-warning" *ngIf="vehiculesh?.length === 0 ">
+                        <span jhiTranslate="improApp.vehicule.home.notFound">No vehicules found</span>
+                    </div>
+                    <div class="table-responsive table-striped table-hover table-bordered" *ngIf="vehiculesh?.length > 0">
+                        <table class="table table-striped" aria-describedby="page-heading">
+                            <thead>
+                            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                                <th scope="col"><span jhiTranslate="improApp.vehicule.numeroChassis">Numero Chassis</span> </th>
+                                <!--<th scope="col"><span jhiTranslate="improApp.vehicule.types">Types</span> </th>-->
+                                <th scope="col"><span jhiTranslate="improApp.vehicule.model">Model</span> </th>
+                                <th scope="col"><span jhiTranslate="improApp.vehicule.typeVehicule">Type Vehicule</span> </th>
+                                <th scope="col"><span jhiTranslate="improApp.vehicule.marqueVehicule">Marque Vehicule</span> </th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let vehicule of vehiculesh | vehiculeFilter:searchText">
+                                <td>{{vehicule.numeroChassis}}</td>
+                                <!--<td>{{vehicule.types}}</td>-->
+                                <td>{{vehicule.model}}</td>
+                                <td>
+                                    <div *ngIf="vehicule.typeVehiculeId">
+                                        <a [routerLink]="['/type-vehicule', vehicule.typeVehiculeId , 'view' ]" >
+                                            <div *ngFor="let type of types">
+                                                <div *ngIf="type.id == vehicule.typeVehiculeId">
+                                                    {{type.libelle}}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div *ngIf="vehicule.marqueVehiculeId">
+                                        <a [routerLink]="['/marque-vehicule', vehicule.marqueVehiculeId , 'view' ]" >
+                                            <div *ngFor="let marque of marques">
+                                                <div *ngIf="marque.id == vehicule.marqueVehiculeId">
+                                                    {{marque.libelle}}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="text-right">
+                                    <div class="btn-group">
+                                        <button type="submit" nbButton shape="round" outline status="info" size="tiny"
+                                                [routerLink]="['/vehicule', vehicule.id, 'view' ]">
+                                            <fa-icon [icon]="'eye'"></fa-icon>
+                                            <span class="d-none d-md-inline"></span>
+                                        </button>
+                                        <div *ngIf="!vehicule.venteId && !vehicule.livraisonVehiculeId">
+                                            <button type="submit" nbButton shape="round" outline status="primary" size="tiny"
+                                                    [routerLink]="['/vehicule', vehicule.id, 'edit']">
+                                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                                <span class="d-none d-md-inline"></span>
+                                            </button>
+                                            <button type="submit" nbButton shape="round" outline status="danger" size="tiny" (click)="delete(vehicule)">
+                                                <fa-icon [icon]="'times'"></fa-icon>
+                                                <span class="d-none d-md-inline"></span>
+                                            </button>
+                                        </div>
+                                        <div *jhiHasAnyAuthority="['CONCESSIONNAIRE','REVENDEUR']" >
+                                            <div *ngIf="vehicule.venteId">
+                                                <div STYLE="color: #105cb6">
+                                                    --VENDU
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *jhiHasAnyAuthority="['STHGUICHET']" >
+                                            <div *ngIf="vehicule.venteId">
+                                                <div STYLE="color: #105cb6">
+                                                    --ENREGISTRE
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </nb-card>
+        </nb-card-body>
+        <nb-card-footer>
+            <!--div [hidden]="vehicules?.length === 0">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+                </div>
+            </div-->
+        </nb-card-footer>
+    </nb-card>
+</div>

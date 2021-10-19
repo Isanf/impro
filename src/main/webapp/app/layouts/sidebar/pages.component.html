@@ -1,0 +1,31 @@
+<div [ngSwitch]="isAuthenticated()">
+    <div *ngSwitchCase="true">
+        <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+            <nb-menu [items]="admin_menu" autoCollapse="true"></nb-menu>
+        </div>
+        <div  *jhiHasAnyAuthority="['CONCESSIONNAIRE']">
+            <nb-menu [items]="cons_menu" autoCollapse="true"></nb-menu>
+        </div>
+        <div  *jhiHasAnyAuthority="['REVENDEUR']">
+            <nb-menu [items]="reven_menu" autoCollapse="true"></nb-menu>
+        </div>
+        <div  *jhiHasAnyAuthority="['STHGUICHET']">
+            <nb-menu [items]="sthguichet_menu" autoCollapse="true"></nb-menu>
+        </div>
+        <div  *jhiHasAnyAuthority="['DGTTM']">
+            <nb-menu [items]="dgttm_menu" autoCollapse="true"></nb-menu>
+        </div>
+        <div  *jhiHasAnyAuthority="['DOUANE']">
+            <nb-menu [items]="douane_menu" autoCollapse="true"></nb-menu>
+        </div>
+        <div  *jhiHasAnyAuthority="['DG_DGTTM']">
+            <nb-menu [items]="dg_dgttm_menu" autoCollapse="true"></nb-menu>
+        </div>
+        <div  *jhiHasAnyAuthority="['DG_DOUANE']">
+            <nb-menu [items]="dg_douane_menu" autoCollapse="true"></nb-menu>
+        </div>
+    </div>
+    <div *ngSwitchCase="false" >
+    </div>
+</div>
+

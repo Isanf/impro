@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="logActivity">
+            <h2><span jhiTranslate="improApp.logActivity.detail.title">Log Activity</span> {{ logActivity.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="improApp.logActivity.principal">Principal</span></dt>
+                <dd>
+                    <span>{{ logActivity.principal }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.logActivity.url">Url</span></dt>
+                <dd>
+                    <span>{{ logActivity.url }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.logActivity.action">Action</span></dt>
+                <dd>
+                    <span>{{ logActivity.action }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.logActivity.ip">Ip</span></dt>
+                <dd>
+                    <span>{{ logActivity.ip }}</span>
+                </dd>
+                <dt><span jhiTranslate="improApp.logActivity.dateAction">Date Action</span></dt>
+                <dd>
+                    <span>{{ logActivity.dateAction }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/log-activity', logActivity.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

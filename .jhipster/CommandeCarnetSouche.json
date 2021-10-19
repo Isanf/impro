@@ -1,0 +1,76 @@
+{
+  "name": "CommandeCarnetSouche",
+  "fields": [
+    {
+      "fieldName": "numeroCommandeCS",
+      "fieldType": "String",
+      "javadoc": "numeroCommandeCS"
+    },
+    {
+      "fieldName": "dateCommandeCS",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "typePaiement",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "estValide",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "estTraitee",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "estLivree",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "prixCommande",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "livraisonCarnetSouche",
+      "otherEntityRelationshipName": "commandeCarnetSouche",
+      "relationshipName": "livraisonCarnetSouche"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "infoCommandeCarnetASouche",
+      "otherEntityRelationshipName": "commandeCarnetSouche",
+      "relationshipName": "infoCommandeCarnetASouche"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "commandeCSConcessionnaire",
+      "relationshipName": "concessionnaire",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "commandeCSRevendeur",
+      "relationshipName": "supernet",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200205114805",
+  "javadoc": "The CommandeCarnetSouche entity.\\n@author A true hipster",
+  "entityTableName": "commande_carnet_souche",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "embedded": false,
+  "searchEngine": false,
+  "databaseType": "sql"
+}

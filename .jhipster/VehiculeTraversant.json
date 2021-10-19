@@ -1,0 +1,33 @@
+{
+  "name": "VehiculeTraversant",
+  "fields": [
+    {
+      "fieldName": "chassis",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "marque",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "model",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20201126162354",
+  "entityTableName": "vehicule_traversant",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,181 @@
+
+<nb-card>
+    <div class="container-fluid" [ngSwitch]="isAuthenticated()">
+        <div *ngSwitchCase="true">
+            <div *jhiHasAnyAuthority="['ROLE_ADMIN']" class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <nb-flip-card>
+                            <nb-card-front>
+                                <nb-card status="basic">
+                                    <nb-card-header> Carnets Disponibles</nb-card-header>
+                                    <nb-card-body>
+                                        <h2>{{ carnetASouchesUsed }}</h2>
+                                    </nb-card-body>
+                                </nb-card>
+                            </nb-card-front>
+                            <nb-card-back>
+                                <nb-card status="basic">
+                                    <nb-card-header>Total Carnets</nb-card-header>
+                                    <nb-card-body>
+                                        <h2>{{ carnetASouchesTotal }}</h2>
+                                    </nb-card-body>
+                                </nb-card>
+                            </nb-card-back>
+                        </nb-flip-card>
+                    </div>
+                    <div class="col-md-3">
+                        <nb-flip-card>
+                            <nb-card-front>
+                                <nb-card status="basic">
+                                    <nb-card-header> Certificats Disponibles</nb-card-header>
+                                    <nb-card-body>
+                                        <h2>{{ certificatImmatriculationsUsed }}</h2>
+                                    </nb-card-body>
+                                </nb-card>
+                            </nb-card-front>
+                            <nb-card-back>
+                                <nb-card status="basic">
+                                    <nb-card-header>Total Certificats</nb-card-header>
+                                    <nb-card-body>
+                                        <h2>{{certificatImmatriculationsTotal }}</h2>
+                                    </nb-card-body>
+                                </nb-card>
+                            </nb-card-back>
+                        </nb-flip-card>
+                    </div>
+                    <div class="col-md-3">
+                        <nb-card status="basic">
+                            <nb-card-header>Total Concessionaires</nb-card-header>
+                            <nb-card-body>
+                                <h2>{{ carteWS.length }}</h2>
+                            </nb-card-body>
+                        </nb-card>
+                    </div>
+                    <div class="col-md-3">
+                        <nb-card status="basic">
+                            <nb-card-header>Total Immatriculations</nb-card-header>
+                            <nb-card-body>
+                                <h2>{{ immatriculationList }}</h2>
+                            </nb-card-body>
+                        </nb-card>
+                    </div>
+                </div>
+            </div>
+            <div *jhiHasAnyAuthority="['CONCESSIONNAIRE']" class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <nb-flip-card>
+                            <nb-card-front>
+                                <nb-card status="basic">
+                                    <nb-card-header> Carnets Disponibles</nb-card-header>
+                                    <nb-card-body>
+                                        <h2>{{ carnetASouchesUsed }}</h2>
+                                    </nb-card-body>
+                                </nb-card>
+                            </nb-card-front>
+                            <nb-card-back>
+                                <nb-card status="basic">
+                                    <nb-card-header>Total Carnets</nb-card-header>
+                                    <nb-card-body>
+                                        <h2>{{ carnetASouchesTotal }}</h2>
+                                    </nb-card-body>
+                                </nb-card>
+                            </nb-card-back>
+                        </nb-flip-card>
+                    </div>
+                    <div class="col-md-3">
+                        <nb-flip-card>
+                            <nb-card-front>
+                                <nb-card status="basic">
+                                    <nb-card-header> Certificats Disponibles</nb-card-header>
+                                    <nb-card-body>
+                                        <h2>{{ certificatImmatriculationsUsed }}</h2>
+                                    </nb-card-body>
+                                </nb-card>
+                            </nb-card-front>
+                            <nb-card-back>
+                                <nb-card status="basic">
+                                    <nb-card-header>Total Certificats</nb-card-header>
+                                    <nb-card-body>
+                                        <h2>{{certificatImmatriculationsTotal }}</h2>
+                                    </nb-card-body>
+                                </nb-card>
+                            </nb-card-back>
+                        </nb-flip-card>
+                    </div>
+                    <div class="col-md-3">
+                        <nb-card status="basic">
+                            <nb-card-header>Total Revendeurs</nb-card-header>
+                            <nb-card-body>
+                                <h2>{{ revendeurs }}</h2>
+                            </nb-card-body>
+                        </nb-card>
+                    </div>
+                    <div class="col-md-3">
+                        <nb-card status="basic">
+                            <nb-card-header>Total Immatriculations</nb-card-header>
+                            <nb-card-body>
+                                <h2>{{ immatriculationList }}</h2>
+                            </nb-card-body>
+                        </nb-card>
+                    </div>
+                </div>
+
+            </div>
+            <div *jhiHasAnyAuthority="['STHGUICHET']" class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <nb-flip-card>
+                            <nb-card-front>
+                                <nb-card status="basic">
+                                    <nb-card-header> Carnets Disponibles</nb-card-header>
+                                    <nb-card-body>
+                                        <h2>{{ carnetASouchesUsed }}</h2>
+                                    </nb-card-body>
+                                </nb-card>
+                            </nb-card-front>
+                            <nb-card-back>
+                                <nb-card status="basic">
+                                    <nb-card-header>Total Carnets</nb-card-header>
+                                    <nb-card-body>
+                                        <h2>{{ carnetASouchesTotal }}</h2>
+                                    </nb-card-body>
+                                </nb-card>
+                            </nb-card-back>
+                        </nb-flip-card>
+                    </div>
+                    <div class="col-md-4">
+                        <nb-flip-card>
+                            <nb-card-front>
+                                <nb-card status="basic">
+                                    <nb-card-header> Certificats Disponibles</nb-card-header>
+                                    <nb-card-body>
+                                        <h2>{{ certificatImmatriculationsUsed }}</h2>
+                                    </nb-card-body>
+                                </nb-card>
+                            </nb-card-front>
+                            <nb-card-back>
+                                <nb-card status="basic">
+                                    <nb-card-header>Total Certificats</nb-card-header>
+                                    <nb-card-body>
+                                        <h2>{{certificatImmatriculationsTotal }}</h2>
+                                    </nb-card-body>
+                                </nb-card>
+                            </nb-card-back>
+                        </nb-flip-card>
+                    </div>
+                    <div class="col-md-4">
+                        <nb-card status="basic">
+                            <nb-card-header>Total Immatriculations</nb-card-header>
+                            <nb-card-body>
+                                <h2>{{ immatriculationList }}</h2>
+                            </nb-card-body>
+                        </nb-card>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</nb-card>

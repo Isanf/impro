@@ -1,0 +1,973 @@
+<div class="container-fluid">
+    <nb-card *jhiHasAnyAuthority="'ROLE_ADMIN'">
+        <nb-card-header  >
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <nb-checkbox [value]="checked" (checkedChange)="toggle($event)"
+                                 status="primary" size="10"> STH </nb-checkbox>
+                </div>
+                <div class="col-sm-3">
+                    <nb-checkbox [value]="checked2" (checkedChange)="toggle2($event)"
+                                 status="primary" size="10"> DGTTM </nb-checkbox>
+                </div>
+                <div class="col-sm-3">
+                    <nb-checkbox [value]="checked4" (checkedChange)="toggle4($event)"
+                                 status="primary" size="10"> GARAGE </nb-checkbox>
+                </div>
+                <div class="col-sm-3">
+                    <nb-checkbox [value]="checked3" (checkedChange)="toggle3($event)"
+                                 status="primary" size="10"> FDS </nb-checkbox>
+                </div>
+            </div>
+        </nb-card-header>
+    </nb-card>
+
+    <nb-card *ngIf="checked2">
+        <nb-card-header>
+            <h2> Création de l'acteur DGTTM </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <nb-stepper>
+                <nb-step>
+                    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                        <!--                    <h2 id="jhi-organisation-heading">Information Organisation</h2>-->
+                        <div>
+                            <!--<jhi-alert-error></jhi-alert-error>-->
+                            <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                                <label for="id" jhiTranslate="global.field.id">ID</label>
+                                <input type="text" class="form-control" name="id" formControlName="id" readonly />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Nom </label>
+                                <div class="col-sm-9">
+                                    <input nbInput shape="round" status="primary" fieldSize="tiny" formControlName="nom"
+                                           fullWidth name="nom" type="text" required>
+                                    <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Description </label>
+                                <div class="col-sm-9">
+                                    <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="description"
+                                           fullWidth name="description" type="text" required>
+                                    <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                            This field cannot be longer than 1000 characters.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="field_pere">Mere</label>
+                                <div class="col-sm-9">
+                                    <nb-select id="field_pere" status="primary" fullWidth shape="round"
+                                               outline size="small" formControlName="pereId" >
+                                        <nb-option [value]="" >Pas de mère</nb-option>
+                                        <nb-option [value]="organisationOption.id" *ngFor="let organisationOption of organisations; trackBy: trackById">{{organisationOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Type Organisation</label>
+                                <div class="col-sm-9">
+                                    <nb-select status="primary" size="small" outline shape="round" fullWidth
+                                               formControlName="typeOrganisationId">
+                                        <nb-option [value]="typeOrganisationOption.id" *ngFor="let typeOrganisationOption of typeorganisations; trackBy: trackById">{{typeOrganisationOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Numero Telephone </label>
+                                <div class="col-sm-9">
+                                    <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroPhone"
+                                           fullWidth name="numeroPhone" type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Localite Organisation</label>
+                                <div class="col-sm-9">
+                                    <nb-select  status="primary" fullWidth shape="round" outline size="small"
+                                                formControlName="organisationLocaliteId" >
+                                        <nb-option [value]="organisationLocaliteOption.id" *ngFor="let organisationLocaliteOption of organisationlocalites; trackBy: trackById">{{organisationLocaliteOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <!--<div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Localité </label>
+                                <div class="col-sm-9">
+                                    <nb-form-field>
+                                        <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                                        <input [nbAutocomplete]="auto" type="text" shape="round" fieldSize="tiny" formControlName="organisationLocaliteId"
+                                           #autoInput (input)="onChange()" (click)="clic()" nbInput status="primary" fullWidth placeholder="Rechercher une localite"/>
+                                    </nb-form-field>
+                                    <nb-autocomplete #auto [handleDisplayFn]="viewHandle" (selectedChange)="onSelectionChange($event)">
+                                        <nb-option  *ngFor="let option of filteredOptions$ | async" [value]="option.id">
+                                            {{ option.nom }}
+                                        </nb-option>
+                                    </nb-autocomplete>
+                                </div>
+                            </div>-->
+                            <h6>Ou ajouter une nouvelle localite
+                                <button nbButton outline shape="round" status="primary"
+                                        class="float-right"  (click)="new()">
+                                    <fa-icon icon="plus"></fa-icon>
+                                    <span>
+                                Ajouter
+                            </span>
+                                </button>
+                            </h6>
+                            <div>
+                                <br>
+                                <div *ngIf="nouv == true" class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Nouvelle Localité </label>
+                                    <div class="col-sm-9">
+                                        <input fieldSize="tiny" nbInput shape="round" required status="primary" formControlName="nomlocalite"
+                                               fullWidth name="nomlocalite" type="text" placeholder="Taper la nouvelle localite" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Est Acteur</label>
+                                <div class="col-sm-9">
+                                    <nb-select status="primary" size="small" outline shape="round" fullWidth
+                                               formControlName="typeActeurId" >
+                                        <nb-option [value]="'DGTTM'">DGTTM</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group row">
+                        <label class="col-sm-11 col-form-label" ></label>
+                        <button nbButton nbStepperNext outline shape="round" status="primary" >
+                            <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                        </button>
+                    </div>
+                </nb-step>
+                <nb-step>
+
+                    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="docIdentificationPMeditForm">
+                        <!--                        <h2 id="jhi-doc-identification-pm-heading" >Informations d'identification de la Structure</h2>-->
+                        <div class="form-group" [hidden]="!docIdentificationPMeditForm.get('id')!.value">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input shape="round" nbInput fullWidth fieldSize="tiny" status="primary"
+                                   type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"> Numero IFU </label>
+                            <div class="col-sm-9">
+                                <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroIFU"
+                                       fullWidth name="numeroIFU" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"> Numero RCCM </label>
+                            <div class="col-sm-9">
+                                <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroRCCM"
+                                       fullWidth name="numeroRCCM" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">E-mail professionnel</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="E-mail professionnel" required
+                                       formControlName="email"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Adress Postal</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="22 BP 52367 OUAGADOUGOU 22" required
+                                       formControlName="codePostal"/>
+                            </div>
+                        </div>
+                    </form>
+                    <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                        <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                    </button>
+
+                </nb-step>
+            </nb-stepper>
+        </nb-card-body>
+        <nb-card-footer>
+            <div>
+                <button type="button" outline nbButton status="basic" size="tiny" shape="round"  id="cancel-save" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="button" nbButton outline status="primary" size="tiny" shape="round"
+                        (click)="save()" id="save-entity" [disabled]="editForm.invalid || isSaving || docIdentificationPMeditForm.invalid">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </nb-card-footer>
+    </nb-card>
+    <nb-card *ngIf="checked4">
+        <nb-card-header>
+            <h2> Création de l'acteur GARAGE </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <nb-stepper>
+                <nb-step>
+                    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                        <!--                    <h2 id="jhi-organisation-heading">Information Organisation</h2>-->
+                        <div>
+                            <!--<jhi-alert-error></jhi-alert-error>-->
+                            <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                                <label for="id" jhiTranslate="global.field.id">ID</label>
+                                <input type="text" class="form-control" name="id" formControlName="id" readonly />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Nom </label>
+                                <div class="col-sm-9">
+                                    <input nbInput shape="round" status="primary" fieldSize="tiny" formControlName="nom"
+                                           fullWidth name="nom" type="text" required>
+                                    <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Description </label>
+                                <div class="col-sm-9">
+                                    <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="description"
+                                           fullWidth name="description" type="text" required>
+                                    <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                            This field cannot be longer than 1000 characters.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Mere</label>
+                                <div class="col-sm-9">
+                                    <nb-select status="primary" fullWidth shape="round"
+                                               outline size="small" formControlName="pereId" >
+                                        <nb-option [value]="" >Pas de mère</nb-option>
+                                        <nb-option [value]="organisationOption.id" *ngFor="let organisationOption of organisations; trackBy: trackById">{{organisationOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Type Organisation</label>
+                                <div class="col-sm-9">
+                                    <nb-select status="primary" size="small" outline shape="round" fullWidth
+                                               formControlName="typeOrganisationId">
+                                        <nb-option [value]="typeOrganisationOption.id" *ngFor="let typeOrganisationOption of typeorganisations; trackBy: trackById">{{typeOrganisationOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Numero Telephone </label>
+                                <div class="col-sm-9">
+                                    <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroPhone"
+                                           fullWidth name="numeroPhone" type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Localite Organisation</label>
+                                <div class="col-sm-9">
+                                    <nb-select  status="primary" fullWidth shape="round" outline size="small"
+                                                formControlName="organisationLocaliteId" >
+                                        <nb-option [value]="organisationLocaliteOption.id" *ngFor="let organisationLocaliteOption of organisationlocalites; trackBy: trackById">{{organisationLocaliteOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <!--<div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Localité </label>
+                                <div class="col-sm-9">
+                                    <nb-form-field>
+                                        <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                                        <input [nbAutocomplete]="auto" type="text" shape="round" fieldSize="tiny" formControlName="organisationLocaliteId"
+                                           #autoInput (input)="onChange()" (click)="clic()" nbInput status="primary" fullWidth placeholder="Rechercher une localite"/>
+                                    </nb-form-field>
+                                    <nb-autocomplete #auto [handleDisplayFn]="viewHandle" (selectedChange)="onSelectionChange($event)">
+                                        <nb-option  *ngFor="let option of filteredOptions$ | async" [value]="option.id">
+                                            {{ option.nom }}
+                                        </nb-option>
+                                    </nb-autocomplete>
+                                </div>
+                            </div>-->
+                            <h6>Ou ajouter une nouvelle localite
+                                <button nbButton outline shape="round" status="primary"
+                                        class="float-right"  (click)="new()">
+                                    <fa-icon icon="plus"></fa-icon>
+                                    <span>
+                                Ajouter
+                            </span>
+                                </button>
+                            </h6>
+                            <div>
+                                <br>
+                                <div *ngIf="nouv == true" class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Nouvelle Localité </label>
+                                    <div class="col-sm-9">
+                                        <input fieldSize="tiny" nbInput shape="round" required status="primary" formControlName="nomlocalite"
+                                               fullWidth name="nomlocalite" type="text" placeholder="Taper la nouvelle localite" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Est Acteur</label>
+                                <div class="col-sm-9">
+                                    <nb-select status="primary" size="small" outline shape="round" fullWidth
+                                               formControlName="typeActeurId" >
+                                        <nb-option [value]="'GARAGE'">GARAGE</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group row">
+                        <label class="col-sm-11 col-form-label" ></label>
+                        <button nbButton nbStepperNext outline shape="round" status="primary" >
+                            <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                        </button>
+                    </div>
+                </nb-step>
+                <nb-step>
+
+                    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="docIdentificationPMeditForm">
+                        <!--                        <h2 id="jhi-doc-identification-pm-heading" >Informations d'identification de la Structure</h2>-->
+                        <div class="form-group" [hidden]="!docIdentificationPMeditForm.get('id')!.value">
+                            <label jhiTranslate="global.field.id">ID</label>
+                            <input shape="round" nbInput fullWidth fieldSize="tiny" status="primary"
+                                   type="text" class="form-control" name="id" formControlName="id" readonly />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"> Numero IFU </label>
+                            <div class="col-sm-9">
+                                <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroIFU"
+                                       fullWidth name="numeroIFU" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"> Numero RCCM </label>
+                            <div class="col-sm-9">
+                                <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroRCCM"
+                                       fullWidth name="numeroRCCM" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">E-mail professionnel</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="E-mail professionnel" required
+                                       formControlName="email"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Adress Postal</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="22 BP 52367 OUAGADOUGOU 22" required
+                                       formControlName="codePostal"/>
+                            </div>
+                        </div>
+                    </form>
+                    <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                        <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                    </button>
+
+                </nb-step>
+            </nb-stepper>
+        </nb-card-body>
+        <nb-card-footer>
+            <div>
+                <button type="button" outline nbButton status="basic" size="tiny" shape="round" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="button" nbButton outline status="primary" size="tiny" shape="round"
+                        (click)="save()" [disabled]="editForm.invalid || isSaving || docIdentificationPMeditForm.invalid">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </nb-card-footer>
+    </nb-card>
+    <nb-card *ngIf="checked3">
+        <nb-card-header>
+            <h2> Création de l'acteur FDS </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <nb-stepper>
+                <nb-step>
+                    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                        <!--                    <h2 id="jhi-organisation-heading">Information Organisation</h2>-->
+                        <div>
+                            <!--<jhi-alert-error></jhi-alert-error>-->
+                            <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                                <label for="id" jhiTranslate="global.field.id">ID</label>
+                                <input type="text" class="form-control" name="id" formControlName="id" readonly />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Nom </label>
+                                <div class="col-sm-9">
+                                    <input nbInput shape="round" status="primary" fieldSize="tiny" formControlName="nom"
+                                           fullWidth name="nom" type="text" required>
+                                    <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Description </label>
+                                <div class="col-sm-9">
+                                    <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="description"
+                                           fullWidth name="description" type="text" required>
+                                    <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                            This field cannot be longer than 1000 characters.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Mere</label>
+                                <div class="col-sm-9">
+                                    <nb-select status="primary" fullWidth shape="round"
+                                               outline size="small" formControlName="pereId" >
+                                        <nb-option [value]="" >Pas de mère</nb-option>
+                                        <nb-option [value]="organisationOption.id" *ngFor="let organisationOption of organisations; trackBy: trackById">{{organisationOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Type Organisation</label>
+                                <div class="col-sm-9">
+                                    <nb-select status="primary" size="small" outline shape="round" fullWidth
+                                               formControlName="typeOrganisationId">
+                                        <nb-option [value]="typeOrganisationOption.id" *ngFor="let typeOrganisationOption of typeorganisations; trackBy: trackById">{{typeOrganisationOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Numero Telephone </label>
+                                <div class="col-sm-9">
+                                    <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroPhone"
+                                           fullWidth name="numeroPhone" type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Localite Organisation</label>
+                                <div class="col-sm-9">
+                                    <nb-select  status="primary" fullWidth shape="round" outline size="small"
+                                                formControlName="organisationLocaliteId" >
+                                        <nb-option [value]="organisationLocaliteOption.id" *ngFor="let organisationLocaliteOption of organisationlocalites; trackBy: trackById">{{organisationLocaliteOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <!--<div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Localité </label>
+                                <div class="col-sm-9">
+                                    <nb-form-field>
+                                        <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                                        <input [nbAutocomplete]="auto" type="text" shape="round" fieldSize="tiny" formControlName="organisationLocaliteId"
+                                           #autoInput (input)="onChange()" (click)="clic()" nbInput status="primary" fullWidth placeholder="Rechercher une localite"/>
+                                    </nb-form-field>
+                                    <nb-autocomplete #auto [handleDisplayFn]="viewHandle" (selectedChange)="onSelectionChange($event)">
+                                        <nb-option  *ngFor="let option of filteredOptions$ | async" [value]="option.id">
+                                            {{ option.nom }}
+                                        </nb-option>
+                                    </nb-autocomplete>
+                                </div>
+                            </div>-->
+                            <h6>Ou ajouter une nouvelle localite
+                                <button nbButton outline shape="round" status="primary"
+                                        class="float-right"  (click)="new()">
+                                    <fa-icon icon="plus"></fa-icon>
+                                    <span>
+                                Ajouter
+                            </span>
+                                </button>
+                            </h6>
+                            <div>
+                                <br>
+                                <div *ngIf="nouv == true" class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Nouvelle Localité </label>
+                                    <div class="col-sm-9">
+                                        <input fieldSize="tiny" nbInput shape="round" required status="primary" formControlName="nomlocalite"
+                                               fullWidth name="nomlocalite" type="text" placeholder="Taper la nouvelle localite" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Est Acteur</label>
+                                <div class="col-sm-9">
+                                    <nb-select status="primary" size="small" outline shape="round" fullWidth
+                                               formControlName="typeActeurId" >
+                                        <nb-option [value]="'FDS'"> FDS </nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group row">
+                        <label class="col-sm-11 col-form-label" ></label>
+                        <button nbButton nbStepperNext outline shape="round" status="primary" >
+                            <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                        </button>
+                    </div>
+                </nb-step>
+                <nb-step>
+
+                    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="docIdentificationPMeditForm">
+                        <!--                        <h2 id="jhi-doc-identification-pm-heading" >Informations d'identification de la Structure</h2>-->
+                        <div class="form-group" [hidden]="!docIdentificationPMeditForm.get('id')!.value">
+                            <label jhiTranslate="global.field.id">ID</label>
+                            <input shape="round" nbInput fullWidth fieldSize="tiny" status="primary"
+                                   type="text" class="form-control" name="id" formControlName="id" readonly />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"> Numero IFU </label>
+                            <div class="col-sm-9">
+                                <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroIFU"
+                                       fullWidth name="numeroIFU" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"> Numero RCCM </label>
+                            <div class="col-sm-9">
+                                <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroRCCM"
+                                       fullWidth name="numeroRCCM" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">E-mail professionnel</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="E-mail professionnel" required
+                                       formControlName="email"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Adress Postal</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="22 BP 52367 OUAGADOUGOU 22" required
+                                       formControlName="codePostal"/>
+                            </div>
+                        </div>
+                    </form>
+                    <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                        <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                    </button>
+
+                </nb-step>
+            </nb-stepper>
+        </nb-card-body>
+        <nb-card-footer>
+            <div>
+                <button type="button" outline nbButton status="basic" size="tiny" shape="round" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="button" nbButton outline status="primary" size="tiny" shape="round"
+                        (click)="save()" [disabled]="editForm.invalid || isSaving || docIdentificationPMeditForm.invalid">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </nb-card-footer>
+    </nb-card>
+    <nb-card *ngIf="checked">
+        <nb-card-header>
+            <h2> STH ou Guichet SIP </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <nb-stepper>
+                <nb-step>
+                    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                        <!--                    <h2 id="jhi-organisation-heading">Information Organisation</h2>-->
+                        <div>
+                            <!--<jhi-alert-error></jhi-alert-error>-->
+                            <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                                <label for="id" jhiTranslate="global.field.id">ID</label>
+                                <input type="text" class="form-control" name="id" formControlName="id" readonly />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Nom </label>
+                                <div class="col-sm-9">
+                                    <input nbInput shape="round" status="primary" fieldSize="tiny" formControlName="nom"
+                                           fullWidth name="nom" type="text" required>
+                                    <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Description </label>
+                                <div class="col-sm-9">
+                                    <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="description"
+                                           fullWidth name="description" type="text" required>
+                                    <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                            This field cannot be longer than 1000 characters.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Mere</label>
+                                <div class="col-sm-9">
+                                    <nb-select status="primary" fullWidth shape="round"
+                                               outline size="small" formControlName="pereId" >
+                                        <nb-option [value]="" >Pas de mère</nb-option>
+                                        <nb-option [value]="organisationOption.id" *ngFor="let organisationOption of organisations; trackBy: trackById">{{organisationOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Type Organisation</label>
+                                <div class="col-sm-9">
+                                    <nb-select status="primary" size="small" outline shape="round" fullWidth
+                                               formControlName="typeOrganisationId">
+                                        <nb-option [value]="typeOrganisationOption.id" *ngFor="let typeOrganisationOption of typeorganisations; trackBy: trackById">{{typeOrganisationOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Numero Telephone </label>
+                                <div class="col-sm-9">
+                                    <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroPhone"
+                                           fullWidth name="numeroPhone" type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Localite Organisation</label>
+                                <div class="col-sm-9">
+                                    <nb-select  status="primary" fullWidth shape="round" outline size="small"
+                                                formControlName="organisationLocaliteId" >
+                                        <nb-option [value]="organisationLocaliteOption.id" *ngFor="let organisationLocaliteOption of organisationlocalites; trackBy: trackById">{{organisationLocaliteOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <!--<div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Localité </label>
+                                <div class="col-sm-9">
+                                    <nb-form-field>
+                                        <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                                        <input [nbAutocomplete]="auto" type="text" shape="round" fieldSize="tiny" formControlName="organisationLocaliteId"
+                                           #autoInput (input)="onChange()" (click)="clic()" nbInput status="primary" fullWidth placeholder="Rechercher une localite"/>
+                                    </nb-form-field>
+                                    <nb-autocomplete #auto [handleDisplayFn]="viewHandle" (selectedChange)="onSelectionChange($event)">
+                                        <nb-option  *ngFor="let option of filteredOptions$ | async" [value]="option.id">
+                                            {{ option.nom }}
+                                        </nb-option>
+                                    </nb-autocomplete>
+                                </div>
+                            </div>-->
+                            <h6>Ou ajouter une nouvelle localite
+                                <button nbButton outline shape="round" status="primary"
+                                        class="float-right"  (click)="new()">
+                                    <fa-icon icon="plus"></fa-icon>
+                                    <span>
+                                Ajouter
+                            </span>
+                                </button>
+                            </h6>
+                            <div>
+                                <br>
+                                <div *ngIf="nouv == true" class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Nouvelle Localité </label>
+                                    <div class="col-sm-9">
+                                        <input fieldSize="tiny" nbInput shape="round" required status="primary" formControlName="nomlocalite"
+                                               fullWidth name="nomlocalite" type="text" placeholder="Taper la nouvelle localite" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Est Acteur</label>
+                                <div class="col-sm-9">
+                                    <nb-select status="primary" size="small" outline shape="round" fullWidth
+                                               formControlName="typeActeurId" >
+                                        <nb-option [value]="'STH'"> STH </nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!--<div class="form-group row">
+                        <label class="col-sm-11 col-form-label" ></label>
+                        <button nbButton nbStepperNext outline shape="round" status="primary" >
+                            <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                        </button>
+                    </div>-->
+                </nb-step>
+               <!-- <nb-step>
+
+                    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="docIdentificationPMeditForm">
+                        &lt;!&ndash;                        <h2 id="jhi-doc-identification-pm-heading" >Informations d'identification de la Structure</h2>&ndash;&gt;
+                        <div class="form-group" [hidden]="!docIdentificationPMeditForm.get('id')!.value">
+                            <label jhiTranslate="global.field.id">ID</label>
+                            <input shape="round" nbInput fullWidth fieldSize="tiny" status="primary"
+                                   type="text" class="form-control"  name="id" formControlName="id" readonly />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"> Numero </label>
+                            <div class="col-sm-9">
+                                <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numero"
+                                       fullWidth name="numero" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"> Numero IFU </label>
+                            <div class="col-sm-9">
+                                <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroIFU"
+                                       fullWidth name="numeroIFU" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"> Numero RCCM </label>
+                            <div class="col-sm-9">
+                                <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroRCCM"
+                                       fullWidth name="numeroRCCM" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">E-mail professionnel</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="E-mail professionnel" required
+                                       formControlName="email"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Adress Postal</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="22 BP 52367 OUAGADOUGOU 22" required
+                                       formControlName="codePostal"/>
+                            </div>
+                        </div>
+                    </form>
+                    <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                        <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                    </button>
+
+                </nb-step>-->
+            </nb-stepper>
+        </nb-card-body>
+        <nb-card-footer>
+            <div>
+                <button type="button" outline nbButton status="basic" size="tiny" shape="round"  (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="button" nbButton outline status="primary" size="tiny" shape="round"
+                        (click)="save()" [disabled]="editForm.invalid || isSaving || docIdentificationPMeditForm.invalid">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </nb-card-footer>
+    </nb-card>
+
+    <nb-card *jhiHasAnyAuthority="'CONCESSIONNAIRE'">
+        <nb-card-header>
+            <h2> Création d'un REVENDEUR </h2>
+        </nb-card-header>
+        <nb-card-body>
+            <nb-stepper>
+                <nb-step>
+                    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                        <!--                    <h2 id="jhi-organisation-heading">Information Organisation</h2>-->
+                        <div>
+                            <!--<jhi-alert-error></jhi-alert-error>-->
+                            <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                                <label for="id" jhiTranslate="global.field.id">ID</label>
+                                <input type="text" class="form-control" name="id" formControlName="id" readonly />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Nom </label>
+                                <div class="col-sm-9">
+                                    <input nbInput shape="round" status="primary" fieldSize="tiny" formControlName="nom"
+                                           fullWidth name="nom" type="text" required>
+                                    <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').dirty || editForm.get('nom').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('nom').errors.required" jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Description </label>
+                                <div class="col-sm-9">
+                                    <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="description"
+                                           fullWidth name="description" type="text" required>
+                                    <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                                        <small class="form-text text-danger"
+                                               *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                            This field cannot be longer than 1000 characters.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Agence Mère</label>
+                                <div class="col-sm-9">
+                                    <nb-select status="primary" fullWidth shape="round"
+                                               outline size="small" formControlName="pereId" >
+                                        <nb-option [value]="" >Pas de mère</nb-option>
+                                        <nb-option [value]="organisationOption.id" *ngFor="let organisationOption of organisations; trackBy: trackById">{{organisationOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Type Organisation</label>
+                                <div class="col-sm-9">
+                                    <nb-select status="primary" size="small" outline shape="round" fullWidth
+                                               formControlName="typeOrganisationId">
+                                        <nb-option [value]="typeOrganisationOption.id" *ngFor="let typeOrganisationOption of typeorganisations; trackBy: trackById">{{typeOrganisationOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Numéro Téléphone </label>
+                                <div class="col-sm-9">
+                                    <label>
+                                        <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroPhone"
+                                               fullWidth name="numeroPhone" type="text" required>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Localité Organisation</label>
+                                <div class="col-sm-9">
+                                    <nb-select  status="primary" fullWidth shape="round" outline size="small"
+                                                formControlName="organisationLocaliteId" >
+                                        <nb-option [value]="organisationLocaliteOption.id" *ngFor="let organisationLocaliteOption of organisationlocalites; trackBy: trackById">{{organisationLocaliteOption.nom}}</nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                            <!--<div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Localité </label>
+                                <div class="col-sm-9">
+                                    <nb-form-field>
+                                        <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                                        <input [nbAutocomplete]="auto" type="text" shape="round" fieldSize="tiny" formControlName="organisationLocaliteId"
+                                           #autoInput (input)="onChange()" (click)="clic()" nbInput status="primary" fullWidth placeholder="Rechercher une localite"/>
+                                    </nb-form-field>
+                                    <nb-autocomplete #auto [handleDisplayFn]="viewHandle" (selectedChange)="onSelectionChange($event)">
+                                        <nb-option  *ngFor="let option of filteredOptions$ | async" [value]="option.id">
+                                            {{ option.nom }}
+                                        </nb-option>
+                                    </nb-autocomplete>
+                                </div>
+                            </div>-->
+                            <h6>Ou ajouter une nouvelle localité
+                                <button nbButton outline shape="round" status="primary"
+                                        class="float-right"  (click)="new()">
+                                    <fa-icon icon="plus"></fa-icon>
+                                    <span>
+                                Ajouter
+                            </span>
+                                </button>
+                            </h6>
+                            <div>
+                                <br>
+                                <div *ngIf="nouv == true" class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Nouvelle Localité </label>
+                                    <div class="col-sm-9">
+                                        <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="nomlocalite"
+                                               fullWidth name="nomlocalite" type="text" placeholder="Taper la nouvelle localite" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Est Acteur</label>
+                                <div class="col-sm-9">
+                                    <nb-select status="primary" size="small" outline shape="round" fullWidth
+                                               formControlName="typeActeurId" >
+                                        <nb-option [value]="'REVENDEUR'"> REVENDEUR </nb-option>
+                                    </nb-select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group row">
+                        <label class="col-sm-11 col-form-label" ></label>
+                        <button nbButton nbStepperNext outline shape="round" status="primary" >
+                            <nb-icon icon="arrow-forward-outline" size="120"></nb-icon>
+                        </button>
+                    </div>
+                </nb-step>
+                <nb-step>
+
+                    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="docIdentificationPMeditForm">
+                        <!--                        <h2 id="jhi-doc-identification-pm-heading" >Informations d'identification de la Structure</h2>-->
+                        <div class="form-group" [hidden]="!docIdentificationPMeditForm.get('id')!.value">
+                            <label jhiTranslate="global.field.id">ID</label>
+                            <input shape="round" nbInput fullWidth fieldSize="tiny" status="primary"
+                                   type="text" class="form-control" name="id" formControlName="id" readonly />
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"> Numéro IFU </label>
+                            <div class="col-sm-9">
+                                <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroIFU"
+                                       fullWidth name="numeroIFU" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label"> Numéro RCCM </label>
+                            <div class="col-sm-9">
+                                <input fieldSize="tiny" nbInput shape="round" status="primary" formControlName="numeroRCCM"
+                                       fullWidth name="numeroRCCM" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">E-mail professionnel</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="E-mail professionnel" required
+                                       formControlName="email"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Adresse Postale</label>
+                            <div class="col-sm-9">
+                                <input nbInput fullWidth fieldSize="tiny" shape="round" status="primary"
+                                       type="text" placeholder="22 BP 52367 OUAGADOUGOU 22" required
+                                       formControlName="codePostal"/>
+                            </div>
+                        </div>
+                    </form>
+                    <button nbButton nbStepperPrevious outline shape="round" status="basic">
+                        <nb-icon icon="arrow-back-outline" size="120"></nb-icon>
+                    </button>
+
+                </nb-step>
+            </nb-stepper>
+        </nb-card-body>
+        <nb-card-footer>
+            <div>
+                <button type="button" outline nbButton status="basic" size="tiny" shape="round" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="button" nbButton outline status="primary" size="tiny" shape="round"
+                        (click)="save()" [disabled]="editForm.invalid || isSaving || docIdentificationPMeditForm.invalid">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </nb-card-footer>
+    </nb-card>
+</div>
+
+
+

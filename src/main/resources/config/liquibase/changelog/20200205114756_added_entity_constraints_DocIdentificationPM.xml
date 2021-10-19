@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity DocIdentificationPM.
+    -->
+    <changeSet id="20200205114756-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="organisation_id"
+                                 baseTableName="doc_identification_pm"
+                                 constraintName="fk_doc_identification_pm_organisation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="organisation"/>
+
+        <addForeignKeyConstraint baseColumnNames="personne_morale_id"
+                                 baseTableName="doc_identification_pm"
+                                 constraintName="fk_doc_identification_pm_personne_morale_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="personne_morale"/>
+
+    </changeSet>
+</databaseChangeLog>

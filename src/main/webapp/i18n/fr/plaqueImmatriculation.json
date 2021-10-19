@@ -1,0 +1,29 @@
+{
+  "improApp": {
+    "plaqueImmatriculation": {
+      "home": {
+        "title": "PlaqueImmatriculations",
+        "createLabel": "Créer un nouveau Plaque Immatriculation",
+        "createOrEditLabel": "Créer ou éditer un Plaque Immatriculation",
+        "notFound": "Aucun Plaque Immatriculation trouvé"
+      },
+      "created": "Un nouveau Plaque Immatriculation a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Plaque Immatriculation avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Plaque Immatriculation avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Plaque Immatriculation {{ id }} ?"
+      },
+      "detail": {
+        "title": "Plaque Immatriculation"
+      },
+      "numeroSerie": "Numero Serie",
+      "numeroImmatriculation": "Numero Immatriculation",
+      "codeQR": "Code QR",
+      "certificatImmatriculation": "Certificat Immatriculation",
+      "vehicule": "Vehicule",
+      "help": {
+        "numeroSerie": "numeroSerie"
+      }
+    }
+  }
+}

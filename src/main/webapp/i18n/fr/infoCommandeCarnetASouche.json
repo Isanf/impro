@@ -1,0 +1,31 @@
+{
+  "improApp": {
+    "infoCommandeCarnetASouche": {
+      "home": {
+        "title": "InfoCommandeCarnetASouches",
+        "createLabel": "Créer un nouveau Info Commande Carnet A Souche",
+        "createOrEditLabel": "Créer ou éditer un Info Commande Carnet A Souche",
+        "notFound": "Aucun Info Commande Carnet A Souche trouvé"
+      },
+      "created": "Un nouveau Info Commande Carnet A Souche a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Info Commande Carnet A Souche avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Info Commande Carnet A Souche avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Info Commande Carnet A Souche {{ id }} ?"
+      },
+      "detail": {
+        "title": "Info Commande Carnet A Souche"
+      },
+      "numeroCommande": "Numero Commande",
+      "dateCommande": "Date Commande",
+      "quantiteCommande": "Quantite Commande",
+      "estDeliver": "Est Deliver",
+      "estTransiter": "Est Transiter",
+      "commandeCarnetSouche": "Commande Carnet Souche",
+      "typeCarnet": "Type Carnet",
+      "help": {
+        "numeroCommande": "numeroCommande"
+      }
+    }
+  }
+}

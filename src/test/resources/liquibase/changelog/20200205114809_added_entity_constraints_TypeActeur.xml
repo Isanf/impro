@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity TypeActeur.
+    -->
+    <changeSet id="20200205114809-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="type_acteur_id"
+                                 baseTableName="type_acteur_type_organisations"
+                                 constraintName="fk_type_acteur_type_organisations_type_acteur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type_acteur"/>
+
+        <addForeignKeyConstraint baseColumnNames="type_organisations_id"
+                                 baseTableName="type_acteur_type_organisations"
+                                 constraintName="fk_type_acteur_type_organisations_type_organisations_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type_organisation"/>
+        
+    </changeSet>
+</databaseChangeLog>

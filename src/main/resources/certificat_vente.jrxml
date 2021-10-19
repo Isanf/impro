@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certificat_vente" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="44a42c1e-dc3f-40d0-b25c-e8b56f2fd2fc">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+    <parameter name="vendeur" class="java.lang.String"/>
+    <parameter name="nomclient" class="java.lang.String"/>
+    <parameter name="profession" class="java.lang.String"/>
+    <parameter name="adresse" class="java.lang.String"/>
+    <parameter name="cnib" class="java.lang.String"/>
+    <parameter name="phone" class="java.lang.String"/>
+    <parameter name="genre" class="java.lang.String"/>
+    <parameter name="modele" class="java.lang.String"/>
+    <parameter name="chassis" class="java.lang.String"/>
+    <parameter name="carross" class="java.lang.String"/>
+    <parameter name="credit" class="java.lang.String"/>
+    <parameter name="date" class="java.lang.String"/>
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="33" splitType="Stretch">
+            <staticText>
+                <reportElement x="140" y="0" width="290" height="30" uuid="22a27e01-63ce-49df-a774-cae96eb08fd7"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[CERTIFICAT DE VENTE]]></text>
+            </staticText>
+            <line>
+                <reportElement x="3" y="30" width="554" height="1" uuid="8d659db9-5275-4d4b-88a7-f66155c970c0"/>
+            </line>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="1" splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="574" splitType="Stretch">
+            <textField>
+                <reportElement x="-3" y="20" width="560" height="30" uuid="f5c35eb1-5265-4198-a53e-4b9661da69b1"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Je soussigné, " + $P{vendeur}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="-3" y="50" width="560" height="30" uuid="e31ced86-3556-443f-989d-042f1ba75126"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Certifions avoir vendu ce jour à :  "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="-3" y="80" width="210" height="50" uuid="825cae42-01b4-4a6e-81ad-bc1936ea6a72"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Nom et prénom (s) ou Dénomination ou raison sociale "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="207" y="80" width="350" height="50" uuid="62b8a561-8fc7-4a49-a3b5-354ae0af177d"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{nomclient}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="-3" y="130" width="210" height="30" uuid="3baf710b-3d08-4092-86c0-f3ef4d0b107c"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Profession ou activité principale "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="207" y="130" width="350" height="30" uuid="be7041ea-7086-4ded-b50e-08ddccdbbb3f"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{profession}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="-3" y="160" width="210" height="30" uuid="290e1854-4775-4983-b730-10a12a4914f6"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Adresse "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="207" y="160" width="350" height="30" uuid="df82fc82-a58e-4e3a-93ec-8af78f5df6ff"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{adresse}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="-3" y="190" width="210" height="30" uuid="705c24a6-1ebb-458b-bab4-4e14dd09118f"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Numéro de la pièce d’identité "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="207" y="190" width="350" height="30" uuid="1260c378-7d22-4778-9b70-52ae6071ab16"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{cnib}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="-3" y="220" width="210" height="30" uuid="928fad2e-a87e-48c0-a021-9dd885273e86"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Téléphone : "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="207" y="220" width="350" height="30" uuid="f0714caf-724f-4def-a94f-acda87def6d2"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{phone}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="-3" y="250" width="560" height="30" uuid="7a6a8321-9246-496d-af5d-11c9468c133d"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["le véhicule dont les caractéristiques "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="-3" y="370" width="210" height="30" uuid="5ba10567-1bc5-4a08-8a28-f4af5c67c362"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Carrosserie "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="-3" y="340" width="210" height="30" uuid="e48c35ff-4d0f-4057-b8bf-c7af2f40625a"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["N° de châssis "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="207" y="280" width="350" height="30" uuid="5c9a3635-5d8f-4a62-8552-baa96c5ec552"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{genre}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="207" y="340" width="350" height="30" uuid="cf9dd482-0776-452c-a7b0-72706c1540fa"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{chassis}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="207" y="310" width="350" height="30" uuid="f65f7670-4135-42c7-8dac-2d6677906271"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{modele}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="-3" y="310" width="210" height="30" uuid="69823214-78d0-4865-b5d0-2794b8e5fb4a"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Marque /Type / Modèle  "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="-3" y="280" width="210" height="30" uuid="3d26c28b-baed-4e8a-848a-242601ff86a0"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Genre "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="207" y="370" width="350" height="30" uuid="b0cc4e19-640e-436f-834f-48db5daa3415"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{carross}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="-3" y="430" width="210" height="30" uuid="8642238d-2470-47ee-85d2-fb5619906c44"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="16" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Comptant ou crédit "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="207" y="430" width="350" height="30" uuid="45b07e3d-227c-4bae-ad7a-51f38d701f56"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{credit}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="-3" y="400" width="210" height="30" uuid="abd58c9e-3127-4143-b879-cc3a606e303f"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="207" y="400" width="350" height="30" uuid="6b3ef323-a286-40b2-87e8-6852784a5de2"/>
+                <box>
+                    <topPen lineWidth="1.0"/>
+                    <leftPen lineWidth="1.0"/>
+                    <bottomPen lineWidth="1.0"/>
+                    <rightPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[""]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="207" y="504" width="337" height="30" uuid="a288860d-10ae-484a-bfd8-0b3b67d2c159"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Fait à Ouagadougou le, " + $P{date}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="310" y="534" width="234" height="25" uuid="3d908715-386f-48c7-b4eb-dec07512ec37"/>
+                <textElement>
+                    <font fontName="Times New Roman" size="14"/>
+                </textElement>
+                <text><![CDATA[(Signature et cachet du vendeur)]]></text>
+            </staticText>
+        </band>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
+</jasperReport>

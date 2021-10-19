@@ -1,0 +1,392 @@
+/**
+ * The CarnetASouche entity.\n@author A true hipster
+ */
+entity CarnetASouche {
+  /**
+   * numero
+   */
+  numero String
+  dateImpression ZonedDateTime
+}
+/**
+ * The CarteW entity.\n@author A true hipster
+ */
+entity CarteW {
+  /**
+   * numeroCarteW
+   */
+  numeroCarteW String
+  dateEtablissementCarteW LocalDate
+  dateExpirationCarteW LocalDate
+  lieuEtablissement String
+}
+entity CategorieOrganisation {
+  libelle String required
+  description String
+  typeCategorieOrganisation TypeCategorieOrganisation
+}
+/**
+ * The CertificatImmatriculation entity.\n@author A true hipster
+ */
+entity CertificatImmatriculation {
+  /**
+   * numero
+   */
+  numero String
+  codeQr String
+}
+/**
+ * The Collaboration entity.\n@author A true hipster
+ */
+entity Collaboration {
+  /**
+   * dateDebut
+   */
+  dateDebut LocalDate
+  dateFin LocalDate
+  numeroCollaboration String
+}
+/**
+ * The CommandeCarnetSouche entity.\n@author A true hipster
+ */
+entity CommandeCarnetSouche {
+  /**
+   * numeroCommandeCS
+   */
+  numeroCommandeCS String
+  dateCommandeCS ZonedDateTime
+  typePaiement String
+  estValide Boolean
+  estTraitee Boolean
+  estLivree Boolean
+}
+/**
+ * The CommandeVehicule entity.\n@author A true hipster
+ */
+entity CommandeVehicule {
+  /**
+   * numeroCommandeVehicule
+   */
+  numeroCommandeVehicule String
+  dateCommande ZonedDateTime
+  estLivree Boolean
+}
+/**
+ * The DocIdentificationPM entity.\n@author A true hipster
+ */
+entity DocIdentificationPM {
+  /**
+   * numero
+   */
+  numero String
+  numeroIFU String
+  numeroRCCM String
+  telephone String
+  siegeSocial String
+}
+/**
+ * The DocIdentification entity.\n@author A true hipster
+ */
+entity DocIdentificationPP {
+  /**
+   * numeroDoc
+   */
+  numeroDoc String
+  dateEtablissement LocalDate
+  lieuEtablissement String
+  autoriteEmettrice String
+  typeDocIdentification TypeDocIdentification
+}
+entity Immatriculation {
+  numero String
+  dateImmatriculation ZonedDateTime
+}
+/**
+ * The LivraisonCarnetSouche entity.\n@author A true hipster
+ */
+entity LivraisonCarnetSouche {
+  /**
+   * numeroLivraisonCS
+   */
+  numeroLivraisonCS String
+  dateLivraison ZonedDateTime
+}
+/**
+ * The LivraisonVehicule entity.\n@author A true hipster
+ */
+entity LivraisonVehicule {
+  /**
+   * numeroLivraison
+   */
+  numeroLivraison String
+  dateLivraison ZonedDateTime
+}
+/**
+ * The MarqueVehicule entity.\n@author A true hipster
+ */
+entity MarqueVehicule {
+  /**
+   * code
+   */
+  code String
+  libelle String
+}
+entity Organisation {
+  nom String required
+  description String maxlength(1000)
+  numeroOrdre Integer required
+}
+/**
+ * The PersonneMorale entity.\n@author A true hipster
+ */
+entity PersonneMorale {
+  /**
+   * numeroIFU
+   */
+  numeroIFU String
+  denomination String
+  dateCreate LocalDate
+}
+/**
+ * The PersonnePhysique entity.\n@author A true hipster
+ */
+entity PersonnePhysique {
+  /**
+   * nom
+   */
+  nom String
+  prenom String
+  dateNaissance LocalDate
+  lieuNaissance String
+  telephone String
+  residence String
+}
+/**
+ * The PlaqueImmatriculation entity.\n@author A true hipster
+ */
+entity PlaqueImmatriculation {
+  /**
+   * numeroSerie
+   */
+  numeroSerie String
+  numeroImmatriculation String
+  codeQR String
+}
+/**
+ * The PosePlaque entity.\n@author A true hipster
+ */
+entity PosePlaque {
+  /**
+   * numeroPose
+   */
+  numeroPose String
+  datePosePlaque ZonedDateTime
+}
+entity Profil {
+  nom String required
+  description String maxlength(1000)
+}
+/**
+ * The Stock entity.\n@author A true hipster
+ */
+entity Stock {
+  /**
+   * numeroStock
+   */
+  numeroStock String
+  fichierStock Blob
+  dateStock ZonedDateTime
+}
+entity TypeActeur {
+  nom String required
+  description String maxlength(1000)
+}
+
+enum TypeCategorieOrganisation {
+    SUPERNET,
+    CONCESSIONNAIRE,
+    ETABLISSEMENT_SPECIALISE,
+    DGTTM,
+    FDS,
+    CCVA,
+    ASSURANCE
+}
+
+enum TypePaiement {
+    VIREMENT_BANCAIRE,
+    CHEQUE_BANCAIRE,
+    ORANGE_MONEY,
+    MOBICASH,
+    ESPECE
+}
+
+entity TypeOrganisation {
+  nom String required
+  description String maxlength(1000)
+  niveau Integer required
+}
+/**
+ * The TypeVehicule entity.\n@author A true hipster
+ */
+entity TypeVehicule {
+  /**
+   * code
+   */
+  code String
+  libelle String
+  nombrePlaque Long
+  estCycleMoteur Boolean
+}
+/**
+ * The Vehicule entity.\n@author A true hipster
+ */
+entity Vehicule {
+  /**
+   * numeroChassis
+   */
+  numeroChassis String
+  types String
+  model String
+  energie String
+  puissanceReel String
+  puissanceAdmin String
+  couleur String
+  poidsVide Integer
+  chargeUtile Integer
+  ptac Integer
+  ptra Integer
+  nbrPlace Integer
+  capacite Integer
+  dateMiseCirculation LocalDate
+  regime String
+  noDedouanement String
+  dateDedouanement LocalDate
+}
+/**
+ * The Vente entity.\n@author A true hipster
+ */
+entity Vente {
+  /**
+   * numeroVente
+   */
+  numeroVente String
+  dateVente ZonedDateTime
+  quantiteVendue Integer
+}
+
+
+/**
+ * The TypeCarnet entity.
+ * @author A true hipster
+ */
+entity TypeCarnet {
+  /** code */
+  code String
+  libelle String
+  quantiteCertificat Long
+}
+
+/**
+ * The InfoCommandeVehicule entity.
+ * @author A true hipster
+ */
+entity InfoCommandeVehicule {
+  /** numeroCommande */
+  numeroCommande String
+  dateCommande ZonedDateTime
+  quantiteCommande Long
+}
+
+/**
+ * The InfoCommandeCarnetASouche entity.
+ * @author A true hipster
+ */
+entity InfoCommandeCarnetASouche {
+  /** numeroCommande */
+  numeroCommande String
+  dateCommande ZonedDateTime
+  quantiteCommande Long
+  estDeliver Boolean
+  estTransiter Boolean
+}
+
+entity OrganisationLocalite {
+    code String
+    nom String
+    description String
+}
+
+enum TypeDocIdentification {
+  CNIB,
+  PASSEPORT,
+  CARTE_MILITAIRE,
+  CARTE_SCOLAIRE,
+  CARTE_ID_ETRANGERE
+}
+
+relationship OneToOne {
+  Immatriculation{certificatImmatriculation} to CertificatImmatriculation,
+  PersonnePhysique{docIdentification} to DocIdentificationPP,
+  PersonnePhysique{user} to User,
+  CarteW{organisation} to Organisation,
+  DocIdentificationPM{organisation} to Organisation,
+  DocIdentificationPM{personneMorale} to PersonneMorale,
+}
+
+
+relationship OneToMany {
+  OrganisationLocalite{organisations} to Organisation{OrganisationLocalite},
+  Organisation{carnetASouche} to CarnetASouche{concessionnaire},
+  LivraisonCarnetSouche{carnetASouche} to CarnetASouche{livraisonCarnetSouche},
+  CarnetASouche{certificatImmatriculation} to CertificatImmatriculation{carnetASouche},
+  TypeCarnet{carnetSouche} to CarnetASouche{typeCarnet},
+  TypeVehicule{typeCarnet} to TypeCarnet{typeVehicule},
+  CertificatImmatriculation{plaqueImmatriculation} to PlaqueImmatriculation{certificatImmatriculation}
+  Organisation{collaborationsRevendeur} to Collaboration{revendeur},
+  Organisation{collaborationsConcessionnaire} to Collaboration{concessionnaire},
+  Organisation{commandeCSConcessionnaire} to CommandeCarnetSouche{concessionnaire},
+  Organisation{commandeCSRevendeur} to CommandeCarnetSouche{supernet},
+  Organisation{commandeVRevendeur} to CommandeVehicule{revendeur},
+  Organisation{commandeVConcessionnaire} to CommandeVehicule{concessionnaire},
+  Organisation{immatriculation} to Immatriculation{organisation},
+  PersonnePhysique{immatriculation} to Immatriculation{personnePhysique},
+  PersonneMorale{immatriculation} to Immatriculation{personneMorale},
+  Vehicule{immatriculation} to Immatriculation{vehicule},
+  Organisation{livraisonCSConcessionnaire} to LivraisonCarnetSouche{concessionnaire},
+  Organisation{livraisonCSSupernet} to LivraisonCarnetSouche{supernet},
+  Organisation{livraisonVRevendeur} to LivraisonVehicule{revendeur},
+  Organisation{livraisonVConcessionnaire} to LivraisonVehicule{concessionnaire},
+  Organisation{fils} to Organisation{pere},
+  TypeOrganisation{organisations} to Organisation{typeOrganisation},
+  Organisation{personnePhysique} to PersonnePhysique{organisation},
+  PersonnePhysique{organisation} to Organisation{gerant},
+  Profil{personnePhysique} to PersonnePhysique{profil},
+  Vehicule{plaqueImmatriculation} to PlaqueImmatriculation{vehicule},
+  Organisation{posePlaque} to PosePlaque{revendeur},
+  Organisation{profils} to Profil{organisation},
+  Organisation{stock} to Stock{concessionnaire},
+  CategorieOrganisation{type} to TypeOrganisation{categorieOrganisation},
+  LivraisonVehicule{vehicule} to Vehicule{livraisonVehicule},
+  TypeVehicule{vehicule} to Vehicule{typeVehicule},
+  MarqueVehicule{vehicule} to Vehicule{marqueVehicule},
+  Organisation{vente} to Vente{revendeur},
+  PersonnePhysique{vente} to Vente{personnePhysique},
+  PersonneMorale{vente} to Vente{personneMorale},
+  CommandeCarnetSouche{livraisonCarnetSouche} to LivraisonCarnetSouche{commandeCarnetSouche},
+  CommandeVehicule{infoCommandeVehicule} to InfoCommandeVehicule{commandeVehicule},
+  MarqueVehicule{infoCommandeVehicule} to InfoCommandeVehicule{marqueVehicule},
+  CommandeVehicule{livraisonVehicule} to LivraisonVehicule{commandeVehicule},
+  CommandeCarnetSouche{infoCommandeCarnetASouche} to InfoCommandeCarnetASouche{commandeCarnetSouche},
+  TypeCarnet{infoCommandeCarnetASouche} to InfoCommandeCarnetASouche{typeCarnet},
+  TypeActeur{organisations} to Organisation{typeActeur},
+  Vente{Vehicules} to Vehicule{vente},
+  Stock{vehicules} to Vehicule{stock}
+}
+
+relationship ManyToMany {
+    TypeActeur{typeOrganisations} to TypeOrganisation{typeActeurs}
+}
+
+dto * with mapstruct
+paginate * with pagination
+service * with serviceClass
